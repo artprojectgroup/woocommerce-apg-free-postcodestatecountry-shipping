@@ -1,0 +1,293 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce - APG Free Postcode/State/Country Shipping v0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-12-10 08:50:59+0000\n"
+"Last-Translator: artprojectgroup <info@herves-vida.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: SPAIN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: apg-free-shipping.php:134
+#@ apg_free_shipping
+msgid "Enable/Disable"
+msgstr "Habilitar/Deshabilitar"
+
+#: apg-free-shipping.php:140
+#@ apg_free_shipping
+msgid "Method Title"
+msgstr "Título del método"
+
+#: apg-free-shipping.php:142
+#@ apg_free_shipping
+msgid "This controls the title which the user sees during checkout."
+msgstr "Esto controla el título que el usuario ve durante la finalización de la compra."
+
+#: apg-free-shipping.php:189
+#@ apg_free_shipping
+msgid "Number of postcode groups"
+msgstr "Número de grupos de código postal"
+
+#: apg-free-shipping.php:195
+#@ apg_free_shipping
+msgid "Number of state groups"
+msgstr "Número de grupos de provincias (estados)"
+
+#: apg-free-shipping.php:219
+#, php-format
+#@ apg_free_shipping
+msgid "Postcode Group %s (P%s)"
+msgstr "Grupo de código postal %s (P%s)"
+
+#: apg-free-shipping.php:239
+#, php-format
+#@ apg_free_shipping
+msgid "State Group %s (S%s)"
+msgstr "Grupo de provincia (estado) %s (S%s)"
+
+#: apg-free-shipping.php:243
+#@ apg_free_shipping
+msgid "Select the states for this group."
+msgstr "Selecciona las provincias (estados) para este grupo"
+
+#: apg-free-shipping.php:191
+#@ apg_free_shipping
+msgid "Number of groups of ZIP/Postcode sharing delivery rates. (Hit \"Save changes\" button after you have changed this setting)."
+msgstr "Número de grupos de código postal que comparten gastos de envío. (Pulse \"Guardar cambios\" tras modificar esta opción)."
+
+#: apg-free-shipping.php:197
+#@ apg_free_shipping
+msgid "Number of groups of states sharing delivery rates. (Hit \"Save changes\" button after you have changed this setting)."
+msgstr "Número de grupos de provincia (estado) que comparten gastos de envío. (Pulse \"Guardar cambios\" tras modificar esta opción)."
+
+#: apg-free-shipping.php:221
+#@ apg_free_shipping
+msgid "Add the postcodes for this group. Semi-colon (;) separate multiple values. Wildcards (*) can be used. Example: <code>07*</code>. Ranges for numeric postcodes will be expanded into individual postcodes. Example: <code>12345-12350</code>."
+msgstr "Introduzca los códigos postales para este grupo. Los valores múltiples se separan con punto y coma (;). Los comodines (*) están permitidos. Ejemplo: <code>07 *</code>. Los rangos de números de códigos postales se convierten automáticamente en códigos postales individuales. Ejemplo: <code>12345-1235 </code>."
+
+#: apg-free-shipping.php:61
+#@ apg_free_shipping
+msgid "Settings"
+msgstr "Ajustes"
+
+#. translators: plugin header field 'Author'
+#: apg-free-shipping.php:0
+#@ apg_free_shipping
+msgid "Art Project Group"
+msgstr ""
+
+#. translators: plugin header field 'AuthorURI'
+#: apg-free-shipping.php:0
+#@ apg_free_shipping
+msgid "http://www.artprojectgroup.es/"
+msgstr ""
+
+#: cuadro-donacion.php:13
+#@ apg_free_shipping
+msgid "Follow us:"
+msgstr "Síguenos:"
+
+#: cuadro-donacion.php:19
+#@ apg_free_shipping
+msgid "More plugins:"
+msgstr "Más plugins:"
+
+#: cuadro-donacion.php:25
+#@ apg_free_shipping
+msgid "Contact with us:"
+msgstr "Contacta con nosotros:"
+
+#: apg-free-shipping.php:45
+#: cuadro-donacion.php:6
+#@ apg_free_shipping
+msgid "Make a donation by "
+msgstr "Haz una donación por "
+
+#: apg-free-shipping.php:47
+#: cuadro-donacion.php:15
+#@ apg_free_shipping
+msgid "Follow us on "
+msgstr "Síguenos en "
+
+#: apg-free-shipping.php:48
+#: cuadro-donacion.php:21
+#@ apg_free_shipping
+msgid "More plugins on "
+msgstr "Más plugins en "
+
+#: apg-free-shipping.php:49
+#: cuadro-donacion.php:27
+#@ apg_free_shipping
+msgid "Contact with us by "
+msgstr "Contacta con nosotros por "
+
+#: apg-free-shipping.php:61
+#@ apg_free_shipping
+msgid "Settings of "
+msgstr "Ajustes de "
+
+#: cuadro-donacion.php:4
+#@ apg_free_shipping
+msgid "If you enjoyed and find helpful this plugin, please make a donation:"
+msgstr "Si te ha gustado y resultado útil este plugin, por favor, haz una donación:"
+
+#: cuadro-donacion.php:31
+#@ apg_free_shipping
+msgid "Documentation and Support:"
+msgstr "Documentación y ayuda:"
+
+#: apg-free-shipping.php:50
+#: cuadro-donacion.php:39
+#@ apg_free_shipping
+msgid "***** Fantastic!"
+msgstr "***** ¡Fantástico!"
+
+#: apg-free-shipping.php:50
+#: cuadro-donacion.php:39
+#@ apg_free_shipping
+msgid "**** Great"
+msgstr "*** Genial"
+
+#: apg-free-shipping.php:50
+#: cuadro-donacion.php:39
+#@ apg_free_shipping
+msgid "*** Good"
+msgstr "*** Bueno"
+
+#: apg-free-shipping.php:50
+#: cuadro-donacion.php:39
+#@ apg_free_shipping
+msgid "** Works"
+msgstr "** Funciona"
+
+#: apg-free-shipping.php:50
+#: cuadro-donacion.php:39
+#@ apg_free_shipping
+msgid "* Poor"
+msgstr "* Pobre"
+
+#: cuadro-donacion.php:36
+#, php-format
+#@ apg_free_shipping
+msgid "Please, rate %s:"
+msgstr "Por favor, puntúa %s:"
+
+#: apg-free-shipping.php:201
+#@ apg_free_shipping
+msgid "No shipping"
+msgstr "Sin envíos"
+
+#: apg-free-shipping.php:203
+#, php-format
+#@ apg_free_shipping
+msgid "Group/s of ZIP/Postcode/State where %s doesn't accept shippings. Example: <code>Postcode/state group code separated by comma (,)</code>"
+msgstr "Grupos de código postal/provincia (estado) donde %s no aceptará envíos. Por ejemplo: <code>Código de grupo de código postal/provincia (estado) separado por comas (,)</code>"
+
+#. translators: plugin header field 'Name'
+#: apg-free-shipping.php:0
+#@ apg_free_shipping
+msgid "WooCommerce - APG Free Postcode/State/Country Shipping"
+msgstr ""
+
+#. translators: plugin header field 'PluginURI'
+#: apg-free-shipping.php:0
+#@ apg_free_shipping
+msgid "http://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/"
+msgstr ""
+
+#. translators: plugin header field 'Version'
+#: apg-free-shipping.php:0
+#@ apg_free_shipping
+msgid "0.1"
+msgstr ""
+
+#: apg-free-shipping.php:76
+#: apg-free-shipping.php:143
+#@ apg_free_shipping
+msgid "APG Free Shipping"
+msgstr "APG envío gratuito"
+
+#: apg-free-shipping.php:136
+#@ apg_free_shipping
+msgid "Enable Free Shipping"
+msgstr "Habilitar envío gratuito"
+
+#: apg-free-shipping.php:147
+#@ apg_free_shipping
+msgid "Method availability"
+msgstr "Disponibilidad del método"
+
+#: apg-free-shipping.php:152
+#@ apg_free_shipping
+msgid "All allowed countries"
+msgstr "Todos los países permitidos"
+
+#: apg-free-shipping.php:153
+#: apg-free-shipping.php:157
+#@ apg_free_shipping
+msgid "Specific Countries"
+msgstr "Países específicos"
+
+#: apg-free-shipping.php:165
+#@ apg_free_shipping
+msgid "Free Shipping Requires..."
+msgstr "Envío gratuito requiere..."
+
+#: apg-free-shipping.php:169
+#@ apg_free_shipping
+msgid "N/A"
+msgstr "Nada específico"
+
+#: apg-free-shipping.php:170
+#@ apg_free_shipping
+msgid "A valid free shipping coupon"
+msgstr "Un cupón válido de gastos de envío gratuitos"
+
+#: apg-free-shipping.php:171
+#@ apg_free_shipping
+msgid "A minimum order amount (defined below)"
+msgstr "Un importe mínimo de pedido (definido más abajo)"
+
+#: apg-free-shipping.php:172
+#@ apg_free_shipping
+msgid "A minimum order amount OR a coupon"
+msgstr "Un importe mínimo de pedido O un cupón"
+
+#: apg-free-shipping.php:173
+#@ apg_free_shipping
+msgid "A minimum order amount AND a coupon"
+msgstr "Un importe mínimo de pedido Y un cupón"
+
+#: apg-free-shipping.php:177
+#@ apg_free_shipping
+msgid "Minimum Order Amount"
+msgstr "Importe mínimo del pedido"
+
+#: apg-free-shipping.php:183
+#@ apg_free_shipping
+msgid "Users will need to spend this amount to get free shipping (if enabled above)."
+msgstr "Los usuarios tendrán que gastar este importe para obtener el envío gratis (si está activado anteriormente)."
+
+#. translators: plugin header field 'Description'
+#: apg-free-shipping.php:0
+#@ apg_free_shipping
+msgid "Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href=\"http://profiles.wordpress.org/artprojectgroup/\" target=\"_blank\">Art Project Group</a> <a href=\"http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/\" target=\"_blank\"><strong>WooCommerce - APG Weight and Postcode/State/Country Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href=\"http://wordpress.org/plugins/woocommerce/\" target=\"_blank\"><strong>WooCommerce - excelling eCommerce</strong></a>."
+msgstr "Añade a WooCommerce un envío gratuito basado en el código postal, provincia (estado) y país de la dirección del cliente y un importe mínimo del pedido y/o un cupón válido de gastos de envío gratuitos. Creado a partir del plugin de <a href=\"http://profiles.wordpress.org/artprojectgroup/\" target=\"_blank\">Art Project Group</a> <a href=\"http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/\" target=\"_blank\"><strong>WooCommerce - APG Weight and Postcode/State/Country Shipping</strong></a> y la clase WC_Shipping_Free_Shipping original de <a href=\"http://wordpress.org/plugins/woocommerce/\" target=\"_blank\"><strong>WooCommerce - excelling eCommerce</strong></a>."
+
+#: formulario.php:5
+#@ apg_free_shipping
+msgid "Lets you add a free shipping based on Postcode/State/Country of the cart and minimum order a amount and/or a valid free shipping coupon."
+msgstr "Le permite añadir un envío gratuito basado en el código postal/provincia (estado)/país del carro y un importe mínimo de pedido y/o un cupón válido de gastos de envío gratuitos."
+
