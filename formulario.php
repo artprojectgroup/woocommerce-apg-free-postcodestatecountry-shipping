@@ -5,7 +5,7 @@
   <?php _e('Lets you add a free shipping based on Postcode/State/Country of the cart and minimum order a amount and/or a valid free shipping coupon.', 'apg_free_shipping'); ?>
 </p>
 <?php include('cuadro-donacion.php'); ?>
-<div class="cabecera"> <a href="<?php echo $apg_free_shipping['plugin_url']; ?>" title="<?php echo $apg_free_shipping['plugin']; ?>"><img src="<?php echo $apg_free_shipping['imagen']; ?>" width="582" height="139" /></a> </div>
+<div class="cabecera"> <a href="<?php echo $apg_free_shipping['plugin_url']; ?>" title="<?php echo $apg_free_shipping['plugin']; ?>" target="_blank"><span class="imagen"></span></a> </div>
 <table class="form-table">
   <?php $this->generate_settings_html(); ?>
 </table>
