@@ -3,8 +3,8 @@ Contributors: artprojectgroup
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=V8GMWW24C3ZCL
 Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, shipping, free shipping, zip, postcode, state, country, coupon, minimum order amount
 Requires at least: 3.5
-Tested up to: 3.8
-Stable tag: 0.2.1
+Tested up to: 3.8.1
+Stable tag: 0.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -54,6 +54,8 @@ Aunque la configuración del plugin es un muy simple, hemos creado un tutorial d
 1. Captura de pantalla de WooCommerce - APG Free Postcode/State/Country Shipping.
 
 == Changelog ==
+= 0.2.2 =
+* Añadido control de error que aparece al dejar campos vacíos.
 = 0.2.1 =
 * Eliminación de imagen externa por otra local.
 = 0.2 =
@@ -62,6 +64,8 @@ Aunque la configuración del plugin es un muy simple, hemos creado un tutorial d
 * Versión inicial.
 
 == Upgrade Notice ==
+= 0.2.2 =
+* Añadido control de error que aparece al dejar campos vacíos.
 = 0.2.1 =
 * Eliminación de imagen externa por otra local.
 = 0.2 =
