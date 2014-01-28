@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG Free Postcode/State/Country Shipping
-Version: 0.2.2
+Version: 0.3
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="http://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WooCommerce - APG Weight and Postcode/State/Country Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="http://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: http://www.artprojectgroup.es/
@@ -401,11 +401,17 @@ function apg_free_shipping_plugin($nombre) {
 	return get_object_vars($plugin);
 }
 
-//Comprueba si hay que mostrar el mensaje de configuración
+//Carga las hojas de estilo
 function apg_free_shipping_muestra_mensaje() {
 	wp_register_style('apg_free_shipping_hoja_de_estilo', plugins_url('style.css', __FILE__)); //Carga la hoja de estilo
 	wp_register_style('apg_free_shipping_fuentes', plugins_url('fonts/stylesheet.css', __FILE__)); //Carga la hoja de estilo global
 	wp_enqueue_style('apg_free_shipping_fuentes'); //Carga la hoja de estilo global
 }
 add_action('admin_init', 'apg_free_shipping_muestra_mensaje');
+
+//Eliminamos todo rastro del plugin al desinstalarlo
+function apg_free_shipping_desinstalar() {
+  delete_option('woocommerce_apg_free_shipping_settings');
+}
+register_deactivation_hook( __FILE__, 'apg_free_shipping_desinstalar' );
 ?>
