@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, shipping, free shipping, zip, postcode, state, country, coupon, minimum order amount
 Requires at least: 3.5
 Tested up to: 3.8.1
-Stable tag: 0.3
+Stable tag: 0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,6 +18,7 @@ Añade a WooCommerce un envío gratuito basado en el código postal, provincia (
 * Puedes requerir un importe mínimo y/o un cupón válido de gastos de envío gratuitos.
 * Puedes crear tantos grupos de código postal y/o provincias (estados) como desees.
 * Puedes asignar grupos de código postal/provincia (estado) donde no atender los pedidos.
+* Puedes ocultar el resto de gastos de envío al estar disponible el gasto de envío gratuito configurado.
 
 = Origen =
 **WooCommerce - APG Free Postcode/State/Country Shipping** ha sido programado a partir del plugin [*WooCommerce - APG Weight and Postcode/State/Country Shipping*](http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/) de [Art Project Group](http://profiles.wordpress.org/artprojectgroup/) y la clase *WC_Shipping_Free_Shipping* original de [*WooCommerce - excelling eCommerce*](http://wordpress.org/plugins/woocommerce/), lo que le añade algunas de las funcionalidades presentes en el primero a la sencillez del segundo.
@@ -54,6 +55,9 @@ Aunque la configuración del plugin es un muy simple, hemos creado un tutorial d
 1. Captura de pantalla de WooCommerce - APG Free Postcode/State/Country Shipping.
 
 == Changelog ==
+= 0.4 =
+* Añadida nueva opción que oculta el resto de gastos de envíos al estar disponible.
+* Arreglo de error que hacía que no funcionara si no se habían configurado ningún grupo.
 = 0.3 =
 * Añadida nueva función que limpia la base de datos al desinstalar el plugin.
 = 0.2.2 =
@@ -66,6 +70,9 @@ Aunque la configuración del plugin es un muy simple, hemos creado un tutorial d
 * Versión inicial.
 
 == Upgrade Notice ==
+= 0.4 =
+* Añadida nueva opción que oculta el resto de gastos de envíos al estar disponible.
+* Arreglo de error que hacía que no funcionara si no se habían configurado ningún grupo.
 = 0.3 =
 * Añadida nueva función que limpia la base de datos al desinstalar el plugin.
 = 0.2.2 =

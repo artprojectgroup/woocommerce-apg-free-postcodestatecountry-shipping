@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG Free Postcode/State/Country Shipping
-Version: 0.3
+Version: 0.4
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="http://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WooCommerce - APG Weight and Postcode/State/Country Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="http://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: http://www.artprojectgroup.es/
@@ -81,7 +81,7 @@ function apg_free_shipping_inicio() {
 			add_action('woocommerce_update_options_shipping_' . $this->id, array($this, 'process_admin_options'));
 
 			$this->init_settings();
-			$campos = array('enabled', 'title', 'postal_group_no', 'state_group_no', 'country_group_no', 'availability', 'countries', 'requires', 'grupos_excluidos', 'importe_minimo');
+			$campos = array('enabled', 'title', 'postal_group_no', 'state_group_no', 'country_group_no', 'availability', 'countries', 'requires', 'grupos_excluidos', 'importe_minimo', 'muestra');
 			foreach ($campos as $campo) $this->$campo = isset($this->settings[$campo]) ? $this->settings[$campo] : '';
 			$this->init_form_fields();
 
@@ -133,26 +133,26 @@ function apg_free_shipping_inicio() {
 
 			$this->form_fields = array(
 				'enabled' => array(
-					'title' 		=> __('Enable/Disable', 'apg_free_shipping'),
-					'type' 			=> 'checkbox',
-					'label' 		=> __('Enable Free Shipping', 'apg_free_shipping'),
-					'default' 		=> 'yes'
+					'title' 						=> __('Enable/Disable', 'apg_free_shipping'),
+					'type' 							=> 'checkbox',
+					'label' 						=> __('Enable Free Shipping', 'apg_free_shipping'),
+					'default' 						=> 'yes'
 				),
 				'title' => array(
-					'title' 		=> __('Method Title', 'apg_free_shipping'),
-					'type' 			=> 'text',
-					'description' 	=> __('This controls the title which the user sees during checkout.', 'apg_free_shipping'),
-					'default'		=> __('APG Free Shipping', 'apg_free_shipping'),
-					'desc_tip'		=> true,
+					'title' 						=> __('Method Title', 'apg_free_shipping'),
+					'type' 							=> 'text',
+					'description' 					=> __('This controls the title which the user sees during checkout.', 'apg_free_shipping'),
+					'default'						=> __('APG Free Shipping', 'apg_free_shipping'),
+					'desc_tip'						=> true,
 				),
 				'availability' => array(
-					'title' 		=> __('Method availability', 'apg_free_shipping'),
-					'type' 			=> 'select',
-					'default' 		=> 'all',
-					'class'			=> 'availability',
-					'options'		=> array(
-						'all' 		=> __('All allowed countries', 'apg_free_shipping'),
-						'specific' => __('Specific Countries', 'apg_free_shipping')
+					'title' 						=> __('Method availability', 'apg_free_shipping'),
+					'type' 							=> 'select',
+					'default' 						=> 'all',
+					'class'							=> 'availability',
+					'options'						=> array(
+						'all' 						=> __('All allowed countries', 'apg_free_shipping'),
+						'specific' 				=> __('Specific Countries', 'apg_free_shipping')
 					)
 				),
 				'countries' => array(
@@ -205,6 +205,12 @@ function apg_free_shipping_inicio() {
 					'desc_tip'						=> sprintf(__("Group/s of ZIP/Postcode/State where %s doesn't accept shippings. Example: <code>Postcode/state group code separated by comma (,)</code>", 'apg_free_shipping'), get_bloginfo('name')),
 					'default'						=> '',
 					'description'					=> '<code>P2,S1</code>',
+				),
+				'muestra' => array(
+					'title'							=> __('Show only APG Free Shipping', 'apg_free_shipping'),
+					'type'							=> 'checkbox',
+					'label'							=> __("Don't show others shipping cost.", 'apg_free_shipping'),
+					'default'						=> 'no',
 				),
 			);
 		}
@@ -331,9 +337,11 @@ function apg_free_shipping_inicio() {
     		if ($this->enabled == "no") return false;
 
 			$grupo = $this->dame_grupos($paquete);
-			if (!$grupo) return false;
-			$grupos_excluidos = explode(',', preg_replace('/\s+/', '', $this->grupos_excluidos));
-			foreach ($grupos_excluidos as $grupo_excluido) if ($grupo_excluido == $grupo) return false; //No atiende a los grupos excluidos
+			if ($grupo)
+			{
+				$grupos_excluidos = explode(',', preg_replace('/\s+/', '', $this->grupos_excluidos));
+				foreach ($grupos_excluidos as $grupo_excluido) if ($grupo_excluido == $grupo) return false; //No atiende a los grupos excluidos
+			}
 
 			$habilitado = $tiene_cupon = $tiene_importe_minimo = false;
 
@@ -375,6 +383,8 @@ function apg_free_shipping_inicio() {
 				break;
 			}
 
+			if ($this->muestra == 'yes') add_filter('woocommerce_available_shipping_methods', 'apg_free_shipping_oculta_envios' , 10, 1);
+			
 			return apply_filters('woocommerce_shipping_' . $this->id . '_is_available', $habilitado);
 		}
 	}
@@ -388,6 +398,19 @@ function apg_free_shipping_anade_gastos_de_envio($methods) {
 	return $methods;
 }
 add_filter('woocommerce_shipping_methods', 'apg_free_shipping_anade_gastos_de_envio');
+
+//Oculta el resto de gastos de envío
+function apg_free_shipping_oculta_envios($envios) {
+	if (isset($envios['apg_free_shipping'])) 
+	{
+		foreach ($envios as $envio) 
+		{
+			if ($envio->id != 'apg_free_shipping') unset($envios[$envio->id]);
+		}
+	}
+ 
+	return $envios;
+}
 
 //Obtiene toda la información sobre el plugin
 function apg_free_shipping_plugin($nombre) {
