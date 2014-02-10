@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG Free Postcode/State/Country Shipping
-Version: 0.4
+Version: 0.5
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="http://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WooCommerce - APG Weight and Postcode/State/Country Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="http://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: http://www.artprojectgroup.es/
@@ -85,6 +85,12 @@ function apg_free_shipping_inicio() {
 			foreach ($campos as $campo) $this->$campo = isset($this->settings[$campo]) ? $this->settings[$campo] : '';
 			$this->init_form_fields();
 
+			$this->availability	= $this->settings['availability'];
+			$this->countries		= $this->settings['countries'];
+			$this->min_amount 		= $this->settings['importe_minimo'];
+			$this->requires		= $this->settings['requires'];
+			
+
 			for ($contador = 1; $this->postal_group_no >= $contador; $contador++) 
 			{
 				if (isset($this->settings['P' . $contador])) $this->procesa_codigo_postal($this->settings['P' . $contador], 'P' . $contador);
@@ -161,7 +167,7 @@ function apg_free_shipping_inicio() {
 					'class'							=> 'chosen_select',
 					'css'							=> 'width: 450px;',
 					'default' 						=> '',
-					'options'						=> $woocommerce->countries->countries
+					'options'						=> WC()->countries->get_shipping_countries(),
 				),
 				'requires' => array(
 					'title' 						=> __('Free Shipping Requires...', 'apg_free_shipping'),
@@ -177,15 +183,11 @@ function apg_free_shipping_inicio() {
 				),
 				'importe_minimo' => array(
 							'title'					=> __('Minimum Order Amount', 'apg_free_shipping'),
-							'type'					=> 'number',
-							'custom_attributes'	=> array(
-								'step'				=> 'any',
-								'min'				=> '0'
-							),
+							'type'					=> 'price',
 							'description' 			=> __('Users will need to spend this amount to get free shipping (if enabled above).', 'apg_free_shipping'),
 							'default' 				=> '0',
 							'desc_tip'      		=> true,
-							'placeholder'			=> '0.00'
+							'placeholder'			=> wc_format_localized_price(0)
 				),
 				'postal_group_no' => array(
 					'title'							=> __('Number of postcode groups', 'apg_free_shipping'),
@@ -383,7 +385,7 @@ function apg_free_shipping_inicio() {
 				break;
 			}
 
-			if ($this->muestra == 'yes') add_filter('woocommerce_available_shipping_methods', 'apg_free_shipping_oculta_envios' , 10, 1);
+			if ($this->muestra == 'yes') add_filter('woocommerce_package_rates', 'apg_free_shipping_oculta_envios' , 10, 1);
 			
 			return apply_filters('woocommerce_shipping_' . $this->id . '_is_available', $habilitado);
 		}

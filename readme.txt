@@ -4,13 +4,17 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, shipping, free shipping, zip, postcode, state, country, coupon, minimum order amount
 Requires at least: 3.5
 Tested up to: 3.8.1
-Stable tag: 0.4
+Stable tag: 0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Añade a WooCommerce un envío gratuito basado en el código postal, provincia (estado), país y un importe mínimo y/o un cupón válido.
 
 == Description ==
+[*Español*](http://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/) - [*English*](http://goo.gl/SDIHtG) - [*Italiano*](http://goo.gl/J7WC8H) - [*Français*](http://goo.gl/s9TkQW) - [*Deutsch*](http://goo.gl/WEYLtR) 
+
+**IMPORTANTE: *WooCommerce - APG Free Postcode/State/Country Shipping* requiere WooCommerce 2.1.0 o superior.**
+
 **WooCommerce - APG Free Postcode/State/Country Shipping** añade a tu tienda WooCommerce la posibilidad de incluir un envío gratuito basándose en el código postal, provincia (estado) y/o país de la dirección de envío y un importe mínimo del pedido y/o un cupón válido de gastos de envío gratuitos.
 
 = Características =
@@ -55,6 +59,8 @@ Aunque la configuración del plugin es un muy simple, hemos creado un tutorial d
 1. Captura de pantalla de WooCommerce - APG Free Postcode/State/Country Shipping.
 
 == Changelog ==
+= 0.5 =
+* Actualización del código para que sea 100% compatible con la última versión de WooCommerce. **Ojo: No es compatible con versiones anteriores a WooCommerce 2.1.0.**
 = 0.4 =
 * Añadida nueva opción que oculta el resto de gastos de envíos al estar disponible.
 * Arreglo de error que hacía que no funcionara si no se habían configurado ningún grupo.
@@ -70,6 +76,8 @@ Aunque la configuración del plugin es un muy simple, hemos creado un tutorial d
 * Versión inicial.
 
 == Upgrade Notice ==
+= 0.5 =
+* Actualización del código para que sea 100% compatible con la última versión de WooCommerce. **Ojo: No es compatible con versiones anteriores a WooCommerce 2.1.0.**
 = 0.4 =
 * Añadida nueva opción que oculta el resto de gastos de envíos al estar disponible.
 * Arreglo de error que hacía que no funcionara si no se habían configurado ningún grupo.
