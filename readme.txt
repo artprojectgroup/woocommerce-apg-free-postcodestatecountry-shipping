@@ -1,10 +1,10 @@
 === WooCommerce - APG Free Postcode/State/Country Shipping ===
 Contributors: artprojectgroup
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=V8GMWW24C3ZCL
+Donate link: http://www.artprojectgroup.es/plugins-para-wordpress/woocommerce-apg-free-postcodestatecountry-shipping
 Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, shipping, free shipping, zip, postcode, state, country, coupon, minimum order amount
 Requires at least: 3.5
 Tested up to: 3.8.1
-Stable tag: 0.5.1
+Stable tag: 0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,7 +48,7 @@ Recuerda que puedes encontrar más plugin para WordPress en [Art Project Group](
  * Buscar **WooCommerce - APG Free Postcode/State/Country Shipping** en el buscador disponible en *Plugins -> Añadir nuevo* y pulsar el botón *Instalar ahora*.
 2. Activar el plugin a través del menú *Plugins* en el Panel de Administración de WordPress.
 3. Configurar el plugin en *WooCommerce -> Ajustes -> Envío* o a través del botón *Ajustes*.
-4. Listo, ahora ya puedes disfrutar de él, y si te gusta y te resulta útil, hacer una [*donación*](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=V8GMWW24C3ZCL).
+4. Listo, ahora ya puedes disfrutar de él, y si te gusta y te resulta útil, hacer una [*donación*](http://www.artprojectgroup.es/plugins-para-wordpress/woocommerce-apg-free-postcodestatecountry-shipping).
 
 
 == Frequently asked questions ==
@@ -59,6 +59,9 @@ Aunque la configuración del plugin es un muy simple, hemos creado un tutorial d
 1. Captura de pantalla de WooCommerce - APG Free Postcode/State/Country Shipping.
 
 == Changelog ==
+= 0.6 =
+* Añadida caché para los datos externos.
+* Cambio del botón y enlace de donación.
 = 0.5.1 =
 * Actualización del enlace de Ajustes.
 = 0.5 =
@@ -78,6 +81,9 @@ Aunque la configuración del plugin es un muy simple, hemos creado un tutorial d
 * Versión inicial.
 
 == Upgrade Notice ==
+= 0.6 =
+* Añadida caché para los datos externos.
+* Cambio del botón y enlace de donación.
 = 0.5.1 =
 * Actualización del enlace de Ajustes.
 = 0.5 =
@@ -108,7 +114,7 @@ Por ello regalamos a esa gran comunidad hispana nuestros plugins con interfaces,
 Esperamos que os guste nuestra iniciativa.
 
 == Donación ==
-¿Te ha gustado y te ha resultado útil **WooCommerce - APG Free Postcode/State/Country Shipping** en tu sitio web? Te agradeceríamos una [pequeña donación](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=V8GMWW24C3ZCL) que nos ayudará a seguir mejorando este plugin y a crear más plugins totalmente gratuitos para toda la comunidad WordPress.
+¿Te ha gustado y te ha resultado útil **WooCommerce - APG Free Postcode/State/Country Shipping** en tu sitio web? Te agradeceríamos una [pequeña donación](http://www.artprojectgroup.es/plugins-para-wordpress/woocommerce-apg-free-postcodestatecountry-shipping) que nos ayudará a seguir mejorando este plugin y a crear más plugins totalmente gratuitos para toda la comunidad WordPress.
 
 == Gracias ==
 * A nosotros mismos ([Art Project Group](http://profiles.wordpress.org/artprojectgroup/)) y [Woothemes](http://profiles.wordpress.org/woothemes/) por los grandes plugins que han inspirado **WooCommerce - APG Free Postcode/State/Country Shipping**.
