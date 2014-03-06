@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG Free Postcode/State/Country Shipping
-Version: 0.6.1
+Version: 0.6.2
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="http://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WooCommerce - APG Weight and Postcode/State/Country Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="http://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: http://www.artprojectgroup.es/
@@ -24,6 +24,7 @@ License: GPL2
 //Definimos las variables
 $apg_free_shipping = array(	'plugin' => 'WooCommerce - APG Free Postcode/State/Country Shipping', 
 								'plugin_uri' => 'woocommerce-apg-free-postcodestatecountry-shipping', 
+								'donacion' => 'http://www.artprojectgroup.es/donacion',
 								'plugin_url' => 'http://www.artprojectgroup.es/plugins-para-wordpress/woocommerce-apg-free-postcodestatecountry-shipping', 
 								'ajustes' => 'admin.php?page=wc-settings&tab=shipping&section=apg_free_shipping', 
 								'puntuacion' => 'http://wordpress.org/support/view/plugin-reviews/woocommerce-apg-free-postcodestatecountry-shipping');
@@ -40,7 +41,7 @@ function apg_free_shipping_enlaces($enlaces, $archivo) {
 	if ($archivo == $plugin) 
 	{
 		$plugin = apg_free_shipping_plugin($apg_free_shipping['plugin_uri']);
-		$enlaces[] = '<a href="' . $apg_free_shipping['plugin_url'] . '" target="_blank" title="' . __('Make a donation by ', 'apg_free_shipping') . 'APG"><span class="icon-bills"></span></a>';
+		$enlaces[] = '<a href="' . $apg_free_shipping['donacion'] . '" target="_blank" title="' . __('Make a donation by ', 'apg_free_shipping') . 'APG"><span class="icon-bills"></span></a>';
 		$enlaces[] = '<a href="'. $apg_free_shipping['plugin_url'] . '" target="_blank" title="' . $apg_free_shipping['plugin'] . '"><strong class="artprojectgroup">APG</strong></a>';
 		$enlaces[] = '<a href="https://www.facebook.com/artprojectgroup" title="' . __('Follow us on ', 'apg_free_shipping') . 'Facebook" target="_blank"><span class="icon-facebook6"></span></a> <a href="https://twitter.com/artprojectgroup" title="' . __('Follow us on ', 'apg_free_shipping') . 'Twitter" target="_blank"><span class="icon-social19"></span></a> <a href="https://plus.google.com/+ArtProjectGroupES" title="' . __('Follow us on ', 'apg_free_shipping') . 'Google+" target="_blank"><span class="icon-google16"></span></a> <a href="http://es.linkedin.com/in/artprojectgroup" title="' . __('Follow us on ', 'apg_free_shipping') . 'LinkedIn" target="_blank"><span class="icon-logo"></span></a>';
 		$enlaces[] = '<a href="http://profiles.wordpress.org/artprojectgroup/" title="' . __('More plugins on ', 'apg_free_shipping') . 'WordPress" target="_blank"><span class="icon-wordpress2"></span></a>';
