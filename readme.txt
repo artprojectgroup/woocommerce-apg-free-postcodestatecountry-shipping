@@ -4,7 +4,7 @@ Donate link: http://www.artprojectgroup.es/donacion
 Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, shipping, free shipping, zip, postcode, state, country, coupon, minimum order amount
 Requires at least: 3.5
 Tested up to: 3.8.1
-Stable tag: 0.6.2
+Stable tag: 0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,6 +59,8 @@ Aunque la configuración del plugin es un muy simple, hemos creado un tutorial d
 1. Captura de pantalla de WooCommerce - APG Free Postcode/State/Country Shipping.
 
 == Changelog ==
+= 0.7 =
+* Arreglo de error en el control del país/países.
 = 0.6.2 =
 * Cambio del enlace de donación.
 = 0.6.1 =
@@ -85,6 +87,8 @@ Aunque la configuración del plugin es un muy simple, hemos creado un tutorial d
 * Versión inicial.
 
 == Upgrade Notice ==
+= 0.7 =
+* Arreglo de error en el control del país/países.
 = 0.6.2 =
 * Cambio del enlace de donación.
 = 0.6.1 =

@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG Free Postcode/State/Country Shipping
-Version: 0.6.2
+Version: 0.7
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="http://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WooCommerce - APG Weight and Postcode/State/Country Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="http://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: http://www.artprojectgroup.es/
@@ -307,23 +307,23 @@ function apg_free_shipping_inicio() {
 					}
 				    $contador++;
 				}
-	
+
     	        if (isset($grupo)) return $grupo;				
 			}
-			
-			if (isset($contador) && !$this->grupos_excluidos) return NULL;
+
 			$paises = '';
 			if ($this->availability == 'specific') $paises = $this->countries;
 			else 
 			{
 				if (get_option('woocommerce_allowed_countries') == 'specific') $paises = get_option('woocommerce_specific_allowed_countries');
-				else return 'C1';
 			}
 
 			if (is_array($paises))
 			{
 				if (in_array($paquete['destination']['country'], $paises)) return 'C1';
 			}
+			
+			return NULL;
         }
 
 		//Pinta el formulario
@@ -344,6 +344,7 @@ function apg_free_shipping_inicio() {
 				$grupos_excluidos = explode(',', preg_replace('/\s+/', '', $this->grupos_excluidos));
 				foreach ($grupos_excluidos as $grupo_excluido) if ($grupo_excluido == $grupo) return false; //No atiende a los grupos excluidos
 			}
+			else return false;
 
 			$habilitado = $tiene_cupon = $tiene_importe_minimo = false;
 
