@@ -28,12 +28,12 @@ Añade a WooCommerce un envío gratuito basado en el código postal, provincia (
 **WooCommerce - APG Free Postcode/State/Country Shipping** ha sido programado a partir del plugin [*WooCommerce - APG Weight and Postcode/State/Country Shipping*](http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/) de [Art Project Group](http://profiles.wordpress.org/artprojectgroup/) y la clase *WC_Shipping_Free_Shipping* original de [*WooCommerce - excelling eCommerce*](http://wordpress.org/plugins/woocommerce/), lo que le añade algunas de las funcionalidades presentes en el primero a la sencillez del segundo.
 
 = Más información =
-En nuestro sitio web oficial puede obtener más información sobre [**WooCommerce - APG Free Postcode/State/Country Shipping**](http://www.artprojectgroup.es/plugins-para-wordpress/woocommerce-apg-free-postcodestatecountry-shipping). 
+En nuestro sitio web oficial puede obtener más información sobre [**WooCommerce - APG Free Postcode/State/Country Shipping**](http://www.artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-free-postcodestatecountry-shipping). 
 
 = Comentarios =
 No olvides dejarnos tu comentario en:
 
-* [WooCommerce - APG Free Postcode/State/Country Shipping](http://www.artprojectgroup.es/plugins-para-wordpress/woocommerce-apg-free-postcodestatecountry-shipping) en Art Project Group.
+* [WooCommerce - APG Free Postcode/State/Country Shipping](http://www.artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-free-postcodestatecountry-shipping) en Art Project Group.
 * [Art Project Group](https://www.facebook.com/artprojectgroup) en Facebook.
 * [@artprojectgroup](https://twitter.com/artprojectgroup) en Twitter.
 * [+ArtProjectGroupES](https://plus.google.com/+ArtProjectGroupES/) en Google+.
