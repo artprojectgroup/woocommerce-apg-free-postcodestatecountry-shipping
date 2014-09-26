@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG Free Postcode/State/Country Shipping
-Version: 0.7.1.1
+Version: 0.8
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="http://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WooCommerce - APG Weight and Postcode/State/Country Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="http://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: http://www.artprojectgroup.es/
@@ -22,12 +22,12 @@ License: GPL2
 */
 
 //Definimos las variables
-$apg_free_shipping = array(	'plugin' => 'WooCommerce - APG Free Postcode/State/Country Shipping', 
-								'plugin_uri' => 'woocommerce-apg-free-postcodestatecountry-shipping', 
-								'donacion' => 'http://www.artprojectgroup.es/donacion',
-								'plugin_url' => 'http://www.artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-free-postcodestatecountry-shipping', 
-								'ajustes' => 'admin.php?page=wc-settings&tab=shipping&section=apg_free_shipping', 
-								'puntuacion' => 'http://wordpress.org/support/view/plugin-reviews/woocommerce-apg-free-postcodestatecountry-shipping');
+$apg_free_shipping = array(	'plugin' 		=> 'WooCommerce - APG Free Postcode/State/Country Shipping', 
+							'plugin_uri' 	=> 'woocommerce-apg-free-postcodestatecountry-shipping', 
+							'donacion' 		=> 'http://www.artprojectgroup.es/tienda/donacion',
+							'plugin_url' 	=> 'http://www.artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-free-postcodestatecountry-shipping', 
+							'ajustes' 		=> 'admin.php?page=wc-settings&tab=shipping&section=apg_free_shipping', 
+							'puntuacion' 	=> 'http://wordpress.org/support/view/plugin-reviews/woocommerce-apg-free-postcodestatecountry-shipping');
 
 //Carga el idioma
 load_plugin_textdomain('apg_free_shipping', null, dirname(plugin_basename(__FILE__)) . '/lang');
@@ -70,6 +70,8 @@ function apg_free_shipping_inicio() {
 	if (!class_exists('WC_Shipping_Method')) return;
 
 	class apg_free_shipping extends WC_Shipping_Method {				
+		public	$clases_de_envio		= array();
+
 		function __construct() {
 			$this->id 				= 'apg_free_shipping';
 			$this->method_title	= __("APG Free Shipping", 'apg_free_shipping');
@@ -80,8 +82,10 @@ function apg_free_shipping_inicio() {
         function init() {
 			add_action('woocommerce_update_options_shipping_' . $this->id, array($this, 'process_admin_options'));
 
+			$this->apg_free_shipping_dame_clases_de_envio(); //Obtiene todas las clases de envío
+
 			$this->init_settings();
-			$campos = array('enabled', 'title', 'postal_group_no', 'state_group_no', 'country_group_no', 'availability', 'countries', 'requires', 'grupos_excluidos', 'importe_minimo', 'muestra');
+			$campos = array('enabled', 'title', 'postal_group_no', 'state_group_no', 'country_group_no', 'availability', 'countries', 'requires', 'grupos_excluidos', 'clases_excluidas', 'importe_minimo', 'muestra');
 			foreach ($campos as $campo) $this->$campo = isset($this->settings[$campo]) ? $this->settings[$campo] : '';
 			$this->init_form_fields();
 
@@ -90,7 +94,6 @@ function apg_free_shipping_inicio() {
 			$this->min_amount 		= $this->settings['importe_minimo'];
 			$this->requires		= $this->settings['requires'];
 			
-
 			for ($contador = 1; $this->postal_group_no >= $contador; $contador++) 
 			{
 				if (isset($this->settings['P' . $contador])) $this->procesa_codigo_postal($this->settings['P' . $contador], 'P' . $contador);
@@ -204,18 +207,36 @@ function apg_free_shipping_inicio() {
 				'grupos_excluidos' 				=> array(
 					'title'							=> __('No shipping', 'apg_free_shipping'),
 					'type'							=> 'text',
-					'desc_tip'						=> sprintf(__("Group/s of ZIP/Postcode/State where %s doesn't accept shippings. Example: <code>Postcode/state group code separated by comma (,)</code>", 'apg_free_shipping'), get_bloginfo('name')),
+					'desc_tip'						=> sprintf(__("Group/s of ZIP/Postcode/State where %s doesn't accept free shippings. Example: <code>Postcode/state group code separated by comma (,)</code>", 'apg_free_shipping'), get_bloginfo('name')),
 					'default'						=> '',
 					'description'					=> '<code>P2,S1</code>',
 				),
-				'muestra' => array(
+			);
+			if (WC()->shipping->get_shipping_classes()) $this->form_fields['clases_excluidas'] = array(
+					'title'		=> __('No shipping (Shipping class):', 'apg_free_shipping'),
+					'desc_tip' 	=> sprintf(__("Select the shipping class where %s doesn't accept free shippings.", 'apg_free_shipping'), get_bloginfo('name')),
+					'css'		=> 'width: 450px;',
+					'default'	=> '',
+					'type'		=> 'multiselect',
+					'class'		=> 'chosen_select',
+					'options' 	=> array('todas' => __('All enabled shipping class', 'apg_free_shipping')) + $this->clases_de_envio,
+			);
+			$this->form_fields['muestra'] = array(
 					'title'							=> __('Show only APG Free Shipping', 'apg_free_shipping'),
 					'type'							=> 'checkbox',
 					'label'							=> __("Don't show others shipping cost.", 'apg_free_shipping'),
 					'default'						=> 'no',
-				),
 			);
 		}
+
+		//Función que lee y devuelve los tipos de clases de envío
+		function apg_free_shipping_dame_clases_de_envio() {
+			if (WC()->shipping->get_shipping_classes()) 
+			{
+				foreach (WC()->shipping->get_shipping_classes() as $clase_de_envio) $this->clases_de_envio[esc_attr($clase_de_envio->slug)] = $clase_de_envio->name;
+			} 
+			else $this->clases_de_envio[] = __( 'Select a class&hellip;', 'apg_free_shipping' );
+		}	
 
 		//Muestra los campos para los grupos de códigos postales
 		function pinta_grupos_codigos_postales() {
@@ -334,9 +355,21 @@ function apg_free_shipping_inicio() {
 		
 		//Habilita el envío
 		function is_available($paquete) {
-	    	global $woocommerce;
+			global $woocommerce;
 
-    		if ($this->enabled == "no") return false;
+			if ($this->enabled == "no") return false;
+
+			if ($this->clases_excluidas)
+			{
+				//Toma distintos datos de los productos
+				foreach (WC()->cart->get_cart() as $identificador => $valores) 
+				{
+					$producto = $valores['data'];
+
+					//Clase de producto
+					if (in_array($producto->get_shipping_class(), $this->clases_excluidas)) return false; //No atiende a las clases de envío excluidas
+				}
+			}
 
 			$grupo = $this->dame_grupos($paquete);
 			if ($grupo)
