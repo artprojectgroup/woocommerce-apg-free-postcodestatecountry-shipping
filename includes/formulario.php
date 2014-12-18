@@ -2,9 +2,9 @@
 
 <h3><a href="<?php echo $apg_free_shipping['plugin_url']; ?>" title="Art Project Group"><?php echo $apg_free_shipping['plugin']; ?></a></h3>
 <p>
-  <?php _e('Lets you add a free shipping based on Postcode/State/Country of the cart and minimum order a amount and/or a valid free shipping coupon.', 'apg_free_shipping'); ?>
+  <?php _e( 'Lets you add a free shipping based on Postcode/State/Country of the cart and minimum order a amount and/or a valid free shipping coupon.', 'apg_free_shipping' ); ?>
 </p>
-<?php include('cuadro-donacion.php'); ?>
+<?php include( 'cuadro-donacion.php' ); ?>
 <div class="cabecera"> <a href="<?php echo $apg_free_shipping['plugin_url']; ?>" title="<?php echo $apg_free_shipping['plugin']; ?>" target="_blank"><span class="imagen"></span></a> </div>
 <table class="form-table">
   <?php $this->generate_settings_html(); ?>

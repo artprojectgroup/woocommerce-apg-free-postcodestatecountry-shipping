@@ -2,11 +2,11 @@
 Contributors: artprojectgroup
 Donate link: http://www.artprojectgroup.es/tienda/donacion
 Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, shipping, free shipping, zip, postcode, state, country, coupon, minimum order amount
-Requires at least: 3.5
-Tested up to: 4.0
-Stable tag: 0.8
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Requires at least: 3.8
+Tested up to: 4.1
+Stable tag: 0.9
+License: GPLv3
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 Añade a WooCommerce un envío gratuito basado en el código postal, provincia (estado), país y un importe mínimo y/o un cupón válido.
 
@@ -59,6 +59,9 @@ Aunque la configuración del plugin es un muy simple, hemos creado un tutorial d
 1. Captura de pantalla de WooCommerce - APG Free Postcode/State/Country Shipping.
 
 == Changelog ==
+= 0.9 =
+* Eliminación de errores internos que aparecían al instalar el plugin y no tener configuración inicial.
+* Modificación de la estructura interna del plugin para ajustarse a los estándares de WordPress.
 = 0.8 =
 * Soporte de clases de envío para no realizar envíos gratuitos.
 = 0.7.1.1 =
@@ -94,6 +97,9 @@ Aunque la configuración del plugin es un muy simple, hemos creado un tutorial d
 * Versión inicial.
 
 == Upgrade Notice ==
+= 0.9 =
+* Eliminación de errores internos que aparecían al instalar el plugin y no tener configuración inicial.
+* Modificación de la estructura interna del plugin para ajustarse a los estándares de WordPress.
 = 0.8 =
 * Soporte de clases de envío para no realizar envíos gratuitos.
 = 0.7.1.1 =
