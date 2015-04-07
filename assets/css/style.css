@@ -20,6 +20,12 @@ table.form-table, .cabecera {
 	-khtml-opacity: 0.8;
 	opacity: 0.8;
 }
+.estrellas div {
+	display:inline!important;
+}
+.estrellas div:hover {
+	color:#2ea2cc;
+}
 div.donacion .genericon {
 	width: 25px;
 	height: 25px;

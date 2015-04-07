@@ -1,13 +1,13 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG Free Postcode/State/Country Shipping
-Version: 0.9
+Version: 0.9.1
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="http://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WooCommerce - APG Weight and Postcode/State/Country Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="http://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: http://www.artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
-Tested up to: 4.1
+Tested up to: 4.1.1
 
 Text Domain: apg_free_shipping
 Domain Path: /i18n/languages
@@ -43,13 +43,12 @@ function apg_free_shipping_enlaces( $enlaces, $archivo ) {
 	global $apg_free_shipping;
 
 	if ( $archivo == DIRECCION_apg_free_shipping ) {
-		$plugin = apg_free_shipping_plugin( $apg_free_shipping['plugin_uri'] );
 		$enlaces[] = '<a href="' . $apg_free_shipping['donacion'] . '" target="_blank" title="' . __( 'Make a donation by ', 'apg_free_shipping' ) . 'APG"><span class="genericon genericon-cart"></span></a>';
 		$enlaces[] = '<a href="'. $apg_free_shipping['plugin_url'] . '" target="_blank" title="' . $apg_free_shipping['plugin'] . '"><strong class="artprojectgroup">APG</strong></a>';
 		$enlaces[] = '<a href="https://www.facebook.com/artprojectgroup" title="' . __( 'Follow us on ', 'apg_free_shipping' ) . 'Facebook" target="_blank"><span class="genericon genericon-facebook-alt"></span></a> <a href="https://twitter.com/artprojectgroup" title="' . __( 'Follow us on ', 'apg_free_shipping' ) . 'Twitter" target="_blank"><span class="genericon genericon-twitter"></span></a> <a href="https://plus.google.com/+ArtProjectGroupES" title="' . __( 'Follow us on ', 'apg_free_shipping' ) . 'Google+" target="_blank"><span class="genericon genericon-googleplus-alt"></span></a> <a href="http://es.linkedin.com/in/artprojectgroup" title="' . __( 'Follow us on ', 'apg_free_shipping' ) . 'LinkedIn" target="_blank"><span class="genericon genericon-linkedin"></span></a>';
 		$enlaces[] = '<a href="http://profiles.wordpress.org/artprojectgroup/" title="' . __( 'More plugins on ', 'apg_free_shipping' ) . 'WordPress" target="_blank"><span class="genericon genericon-wordpress"></span></a>';
-		$enlaces[] = '<a href="mailto:info@artprojectgroup.es" title="' . __( 'Contact with us by ', 'apg_free_shipping' ) . 'e-mail"><span class="genericon genericon-mail"></span></a> <a href="skype:artprojectgroup" title="' . __( 'Contact with us by ', 'apg_free_shipping' ) . 'Skype"><span class="genericon genericon-wordpress"></span></a>';
-		$enlaces[] = '<div class="star-holder rate"><div style="width:' . esc_attr( str_replace( ',', '.', $plugin['rating'] ) ) . 'px;" class="star-rating"></div><div class="star-rate"><a title="' . __( '***** Fantastic!', 'apg_free_shipping' ) . '" href="' . $apg_free_shipping['puntuacion'] . '?rate=5#postform" target="_blank"><span></span></a> <a title="' . __( '**** Great', 'apg_free_shipping' ) . '" href="' . $apg_free_shipping['puntuacion'] . '?rate=4#postform" target="_blank"><span></span></a> <a title="' . __( '*** Good', 'apg_free_shipping' ) . '" href="' . $apg_free_shipping['puntuacion'] . '?rate=3#postform" target="_blank"><span></span></a> <a title="' . __( '** Works', 'apg_free_shipping' ) . '" href="' . $apg_free_shipping['puntuacion'] . '?rate=2#postform" target="_blank"><span></span></a> <a title="' . __( '* Poor', 'apg_free_shipping' ) . '" href="' . $apg_free_shipping['puntuacion'] . '?rate=1#postform" target="_blank"><span></span></a></div></div>';
+		$enlaces[] = '<a href="mailto:info@artprojectgroup.es" title="' . __( 'Contact with us by ', 'apg_free_shipping' ) . 'e-mail"><span class="genericon genericon-mail"></span></a> <a href="skype:artprojectgroup" title="' . __( 'Contact with us by ', 'apg_free_shipping' ) . 'Skype"><span class="genericon genericon-skype"></span></a>';
+		$enlaces[] = apg_free_shipping_plugin( $apg_free_shipping['plugin_uri'] );
 	}
 	
 	return $enlaces;
@@ -60,8 +59,12 @@ add_filter( 'plugin_row_meta', 'apg_free_shipping_enlaces', 10, 2 );
 function apg_free_shipping_enlace_de_ajustes( $enlaces ) { 
 	global $apg_free_shipping;
 
-	$enlace_de_ajustes = '<a href="' . $apg_free_shipping['ajustes'] . '" title="' . __( 'Settings of ', 'apg_free_shipping' ) . $apg_free_shipping['plugin'] . '">' . __( 'Settings', 'apg_free_shipping' ) . '</a>'; 
-	array_unshift( $enlaces, $enlace_de_ajustes ); 
+	$enlaces_de_ajustes = array(
+		'<a href="' . $apg_free_shipping['ajustes'] . '" title="' . __( 'Settings of ', 'apg_free_shipping' ) . $apg_free_shipping['plugin'] .'">' . __( 'Settings', 'apg_free_shipping' ) . '</a>', 
+	);
+	foreach( $enlaces_de_ajustes as $enlace_de_ajustes )	{
+		array_unshift( $enlaces, $enlace_de_ajustes );
+	}
 	
 	return $enlaces; 
 }
@@ -368,7 +371,7 @@ function apg_free_shipping_inicio() {
 					return 'C1';
 				}
 			}
-			
+
 			return NULL;
         }
 
@@ -381,7 +384,7 @@ function apg_free_shipping_inicio() {
 		//Habilita el envío
 		function is_available( $paquete ) {
 			global $woocommerce;
-
+			
 			if ( $this->enabled == "no" ) {
 				return false;
 			}
@@ -406,11 +409,9 @@ function apg_free_shipping_inicio() {
 						return false; //No atiende a los grupos excluidos
 					}
 				}
-			} else {
-				return false;
 			}
 
-			$habilitado = $tiene_cupon = $tiene_importe_minimo = false;
+			$tiene_cupon = $tiene_importe_minimo = false;
 
 			if ( in_array( $this->requires, array( 'cupon', 'cualquiera', 'ambos' ) ) ) {
 				if ( $woocommerce->cart->applied_coupons ) {
@@ -436,19 +437,27 @@ function apg_free_shipping_inicio() {
 
 			switch ( $this->requires ) {
 				case 'importe_minimo' :
-					if ( $tiene_importe_minimo ) $habilitado = true;
+					if ( $tiene_importe_minimo ) {
+						$habilitado = true;
+					}
 				break;
 				case 'cupon' :
-					if ( $tiene_cupon ) $habilitado = true;
+					if ( $tiene_cupon ) {
+						$habilitado = true;
+					}
 				break;
 				case 'ambos' :
-					if ( $tiene_importe_minimo && $tiene_cupon ) $habilitado = true;
+					if ( $tiene_importe_minimo && $tiene_cupon ) {
+						$habilitado = true;
+					}
 				break;
 				case 'cualquiera' :
-					if ( $tiene_importe_minimo || $tiene_cupon ) $habilitado = true;
+					if ( $tiene_importe_minimo || $tiene_cupon ) {
+						$habilitado = true;
+					}
 				break;
 				default :
-					$habilitado = true;
+					$habilitado = false;
 				break;
 			}
 
@@ -484,6 +493,8 @@ function apg_free_shipping_oculta_envios( $envios ) {
 }
 //Obtiene toda la información sobre el plugin
 function apg_free_shipping_plugin( $nombre ) {
+	global $apg_free_shipping;
+	
 	$argumentos = ( object ) array( 
 		'slug' => $nombre 
 	);
@@ -504,13 +515,24 @@ function apg_free_shipping_plugin( $nombre ) {
 	} else {
 		$plugin['rating'] = 100;
 	}
-	
-	return $plugin;
+
+	$rating = array(
+	   'rating'	=> $plugin['rating'],
+	   'type'	=> 'percent',
+	   'number'	=> $plugin['num_ratings'],
+	);
+	ob_start();
+	wp_star_rating( $rating );
+	$estrellas = ob_get_contents();
+	ob_end_clean();
+
+	return '<a title="' . sprintf( __( 'Please, rate %s:', 'apg_free_shipping' ), $apg_free_shipping['plugin'] ) . '" href="' . $apg_free_shipping['puntuacion'] . '?rate=5#postform" class="estrellas">' . $estrellas . '</a>';
 }
 
 //Carga las hojas de estilo
 function apg_free_shipping_muestra_mensaje() {
 	wp_register_style( 'apg_free_shipping_hoja_de_estilo', plugins_url( 'assets/css/style.css', __FILE__ ) ); //Carga la hoja de estilo
+	wp_enqueue_style( 'apg_free_shipping_hoja_de_estilo' ); //Carga la hoja de estilo global
 	wp_register_style( 'apg_free_shipping_fuentes', plugins_url( 'assets/fonts/stylesheet.css', __FILE__ ) ); //Carga la hoja de estilo global
 	wp_enqueue_style( 'apg_free_shipping_fuentes' ); //Carga la hoja de estilo global
 }

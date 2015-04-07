@@ -1,5 +1,3 @@
-<?php $plugin = apg_free_shipping_plugin( $apg_free_shipping['plugin_uri'] ); ?>
-
 <div class="donacion">
   <p>
     <?php _e( 'If you enjoyed and find helpful this plugin, please make a donation:', 'apg_free_shipping' ); ?>
@@ -35,9 +33,6 @@
   </div>
   <div>
     <p> <?php echo sprintf( __( 'Please, rate %s:', 'apg_free_shipping' ), $apg_free_shipping['plugin'] ); ?> </p>
-    <div class="star-holder rate">
-      <div style="width: <?php echo esc_attr( str_replace( ',', '.', $plugin['rating'] ) ); ?>px;" class="star-rating"></div>
-      <div class="star-rate"> <a title="<?php _e( '***** Fantastic!', 'apg_free_shipping' ); ?>" href="<?php echo $apg_free_shipping['puntuacion']; ?>?rate=5#postform"><span></span></a> <a title="<?php _e( '**** Great', 'apg_free_shipping' ); ?>" href="<?php echo $apg_free_shipping['puntuacion']; ?>?rate=4#postform"><span></span></a> <a title="<?php _e( '*** Good', 'apg_free_shipping' ); ?>" href="<?php echo $apg_free_shipping['puntuacion']; ?>?rate=3#postform"><span></span></a> <a title="<?php _e( '** Works', 'apg_free_shipping' ); ?>" href="<?php echo $apg_free_shipping['puntuacion']; ?>?rate=2#postform"><span></span></a> <a title="<?php _e( '* Poor', 'apg_free_shipping' ); ?>" href="<?php echo $apg_free_shipping['puntuacion']; ?>?rate=1#postform"><span></span></a> </div>
-    </div>
+    <?php echo apg_free_shipping_plugin( $apg_free_shipping['plugin_uri'] ); ?>
   </div>
 </div>
