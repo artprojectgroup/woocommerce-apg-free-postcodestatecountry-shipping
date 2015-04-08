@@ -1,8 +1,10 @@
 <div class="donacion">
-  <p>
-    <?php _e( 'If you enjoyed and find helpful this plugin, please make a donation:', 'apg_free_shipping' ); ?>
-  </p>
-  <p><a href="<?php echo $apg_free_shipping['donacion']; ?>" target="_blank" title="<?php _e( 'Make a donation by ', 'apg_free_shipping' ); ?>APG"><span class="genericon genericon-cart"></span></a></p>
+  <div>
+    <p>
+      <?php _e( 'If you enjoyed and find helpful this plugin, please make a donation:', 'apg_free_shipping' ); ?>
+    </p>
+    <p><a href="<?php echo $apg_free_shipping['donacion']; ?>" target="_blank" title="<?php _e( 'Make a donation by ', 'apg_free_shipping' ); ?>APG"><span class="genericon genericon-cart"></span></a></p>
+  </div>
   <div>
     <p>Art Project Group:</p>
     <p><a href="http://www.artprojectgroup.es" title="Art Project Group" target="_blank"><strong class="artprojectgroup">APG</strong></a></p>
@@ -23,7 +25,7 @@
     <p>
       <?php _e( 'Contact with us:', 'apg_free_shipping' ); ?>
     </p>
-    <p><a href="mailto:info@artprojectgroup.es" title="<?php _e( 'Contact with us by ', 'apg_free_shipping' ); ?>e-mail"><span class="genericon genericon-mail"></span></a> <a href="skype:artprojectgroup" title="<?php _e( 'Contact with us by ', 'apg_free_shipping' ); ?>Skype"><span class="genericon genericon-wordpress"></span></a></p>
+    <p><a href="mailto:info@artprojectgroup.es" title="<?php _e( 'Contact with us by ', 'apg_free_shipping' ); ?>e-mail"><span class="genericon genericon-mail"></span></a> <a href="skype:artprojectgroup" title="<?php _e( 'Contact with us by ', 'apg_free_shipping' ); ?>Skype"><span class="genericon genericon-skype"></span></a></p>
   </div>
   <div>
     <p>
@@ -33,6 +35,5 @@
   </div>
   <div>
     <p> <?php echo sprintf( __( 'Please, rate %s:', 'apg_free_shipping' ), $apg_free_shipping['plugin'] ); ?> </p>
-    <?php echo apg_free_shipping_plugin( $apg_free_shipping['plugin_uri'] ); ?>
-  </div>
+    <?php echo apg_free_shipping_plugin( $apg_free_shipping['plugin_uri'] ); ?> </div>
 </div>

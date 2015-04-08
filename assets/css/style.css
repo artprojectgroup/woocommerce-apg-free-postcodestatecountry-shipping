@@ -3,14 +3,13 @@
 /*General*/
 table.form-table, .cabecera {
 	clear: none;
-	width: 70%;
+	width: 79%;
+	max-width: 582px;
 }
 .imagen {
 	border-left: 4px solid #7AD03A;
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
-	background-image: url(../images/cabecera.jpg);
-	width: 582px;
-	height: 139px;
+	max-width:100%;
 	display: block;
 }
 .imagen:hover {
@@ -21,25 +20,24 @@ table.form-table, .cabecera {
 	opacity: 0.8;
 }
 .estrellas div {
-	display:inline!important;
+	display: inline!important;
 }
 .estrellas div:hover {
-	color:#2ea2cc;
+	color: #2ea2cc;
 }
 div.donacion .genericon {
-	width: 25px;
-	height: 25px;
-	font-size: 25px;
+	width: 10%;
+	height: 10%;
 }
-div.donacion .artprojectgroup {
-	font-size: 20px;
+div.donacion .genericon, div.donacion .artprojectgroup, .estrellas .star-rating .star, div.donacion p {
+	font-size: 1.7vmin;
 }
 div.donacion {
 	background-color: #FFFFFF;
 	float: right;
-	margin: 10px 0px;
 	padding: 10px;
-	width: 220px;
+	width: 15%;
+	max-width: 220px;
 	text-align: center;
 	border-left: 4px solid #7AD03A;
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
@@ -47,54 +45,13 @@ div.donacion {
 div.donacion > div {
 	padding: 10px;
 	margin: 10px auto 0px;
-	width: 190px;
+	max-width: 190px;
 	border-top: 1px solid #7AD03A;
+}
+div.donacion > div:first-child {
+	border: none;
+	margin-top:0px;
 }
 div.donacion a {
 	text-decoration: none;
-}
-.chzn-choices, chzn-container-active {
-	border: none!important;
-	box-shadow: none!important;
-	background: none!important;
-}
-.search-field {
-	text-align: right;
-	width: 99%;
-}
-.chzn-container, input[type="text"], input[type="number"], textarea, select {
-	background-color: #FFFFFF;
-	border: 1px solid #DDDDDD;
-	width: 25em!important;
-	outline: 0px none;
-	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07) inset!important;
-	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07) inset!important;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07) inset!important;
-}
-input[type="text"], input[type="number"], textarea, select {
-	height: 30px!important;
-}
-textarea {
-	float: none;
-	height: 150px!important;
-	width: 100%!important;
-	max-width: 590px!important;
-}
-input:focus, textarea:focus, select:focus, .chzn-container:hover {
-	border-color: #999999;
-	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1)!important;
-	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1)!important;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1)!important;
-}
-.chosen_select, .chzn-container {
-	width: 350px!important;
-}
-.chzn-container-multi .chzn-choices .search-field input {
-	width: 350px!important;
-	height: 30px!important;
-	padding: 3px 5px!important;
-	margin: 0px!important;
-	color: inherit!important;
-	font-family: inherit!important;
-	font-size: inherit!important;
 }
