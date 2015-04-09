@@ -1,7 +1,7 @@
 @charset "UTF-8";
  @import url(../fonts/stylesheet.css);
 /*General*/
-table.form-table, .cabecera {
+table.apg-table, .cabecera {
 	clear: none;
 	width: 79%;
 	max-width: 582px;
@@ -9,7 +9,7 @@ table.form-table, .cabecera {
 .imagen {
 	border-left: 4px solid #7AD03A;
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
-	max-width:100%;
+	max-width: 100%;
 	display: block;
 }
 .imagen:hover {
@@ -25,12 +25,13 @@ table.form-table, .cabecera {
 .estrellas div:hover {
 	color: #2ea2cc;
 }
-div.donacion .genericon {
-	width: 10%;
-	height: 10%;
+.estrellas .star-rating .star {
+	font-size: 18px;
 }
-div.donacion .genericon, div.donacion .artprojectgroup, .estrellas .star-rating .star, div.donacion p {
-	font-size: 1.7vmin;
+div.donacion .genericon, div.donacion .estrellas .star-rating .star, div.donacion .artprojectgroup,  {
+	width: 15px;
+	height: 15px;
+	font-size: 15px;
 }
 div.donacion {
 	background-color: #FFFFFF;
@@ -42,16 +43,59 @@ div.donacion {
 	border-left: 4px solid #7AD03A;
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
 }
-div.donacion > div {
-	padding: 10px;
+div.donacion div.fila {
+	padding: 10px 10px 0px;
 	margin: 10px auto 0px;
 	max-width: 190px;
+}
+div.donacion div.fila, div.donacion div.columna:nth-child(2n) {
 	border-top: 1px solid #7AD03A;
 }
-div.donacion > div:first-child {
+div.donacion div.fila:first-child {
 	border: none;
-	margin-top:0px;
+	margin-top: 0px;
+}
+div.donacion div.columna.final {
+	display: none;
+}
+div.donacion div.fila.final {
+	padding: 10px;
+	margin: 0px auto 10px;
 }
 div.donacion a {
 	text-decoration: none;
+}
+
+@media screen and (max-width: 582px) {
+table.apg-table, .cabecera {
+	clear: none;
+	width: 100%;
+}
+div.donacion {
+	display: table;
+	float: none;
+	margin-bottom: 10px;
+	max-width: 100%;
+	width: 96%;
+}
+div.donacion div.fila {
+	display: table-row;
+	width: 100%;
+	border-top: 1px solid #7AD03A;
+}
+div.donacion div.fila:first-child {
+	border: none;
+}
+div.donacion div.columna {
+	display: table-cell;
+	width: 50%;
+	padding: 10px;
+}
+div.donacion div.fila, div.donacion div.columna, div.donacion div.columna:first-child {
+	border-top: 1px solid #7AD03A;
+}
+div.donacion div.fila:first-child, div.donacion div.fila:first-child div.columna {
+	border: none;
+	margin-top: 0px;
+}
 }

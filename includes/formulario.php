@@ -6,7 +6,7 @@
 </p>
 <?php include( 'cuadro-donacion.php' ); ?>
 <div class="cabecera"> <a href="<?php echo $apg_free_shipping['plugin_url']; ?>" title="<?php echo $apg_free_shipping['plugin']; ?>" target="_blank"><img src="<?php echo plugins_url( '../assets/images/cabecera.jpg', __FILE__ ); ?>" class="imagen" alt="<?php echo $apg_free_shipping['plugin']; ?>" /></a> </div>
-<table class="form-table">
+<table class="form-table apg-table">
   <?php $this->generate_settings_html(); ?>
 </table>
 <!--/.form-table--> 
