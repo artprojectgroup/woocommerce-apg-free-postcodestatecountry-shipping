@@ -28,12 +28,12 @@ table.apg-table, .cabecera {
 .estrellas .star-rating .star {
 	font-size: 18px;
 }
-div.donacion .genericon, div.donacion .estrellas .star-rating .star, div.donacion .artprojectgroup,  {
+div.informacion .genericon, div.informacion .estrellas .star-rating .star, div.informacion .artprojectgroup,  {
 	width: 15px;
 	height: 15px;
 	font-size: 15px;
 }
-div.donacion {
+div.informacion {
 	background-color: #FFFFFF;
 	float: right;
 	padding: 10px;
@@ -43,58 +43,58 @@ div.donacion {
 	border-left: 4px solid #7AD03A;
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
 }
-div.donacion div.fila {
+div.informacion div.fila {
 	padding: 10px 10px 0px;
 	margin: 10px auto 0px;
 	max-width: 190px;
 }
-div.donacion div.fila, div.donacion div.columna:nth-child(2n) {
+div.informacion div.fila, div.informacion div.columna:nth-child(2n) {
 	border-top: 1px solid #7AD03A;
 }
-div.donacion div.fila:first-child {
+div.informacion div.fila:first-child {
 	border: none;
 	margin-top: 0px;
 }
-div.donacion div.columna.final {
+div.informacion div.columna.final {
 	display: none;
 }
-div.donacion div.fila.final {
+div.informacion div.fila.final {
 	padding: 10px;
 	margin: 0px auto 10px;
 }
-div.donacion a {
+div.informacion a {
 	text-decoration: none;
 }
 
-@media screen and (max-width: 582px) {
+@media screen and (max-width: 802px) {
 table.apg-table, .cabecera {
 	clear: none;
 	width: 100%;
 }
-div.donacion {
+div.informacion {
 	display: table;
 	float: none;
-	margin-bottom: 10px;
-	max-width: 100%;
-	width: 96%;
+	margin: 0px 0px 10px 0px;
+	max-width: 562px;
+	width: auto;
 }
-div.donacion div.fila {
+div.informacion div.fila {
 	display: table-row;
 	width: 100%;
 	border-top: 1px solid #7AD03A;
 }
-div.donacion div.fila:first-child {
+div.informacion div.fila:first-child {
 	border: none;
 }
-div.donacion div.columna {
+div.informacion div.columna {
 	display: table-cell;
 	width: 50%;
 	padding: 10px;
 }
-div.donacion div.fila, div.donacion div.columna, div.donacion div.columna:first-child {
+div.informacion div.fila, div.informacion div.columna, div.informacion div.columna:first-child {
 	border-top: 1px solid #7AD03A;
 }
-div.donacion div.fila:first-child, div.donacion div.fila:first-child div.columna {
+div.informacion div.fila:first-child, div.informacion div.fila:first-child div.columna {
 	border: none;
 	margin-top: 0px;
 }

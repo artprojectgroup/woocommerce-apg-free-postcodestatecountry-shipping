@@ -1,4 +1,4 @@
-<div class="donacion">
+<div class="informacion">
   <div class="fila">
     <div class="columna">
       <p>
