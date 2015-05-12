@@ -1,13 +1,13 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG Free Postcode/State/Country Shipping
-Version: 0.9.1.4
+Version: 0.9.2
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="http://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WooCommerce - APG Weight and Postcode/State/Country Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="http://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: http://www.artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
-Tested up to: 4.1.1
+Tested up to: 4.2.2
 
 Text Domain: apg_free_shipping
 Domain Path: /i18n/languages
@@ -30,6 +30,7 @@ $apg_free_shipping = array(
 	'plugin' 		=> 'WooCommerce - APG Free Postcode/State/Country Shipping', 
 	'plugin_uri' 	=> 'woocommerce-apg-free-postcodestatecountry-shipping', 
 	'donacion' 		=> 'http://www.artprojectgroup.es/tienda/donacion',
+	'soporte' 		=> 'http://www.artprojectgroup.es/tienda/soporte-tecnico',
 	'plugin_url' 	=> 'http://www.artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-free-postcodestatecountry-shipping', 
 	'ajustes' 		=> 'admin.php?page=wc-settings&tab=shipping&section=apg_free_shipping', 
 	'puntuacion' 	=> 'http://wordpress.org/support/view/plugin-reviews/woocommerce-apg-free-postcodestatecountry-shipping'
@@ -61,6 +62,7 @@ function apg_free_shipping_enlace_de_ajustes( $enlaces ) {
 
 	$enlaces_de_ajustes = array(
 		'<a href="' . $apg_free_shipping['ajustes'] . '" title="' . __( 'Settings of ', 'apg_free_shipping' ) . $apg_free_shipping['plugin'] .'">' . __( 'Settings', 'apg_free_shipping' ) . '</a>', 
+		'<a href="' . $apg_free_shipping['soporte'] . '" title="' . __( 'Support of ', 'apg_free_shipping' ) . $apg_free_shipping['plugin'] .'">' . __( 'Support', 'apg_shipping' ) . '</a>'
 	);
 	foreach( $enlaces_de_ajustes as $enlace_de_ajustes )	{
 		array_unshift( $enlaces, $enlace_de_ajustes );
@@ -204,7 +206,7 @@ function apg_free_shipping_inicio() {
 					'options'					=> array( 
 						''						=> __( 'N/A', 'apg_free_shipping' ),
 						'cupon'					=> __( 'A valid free shipping coupon', 'apg_free_shipping' ),
-						'importe_minimo'		=> __( 'A minimum order amount ( defined below )', 'apg_free_shipping' ),
+						'importe_minimo'		=> __( 'A minimum order amount (defined below)', 'apg_free_shipping' ),
 						'cualquiera'			=> __( 'A minimum order amount OR a coupon', 'apg_free_shipping' ),
 						'ambos'					=> __( 'A minimum order amount AND a coupon', 'apg_free_shipping' ),
 					 )
@@ -212,7 +214,7 @@ function apg_free_shipping_inicio() {
 				'importe_minimo' => array( 
 							'title'				=> __( 'Minimum Order Amount', 'apg_free_shipping' ),
 							'type'				=> 'price',
-							'description' 		=> __( 'Users will need to spend this amount to get free shipping ( if enabled above ).', 'apg_free_shipping' ),
+							'description' 		=> __( 'Users will need to spend this amount to get free shipping (if enabled above).', 'apg_free_shipping' ),
 							'default' 			=> '0',
 							'desc_tip'      	=> true,
 							'placeholder'		=> wc_format_localized_price( 0 )
@@ -220,26 +222,26 @@ function apg_free_shipping_inicio() {
 				'postal_group_no' => array( 
 					'title'						=> __( 'Number of postcode groups', 'apg_free_shipping' ),
 					'type'						=> 'number',
-					'desc_tip'					=> __( 'Number of groups of ZIP/Postcode sharing delivery rates. ( Hit "Save changes" button after you have changed this setting ).', 'apg_free_shipping' ),
+					'desc_tip'					=> __( 'Number of groups of ZIP/Postcode sharing delivery rates.  Hit "Save changes" button after you have changed this setting).', 'apg_free_shipping' ),
 					'default'					=> '0',
 				 ),
 				'state_group_no' => array( 
 					'title'						=> __( 'Number of state groups', 'apg_free_shipping' ),
 					'type'						=> 'number',
-					'desc_tip'					=> __( 'Number of groups of states sharing delivery rates. ( Hit "Save changes" button after you have changed this setting ).', 'apg_free_shipping' ),
+					'desc_tip'					=> __( 'Number of groups of states sharing delivery rates. (Hit "Save changes" button after you have changed this setting).', 'apg_free_shipping' ),
 					'default'					=> '0',
 				 ),
 				'grupos_excluidos' 				=> array( 
 					'title'						=> __( 'No shipping', 'apg_free_shipping' ),
 					'type'						=> 'text',
-					'desc_tip'					=> sprintf( __( "Group/s of ZIP/Postcode/State where %s doesn't accept free shippings. Example: <code>Postcode/state group code separated by comma ( , )</code>", 'apg_free_shipping' ), get_bloginfo( 'name' ) ),
+					'desc_tip'					=> sprintf( __( "Group/s of ZIP/Postcode/State where %s doesn't accept free shippings. Example: <code>Postcode/state group code separated by comma (,)</code>", 'apg_free_shipping' ), get_bloginfo( 'name' ) ),
 					'default'					=> '',
 					'description'				=> '<code>P2,S1</code>',
 				 ),
 			 );
 			if ( WC()->shipping->get_shipping_classes() ) {
 				$this->form_fields['clases_excluidas'] = array( 
-					'title'		=> __( 'No shipping ( Shipping class ):', 'apg_free_shipping' ),
+					'title'		=> __( 'No shipping (Shipping class)', 'apg_free_shipping' ),
 					'desc_tip' 	=> sprintf( __( "Select the shipping class where %s doesn't accept free shippings.", 'apg_free_shipping' ), get_bloginfo( 'name' ) ),
 					'css'		=> 'width: 450px;',
 					'default'	=> '',
@@ -275,9 +277,9 @@ function apg_free_shipping_inicio() {
 
 			for ( $contador = 1; $numero >= $contador; $contador++ ) {
 				$this->form_fields['P' . $contador] =  array( 
-					'title'		=> sprintf( __( 'Postcode Group %s ( P%s )', 'apg_free_shipping' ), $contador, $contador ),
+					'title'		=> sprintf( __( 'Postcode Group %s (P%s)', 'apg_free_shipping' ), $contador, $contador ),
 					'type'		=> 'text',
-					'desc_tip'	=> __( 'Add the postcodes for this group. Semi-colon ( ; ) separate multiple values. Wildcards ( * ) can be used. Example: <code>07*</code>. Ranges for numeric postcodes will be expanded into individual postcodes. Example: <code>12345-12350</code>.', 'apg_free_shipping' ),
+					'desc_tip'	=> __( 'Add the postcodes for this group. Semi-colon (;) separate multiple values. Wildcards (*) can be used. Example: <code>07*</code>. Ranges for numeric postcodes will be expanded into individual postcodes. Example: <code>12345-12350</code>.', 'apg_free_shipping' ),
 					'css'		=> 'width: 450px;',
 					'default'	=> '',
 				 );
@@ -294,7 +296,7 @@ function apg_free_shipping_inicio() {
 
 			for ( $contador = 1; $numero >= $contador; $contador++ ) {
 				$this->form_fields['S' . $contador] =  array( 
-					'title'		=> sprintf( __( 'State Group %s ( S%s )', 'apg_free_shipping' ), $contador, $contador ),
+					'title'		=> sprintf( __( 'State Group %s (S%s)', 'apg_free_shipping' ), $contador, $contador ),
 					'type'		=> 'multiselect',
 					'class'		=> 'chosen_select',
 					'css'		=> 'width: 450px;',
@@ -370,6 +372,8 @@ function apg_free_shipping_inicio() {
 				if ( in_array( $paquete['destination']['country'], $paises ) ) {
 					return 'C1';
 				}
+			} else {
+				return 'Vacío'; //No hay países seleccionados
 			}
 
 			return NULL;
@@ -409,6 +413,8 @@ function apg_free_shipping_inicio() {
 						return false; //No atiende a los grupos excluidos
 					}
 				}
+			} else {
+				return false;
 			}
 
 			$habilitado = $tiene_cupon = $tiene_importe_minimo = false;

@@ -4,7 +4,7 @@
 table.apg-table, .cabecera {
 	clear: none;
 	width: 79%;
-	max-width: 582px;
+	max-width: 586px;
 }
 .imagen {
 	border-left: 4px solid #7AD03A;
@@ -28,10 +28,10 @@ table.apg-table, .cabecera {
 .estrellas .star-rating .star {
 	font-size: 18px;
 }
-div.informacion .genericon, div.informacion .estrellas .star-rating .star, div.informacion .artprojectgroup,  {
-	width: 15px;
-	height: 15px;
-	font-size: 15px;
+div.informacion .genericon, div.informacion .estrellas .star-rating .star, div.informacion .artprojectgroup, {
+ width: 15px;
+ height: 15px;
+ font-size: 15px;
 }
 div.informacion {
 	background-color: #FFFFFF;
@@ -65,8 +65,14 @@ div.informacion div.fila.final {
 div.informacion a {
 	text-decoration: none;
 }
+table.apg-table select, table.apg-table textarea {
+	width: 100% !important;
+}
+table.apg-table textarea {
+	min-height: 200px;
+}
 
-@media screen and (max-width: 802px) {
+@media screen and (max-width: 806px) {
 table.apg-table, .cabecera {
 	clear: none;
 	width: 100%;
