@@ -3,8 +3,10 @@ Contributors: artprojectgroup
 Donate link: http://www.artprojectgroup.es/tienda/donacion
 Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, shipping, free shipping, zip, postcode, state, country, coupon, minimum order amount
 Requires at least: 3.8
-Tested up to: 4.2.2
+Tested up to: 4.3
 Stable tag: 0.9.2
+WC requires at least: 2.1
+WC tested up to: 2.3.13
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 

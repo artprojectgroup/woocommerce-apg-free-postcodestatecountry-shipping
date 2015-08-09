@@ -7,7 +7,7 @@ Description: Add to WooCommerce a free shipping based on the order postcode, pro
 Author URI: http://www.artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
-Tested up to: 4.2.2
+Tested up to: 4.3
 
 Text Domain: apg_free_shipping
 Domain Path: /i18n/languages
@@ -34,7 +34,7 @@ $apg_free_shipping = array(
 	'plugin_url' 	=> 'http://www.artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-free-postcodestatecountry-shipping', 
 	'ajustes' 		=> 'admin.php?page=wc-settings&tab=shipping&section=apg_free_shipping', 
 	'puntuacion' 	=> 'http://wordpress.org/support/view/plugin-reviews/woocommerce-apg-free-postcodestatecountry-shipping'
- );
+);
 
 //Carga el idioma
 load_plugin_textdomain( 'apg_free_shipping', null, dirname( DIRECCION_apg_free_shipping ) . '/i18n/languages' );
@@ -497,6 +497,7 @@ function apg_free_shipping_oculta_envios( $envios ) {
  
 	return $envios;
 }
+
 //Obtiene toda la información sobre el plugin
 function apg_free_shipping_plugin( $nombre ) {
 	global $apg_free_shipping;
