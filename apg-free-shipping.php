@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG Free Postcode/State/Country Shipping
-Version: 0.9.2
+Version: 0.9.2.1
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="http://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WooCommerce - APG Weight and Postcode/State/Country Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="http://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: http://www.artprojectgroup.es/
@@ -19,7 +19,7 @@ Domain Path: /i18n/languages
 
 //Igual no deberías poder abrirme
 if ( !defined( 'ABSPATH' ) ) {
-    exit;
+    exit();
 }
 
 //Definimos constantes
@@ -64,7 +64,7 @@ function apg_free_shipping_enlace_de_ajustes( $enlaces ) {
 		'<a href="' . $apg_free_shipping['ajustes'] . '" title="' . __( 'Settings of ', 'apg_free_shipping' ) . $apg_free_shipping['plugin'] .'">' . __( 'Settings', 'apg_free_shipping' ) . '</a>', 
 		'<a href="' . $apg_free_shipping['soporte'] . '" title="' . __( 'Support of ', 'apg_free_shipping' ) . $apg_free_shipping['plugin'] .'">' . __( 'Support', 'apg_shipping' ) . '</a>'
 	);
-	foreach( $enlaces_de_ajustes as $enlace_de_ajustes )	{
+	foreach( $enlaces_de_ajustes as $enlace_de_ajustes ) {
 		array_unshift( $enlaces, $enlace_de_ajustes );
 	}
 	
@@ -187,7 +187,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 						'title' 						=> __( 'Method availability', 'apg_free_shipping' ),
 						'type' 						=> 'select',
 						'default' 					=> 'all',
-						'class'						=> 'availability',
+						'class'						=> 'wc-enhanced-select availability',
 						'options'					=> array( 
 							'all' 					=> __( 'All allowed countries', 'apg_free_shipping' ),
 							'specific' 				=> __( 'Specific Countries', 'apg_free_shipping' )
@@ -196,7 +196,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 					'countries' => array( 
 						'title' 						=> __( 'Specific Countries', 'apg_free_shipping' ),
 						'type' 						=> 'multiselect',
-						'class'						=> 'chosen_select',
+						'class'						=> 'wc-enhanced-select',
 						'css'						=> 'width: 450px;',
 						'default' 					=> '',
 						'options'					=> WC()->countries->get_shipping_countries(),
@@ -205,6 +205,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 						'title' 						=> __( 'Free Shipping Requires...', 'apg_free_shipping' ),
 						'type' 						=> 'select',
 						'default' 					=> $requerido,
+						'class'						=> 'wc-enhanced-select',
 						'options'					=> array( 
 							''						=> __( 'N/A', 'apg_free_shipping' ),
 							'cupon'					=> __( 'A valid free shipping coupon', 'apg_free_shipping' ),
@@ -248,7 +249,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 						'css'		=> 'width: 450px;',
 						'default'	=> '',
 						'type'		=> 'multiselect',
-						'class'		=> 'chosen_select',
+						'class'		=> 'wc-enhanced-select',
 						'options' 	=> array( 'todas' => __( 'All enabled shipping class', 'apg_free_shipping' ) ) + $this->clases_de_envio,
 					);
 				}
@@ -300,7 +301,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 					$this->form_fields['S' . $contador] =  array( 
 						'title'		=> sprintf( __( 'State Group %s (S%s)', 'apg_free_shipping' ), $contador, $contador ),
 						'type'		=> 'multiselect',
-						'class'		=> 'chosen_select',
+						'class'		=> 'wc-enhanced-select',
 						'css'		=> 'width: 450px;',
 						'desc_tip'	=> __( 'Select the states for this group.', 'apg_free_shipping' ),
 						'default'	=> '',
