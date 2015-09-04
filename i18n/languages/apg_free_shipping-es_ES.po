@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce - APG Free Postcode/State/Country Shipping\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Fri Sep 04 2015 10:37:44 GMT+0200 (CEST)\n"
-"PO-Revision-Date: Fri Sep 04 2015 10:40:31 GMT+0200 (CEST)\n"
+"PO-Revision-Date: Fri Sep 04 2015 12:08:18 GMT+0200 (CEST)\n"
 "Last-Translator: Art Project Group <info@artprojectgroup.com>\n"
 "Language-Team: \n"
 "Language: Spanish (Spain)\n"
@@ -220,7 +220,11 @@ msgstr "Grupo de provincia (estado) %s (S%s)"
 msgid "Select the states for this group."
 msgstr "Selecciona las provincias (estados) para este grupo"
 
-#: ../../apg-free-shipping.php:540 ../../includes/cuadro-informacion.php:44
+#: ../../apg-free-shipping.php:498
+msgid "This plugin require WooCommerce active to run!"
+msgstr "¡Este plugin necesita WooCommerce activo para funcionar!"
+
+#: ../../apg-free-shipping.php:550 ../../includes/cuadro-informacion.php:44
 #, php-format
 msgid "Please, rate %s:"
 msgstr "Por favor, puntúa %s:"

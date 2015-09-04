@@ -4,7 +4,7 @@ Donate link: http://www.artprojectgroup.es/tienda/donacion
 Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, shipping, free shipping, zip, postcode, state, country, coupon, minimum order amount
 Requires at least: 3.8
 Tested up to: 4.3
-Stable tag: 0.9.2.1
+Stable tag: 0.9.2.2
 WC requires at least: 2.1
 WC tested up to: 2.4.6
 License: GPLv3
@@ -25,6 +25,13 @@ Añade a WooCommerce un envío gratuito basado en el código postal, provincia (
 * Puedes crear tantos grupos de código postal y/o provincias (estados) como desees.
 * Puedes asignar grupos de código postal/provincia (estado) donde no atender los pedidos.
 * Puedes ocultar el resto de gastos de envío al estar disponible el gasto de envío gratuito configurado.
+
+= Traducciones =
+* Español ([**Art Project Group**](http://www.artprojectgroup.es/)).
+* English ([**Art Project Group**](http://www.artprojectgroup.es/)).
+
+= Soporte técnico =
+**Art Project Group** te ofrece [**Soporte técnico**](http://www.artprojectgroup.es/servicios/servicios-para-wordpress-y-woocommerce/soporte-tecnico) para configurar o instalar **WooCommerce - APG Free Postcode/State/Country Shipping**. 
 
 = Origen =
 **WooCommerce - APG Free Postcode/State/Country Shipping** ha sido programado a partir del plugin [*WooCommerce - APG Weight and Postcode/State/Country Shipping*](http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/) de [Art Project Group](http://profiles.wordpress.org/artprojectgroup/) y la clase *WC_Shipping_Free_Shipping* original de [*WooCommerce - excelling eCommerce*](http://wordpress.org/plugins/woocommerce/), lo que le añade algunas de las funcionalidades presentes en el primero a la sencillez del segundo.
@@ -61,6 +68,8 @@ Aunque la configuración del plugin es un muy simple, hemos creado un tutorial d
 1. Captura de pantalla de WooCommerce - APG Free Postcode/State/Country Shipping.
 
 == Changelog ==
+= 0.9.2.2 =
+* Control de activación de WooCommerce.
 = 0.9.2.1 =
 * Actualización de la captura de pantalla.
 = 0.9.2 =
@@ -118,6 +127,8 @@ Aunque la configuración del plugin es un muy simple, hemos creado un tutorial d
 * Versión inicial.
 
 == Upgrade Notice ==
+= 0.9.2.2 =
+* Control de activación de WooCommerce.
 = 0.9.2.1 =
 * Actualización de la captura de pantalla.
 = 0.9.2 =
@@ -173,8 +184,8 @@ Aunque la configuración del plugin es un muy simple, hemos creado un tutorial d
 * Actualización de las hojas de estilo acorde al nuevo WordPress 8.
 
 ==Traducciones ==
-* *English*: by **Art Project Group** (default language).
-* *Español*: por **Art Project Group**.
+* *English*: by [**Art Project Group**](http://www.artprojectgroup.es/) (default language).
+* *Español*: por [**Art Project Group**](http://www.artprojectgroup.es/).
 
 == ¿Por qué está esta página en español? ==
 Mientras WordPress no nos permita a los desarrolladores realizar esta página en más de un idioma, elegiremos siempre el español.
