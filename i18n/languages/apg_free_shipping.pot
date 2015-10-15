@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce - APG Free Postcode/State/Country Shipping\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Fri Sep 04 2015 10:37:44 GMT+0200 (CEST)\n"
-"POT-Revision-Date: Fri Sep 04 2015 12:07:57 GMT+0200 (CEST)\n"
+"POT-Revision-Date: Thu Oct 15 2015 10:42:02 GMT+0200 (CEST)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -23,6 +23,38 @@ msgstr ""
 "esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
 "esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
 "X-Generator: Loco - https://localise.biz/"
+
+#. Name of the plugin
+msgid "WooCommerce - APG Free Postcode/State/Country Shipping"
+msgstr ""
+
+#. URI of the plugin
+msgid ""
+"http://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-"
+"shipping"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"Add to WooCommerce a free shipping based on the order postcode, province "
+"(state) and country of customer's address and minimum order a amount and/or "
+"a valid free shipping coupon. Created from <a href=\"http://profiles."
+"wordpress.org/artprojectgroup/\" target=\"_blank\">Art Project Group</a> <a "
+"href=\"http://wordpress.org/plugins/woocommerce-apg-weight-and-"
+"postcodestatecountry-shipping/\" target=\"_blank\"><strong>WooCommerce - APG "
+"Weight and Postcode/State/Country Shipping</strong></a> plugin and the "
+"original WC_Shipping_Free_Shipping class from <a href=\"http://wordpress."
+"org/plugins/woocommerce/\" target=\"_blank\"><strong>WooCommerce - excelling "
+"eCommerce</strong></a>."
+msgstr ""
+
+#. Author URI of the plugin
+msgid "http://www.artprojectgroup.es"
+msgstr ""
+
+#. Author of the plugin
+msgid "Art Project Group"
+msgstr ""
 
 #: ../../apg-free-shipping.php:47 ../../includes/cuadro-informacion.php:7
 msgid "Make a donation by "

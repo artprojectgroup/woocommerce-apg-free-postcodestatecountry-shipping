@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: WooCommerce - APG Free Postcode/State/Country Shipping\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Fri Sep 04 2015 10:37:44 GMT+0200 (CEST)\n"
-"PO-Revision-Date: Fri Sep 04 2015 12:08:18 GMT+0200 (CEST)\n"
-"Last-Translator: Art Project Group <info@artprojectgroup.com>\n"
+"PO-Revision-Date: Thu Oct 15 2015 10:45:39 GMT+0200 (CEST)\n"
+"Last-Translator: Herves-Vida <info@herves-vida.com>\n"
 "Language-Team: \n"
 "Language: Spanish (Spain)\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
@@ -25,6 +25,50 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes\n"
 "X-Loco-Target-Locale: es_ES"
+
+#. Name of the plugin
+msgid "WooCommerce - APG Free Postcode/State/Country Shipping"
+msgstr "WooCommerce - APG Free Postcode/State/Country Shipping"
+
+#. URI of the plugin
+msgid ""
+"http://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-"
+"shipping"
+msgstr ""
+"http://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-"
+"shipping"
+
+#. Description of the plugin
+msgid ""
+"Add to WooCommerce a free shipping based on the order postcode, province "
+"(state) and country of customer's address and minimum order a amount and/or "
+"a valid free shipping coupon. Created from <a href=\"http://profiles."
+"wordpress.org/artprojectgroup/\" target=\"_blank\">Art Project Group</a> <a "
+"href=\"http://wordpress.org/plugins/woocommerce-apg-weight-and-"
+"postcodestatecountry-shipping/\" target=\"_blank\"><strong>WooCommerce - APG "
+"Weight and Postcode/State/Country Shipping</strong></a> plugin and the "
+"original WC_Shipping_Free_Shipping class from <a href=\"http://wordpress."
+"org/plugins/woocommerce/\" target=\"_blank\"><strong>WooCommerce - excelling "
+"eCommerce</strong></a>."
+msgstr ""
+"Añade a WooCommerce un gasto de envío gratuito al pedido basado en el código "
+"postal, provincia (estado) o país de la dirección del cliente, y un importe "
+"de pedido mínimo y/o un cupón válido de envío gratuito. Creado a partir del "
+"plugin <a href=\"http://wordpress.org/plugins/woocommerce-apg-weight-and-"
+"postcodestatecountry-shipping/\" target=\"_blank\"><strong>WooCommerce - APG "
+"Weight and Postcode/State/Country Shipping</strong></a> de <a href=\"http:"
+"//profiles.wordpress.org/artprojectgroup/\" target=\"_blank\">Art Project "
+"Group</a> y  la clase original WC_Shipping_Free_Shipping de <a href=\"http:"
+"//wordpress.org/plugins/woocommerce/\" target=\"_blank\"><strong>WooCommerce - "
+"excelling eCommerce</strong></a>."
+
+#. Author URI of the plugin
+msgid "http://www.artprojectgroup.es"
+msgstr "http://www.artprojectgroup.es"
+
+#. Author of the plugin
+msgid "Art Project Group"
+msgstr "Art Project Group"
 
 #: ../../apg-free-shipping.php:47 ../../includes/cuadro-informacion.php:7
 msgid "Make a donation by "
