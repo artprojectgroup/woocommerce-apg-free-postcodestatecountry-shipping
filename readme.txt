@@ -4,7 +4,7 @@ Donate link: http://www.artprojectgroup.es/tienda/donacion
 Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, shipping, free shipping, zip, postcode, state, country, coupon, minimum order amount
 Requires at least: 3.8
 Tested up to: 4.3.1
-Stable tag: 0.9.2.3
+Stable tag: 0.9.2.4
 WC requires at least: 2.1
 WC tested up to: 2.4.7
 License: GPLv3
@@ -29,6 +29,7 @@ Añade a WooCommerce un envío gratuito basado en el código postal, provincia (
 = Traducciones =
 * Español ([**Art Project Group**](http://www.artprojectgroup.es/)).
 * English ([**Art Project Group**](http://www.artprojectgroup.es/)).
+* Português ([**Álvaro Góis dos Santos**](http://efeitoavestruz.pt/)).
 
 = Soporte técnico =
 **Art Project Group** te ofrece [**Soporte técnico**](http://www.artprojectgroup.es/tienda/soporte-tecnico) para configurar o instalar ***WooCommerce - APG Free Postcode/State/Country Shipping***.
@@ -68,6 +69,8 @@ Aunque la configuración del plugin es un muy simple, hemos creado un tutorial d
 1. Captura de pantalla de WooCommerce - APG Free Postcode/State/Country Shipping.
 
 == Changelog ==
+= 0.9.2.4 =
+* Traducción al idioma portugués gracias a [**Álvaro Góis dos Santos**](http://www.efeitoavestruz.pt).
 = 0.9.2.3 =
 * Actualización del paquete de fuentes. Nuevo icono de Google+.
 * Actualización de las traducciones.
@@ -130,6 +133,8 @@ Aunque la configuración del plugin es un muy simple, hemos creado un tutorial d
 * Versión inicial.
 
 == Upgrade Notice ==
+= 0.9.2.4 =
+* Traducción al idioma portugués gracias a [**Álvaro Góis dos Santos**](http://www.efeitoavestruz.pt).
 = 0.9.2.3 =
 * Actualización del paquete de fuentes. Nuevo icono de Google+.
 * Actualización de las traducciones.
@@ -192,6 +197,7 @@ Aunque la configuración del plugin es un muy simple, hemos creado un tutorial d
 ==Traducciones ==
 * *English*: by [**Art Project Group**](http://www.artprojectgroup.es/) (default language).
 * *Español*: por [**Art Project Group**](http://www.artprojectgroup.es/).
+* *Português*: por [**Álvaro Góis dos Santos**](http://www.efeitoavestruz.pt).
 
 == ¿Por qué está esta página en español? ==
 Mientras WordPress no nos permita a los desarrolladores realizar esta página en más de un idioma, elegiremos siempre el español.
