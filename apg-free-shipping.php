@@ -1,13 +1,13 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG Free Postcode/State/Country Shipping
-Version: 0.9.2.4
+Version: 1.0
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="http://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WooCommerce - APG Weight and Postcode/State/Country Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="http://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: http://www.artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
-Tested up to: 4.3.1
+Tested up to: 4.4.2
 
 Text Domain: apg_free_shipping
 Domain Path: /i18n/languages
@@ -30,7 +30,7 @@ $apg_free_shipping = array(
 	'plugin' 		=> 'WooCommerce - APG Free Postcode/State/Country Shipping', 
 	'plugin_uri' 	=> 'woocommerce-apg-free-postcodestatecountry-shipping', 
 	'donacion' 		=> 'http://www.artprojectgroup.es/tienda/donacion',
-	'soporte' 		=> 'http://www.artprojectgroup.es/tienda/soporte-tecnico',
+	'soporte' 		=> 'http://www.wcprojectgroup.es/tienda/ticket-de-soporte',
 	'plugin_url' 	=> 'http://www.artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-free-postcodestatecountry-shipping', 
 	'ajustes' 		=> 'admin.php?page=wc-settings&tab=shipping&section=apg_free_shipping', 
 	'puntuacion' 	=> 'http://wordpress.org/support/view/plugin-reviews/woocommerce-apg-free-postcodestatecountry-shipping'
@@ -84,14 +84,14 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		class apg_free_shipping extends WC_Shipping_Method {				
 			public	$clases_de_envio	= array();
 
-			function __construct() {
+			public function __construct() {
 				$this->id 				= 'apg_free_shipping';
 				$this->method_title		= __( "APG Free Shipping", 'apg_free_shipping' );
 				$this->init();
 			}
 
 			//Inicializa los datos
-	        function init() {
+	        public function init() {
 				add_action( 'woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ) );
 	
 				$this->apg_free_shipping_dame_clases_de_envio(); //Obtiene todas las clases de envío
@@ -130,7 +130,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			}
 			
 			//Procesa el código postal
-			function procesa_codigo_postal( $codigo_postal, $id ) {
+			public function procesa_codigo_postal( $codigo_postal, $id ) {
 				if ( strstr( $codigo_postal, '-' ) ) {
 					$codigos_postales = explode( ';', $codigo_postal );
 					$numeros_codigo_postal = array();
@@ -156,9 +156,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			}
 			
 			//Formulario de datos
-			function init_form_fields() {
-				global $woocommerce;
-				
+			public function init_form_fields() {
 				if ( get_option( 'woocommerce_enable_coupons' ) == 'yes' && $this->importe_minimo ) {
 					$requerido = 'cualquiera';
 				} else if ( get_option( 'woocommerce_enable_coupons' ) == 'yes' ) {
@@ -262,7 +260,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			}
 	
 			//Función que lee y devuelve los tipos de clases de envío
-			function apg_free_shipping_dame_clases_de_envio() {
+			public function apg_free_shipping_dame_clases_de_envio() {
 				if ( WC()->shipping->get_shipping_classes() ) {
 					foreach ( WC()->shipping->get_shipping_classes() as $clase_de_envio ) {
 						$this->clases_de_envio[esc_attr( $clase_de_envio->slug )] = $clase_de_envio->name;
@@ -273,9 +271,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			}	
 	
 			//Muestra los campos para los grupos de códigos postales
-			function pinta_grupos_codigos_postales() {
-				global $woocommerce;
-	
+			public function pinta_grupos_codigos_postales() {
 				$numero = $this->postal_group_no;
 	
 				for ( $contador = 1; $numero >= $contador; $contador++ ) {
@@ -290,12 +286,10 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			}
 	
 			//Muestra los campos para los grupos de estados ( provincias )
-			function pinta_grupos_estados() {
-				global $woocommerce;
-	
+			public function pinta_grupos_estados() {
 				$numero = $this->state_group_no;
 	
-				$base_country = $woocommerce->countries->get_base_country();
+				$base_country = WC()->countries->get_base_country();
 	
 				for ( $contador = 1; $numero >= $contador; $contador++ ) {
 					$this->form_fields['S' . $contador] =  array( 
@@ -305,17 +299,15 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 						'css'		=> 'width: 450px;',
 						'desc_tip'	=> __( 'Select the states for this group.', 'apg_free_shipping' ),
 						'default'	=> '',
-						'options'	=> $woocommerce->countries->get_states( $base_country ),
+						'options'	=> WC()->countries->get_states( $base_country ),
 					 );
 				}
 			}
 	
 			//Calcula el gasto de envío
-			function calculate_shipping() {
-				global $woocommerce;
-	
+			public function calculate_shipping() {
 				$tarifa = array( 
-					'id'		=> $this->id,
+					'id'	=> $this->id,
 					'label'	=> $this->title,
 					'cost'	=> 0,
 					'taxes'	=> false,
@@ -325,7 +317,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			}
 	
 			//Selecciona el/los grupo/s según la dirección de envío del cliente
-			function dame_grupos( $paquete = array() ) {
+			public function dame_grupos( $paquete = array() ) {
 				$codigo_postal 			= strtoupper( woocommerce_clean( $paquete['destination']['postcode'] ) );
 				$codigos_postales 		= array( $codigo_postal );
 				$tamano_codigo_postal 	= strlen( $paquete['destination']['postcode'] );
@@ -384,14 +376,11 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	
 			//Pinta el formulario
 			public function admin_options() {
-				wp_enqueue_style( 'apg_free_shipping_hoja_de_estilo' ); //Carga la hoja de estilo
 				include( 'includes/formulario.php' );
 			}
 			
 			//Habilita el envío
-			function is_available( $paquete ) {
-				global $woocommerce;
-				
+			public function is_available( $paquete ) {
 				if ( $this->enabled == "no" ) {
 					return false;
 				}
@@ -419,12 +408,15 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 				} else {
 					return false;
 				}
-	
-				$habilitado = $tiene_cupon = $tiene_importe_minimo = false;
+				
+				//Variables
+				$habilitado				= false;
+				$tiene_cupon			= false;
+				$tiene_importe_minimo	= false;
 	
 				if ( in_array( $this->requires, array( 'cupon', 'cualquiera', 'ambos' ) ) ) {
-					if ( $woocommerce->cart->applied_coupons ) {
-						foreach ( $woocommerce->cart->applied_coupons as $codigo ) {
+					if ( WC()->cart->applied_coupons ) {
+						foreach ( WC()->cart->applied_coupons as $codigo ) {
 							$cupon = new WC_Coupon( $codigo );
 							if ( $cupon->is_valid() && $cupon->enable_free_shipping() ) {
 								$tiene_cupon = true;
@@ -433,11 +425,11 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 					}
 				}
 	
-				if ( in_array( $this->requires, array( 'importe_minimo', 'cualquiera', 'ambos' ) ) && isset( $woocommerce->cart->cart_contents_total ) ) {
-					if ( $woocommerce->cart->prices_include_tax ) {
-						$total = $woocommerce->cart->cart_contents_total + array_sum( $woocommerce->cart->taxes );
+				if ( in_array( $this->requires, array( 'importe_minimo', 'cualquiera', 'ambos' ) ) && isset( WC()->cart->cart_contents_total ) ) {
+					if ( WC()->cart->prices_include_tax ) {
+						$total = WC()->cart->cart_contents_total + array_sum( WC()->cart->taxes );
 					} else {
-						$total = $woocommerce->cart->cart_contents_total;
+						$total = WC()->cart->cart_contents_total;
 					}
 					if ( $total >= $this->importe_minimo ) { 
 						$tiene_importe_minimo = true;
@@ -554,8 +546,6 @@ function apg_free_shipping_plugin( $nombre ) {
 function apg_free_shipping_muestra_mensaje() {
 	wp_register_style( 'apg_free_shipping_hoja_de_estilo', plugins_url( 'assets/css/style.css', __FILE__ ) ); //Carga la hoja de estilo
 	wp_enqueue_style( 'apg_free_shipping_hoja_de_estilo' ); //Carga la hoja de estilo global
-	wp_register_style( 'apg_free_shipping_fuentes', plugins_url( 'assets/fonts/stylesheet.css', __FILE__ ) ); //Carga la hoja de estilo global
-	wp_enqueue_style( 'apg_free_shipping_fuentes' ); //Carga la hoja de estilo global
 }
 add_action( 'admin_init', 'apg_free_shipping_muestra_mensaje' );
 
