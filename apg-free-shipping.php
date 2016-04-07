@@ -7,7 +7,7 @@ Description: Add to WooCommerce a free shipping based on the order postcode, pro
 Author URI: http://www.artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
-Tested up to: 4.4.2
+Tested up to: 4.5
 
 Text Domain: apg_free_shipping
 Domain Path: /i18n/languages
