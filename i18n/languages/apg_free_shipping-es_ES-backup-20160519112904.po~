@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce - APG Free Postcode/State/Country Shipping\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Fri Sep 04 2015 10:37:44 GMT+0200 (CEST)\n"
-"PO-Revision-Date: Thu May 19 2016 13:29:03 GMT+0200 (CEST)\n"
+"PO-Revision-Date: Thu May 19 2016 13:22:37 GMT+0200 (CEST)\n"
 "Last-Translator: admin <info@localhost>\n"
 "Language-Team: \n"
 "Language: Spanish (Spain)\n"
@@ -28,33 +28,27 @@ msgstr ""
 
 #: ../../apg-free-shipping.php:647 ../../apg-free-shipping.php:654
 msgid "Additional Free Shipping"
-msgstr "Envíos gratuitos adicionales"
+msgstr ""
 
 #: ../../apg-free-shipping.php:648 ../../apg-free-shipping.php:655
 msgid ""
 "List additonal shipping classes below (1 per line). This is in addition to "
 "the default <code>APG Free shipping</code>."
 msgstr ""
-"Añada clases de gastos de envío adicionales (1 por línea). Se añadirán al "
-"gasto de envío <code>APG envío gratuito</code>."
 
 #: ../../includes/formulario-gastos-de-envio.php:9
 msgid "Shipping Methods"
-msgstr "Métodos de envío"
+msgstr ""
 
 #: ../../includes/formulario-gastos-de-envio.php:46
 msgid "Drag and drop the above shipping methods to control their display order."
 msgstr ""
-"Arrastra y suelta los métodos de envío para controlar su orden de "
-"presentación."
 
 #: ../../includes/formulario-gastos-de-envio.php:48
 msgid ""
 "Add new <strong class=\"artprojectgroup\">APG</strong> shippings methods with "
 "this button &#8594;"
 msgstr ""
-"Añade un nuevo método de envío <strong class=\"artprojectgroup\">APG</strong> "
-"con este botón &#8594;"
 
 #. Name of the plugin
 msgid "WooCommerce - APG Free Postcode/State/Country Shipping"

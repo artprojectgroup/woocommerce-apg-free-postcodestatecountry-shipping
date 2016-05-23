@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce - APG Free Postcode/State/Country Shipping\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Fri Sep 04 2015 10:37:44 GMT+0200 (CEST)\n"
-"POT-Revision-Date: Thu May 19 2016 13:21:31 GMT+0200 (CEST)\n"
+"POT-Revision-Date: Wed Nov 04 2015 17:37:18 GMT+0100 (CET)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -56,168 +56,168 @@ msgstr ""
 msgid "Art Project Group"
 msgstr ""
 
-#: ../../apg-free-shipping.php:48 ../../includes/cuadro-informacion.php:7
+#: ../../apg-free-shipping.php:47 ../../includes/cuadro-informacion.php:7
 msgid "Make a donation by "
 msgstr ""
 
-#: ../../apg-free-shipping.php:50 ../../apg-free-shipping.php:50 ../../apg-free-
-#: shipping.php:50 ../../apg-free-shipping.php:50 ../../includes/cuadro-
+#: ../../apg-free-shipping.php:49 ../../apg-free-shipping.php:49 ../../apg-free-
+#: shipping.php:49 ../../apg-free-shipping.php:49 ../../includes/cuadro-
 #: informacion.php:19 ../../includes/cuadro-informacion.php:19 ../..
 #: /includes/cuadro-informacion.php:19 ../../includes/cuadro-informacion.php:19
 msgid "Follow us on "
 msgstr ""
 
-#: ../../apg-free-shipping.php:51 ../../includes/cuadro-informacion.php:25
+#: ../../apg-free-shipping.php:50 ../../includes/cuadro-informacion.php:25
 msgid "More plugins on "
 msgstr ""
 
-#: ../../apg-free-shipping.php:52 ../../apg-free-shipping.php:52 ../..
+#: ../../apg-free-shipping.php:51 ../../apg-free-shipping.php:51 ../..
 #: /includes/cuadro-informacion.php:33 ../../includes/cuadro-informacion.php:33
 msgid "Contact with us by "
 msgstr ""
 
-#: ../../apg-free-shipping.php:65
+#: ../../apg-free-shipping.php:64
 msgid "Settings of "
 msgstr ""
 
-#: ../../apg-free-shipping.php:65
+#: ../../apg-free-shipping.php:64
 msgid "Settings"
 msgstr ""
 
-#: ../../apg-free-shipping.php:66
+#: ../../apg-free-shipping.php:65
 msgid "Support of "
 msgstr ""
 
-#: ../../apg-free-shipping.php:66 ../../includes/cuadro-informacion.php:39
+#: ../../apg-free-shipping.php:65 ../../includes/cuadro-informacion.php:39
 msgid "Support"
 msgstr ""
 
-#: ../../apg-free-shipping.php:90 ../../apg-free-shipping.php:182
+#: ../../apg-free-shipping.php:89 ../../apg-free-shipping.php:183
 msgid "APG Free Shipping"
 msgstr ""
 
-#: ../../apg-free-shipping.php:173
+#: ../../apg-free-shipping.php:174
 msgid "Enable/Disable"
 msgstr ""
 
-#: ../../apg-free-shipping.php:175
+#: ../../apg-free-shipping.php:176
 msgid "Enable Free Shipping"
 msgstr ""
 
-#: ../../apg-free-shipping.php:179
+#: ../../apg-free-shipping.php:180
 msgid "Method Title"
 msgstr ""
 
-#: ../../apg-free-shipping.php:181
+#: ../../apg-free-shipping.php:182
 msgid "This controls the title which the user sees during checkout."
 msgstr ""
 
-#: ../../apg-free-shipping.php:186
+#: ../../apg-free-shipping.php:187
 msgid "Method availability"
 msgstr ""
 
-#: ../../apg-free-shipping.php:191
+#: ../../apg-free-shipping.php:192
 msgid "All allowed countries"
 msgstr ""
 
-#: ../../apg-free-shipping.php:192 ../../apg-free-shipping.php:196
+#: ../../apg-free-shipping.php:193 ../../apg-free-shipping.php:197
 msgid "Specific Countries"
 msgstr ""
 
-#: ../../apg-free-shipping.php:204
+#: ../../apg-free-shipping.php:205
 msgid "Free Shipping Requires..."
 msgstr ""
 
-#: ../../apg-free-shipping.php:209
+#: ../../apg-free-shipping.php:210
 msgid "N/A"
 msgstr ""
 
-#: ../../apg-free-shipping.php:210
+#: ../../apg-free-shipping.php:211
 msgid "A valid free shipping coupon"
 msgstr ""
 
-#: ../../apg-free-shipping.php:211
+#: ../../apg-free-shipping.php:212
 msgid "A minimum order amount (defined below)"
 msgstr ""
 
-#: ../../apg-free-shipping.php:212
+#: ../../apg-free-shipping.php:213
 msgid "A minimum order amount OR a coupon"
 msgstr ""
 
-#: ../../apg-free-shipping.php:213
+#: ../../apg-free-shipping.php:214
 msgid "A minimum order amount AND a coupon"
 msgstr ""
 
-#: ../../apg-free-shipping.php:217
+#: ../../apg-free-shipping.php:218
 msgid "Minimum Order Amount"
 msgstr ""
 
-#: ../../apg-free-shipping.php:219
+#: ../../apg-free-shipping.php:220
 msgid "Users will need to spend this amount to get free shipping (if enabled above)."
 msgstr ""
 
-#: ../../apg-free-shipping.php:225
+#: ../../apg-free-shipping.php:226
 msgid "Number of postcode groups"
 msgstr ""
 
-#: ../../apg-free-shipping.php:227
+#: ../../apg-free-shipping.php:228
 msgid ""
 "Number of groups of ZIP/Postcode sharing delivery rates.  Hit \"Save changes\" "
 "button after you have changed this setting)."
 msgstr ""
 
-#: ../../apg-free-shipping.php:231
+#: ../../apg-free-shipping.php:232
 msgid "Number of state groups"
 msgstr ""
 
-#: ../../apg-free-shipping.php:233
+#: ../../apg-free-shipping.php:234
 msgid ""
 "Number of groups of states sharing delivery rates. (Hit \"Save changes\" "
 "button after you have changed this setting)."
 msgstr ""
 
-#: ../../apg-free-shipping.php:237
+#: ../../apg-free-shipping.php:238
 msgid "No shipping"
 msgstr ""
 
-#: ../../apg-free-shipping.php:239
+#: ../../apg-free-shipping.php:240
 #, php-format
 msgid ""
 "Group/s of ZIP/Postcode/State where %s doesn't accept free shippings. "
 "Example: <code>Postcode/state group code separated by comma (,)</code>"
 msgstr ""
 
-#: ../../apg-free-shipping.php:246
+#: ../../apg-free-shipping.php:247
 msgid "No shipping (Shipping class)"
 msgstr ""
 
-#: ../../apg-free-shipping.php:247
+#: ../../apg-free-shipping.php:248
 #, php-format
 msgid "Select the shipping class where %s doesn't accept free shippings."
 msgstr ""
 
-#: ../../apg-free-shipping.php:252
+#: ../../apg-free-shipping.php:253
 msgid "All enabled shipping class"
 msgstr ""
 
-#: ../../apg-free-shipping.php:256
+#: ../../apg-free-shipping.php:257
 msgid "Show only APG Free Shipping"
 msgstr ""
 
-#: ../../apg-free-shipping.php:258
+#: ../../apg-free-shipping.php:259
 msgid "Don't show others shipping cost."
 msgstr ""
 
-#: ../../apg-free-shipping.php:270
+#: ../../apg-free-shipping.php:271
 msgid "Select a class&hellip;"
 msgstr ""
 
-#: ../../apg-free-shipping.php:280
+#: ../../apg-free-shipping.php:283
 #, php-format
 msgid "Postcode Group %s (P%s)"
 msgstr ""
 
-#: ../../apg-free-shipping.php:282
+#: ../../apg-free-shipping.php:285
 msgid ""
 "Add the postcodes for this group. Semi-colon (;) separate multiple values. "
 "Wildcards (*) can be used. Example: <code>07*</code>. Ranges for numeric "
@@ -225,30 +225,20 @@ msgid ""
 "12350</code>."
 msgstr ""
 
-#: ../../apg-free-shipping.php:297
+#: ../../apg-free-shipping.php:302
 #, php-format
 msgid "State Group %s (S%s)"
 msgstr ""
 
-#: ../../apg-free-shipping.php:301
+#: ../../apg-free-shipping.php:306
 msgid "Select the states for this group."
 msgstr ""
 
-#: ../../apg-free-shipping.php:647 ../../apg-free-shipping.php:654
-msgid "Additional Free Shipping"
-msgstr ""
-
-#: ../../apg-free-shipping.php:648 ../../apg-free-shipping.php:655
-msgid ""
-"List additonal shipping classes below (1 per line). This is in addition to "
-"the default <code>APG Free shipping</code>."
-msgstr ""
-
-#: ../../apg-free-shipping.php:719
+#: ../../apg-free-shipping.php:498
 msgid "This plugin require WooCommerce active to run!"
 msgstr ""
 
-#: ../../apg-free-shipping.php:771 ../../includes/cuadro-informacion.php:44
+#: ../../apg-free-shipping.php:550 ../../includes/cuadro-informacion.php:44
 #, php-format
 msgid "Please, rate %s:"
 msgstr ""
@@ -271,20 +261,6 @@ msgstr ""
 
 #: ../../includes/cuadro-informacion.php:37
 msgid "Documentation and Support:"
-msgstr ""
-
-#: ../../includes/formulario-gastos-de-envio.php:9
-msgid "Shipping Methods"
-msgstr ""
-
-#: ../../includes/formulario-gastos-de-envio.php:46
-msgid "Drag and drop the above shipping methods to control their display order."
-msgstr ""
-
-#: ../../includes/formulario-gastos-de-envio.php:48
-msgid ""
-"Add new <strong class=\"artprojectgroup\">APG</strong> shippings methods with "
-"this button &#8594;"
 msgstr ""
 
 #: ../../includes/formulario.php:5

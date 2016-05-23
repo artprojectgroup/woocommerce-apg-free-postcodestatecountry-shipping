@@ -1,13 +1,13 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG Free Postcode/State/Country Shipping
-Version: 1.0
+Version: 1.1
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="http://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WooCommerce - APG Weight and Postcode/State/Country Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="http://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: http://www.artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
-Tested up to: 4.5
+Tested up to: 4.5.2
 
 Text Domain: apg_free_shipping
 Domain Path: /i18n/languages
@@ -35,6 +35,7 @@ $apg_free_shipping = array(
 	'ajustes' 		=> 'admin.php?page=wc-settings&tab=shipping&section=apg_free_shipping', 
 	'puntuacion' 	=> 'http://wordpress.org/support/view/plugin-reviews/woocommerce-apg-free-postcodestatecountry-shipping'
 );
+$envios_adicionales_free = $limpieza_free = NULL;
 
 //Carga el idioma
 load_plugin_textdomain( 'apg_free_shipping', null, dirname( DIRECCION_apg_free_shipping ) . '/i18n/languages' );
@@ -473,12 +474,240 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	add_action( 'plugins_loaded', 'apg_free_shipping_inicio', 0 );
 	
 	//Añade APG Shipping a WooCommerce
+	/*
 	function apg_free_shipping_anade_gastos_de_envio( $methods ) {
 		$methods[] = 'apg_free_shipping';
 	
 		return $methods;
 	}
 	add_filter( 'woocommerce_shipping_methods', 'apg_free_shipping_anade_gastos_de_envio' );
+	*/
+	
+	//Función que lee y devuelve los nuevos gastos de envío
+	function apg_free_shipping_lee_envios() {
+		global $woocommerce, $envios_adicionales_free;
+	
+		if ( !is_array( $envios_adicionales_free ) || isset( $_POST['subtab'] ) ) {
+			$envios_adicionales_free = array_filter( array_map( 'trim', explode( "\n", get_option( 'woocommerce_apg_free_shipping' ) ) ) );
+		}
+
+		return $envios_adicionales_free;
+	}
+	
+	//Función que convierte guiones en guiones bajos
+	function apg_free_shipping_limpia_guiones( $texto ) {
+		return str_replace( '-', '_', sanitize_title( $texto ) );
+	}
+	
+	//Añade clases necesarias para nuevos gastos de envío
+	function apg_free_shipping_clases( $metodos ) {
+		foreach ( apg_free_shipping_lee_envios() as $clave => $envio ) {
+			$limpio = apg_free_shipping_limpia_guiones( $envio );
+			if ( !class_exists( "apg_free_shipping_$limpio") ) {
+				eval("
+			class apg_free_shipping_$limpio extends apg_free_shipping {
+				public function __construct() {
+					\$shipping = apg_free_shipping_lee_envios();
+		
+					\$this->id 				= \"apg_free_shipping_$limpio\";
+					\$this->method_title	= __( \$shipping[$clave], 'apg_free_shipping' );
+					add_action( 'woocommerce_update_options_shipping_' . \$this->id, array( \$this, 'process_admin_options' ) );
+	
+					parent::init();
+				}
+			}
+				");
+			}
+		}	
+	
+		return $metodos;
+	}
+	add_filter( 'woocommerce_shipping_methods', 'apg_free_shipping_clases', 0 );
+	
+	//Añade APG Shipping a WooCommerce
+	function apg_free_shipping_anade_gastos_de_envio( $metodos ) {
+		global $limpieza_free;
+		
+		//Creamos los medios de envío
+		$metodos[] = 'apg_free_shipping';
+		$envios_apg = (array) apg_free_shipping_lee_envios();
+		foreach ( $envios_apg as $envio ) {
+			$metodo = "apg_free_shipping_" . apg_free_shipping_limpia_guiones( $envio );
+			$metodos[] = $metodo;
+		}
+	
+		if ( !$limpieza_free && isset( $_POST['subtab'] ) ) {
+			apg_free_shipping_limpiamos_opciones();
+		}
+		
+		//Reordenamos los medios de envío en WooCommerce
+		$envios_woocommerce = (array) get_option( 'woocommerce_shipping_method_order' );
+		$orden = array_keys( $envios_woocommerce );
+	
+		$valor_orden = array();
+    	foreach ( $orden as $clave ) {
+			if ( preg_match( '/apg_free_shipping_/', $clave ) ) {
+				$valor_orden[$clave] = $envios_woocommerce[$clave];
+			}
+    	}
+		
+		$ordena_envios = array();
+		foreach ( $envios_apg as $clave => $envio ) {
+			if ( isset( $envios_woocommerce["apg_free_shipping_" . apg_free_shipping_limpia_guiones( $envio )] ) ) {
+				$ordena_envios["apg_free_shipping_" . apg_free_shipping_limpia_guiones( $envio )] = $envios_woocommerce["apg_free_shipping_" . apg_free_shipping_limpia_guiones( $envio )];
+			} else {
+				$ordena_envios["apg_free_shipping_" . apg_free_shipping_limpia_guiones( $envio )] = count( $metodos ) - 1;
+			}
+		}
+		$contador = 0;
+		foreach ( $ordena_envios as $clave => $orden ) {
+			if ( $contador == 0 ) {
+				if ( reset( $valor_orden ) != $orden ) {
+					$envios_woocommerce[$clave] = current( $valor_orden );
+				}
+			} else {
+				if ( next( $valor_orden ) != $orden ) {
+					$envios_woocommerce[$clave] = current( $valor_orden );
+				}
+			}
+			$contador++;
+		}
+		asort( $envios_woocommerce );
+		update_option( 'woocommerce_shipping_method_order', $envios_woocommerce );	
+			
+		return $metodos;
+	}
+	add_filter( 'woocommerce_shipping_methods', 'apg_free_shipping_anade_gastos_de_envio', 10 );
+	
+	//Recomponemos los nombres de las secciones
+	function apg_free_shipping_secciones( $secciones ) {
+		foreach ( apg_free_shipping_lee_envios() as $envio ) {
+			$limpio = apg_free_shipping_limpia_guiones( $envio );
+			if ( $secciones["apg_free_shipping_" . $limpio] != $envio ) {
+				$secciones["apg_free_shipping_" . $limpio] = $envio;
+			}
+		}
+
+		return $secciones;
+	}
+	add_filter( 'woocommerce_get_sections_shipping', 'apg_free_shipping_secciones' );
+
+	//Controlamos las opciones de WooCommerce para mantenerlas limpias
+	function apg_free_shipping_limpiamos_opciones( $limpia = false ) {
+		global $limpieza_free;
+		
+		$apg_opciones = $encontrados = array();
+	
+		//Vemos las opciones que existen
+		foreach ( wp_load_alloptions() as $nombre => $valor ) {
+			if ( stristr( $nombre, 'woocommerce_apg_free_shipping_' ) ) {
+				$apg_opciones[] = $nombre;
+			}
+		}
+		
+		//Vemos las opciones que usamos
+		$envios = (array) apg_free_shipping_lee_envios();
+		$encontrados[] = "woocommerce_apg_free_shipping_settings";
+		foreach ( $envios as $envio ) {
+			foreach ( $apg_opciones as $opcion ) {
+				if ( strpos( $opcion, apg_free_shipping_limpia_guiones( $envio ) ) !== false ) {
+					$encontrados[] = apg_free_shipping_limpia_guiones( $opcion );
+				}
+			}
+		}
+		
+		//Borramos las no necesarias
+		$borrar = ( !$limpia ) ? array_diff( $apg_opciones, $encontrados ) : $apg_opciones;
+		foreach( $borrar as $borrame ) {
+			if ( preg_match( '/woocommerce_apg_free_shipping_(\d)_settings/', $borrame, $valor ) ) {
+				update_option( "woocommerce_apg_free_shipping_" . apg_free_shipping_limpia_guiones( $envios[($valor[1] - 1)] ) . "_settings", get_option( $borrame ) );
+			}
+			delete_option( $borrame );
+		}
+		
+		$limpieza_free = true; //Cambiamos la variable global para que sólo se ejecute una vez
+	}
+	
+	//Añade un nuevo campo a Opciones de envío para añadir nuevos gastos de envío
+	function apg_free_shipping_nuevos_gastos_de_envio( $configuracion ) {
+		$anadir_seccion = array();
+	
+		foreach ( $configuracion as $seccion ) {
+			if ( ( isset( $seccion['id'] ) && $seccion['id'] == 'shipping_options' ) && ( isset( $seccion['type'] ) && $seccion['type'] == 'sectionend' ) ) {
+				$anadir_seccion[] = array(
+					'type'		=> 'sectionend',
+					'id'		=> 'shipping_methods' 
+				);
+				$anadir_seccion[] = array( 
+					'title'		=> __( 'WooCommerce - APG Free Postcode/State/Country Shipping', 'apg_free_shipping' ),
+					'type'		=> 'title',
+					'id'		=> 'apg_free_shipping',
+				);
+				$anadir_seccion[] = array( 
+					'name'		=> __( 'Additional Free Shipping', 'apg_free_shipping' ),
+					'desc_tip'	=> __( 'List additonal shipping classes below (1 per line). This is in addition to the default <code>APG Free shipping</code>.', 'apg_free_shipping' ),
+					'id'		=> 'campos_apg_free_shipping',
+					'type'		=> 'shipping_apg_free_shipping_envios',
+				);
+				//Este lo usamos para rellenar
+				$anadir_seccion[] = array(
+					'name'		=> __( 'Additional Free Shipping', 'apg_free_shipping' ),
+					'desc_tip'	=> __( 'List additonal shipping classes below (1 per line). This is in addition to the default <code>APG Free shipping</code>.', 'apg_free_shipping' ),
+					'id'		=> 'woocommerce_apg_free_shipping',
+					'type'		=> 'textarea',
+					'default'	=> '',
+					'class'		=> 'borrame_apg_free_shipping',					
+				);
+				$anadir_seccion[] = array(
+					'type'		=> 'sectionend',
+					'id'		=> 'apg_free_shipping' 
+				);
+			}
+	
+			$anadir_seccion[] = $seccion;
+		}
+		
+		return $anadir_seccion;
+	}
+	add_filter( 'woocommerce_shipping_settings', 'apg_free_shipping_nuevos_gastos_de_envio' );
+	
+	//Añade un nuevo campo a Opciones de envío para añadir nuevos gastos de envío
+	function apg_free_shipping_campos_nuevos_gastos_de_envio( $opciones ) {
+		include( 'includes/formulario-gastos-de-envio.php' );
+	}
+	add_filter( 'woocommerce_admin_field_shipping_apg_free_shipping_envios', 'apg_free_shipping_campos_nuevos_gastos_de_envio' );
+	
+	//Recoge los medios de pago
+	function apg_free_shipping_filtra_medios_de_pago( $medios ) {
+		global $woocommerce;
+	
+		if ( isset( WC()->session->chosen_shipping_method ) ) {
+			$configuracion = get_option( 'woocommerce_' . WC()->session->chosen_shipping_method . '_settings' );
+		} else if ( isset( $_POST['shipping_method'] ) ) {
+			$configuracion = get_option( 'woocommerce_' . $_POST['shipping_method'][0] . '_settings' );
+		}
+		
+		if ( isset( $_POST['payment_method'] ) && !$medios ) {
+			$medios = $_POST['payment_method'];
+		}
+	
+		if ( isset( $configuracion['pago'] ) && $configuracion['pago'][0] != 'todos' ) {
+			foreach ( $medios as $nombre => $medio ) {
+				if ( is_array( $configuracion['pago'] ) ) {
+					if ( !in_array( $nombre, $configuracion['pago'] ) ) {
+						unset( $medios[$nombre] );
+					}
+				} else { 
+					if ( $nombre != $configuracion['pago'] ) {
+						unset( $medios[$nombre] );
+					}
+				}
+			}
+		}
+	
+		return $medios;
+	}
+	add_filter( 'woocommerce_available_payment_gateways', 'apg_free_shipping_filtra_medios_de_pago' );	
 } else {
 	add_action( 'admin_notices', 'apg_free_shipping_requiere_wc' );
 }
@@ -546,6 +775,8 @@ function apg_free_shipping_plugin( $nombre ) {
 function apg_free_shipping_muestra_mensaje() {
 	wp_register_style( 'apg_free_shipping_hoja_de_estilo', plugins_url( 'assets/css/style.css', __FILE__ ) ); //Carga la hoja de estilo
 	wp_enqueue_style( 'apg_free_shipping_hoja_de_estilo' ); //Carga la hoja de estilo global
+	wp_register_style( 'apg_free_shipping_hoja_de_estilo_shipping', plugins_url( 'assets/css/style-shipping.css', __FILE__ ) );
+	wp_enqueue_style( 'apg_free_shipping_hoja_de_estilo_shipping' ); //Carga la hoja de estilo global
 }
 add_action( 'admin_init', 'apg_free_shipping_muestra_mensaje' );
 
