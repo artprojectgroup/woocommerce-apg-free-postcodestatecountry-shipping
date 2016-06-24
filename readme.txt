@@ -3,14 +3,14 @@ Contributors: artprojectgroup
 Donate link: http://www.artprojectgroup.es/tienda/donacion
 Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, shipping, free shipping, zip, postcode, state, country, coupon, minimum order amount
 Requires at least: 3.8
-Tested up to: 4.5.2
-Stable tag: 1.1
+Tested up to: 4.5.3
+Stable tag: 1.1.1
 WC requires at least: 2.1
-WC tested up to: 2.5.5
+WC tested up to: 2.6.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Add WooCommerce a free shipping based on postcode, state (province), country and a minimum and/or a valid coupon.
+Add to WooCommerce a free shipping based on postcode, state (province), country and a minimum and/or a valid coupon.
 
 == Description ==
 [*Español*](http://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/) - [*English*](http://goo.gl/SDIHtG) - [*Italiano*](http://goo.gl/J7WC8H) - [*Français*](http://goo.gl/s9TkQW) - [*Deutsch*](http://goo.gl/WEYLtR) 
@@ -78,6 +78,8 @@ If you need help to configuring or installing **WooCommerce - APG Free Postcode/
 2. Screenshot of WooCommerce - APG Free Postcode/State/Country Shipping. APG Free Shipping Tab.
 
 == Changelog ==
+= 1.1.1 =
+* Fixed WooCommerce 2.6.1 compatibility error
 = 1.1 =
 * New interface and management function to add additional free shipping.
 * New screenshot.
@@ -148,10 +150,8 @@ If you need help to configuring or installing **WooCommerce - APG Free Postcode/
 * Initial version.
 
 == Upgrade Notice ==
-= 1.1 =
-* New interface and management function to add additional free shipping.
-* New screenshot.
-* Updated translations.
+= 1.1.1 =
+* Fixed WooCommerce 2.6.1 compatibility error
 
 == Translations ==
 * *English*: by [**Art Project Group**](http://www.artprojectgroup.es/) (default language).

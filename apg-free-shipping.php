@@ -1,13 +1,13 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG Free Postcode/State/Country Shipping
-Version: 1.1
+Version: 1.1.1
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="http://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WooCommerce - APG Weight and Postcode/State/Country Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="http://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: http://www.artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
-Tested up to: 4.5.2
+Tested up to: 4.5.3
 
 Text Domain: apg_free_shipping
 Domain Path: /i18n/languages
@@ -306,7 +306,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			}
 	
 			//Calcula el gasto de envío
-			public function calculate_shipping() {
+			public function calculate_shipping( $package = array() ) {
 				$tarifa = array( 
 					'id'	=> $this->id,
 					'label'	=> $this->title,
@@ -676,38 +676,6 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		include( 'includes/formulario-gastos-de-envio.php' );
 	}
 	add_filter( 'woocommerce_admin_field_shipping_apg_free_shipping_envios', 'apg_free_shipping_campos_nuevos_gastos_de_envio' );
-	
-	//Recoge los medios de pago
-	function apg_free_shipping_filtra_medios_de_pago( $medios ) {
-		global $woocommerce;
-	
-		if ( isset( WC()->session->chosen_shipping_method ) ) {
-			$configuracion = get_option( 'woocommerce_' . WC()->session->chosen_shipping_method . '_settings' );
-		} else if ( isset( $_POST['shipping_method'] ) ) {
-			$configuracion = get_option( 'woocommerce_' . $_POST['shipping_method'][0] . '_settings' );
-		}
-		
-		if ( isset( $_POST['payment_method'] ) && !$medios ) {
-			$medios = $_POST['payment_method'];
-		}
-	
-		if ( isset( $configuracion['pago'] ) && $configuracion['pago'][0] != 'todos' ) {
-			foreach ( $medios as $nombre => $medio ) {
-				if ( is_array( $configuracion['pago'] ) ) {
-					if ( !in_array( $nombre, $configuracion['pago'] ) ) {
-						unset( $medios[$nombre] );
-					}
-				} else { 
-					if ( $nombre != $configuracion['pago'] ) {
-						unset( $medios[$nombre] );
-					}
-				}
-			}
-		}
-	
-		return $medios;
-	}
-	add_filter( 'woocommerce_available_payment_gateways', 'apg_free_shipping_filtra_medios_de_pago' );	
 } else {
 	add_action( 'admin_notices', 'apg_free_shipping_requiere_wc' );
 }
