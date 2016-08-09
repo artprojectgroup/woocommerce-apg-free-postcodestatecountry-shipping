@@ -78,7 +78,7 @@ If you need help to configuring or installing **WooCommerce - APG Free Postcode/
 
 == Changelog ==
 = 2.0 =
-* WooCommerce 2.6 fully compatibility.
+* WooCommerce 2.6 fully compatibility. **Note: Not compatible with WooCommerce versions earlier than 2.6.0, including it setting.**
 = 1.1.1 =
 * Fixed WooCommerce 2.6.1 compatibility error.
 = 1.1 =
@@ -152,7 +152,7 @@ If you need help to configuring or installing **WooCommerce - APG Free Postcode/
 
 == Upgrade Notice ==
 = 2.0 =
-* WooCommerce 2.6 fully compatibility.
+* WooCommerce 2.6 fully compatibility. **Note: Not compatible with WooCommerce versions earlier than 2.6.0, including it setting.**
 
 == Translations ==
 * *English*: by [**Art Project Group**](http://www.artprojectgroup.es/) (default language).

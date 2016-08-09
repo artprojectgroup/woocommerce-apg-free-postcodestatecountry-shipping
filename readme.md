@@ -83,7 +83,8 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG Free Postcode/
 
 ## Changelog
 ###2.0
-* Compatibilidad completa con WooCommerce 2.6.
+* Compatibilidad completa con WooCommerce 2.6. **Nota: No es compatible con versiones anteriores a 2.6.0, tampoco su configuración.**
+
 
 ###1.1.1
 * Arreglo de error de compatibilidad con WooCommerce 2.6.1
