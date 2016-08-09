@@ -7,13 +7,13 @@ Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, shipping,
 
 Requires at least: 3.8
 
-Tested up to: 4.5.3
+Tested up to: 4.6
 
-Stable tag: 1.1.1
+Stable tag: 2.0
 
-WC requires at least: 2.1
+WC requires at least: 2.6
 
-WC tested up to: 2.6.1
+WC tested up to: 2.6.4
 
 License: GPLv3
 
@@ -24,7 +24,7 @@ Añade a WooCommerce un envío gratuito basado en el código postal, provincia (
 ## Description
 [*Español*](http://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/) - [*English*](http://goo.gl/SDIHtG) - [*Italiano*](http://goo.gl/J7WC8H) - [*Français*](http://goo.gl/s9TkQW) - [*Deutsch*](http://goo.gl/WEYLtR) 
 
-**IMPORTANTE: *WooCommerce - APG Free Postcode/State/Country Shipping* requiere WooCommerce 2.1.0 o superior.**
+**IMPORTANTE: *WooCommerce - APG Free Postcode/State/Country Shipping* requiere WooCommerce 2.6.0 o superior.**
 
 **WooCommerce - APG Free Postcode/State/Country Shipping** añade a tu tienda WooCommerce la posibilidad de incluir un envío gratuito basándose en el código postal, provincia (estado) y/o país de la dirección de envío y un importe mínimo del pedido y/o un cupón válido de gastos de envío gratuitos.
 
@@ -32,7 +32,6 @@ Añade a WooCommerce un envío gratuito basado en el código postal, provincia (
 * Puedes indicar un listado de países específicos o elegir a todos los países soportados por la tienda virtual.
 * Puedes requerir un importe mínimo y/o un cupón válido de gastos de envío gratuitos.
 * Puedes crear tantos grupos de código postal y/o provincias (estados) como desees.
-* Puedes asignar grupos de código postal/provincia (estado) donde no atender los pedidos.
 * Puedes crear un número ilimitado de gastos de envío gratuitos para utilizar este sistema de cálculo.
 * Puedes ocultar el resto de gastos de envío al estar disponible el gasto de envío gratuito configurado.
 
@@ -83,6 +82,9 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG Free Postcode/
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+###2.0
+* Compatibilidad completa con WooCommerce 2.6.
+
 ###1.1.1
 * Arreglo de error de compatibilidad con WooCommerce 2.6.1
 

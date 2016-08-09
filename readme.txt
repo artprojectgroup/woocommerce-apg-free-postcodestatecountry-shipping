@@ -3,10 +3,10 @@ Contributors: artprojectgroup
 Donate link: http://www.artprojectgroup.es/tienda/donacion
 Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, shipping, free shipping, zip, postcode, state, country, coupon, minimum order amount
 Requires at least: 3.8
-Tested up to: 4.5.3
-Stable tag: 1.1.1
-WC requires at least: 2.1
-WC tested up to: 2.6.1
+Tested up to: 4.6
+Stable tag: 2.0
+WC requires at least: 2.6
+WC tested up to: 2.6.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -15,7 +15,7 @@ Add to WooCommerce a free shipping based on postcode, state (province), country 
 == Description ==
 [*Español*](http://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/) - [*English*](http://goo.gl/SDIHtG) - [*Italiano*](http://goo.gl/J7WC8H) - [*Français*](http://goo.gl/s9TkQW) - [*Deutsch*](http://goo.gl/WEYLtR) 
 
-**IMPORTANT: *WooCommerce - APG Free Postcode/State/Country Shipping* required WooCommerce 2.1.0 or higher.**
+**IMPORTANT: *WooCommerce - APG Free Postcode/State/Country Shipping* required WooCommerce 2.6.0 or higher.**
 
 **WooCommerce - APG Free Postcode/State/Country Shipping** add to your WooCommerce shop the possibility of including a free shipping based on postcode, state (province) and/or country from the shipping address and a minimum amount of order and/or a valid free shipping coupon.
 
@@ -23,7 +23,6 @@ Add to WooCommerce a free shipping based on postcode, state (province), country 
 * You can specify a list of specific countries or select all countries supported by the virtual store.
 * You can require a minimum and/or a valid free shipping coupon.
 * You can create as many postal groups and/or states (provinces) groups as you wish.
-* You can assign postcode/state (province) groups where they don’t meet orders.
 * You can create an unlimited number of free shipping.
 * You can hide the rest of shipping if free shipping is available.
 
@@ -78,8 +77,10 @@ If you need help to configuring or installing **WooCommerce - APG Free Postcode/
 2. Screenshot of WooCommerce - APG Free Postcode/State/Country Shipping. APG Free Shipping Tab.
 
 == Changelog ==
+= 2.0 =
+* WooCommerce 2.6 fully compatibility.
 = 1.1.1 =
-* Fixed WooCommerce 2.6.1 compatibility error
+* Fixed WooCommerce 2.6.1 compatibility error.
 = 1.1 =
 * New interface and management function to add additional free shipping.
 * New screenshot.
@@ -150,8 +151,8 @@ If you need help to configuring or installing **WooCommerce - APG Free Postcode/
 * Initial version.
 
 == Upgrade Notice ==
-= 1.1.1 =
-* Fixed WooCommerce 2.6.1 compatibility error
+= 2.0 =
+* WooCommerce 2.6 fully compatibility.
 
 == Translations ==
 * *English*: by [**Art Project Group**](http://www.artprojectgroup.es/) (default language).

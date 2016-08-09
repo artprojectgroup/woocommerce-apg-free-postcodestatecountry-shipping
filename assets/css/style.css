@@ -1,5 +1,9 @@
 @charset "UTF-8";
 @import url(../fonts/stylesheet.css);
+/*Plugins*/
+.wc_plugin_upgrade_notice + p {
+	display: none;
+}
 /*General*/
 table.apg-table, .cabecera {
 	clear: none;
