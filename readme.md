@@ -22,8 +22,6 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Añade a WooCommerce un envío gratuito basado en el código postal, provincia (estado), país y un importe mínimo y/o un cupón válido.
 
 ## Description
-[*Español*](http://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/) - [*English*](http://goo.gl/SDIHtG) - [*Italiano*](http://goo.gl/J7WC8H) - [*Français*](http://goo.gl/s9TkQW) - [*Deutsch*](http://goo.gl/WEYLtR) 
-
 **IMPORTANTE: *WooCommerce - APG Free Postcode/State/Country Shipping* requiere WooCommerce 2.6.0 o superior.**
 
 **WooCommerce - APG Free Postcode/State/Country Shipping** añade a tu tienda WooCommerce la posibilidad de incluir un envío gratuito basándose en el código postal, provincia (estado) y/o país de la dirección de envío y un importe mínimo del pedido y/o un cupón válido de gastos de envío gratuitos.
