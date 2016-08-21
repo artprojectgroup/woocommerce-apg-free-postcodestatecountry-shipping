@@ -4,7 +4,7 @@ Donate link: http://www.artprojectgroup.es/tienda/donacion
 Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, shipping, free shipping, zip, postcode, state, country, coupon, minimum order amount
 Requires at least: 3.8
 Tested up to: 4.6
-Stable tag: 2.0
+Stable tag: 2.0.1
 WC requires at least: 2.6
 WC tested up to: 2.6.4
 License: GPLv3
@@ -18,10 +18,8 @@ Add to WooCommerce a free shipping based on postcode, state (province), country 
 **WooCommerce - APG Free Postcode/State/Country Shipping** add to your WooCommerce shop the possibility of including a free shipping based on postcode, state (province) and/or country from the shipping address and a minimum amount of order and/or a valid free shipping coupon.
 
 = Features =
-* You can specify a list of specific countries or select all countries supported by the virtual store.
 * You can require a minimum and/or a valid free shipping coupon.
-* You can create as many postal groups and/or states (provinces) groups as you wish.
-* You can create an unlimited number of free shipping.
+* You can exclude shipping classes.
 * You can hide the rest of shipping if free shipping is available.
 
 = Translations =
@@ -75,6 +73,8 @@ If you need help to configuring or installing **WooCommerce - APG Free Postcode/
 2. Screenshot of WooCommerce - APG Free Postcode/State/Country Shipping. APG Free Shipping Tab.
 
 == Changelog ==
+= 2.0.1 =
+* Fixed excluded shipping classes totals control.
 = 2.0 =
 * WooCommerce 2.6 fully compatibility. **Note: Not compatible with WooCommerce versions earlier than 2.6.0, including it setting.**
 = 1.1.1 =
@@ -149,8 +149,8 @@ If you need help to configuring or installing **WooCommerce - APG Free Postcode/
 * Initial version.
 
 == Upgrade Notice ==
-= 2.0 =
-* WooCommerce 2.6 fully compatibility. **Note: Not compatible with WooCommerce versions earlier than 2.6.0, including it setting.**
+= 2.0.1 =
+* Fixed excluded shipping classes totals control.
 
 == Translations ==
 * *English*: by [**Art Project Group**](http://www.artprojectgroup.es/) (default language).

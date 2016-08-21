@@ -9,7 +9,7 @@ Requires at least: 3.8
 
 Tested up to: 4.6
 
-Stable tag: 2.0
+Stable tag: 2.0.1
 
 WC requires at least: 2.6
 
@@ -27,10 +27,8 @@ Añade a WooCommerce un envío gratuito basado en el código postal, provincia (
 **WooCommerce - APG Free Postcode/State/Country Shipping** añade a tu tienda WooCommerce la posibilidad de incluir un envío gratuito basándose en el código postal, provincia (estado) y/o país de la dirección de envío y un importe mínimo del pedido y/o un cupón válido de gastos de envío gratuitos.
 
 ### Características
-* Puedes indicar un listado de países específicos o elegir a todos los países soportados por la tienda virtual.
 * Puedes requerir un importe mínimo y/o un cupón válido de gastos de envío gratuitos.
-* Puedes crear tantos grupos de código postal y/o provincias (estados) como desees.
-* Puedes crear un número ilimitado de gastos de envío gratuitos para utilizar este sistema de cálculo.
+* Puedes excluir clases de envío.
 * Puedes ocultar el resto de gastos de envío al estar disponible el gasto de envío gratuito configurado.
 
 ### Traducciones
@@ -80,6 +78,9 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG Free Postcode/
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+###2.0.1
+* Corregido el control de totales de clases de envío excluidas.
+
 ###2.0
 * Compatibilidad completa con WooCommerce 2.6. **Nota: No es compatible con versiones anteriores a 2.6.0, tampoco su configuración.**
 

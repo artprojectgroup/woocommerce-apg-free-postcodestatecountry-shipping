@@ -1,8 +1,8 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG Free Postcode/State/Country Shipping
-Version: 2.0
-Plugin URI: http://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
+Version: 2.0.1
+Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="http://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WooCommerce - APG Weight and Postcode/State/Country Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="http://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: http://www.artprojectgroup.es/
 Author: Art Project Group
@@ -33,7 +33,7 @@ $apg_free_shipping = array(
 	'soporte' 		=> 'http://www.wcprojectgroup.es/tienda/ticket-de-soporte',
 	'plugin_url' 	=> 'http://www.artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-free-postcodestatecountry-shipping', 
 	'ajustes' 		=> 'admin.php?page=wc-settings&tab=shipping&section=apg_free_shipping', 
-	'puntuacion' 	=> 'http://wordpress.org/support/view/plugin-reviews/woocommerce-apg-free-postcodestatecountry-shipping'
+	'puntuacion' 	=> 'https://wordpress.org/support/view/plugin-reviews/woocommerce-apg-free-postcodestatecountry-shipping'
 );
 $envios_adicionales_free = $limpieza_free = NULL;
 
@@ -48,7 +48,7 @@ function apg_free_shipping_enlaces( $enlaces, $archivo ) {
 		$enlaces[] = '<a href="' . $apg_free_shipping['donacion'] . '" target="_blank" title="' . __( 'Make a donation by ', 'apg_free_shipping' ) . 'APG"><span class="genericon genericon-cart"></span></a>';
 		$enlaces[] = '<a href="'. $apg_free_shipping['plugin_url'] . '" target="_blank" title="' . $apg_free_shipping['plugin'] . '"><strong class="artprojectgroup">APG</strong></a>';
 		$enlaces[] = '<a href="https://www.facebook.com/artprojectgroup" title="' . __( 'Follow us on ', 'apg_free_shipping' ) . 'Facebook" target="_blank"><span class="genericon genericon-facebook-alt"></span></a> <a href="https://twitter.com/artprojectgroup" title="' . __( 'Follow us on ', 'apg_free_shipping' ) . 'Twitter" target="_blank"><span class="genericon genericon-twitter"></span></a> <a href="https://plus.google.com/+ArtProjectGroupES" title="' . __( 'Follow us on ', 'apg_free_shipping' ) . 'Google+" target="_blank"><span class="genericon genericon-googleplus-alt"></span></a> <a href="http://es.linkedin.com/in/artprojectgroup" title="' . __( 'Follow us on ', 'apg_free_shipping' ) . 'LinkedIn" target="_blank"><span class="genericon genericon-linkedin"></span></a>';
-		$enlaces[] = '<a href="http://profiles.wordpress.org/artprojectgroup/" title="' . __( 'More plugins on ', 'apg_free_shipping' ) . 'WordPress" target="_blank"><span class="genericon genericon-wordpress"></span></a>';
+		$enlaces[] = '<a href="https://profiles.wordpress.org/artprojectgroup/" title="' . __( 'More plugins on ', 'apg_free_shipping' ) . 'WordPress" target="_blank"><span class="genericon genericon-wordpress"></span></a>';
 		$enlaces[] = '<a href="mailto:info@artprojectgroup.es" title="' . __( 'Contact with us by ', 'apg_free_shipping' ) . 'e-mail"><span class="genericon genericon-mail"></span></a> <a href="skype:artprojectgroup" title="' . __( 'Contact with us by ', 'apg_free_shipping' ) . 'Skype"><span class="genericon genericon-skype"></span></a>';
 		$enlaces[] = apg_free_shipping_plugin( $apg_free_shipping['plugin_uri'] );
 	}
@@ -96,7 +96,6 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
 		class WC_apg_free_shipping extends WC_Shipping_Method {				
 			public $clases_de_envio	= array();
-			public $importe_minimo	= 0;
 
 			public function __construct( $instance_id = 0 ) {
 				$this->id					= 'apg_free_shipping';
@@ -115,19 +114,10 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	        public function init() {
 				$this->apg_free_shipping_dame_clases_de_envio(); //Obtiene todas las clases de envío
 	
-				//Inicializamos el campo requires
-				if ( get_option( 'woocommerce_enable_coupons' ) == 'yes' && $this->importe_minimo ) {
-					$this->requerido = 'cualquiera';
-				} else if ( get_option( 'woocommerce_enable_coupons' ) == 'yes' ) {
-					$this->requerido = 'cupon';
-				} else if ( $this->importe_minimo ) {
-					$this->requerido = 'importe_minimo';
-				} else {
-					$this->requerido = '';
-				}
-
 				$this->init_form_fields();
 				$this->init_settings();
+
+				//Inicializamos variables
 				$campos = array( 
 					'title', 
 					'requires', 
@@ -145,7 +135,6 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			
 			//Formulario de datos
 			public function init_form_fields() {
-
 				$this->instance_form_fields = array( 
 					'title' => array( 
 						'title' 						=> __( 'Method Title', 'apg_free_shipping' ),
@@ -157,7 +146,6 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 					'requires' => array( 
 						'title' 						=> __( 'Free Shipping Requires...', 'apg_free_shipping' ),
 						'type' 						=> 'select',
-						'default' 					=> $this->requerido,
 						'class'						=> 'wc-enhanced-select',
 						'options'					=> array( 
 							''						=> __( 'N/A', 'apg_free_shipping' ),
@@ -227,6 +215,10 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
 			//Habilita el envío
 			public function is_available( $paquete ) {
+				//Variable
+				$total_clases_excluidas = 0;
+				
+				//Comprobamos las clases excluidas
 				if ( $this->clases_excluidas ) {
 					//Toma distintos datos de los productos
 					foreach ( WC()->cart->get_cart() as $identificador => $valores ) {
@@ -234,7 +226,11 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	
 						//Clase de producto
 						if ( in_array( $producto->get_shipping_class(), $this->clases_excluidas ) || in_array( 'todas', $this->clases_excluidas ) ) {
-							return false; //No atiende a las clases de envío excluidas
+							if ( WC()->cart->tax_display_cart == 'excl' ) {
+								$total_clases_excluidas += $producto->get_price_excluding_tax() * $valores['quantity'];
+							} else {
+								$total_clases_excluidas += $producto->get_price_including_tax() * $valores['quantity'];
+							}
 						}
 					}
 				}
@@ -264,7 +260,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 						$total = $total - WC()->cart->get_cart_discount_total();
 					}
 		
-					if ( $total >= $this->importe_minimo ) {
+					if ( $total - $total_clases_excluidas >= $this->importe_minimo ) {
 						$tiene_importe_minimo = true;
 					}
 				}
