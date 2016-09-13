@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG Free Postcode/State/Country Shipping
-Version: 2.0.1.1
+Version: 2.0.1.2
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="http://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WooCommerce - APG Weight and Postcode/State/Country Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="http://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: http://artprojectgroup.es/
@@ -322,15 +322,15 @@ function apg_free_shipping_requiere_wc() {
 
 //Oculta el resto de gastos de envío
 function apg_free_shipping_oculta_envios( $envios ) {
-	if ( isset( $envios['apg_free_shipping'] ) ) {
-		foreach ( $envios as $envio ) {
-			if ( $envio->id != 'apg_free_shipping' ) {
-				unset( $envios[$envio->id] );
-			}
+	$envio_gratis = array();
+	foreach ( $envios as $clave => $envio ) {
+		if ( 'apg_free_shipping' === $envio->method_id ) {
+			$envio_gratis[ $clave ] = $envio;
+			break;
 		}
 	}
  
-	return $envios;
+	return !empty( $envio_gratis ) ? $envio_gratis : $envios;
 }
 
 //Obtiene toda la información sobre el plugin
