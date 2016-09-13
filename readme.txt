@@ -74,7 +74,7 @@ If you need help to configuring or installing **WooCommerce - APG Free Postcode/
 
 == Changelog ==
 = 2.0.1.2 =
-* Fixed hiding shipping.
+* Fixed hidding shipping.
 = 2.0.1.1 =
 * Added support for multiple shipping methods per shipping zone.
 = 2.0.1 =
@@ -154,7 +154,7 @@ If you need help to configuring or installing **WooCommerce - APG Free Postcode/
 
 == Upgrade Notice ==
 = 2.0.1.2 =
-* Fixed hiding shipping.
+* Fixed hidding shipping.
 
 == Translations ==
 * *English*: by [**Art Project Group**](http://artprojectgroup.es/) (default language).
