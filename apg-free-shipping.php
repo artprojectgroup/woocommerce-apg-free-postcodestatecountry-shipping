@@ -1,16 +1,16 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG Free Postcode/State/Country Shipping
-Version: 2.0.1
+Version: 2.0.1.1
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="http://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WooCommerce - APG Weight and Postcode/State/Country Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="http://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
-Author URI: http://www.artprojectgroup.es/
+Author URI: http://artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
 Tested up to: 4.6
 
 Text Domain: apg_free_shipping
-Domain Path: /i18n/languages
+Domain Path: /languages
 
 @package WooCommerce - APG Free Postcode/State/Country Shipping
 @category Core
@@ -29,16 +29,16 @@ define( 'DIRECCION_apg_free_shipping', plugin_basename( __FILE__ ) );
 $apg_free_shipping = array( 	
 	'plugin' 		=> 'WooCommerce - APG Free Postcode/State/Country Shipping', 
 	'plugin_uri' 	=> 'woocommerce-apg-free-postcodestatecountry-shipping', 
-	'donacion' 		=> 'http://www.artprojectgroup.es/tienda/donacion',
-	'soporte' 		=> 'http://www.wcprojectgroup.es/tienda/ticket-de-soporte',
-	'plugin_url' 	=> 'http://www.artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-free-postcodestatecountry-shipping', 
-	'ajustes' 		=> 'admin.php?page=wc-settings&tab=shipping&section=apg_free_shipping', 
+	'donacion' 		=> 'http://artprojectgroup.es/tienda/donacion',
+	'soporte' 		=> 'http://wcprojectgroup.es/tienda/ticket-de-soporte',
+	'plugin_url' 	=> 'http://artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-free-postcodestatecountry-shipping', 
+	'ajustes' 		=> 'admin.php?page=wc-settings&tab=shipping', 
 	'puntuacion' 	=> 'https://wordpress.org/support/view/plugin-reviews/woocommerce-apg-free-postcodestatecountry-shipping'
 );
 $envios_adicionales_free = $limpieza_free = NULL;
 
 //Carga el idioma
-load_plugin_textdomain( 'apg_free_shipping', null, dirname( DIRECCION_apg_free_shipping ) . '/i18n/languages' );
+load_plugin_textdomain( 'apg_free_shipping', null, dirname( DIRECCION_apg_free_shipping ) . '/languages' );
 
 //Enlaces adicionales personalizados
 function apg_free_shipping_enlaces( $enlaces, $archivo ) {
@@ -185,7 +185,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			
 			//Pinta el formulario
 			public function admin_options() {
-				include( 'includes/formulario.php' );
+				include_once( 'includes/formulario.php' );
 			}
 
 			public function get_instance_form_fields() {
@@ -204,13 +204,13 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			}	
 	
 			//Calcula el gasto de envío
-			public function calculate_shipping( $package = array() ) {
-				$this->add_rate( array( 
-					'id'	=> $this->id,
-					'label'	=> $this->title,
-					'cost'	=> 0,
-					'taxes'	=> false,
-				 ) );
+			public function calculate_shipping( $paquete = array() ) {
+				$this->add_rate( array(
+					'id'		=> $this->get_rate_id(),
+					'label'		=> $this->title,
+					'cost'		=> 0,
+					'taxes'		=> false
+				) );
 			}
 
 			//Habilita el envío
