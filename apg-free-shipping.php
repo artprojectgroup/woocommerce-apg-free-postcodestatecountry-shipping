@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG Free Postcode/State/Country Shipping
-Version: 2.0.1.2
+Version: 2.0.1.3
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="http://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WooCommerce - APG Weight and Postcode/State/Country Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="http://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: http://artprojectgroup.es/
@@ -119,6 +119,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
 				//Inicializamos variables
 				$campos = array( 
+					'activo', 
 					'title', 
 					'requires', 
 					'importe_minimo', 
@@ -135,52 +136,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			
 			//Formulario de datos
 			public function init_form_fields() {
-				$this->instance_form_fields = array( 
-					'title' => array( 
-						'title' 						=> __( 'Method Title', 'apg_free_shipping' ),
-						'type' 						=> 'text',
-						'description' 				=> __( 'This controls the title which the user sees during checkout.', 'apg_free_shipping' ),
-						'default'					=> $this->method_title,
-						'desc_tip'					=> true,
-					 ),
-					'requires' => array( 
-						'title' 						=> __( 'Free Shipping Requires...', 'apg_free_shipping' ),
-						'type' 						=> 'select',
-						'class'						=> 'wc-enhanced-select',
-						'options'					=> array( 
-							''						=> __( 'N/A', 'apg_free_shipping' ),
-							'cupon'					=> __( 'A valid free shipping coupon', 'apg_free_shipping' ),
-							'importe_minimo'		=> __( 'A minimum order amount (defined below)', 'apg_free_shipping' ),
-							'cualquiera'			=> __( 'A minimum order amount OR a coupon', 'apg_free_shipping' ),
-							'ambos'					=> __( 'A minimum order amount AND a coupon', 'apg_free_shipping' ),
-						 )
-					 ),
-					'importe_minimo' => array( 
-								'title'				=> __( 'Minimum Order Amount', 'apg_free_shipping' ),
-								'type'				=> 'price',
-								'description' 		=> __( 'Users will need to spend this amount to get free shipping (if enabled above).', 'apg_free_shipping' ),
-								'default' 			=> '0',
-								'desc_tip'      	=> true,
-								'placeholder'		=> wc_format_localized_price( 0 )
-					 ),
-				 );
-				if ( WC()->shipping->get_shipping_classes() ) {
-					$this->instance_form_fields['clases_excluidas'] = array( 
-						'title'		=> __( 'No shipping (Shipping class)', 'apg_free_shipping' ),
-						'desc_tip' 	=> sprintf( __( "Select the shipping class where %s doesn't accept free shippings.", 'apg_free_shipping' ), get_bloginfo( 'name' ) ),
-						'css'		=> 'width: 450px;',
-						'default'	=> '',
-						'type'		=> 'multiselect',
-						'class'		=> 'wc-enhanced-select',
-						'options' 	=> array( 'todas' => __( 'All enabled shipping class', 'apg_free_shipping' ) ) + $this->clases_de_envio,
-					);
-				}
-				$this->instance_form_fields['muestra'] = array( 
-						'title'		=> __( 'Show only APG Free Shipping', 'apg_free_shipping' ),
-						'type'		=> 'checkbox',
-						'label'		=> __( "Don't show others shipping cost.", 'apg_free_shipping' ),
-						'default'	=> 'no',
-				 );
+				$this->instance_form_fields = include( 'includes/admin/campos.php' );
 			}
 			
 			//Pinta el formulario
@@ -215,6 +171,10 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
 			//Habilita el envío
 			public function is_available( $paquete ) {
+				if ( $this->activo == 'no' ) {
+					return false; //No está activo
+				}
+
 				//Variable
 				$total_clases_excluidas = 0;
 				

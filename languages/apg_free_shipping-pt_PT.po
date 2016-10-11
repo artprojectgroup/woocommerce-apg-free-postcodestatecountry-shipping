@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce - APG Free Postcode/State/Country Shipping\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-13 11:32+0000\n"
-"PO-Revision-Date: 2016-09-13 11:32+0000\n"
-"Last-Translator: artprojectgroup <info@artprojectgroup.es>\n"
+"POT-Creation-Date: 2016-10-11 09:09+0000\n"
+"PO-Revision-Date: 2016-10-11 09:09+0000\n"
+"Last-Translator: artprojectgroup <artprojectgroup@gmail.com>\n"
 "Language-Team: Portuguese (Portugal)\n"
 "Language: pt-PT\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
@@ -31,17 +31,13 @@ msgid ""
 "and you'll lose it</em>."
 msgstr ""
 
-#. URI of the plugin
-msgid ""
-"https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-"
-"shipping/"
+#: includes/admin/campos.php:9
+msgid "Enable/Disable"
 msgstr ""
-"https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-"
-"shipping/"
 
-#. Author URI of the plugin
-msgid "http://artprojectgroup.es/"
-msgstr "http://artprojectgroup.es/"
+#: includes/admin/campos.php:11
+msgid "Enable this shipping method"
+msgstr ""
 
 #: apg-free-shipping.php:48 includes/cuadro-informacion.php:7
 msgid "Make a donation by "
@@ -92,78 +88,15 @@ msgstr ""
 "encomenda, província (estado) e país da morada do cliente e um valor mínimo "
 "de encomenda e/ou um cupão para envios grátis válido."
 
-#: apg-free-shipping.php:140
-msgid "Method Title"
-msgstr "Título do modo de envio"
-
-#: apg-free-shipping.php:142
-msgid "This controls the title which the user sees during checkout."
-msgstr "Controla o título que o utilizador vê durante o checkout."
-
-#: apg-free-shipping.php:147
-msgid "Free Shipping Requires..."
-msgstr "Envio Grátis requer…"
-
-#: apg-free-shipping.php:151
-msgid "N/A"
-msgstr "N/D "
-
-#: apg-free-shipping.php:152
-msgid "A valid free shipping coupon"
-msgstr "Um cupão de envio grátis válido"
-
-#: apg-free-shipping.php:153
-msgid "A minimum order amount (defined below)"
-msgstr "Valor mínimo da encomenda (definido abaixo)"
-
-#: apg-free-shipping.php:154
-msgid "A minimum order amount OR a coupon"
-msgstr "Valor mínimo de encomenda OU um cupão"
-
-#: apg-free-shipping.php:155
-msgid "A minimum order amount AND a coupon"
-msgstr "Valor mínimo de encomenda E um cupão"
-
-#: apg-free-shipping.php:159
-msgid "Minimum Order Amount"
-msgstr "Valor mínimo da encomenda"
-
-#: apg-free-shipping.php:161
-msgid ""
-"Users will need to spend this amount to get free shipping (if enabled above)."
-msgstr ""
-"Os utilizadores terão de gastar este montante para beneficiarem do envio "
-"grátis (se estiver activado)."
-
-#: apg-free-shipping.php:169
-msgid "No shipping (Shipping class)"
-msgstr "Sem envio (classe de envio)"
-
-#: apg-free-shipping.php:170
-msgid "Select the shipping class where %s doesn't accept free shippings."
-msgstr "Seleccione a classe de envio em que %s não aceita envios grátis."
-
-#: apg-free-shipping.php:175
-msgid "All enabled shipping class"
-msgstr "Todas as classes de envio activas"
-
-#: apg-free-shipping.php:179
-msgid "Show only APG Free Shipping"
-msgstr "Mostrar apenas APG Free Shipping"
-
-#: apg-free-shipping.php:181
-msgid "Don't show others shipping cost."
-msgstr "Não mostrar outros custos de envio."
-
-#: apg-free-shipping.php:202
+#: apg-free-shipping.php:158
 msgid "Select a class&hellip;"
 msgstr "Seleccione uma classe&hellip;"
 
-#: apg-free-shipping.php:319
+#: apg-free-shipping.php:279
 msgid "This plugin require WooCommerce active to run!"
 msgstr "Este plugin requer que o WooCommerce esteja activo!"
 
-#: apg-free-shipping.php:371 includes/cuadro-informacion.php:44
+#: apg-free-shipping.php:331 includes/cuadro-informacion.php:44
 msgid "Please, rate %s:"
 msgstr "Por favor, classifique o %s:"
 
@@ -186,6 +119,69 @@ msgstr "Contacte-nos:"
 #: includes/cuadro-informacion.php:37
 msgid "Documentation and Support:"
 msgstr "Documentação e suporte:"
+
+#: includes/admin/campos.php:15
+msgid "Method Title"
+msgstr "Título do modo de envio"
+
+#: includes/admin/campos.php:17
+msgid "This controls the title which the user sees during checkout."
+msgstr "Controla o título que o utilizador vê durante o checkout."
+
+#: includes/admin/campos.php:22
+msgid "Free Shipping Requires..."
+msgstr "Envio Grátis requer…"
+
+#: includes/admin/campos.php:26
+msgid "N/A"
+msgstr "N/D "
+
+#: includes/admin/campos.php:27
+msgid "A valid free shipping coupon"
+msgstr "Um cupão de envio grátis válido"
+
+#: includes/admin/campos.php:28
+msgid "A minimum order amount (defined below)"
+msgstr "Valor mínimo da encomenda (definido abaixo)"
+
+#: includes/admin/campos.php:29
+msgid "A minimum order amount OR a coupon"
+msgstr "Valor mínimo de encomenda OU um cupão"
+
+#: includes/admin/campos.php:30
+msgid "A minimum order amount AND a coupon"
+msgstr "Valor mínimo de encomenda E um cupão"
+
+#: includes/admin/campos.php:34
+msgid "Minimum Order Amount"
+msgstr "Valor mínimo da encomenda"
+
+#: includes/admin/campos.php:36
+msgid ""
+"Users will need to spend this amount to get free shipping (if enabled above)."
+msgstr ""
+"Os utilizadores terão de gastar este montante para beneficiarem do envio "
+"grátis (se estiver activado)."
+
+#: includes/admin/campos.php:44
+msgid "No shipping (Shipping class)"
+msgstr "Sem envio (classe de envio)"
+
+#: includes/admin/campos.php:45
+msgid "Select the shipping class where %s doesn't accept free shippings."
+msgstr "Seleccione a classe de envio em que %s não aceita envios grátis."
+
+#: includes/admin/campos.php:50
+msgid "All enabled shipping class"
+msgstr "Todas as classes de envio activas"
+
+#: includes/admin/campos.php:54
+msgid "Show only APG Free Shipping"
+msgstr "Mostrar apenas APG Free Shipping"
+
+#: includes/admin/campos.php:56
+msgid "Don't show others shipping cost."
+msgstr "Não mostrar outros custos de envio."
 
 #. Name of the plugin
 msgid "WooCommerce - APG Free Postcode/State/Country Shipping"
@@ -215,6 +211,18 @@ msgstr ""
 "eCommerce</strong></a>, pelo <a href=\"http://profiles.wordpress."
 "org/artprojectgroup/\" target=\"_blank\">Art Project Group</a>."
 
+#. URI of the plugin
+msgid ""
+"https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-"
+"shipping/"
+msgstr ""
+"https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-"
+"shipping/"
+
 #. Author of the plugin
 msgid "Art Project Group"
 msgstr "Art Project Group"
+
+#. Author URI of the plugin
+msgid "http://artprojectgroup.es/"
+msgstr "http://artprojectgroup.es/"
