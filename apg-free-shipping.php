@@ -1,13 +1,13 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG Free Postcode/State/Country Shipping
-Version: 2.0.1.3
+Version: 2.0.1.4
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="http://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WooCommerce - APG Weight and Postcode/State/Country Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="http://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: http://artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
-Tested up to: 4.6
+Tested up to: 4.6.1
 
 Text Domain: apg_free_shipping
 Domain Path: /languages
@@ -286,7 +286,6 @@ function apg_free_shipping_oculta_envios( $envios ) {
 	foreach ( $envios as $clave => $envio ) {
 		if ( 'apg_free_shipping' === $envio->method_id ) {
 			$envio_gratis[ $clave ] = $envio;
-			break;
 		}
 	}
  
@@ -296,20 +295,20 @@ function apg_free_shipping_oculta_envios( $envios ) {
 //Obtiene toda la información sobre el plugin
 function apg_free_shipping_plugin( $nombre ) {
 	global $apg_free_shipping;
-	
+
 	$argumentos = ( object ) array( 
-		'slug' => $nombre 
+		'slug'		=> $nombre 
 	);
 	$consulta = array( 
-		'action' => 'plugin_information', 
-		'timeout' => 15, 
-		'request' => serialize( $argumentos )
+		'action'		=> 'plugin_information', 
+		'timeout'	=> 15, 
+		'request'	=> serialize( $argumentos )
 	);
 	$respuesta = get_transient( 'apg_free_shipping_plugin' );
 	if ( false === $respuesta ) {
 		$respuesta = wp_remote_post( 'http://api.wordpress.org/plugins/info/1.0/', array( 
-			'body' => $consulta)
-		);
+			'body'	=> $consulta
+		) );
 		set_transient( 'apg_free_shipping_plugin', $respuesta, 24 * HOUR_IN_SECONDS );
 	}
 	if ( !is_wp_error( $respuesta ) ) {
@@ -317,11 +316,11 @@ function apg_free_shipping_plugin( $nombre ) {
 	} else {
 		$plugin['rating'] = 100;
 	}
-
+	
 	$rating = array(
-	   'rating'	=> $plugin['rating'],
-	   'type'	=> 'percent',
-	   'number'	=> $plugin['num_ratings'],
+	   'rating'		=> $plugin['rating'],
+	   'type'		=> 'percent',
+	   'number'		=> $plugin['num_ratings'],
 	);
 	ob_start();
 	wp_star_rating( $rating );

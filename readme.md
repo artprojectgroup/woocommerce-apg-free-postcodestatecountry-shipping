@@ -7,13 +7,13 @@ Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, shipping,
 
 Requires at least: 3.8
 
-Tested up to: 4.6
+Tested up to: 4.6.1
 
-Stable tag: 2.0.1.3
+Stable tag: 2.0.1.4
 
 WC requires at least: 2.6
 
-WC tested up to: 2.6.4
+WC tested up to: 2.6.7
 
 License: GPLv3
 
@@ -78,6 +78,9 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG Free Postcode/
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+###2.0.1.4
+* Soporte para múltiples gastos de envío gratuitos simultáneamente.
+
 ###2.0.1.3
 * Añadida opción para activar o desactivar un método de envío.  
 
