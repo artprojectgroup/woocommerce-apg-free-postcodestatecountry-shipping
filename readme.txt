@@ -3,8 +3,8 @@ Contributors: artprojectgroup
 Donate link: http://artprojectgroup.es/tienda/donacion
 Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, shipping, free shipping, zip, postcode, state, country, coupon, minimum order amount
 Requires at least: 3.8
-Tested up to: 4.7.2
-Stable tag: 2.0.2.1
+Tested up to: 4.7.3
+Stable tag: 2.1
 WC requires at least: 2.6
 WC tested up to: 2.7
 License: GPLv3
@@ -20,6 +20,9 @@ Add to WooCommerce a free shipping based on postcode, state (province), country 
 = Features =
 * You can require a minimum and/or a valid free shipping coupon.
 * You can exclude shipping classes.
+* You can exclude user roles.
+* You can show a custom icon image.
+* You can show the estimated delivery time.
 * You can hide the rest of shipping if free shipping is available.
 
 = Translations =
@@ -73,6 +76,11 @@ If you need help to configuring or installing **WooCommerce - APG Free Postcode/
 2. Screenshot of WooCommerce - APG Free Postcode/State/Country Shipping. APG Free Shipping Tab.
 
 == Changelog ==
+= 2.1 =
+* Support to limit free shipping by user roles. **Update sponsored by [**Marketing Paradise**](https://mkparadise.com)**
+* Support to add a custom image.
+* Support to add the estimated delivery time.
+* Updated screenshot.
 = 2.0.2.1 = 
 * Adjust to optimize WooCommerce 2.7 compatibility.
 = 2.0.2 = 
@@ -127,7 +135,7 @@ If you need help to configuring or installing **WooCommerce - APG Free Postcode/
 * Fixed internal errors that appeared when you install the plugin and have no initial configuration.
 * Changing the internal structure of the plug to fit WordPress standards.
 = 0.8 =
-* Shipping classes support to limiting free shipping.
+* Support to limit free shipping by shipping classes.
 = 0.7.1.1 =
 * Changing the URL of the plugin in Art Project Group.
 = 0.7.1 =
@@ -161,8 +169,11 @@ If you need help to configuring or installing **WooCommerce - APG Free Postcode/
 * Initial version.
 
 == Upgrade Notice ==
-= 2.0.2.1 = 
-* Adjust to optimize WooCommerce 2.7 compatibility.
+= 2.1 =
+* Support to limit free shipping by user roles. **Update sponsored by [**Marketing Paradise**](https://mkparadise.com)**
+* Support to add a custom image.
+* Support to add the estimated delivery time.
+* Updated screenshot.
 
 == Translations ==
 * *English*: by [**Art Project Group**](http://artprojectgroup.es/) (default language).

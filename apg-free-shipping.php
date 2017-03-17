@@ -1,13 +1,13 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG Free Postcode/State/Country Shipping
-Version: 2.0.2.1
+Version: 2.1
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="http://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WooCommerce - APG Weight and Postcode/State/Country Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="http://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: http://artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
-Tested up to: 4.7.2
+Tested up to: 4.7.3
 
 Text Domain: apg_free_shipping
 Domain Path: /languages
@@ -96,7 +96,8 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 		}
 
 		class WC_apg_free_shipping extends WC_Shipping_Method {				
-			public $clases_de_envio	= array();
+			public $clases_de_envio		= array();
+			public $roles_de_usuario	= array();
 
 			public function __construct( $instance_id = 0 ) {
 				$this->id					= 'apg_free_shipping';
@@ -114,6 +115,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 			//Inicializa los datos
 	        public function init() {
 				$this->apg_free_shipping_dame_clases_de_envio(); //Obtiene todas las clases de envío
+				$this->apg_free_shipping_dame_roles_de_usuario(); //Obtiene todos los roles de usuario
 	
 				$this->init_form_fields();
 				$this->init_settings();
@@ -125,12 +127,16 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 					'requires', 
 					'importe_minimo', 
 					'clases_excluidas', 
+					'roles_excluidos', 
+					'icono',
+					'muestra_icono',
+					'entrega',
 					'muestra',
 				);
 				foreach ( $campos as $campo ) {
 					$this->$campo = $this->get_option( $campo );
 				}
-
+				
 				//Acción
 				add_action( 'woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ) );
 			}
@@ -145,6 +151,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 				include_once( 'includes/formulario.php' );
 			}
 
+			//Fuerza a mostrar el formulario
 			public function get_instance_form_fields() {
 				if ( is_admin() ) {
 					wc_enqueue_js( "
@@ -166,6 +173,16 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 				} else {
 					$this->clases_de_envio[] = __( 'Select a class&hellip;', 'apg_free_shipping' );
 				}
+			}
+			
+			//Función que lee y devuelve los roles de usuario
+			public function apg_free_shipping_dame_roles_de_usuario() {
+				$wp_roles			= new WP_Roles();
+				$wp_roles->use_db	= true;
+  
+				foreach( $wp_roles->get_names() as $role ) {
+					$this->roles_de_usuario[strtolower( $role )] = $role;
+				}
 			}	
 	
 			//Calcula el gasto de envío
@@ -183,6 +200,18 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 				if ( $this->activo == 'no' ) {
 					return false; //No está activo
 				}
+				
+				//Comprobamos los roles excluidos
+				if ( !empty( $this->roles_excluidos ) ) {
+					if ( empty( wp_get_current_user()->roles ) && in_array( 'invitado', $this->roles_excluidos ) ) { //Usuario invitado
+						return false; //Role excluido
+					}
+					foreach( wp_get_current_user()->roles as $rol ) { //Usuario con rol
+						if ( in_array( $rol, $this->roles_excluidos ) ) {
+							return false; //Role excluido
+						}
+					}
+				}
 
 				//Variable
 				$total_clases_excluidas = 0;
@@ -195,11 +224,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 	
 						//Clase de producto
 						if ( in_array( $producto->get_shipping_class(), $this->clases_excluidas ) || in_array( 'todas', $this->clases_excluidas ) ) {
-							if ( WC()->cart->tax_display_cart == 'excl' ) {
-								$total_clases_excluidas += $producto->get_price_excluding_tax() * $valores['quantity'];
-							} else {
-								$total_clases_excluidas += $producto->get_price_including_tax() * $valores['quantity'];
-							}
+							$total_clases_excluidas = ( WC()->cart->tax_display_cart == 'excl' ) ? $total_clases_excluidas + $producto->get_price_excluding_tax() * $valores['quantity'] : $total_clases_excluidas + $producto->get_price_including_tax() * $valores['quantity'];
 						}
 					}
 				}
@@ -223,11 +248,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 				if ( in_array( $this->requires, array( 'importe_minimo', 'cualquiera', 'ambos' ) ) && isset( WC()->cart->cart_contents_total ) ) {
 					$total = WC()->cart->get_displayed_subtotal();
 
-					if ( 'incl' === WC()->cart->tax_display_cart ) {
-						$total = $total - ( WC()->cart->get_cart_discount_total() + WC()->cart->get_cart_discount_tax_total() );
-					} else {
-						$total = $total - WC()->cart->get_cart_discount_total();
-					}
+					$total = ( 'incl' === WC()->cart->tax_display_cart ) ? $total - ( WC()->cart->get_cart_discount_total() + WC()->cart->get_cart_discount_tax_total() ) : $total - WC()->cart->get_cart_discount_total();
 		
 					if ( $total - $total_clases_excluidas >= $this->importe_minimo ) {
 						$tiene_importe_minimo = true;
@@ -280,6 +301,31 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 } else {
 	add_action( 'admin_notices', 'apg_free_shipping_requiere_wc' );
 }
+
+//Muestra el icono
+function apg_free_shipping_icono( $etiqueta, $metodo ) {
+	$id				= explode( ":", $metodo->id );
+	$configuracion	= maybe_unserialize( get_option( 'woocommerce_apg_free_shipping_' . $id[1] .'_settings' ) );
+	//¿Mostramos el icono?
+	if ( !empty( $configuracion['icono'] ) && @getimagesize( $configuracion['icono'] ) && $configuracion['muestra_icono'] != 'no' ) {
+		$tamano = @getimagesize( $configuracion['icono'] );
+		$imagen	= '<img class="apg_free_shipping_icon" src="' . $configuracion['icono'] . '" witdh="' . $tamano[0] . '" height="' . $tamano[1] . '" />';
+		if ( $configuracion['muestra_icono'] == 'delante' ) {
+			$etiqueta = $imagen . ' ' . $etiqueta;
+		} else if ( $configuracion['muestra_icono'] == 'detras' ) {
+			$etiqueta = $etiqueta . ' ' . $imagen;
+		} else {
+			$etiqueta = $imagen;
+		}
+	}
+	//Tiempo de entrega
+	if ( !empty( $configuracion['entrega'] ) ) {
+		$etiqueta .= '<br /><small class="apg_shipping_delivery">' . sprintf( __( "Estimated delivery time: %s", 'apg_free_shipping' ), $configuracion['entrega'] ) . '</small>';
+	}
+
+	return $etiqueta;
+}
+add_filter( 'woocommerce_cart_shipping_method_full_label', 'apg_free_shipping_icono', PHP_INT_MAX, 2 );
 
 //Muestra el mensaje de activación de WooCommerce y desactiva el plugin
 function apg_free_shipping_requiere_wc() {

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce - APG Free Postcode/State/Country Shipping\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-11 09:08+0000\n"
-"PO-Revision-Date: 2016-10-11 09:08+0000\n"
+"POT-Creation-Date: 2017-03-15 14:25+0000\n"
+"PO-Revision-Date: 2017-03-15 14:26+0000\n"
 "Last-Translator: artprojectgroup <artprojectgroup@gmail.com>\n"
 "Language-Team: Spanish (Spain)\n"
 "Language: es-ES\n"
@@ -26,21 +26,26 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Loco-Target-Locale: es_ES"
 
-#: includes/admin/campos.php:9
-msgid "Enable/Disable"
-msgstr "Activar/Desactivar"
+#: apg-free-shipping.php:320
+#, php-format
+msgid "Estimated delivery time: %s"
+msgstr "Tiempo de entrega estimado: %s"
 
-#: includes/admin/campos.php:11
-msgid "Enable this shipping method"
-msgstr "Activa este método de envío"
+#: includes/admin/campos.php:88
+msgid "Estimated delivery time"
+msgstr "Tiempo de entrega estimado"
+
+#: includes/admin/campos.php:90
+msgid "Define estimation for delivery time for this shipping method."
+msgstr "Indica el tiempo estimado de entrega para este método de envío."
 
 #: apg-free-shipping.php:48 includes/cuadro-informacion.php:7
 msgid "Make a donation by "
 msgstr "Haz una donación por "
 
-#: apg-free-shipping.php:50 apg-free-shipping.php:50 apg-free-shipping.php:50 
-#: apg-free-shipping.php:50 includes/cuadro-informacion.php:19 
-#: includes/cuadro-informacion.php:19 includes/cuadro-informacion.php:19 
+#: apg-free-shipping.php:50 apg-free-shipping.php:50 apg-free-shipping.php:50
+#: apg-free-shipping.php:50 includes/cuadro-informacion.php:19
+#: includes/cuadro-informacion.php:19 includes/cuadro-informacion.php:19
 #: includes/cuadro-informacion.php:19
 msgid "Follow us on "
 msgstr "Síguenos en "
@@ -49,7 +54,7 @@ msgstr "Síguenos en "
 msgid "More plugins on "
 msgstr "Más plugins en "
 
-#: apg-free-shipping.php:52 apg-free-shipping.php:52 
+#: apg-free-shipping.php:52 apg-free-shipping.php:52
 #: includes/cuadro-informacion.php:33 includes/cuadro-informacion.php:33
 msgid "Contact with us by "
 msgstr "Contacta con nosotros por "
@@ -84,11 +89,11 @@ msgstr ""
 "configurar tras la actualización.<br /><em>Recuerda que la configuración "
 "actual es totalmente incompatible con WooCommerce 2.6 y la perderás</em>."
 
-#: apg-free-shipping.php:103
+#: apg-free-shipping.php:105
 msgid "APG Free Shipping"
 msgstr "APG envío gratuito"
 
-#: apg-free-shipping.php:104
+#: apg-free-shipping.php:106
 msgid ""
 "Lets you add a free shipping based on Postcode/State/Country of the cart and "
 "minimum order a amount and/or a valid free shipping coupon."
@@ -97,15 +102,16 @@ msgstr ""
 "(estado)/país del carro y un importe mínimo de pedido y/o un cupón válido de "
 "gastos de envío gratuitos."
 
-#: apg-free-shipping.php:158
+#: apg-free-shipping.php:174
 msgid "Select a class&hellip;"
 msgstr "Selecciona la clase&hellip;"
 
-#: apg-free-shipping.php:279
+#: apg-free-shipping.php:331
 msgid "This plugin require WooCommerce active to run!"
 msgstr "¡Este plugin necesita WooCommerce activo para funcionar!"
 
-#: apg-free-shipping.php:331 includes/cuadro-informacion.php:44
+#: apg-free-shipping.php:382 includes/cuadro-informacion.php:44
+#, php-format
 msgid "Please, rate %s:"
 msgstr "Por favor, puntúa %s:"
 
@@ -129,6 +135,14 @@ msgstr "Contacta con nosotros:"
 #: includes/cuadro-informacion.php:37
 msgid "Documentation and Support:"
 msgstr "Documentación y ayuda:"
+
+#: includes/admin/campos.php:9
+msgid "Enable/Disable"
+msgstr "Activar/Desactivar"
+
+#: includes/admin/campos.php:11
+msgid "Enable this shipping method"
+msgstr "Activa este método de envío"
 
 #: includes/admin/campos.php:15
 msgid "Method Title"
@@ -180,6 +194,7 @@ msgid "No shipping (Shipping class)"
 msgstr "Sin envíos (Clase de envío)"
 
 #: includes/admin/campos.php:45
+#, php-format
 msgid "Select the shipping class where %s doesn't accept free shippings."
 msgstr "Selecciona la clase de envíos donde %s no aceptará envíos gratuitos."
 
@@ -188,10 +203,51 @@ msgid "All enabled shipping class"
 msgstr "Todas las clases de envío disponibles"
 
 #: includes/admin/campos.php:54
+msgid "No shipping (User role)"
+msgstr "Sin envíos (Rol de usuario)"
+
+#: includes/admin/campos.php:55
+#, php-format
+msgid "Select the user role where %s doesn't accept free shippings."
+msgstr "Selecciona el rol de usuario donde %s no aceptará envíos gratuitos."
+
+#: includes/admin/campos.php:63
+msgid "Icon image"
+msgstr "Imagen personalizada"
+
+#: includes/admin/campos.php:65
+msgid "Icon image URL. APG recommends a 60x21px image."
+msgstr "URL de la imagen. APG recomienda una imagen de 60x21px."
+
+#: includes/admin/campos.php:70
+msgid "How show icon image?"
+msgstr "¿Cómo mostrar la imagen?"
+
+#: includes/admin/campos.php:71
+msgid "Select how you want to show the icon image."
+msgstr "Selecciona cómo quieres que se muestre la imagen personalizada."
+
+#: includes/admin/campos.php:75
+msgid "Not show, just title"
+msgstr "No mostrar, sólo el título"
+
+#: includes/admin/campos.php:76
+msgid "Before title"
+msgstr "Antes del título"
+
+#: includes/admin/campos.php:77
+msgid "After title"
+msgstr "Después del título"
+
+#: includes/admin/campos.php:78
+msgid "No title, just icon"
+msgstr "Sin título, sólo icono"
+
+#: includes/admin/campos.php:82
 msgid "Show only APG Free Shipping"
 msgstr "Muestra sólo APG Envío Gratuito"
 
-#: includes/admin/campos.php:56
+#: includes/admin/campos.php:84
 msgid "Don't show others shipping cost."
 msgstr "No muestra el resto de gastos de envío."
 

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce - APG Free Postcode/State/Country Shipping\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-11 09:08+0000\n"
+"POT-Creation-Date: 2017-03-15 14:24+0000\n"
 "POT-Revision-Date: Tue Aug 09 2016 11:16:48 GMT+0200 (CEST)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -27,9 +27,9 @@ msgstr ""
 msgid "Make a donation by "
 msgstr ""
 
-#: apg-free-shipping.php:50 apg-free-shipping.php:50 apg-free-shipping.php:50 
-#: apg-free-shipping.php:50 includes/cuadro-informacion.php:19 
-#: includes/cuadro-informacion.php:19 includes/cuadro-informacion.php:19 
+#: apg-free-shipping.php:50 apg-free-shipping.php:50 apg-free-shipping.php:50
+#: apg-free-shipping.php:50 includes/cuadro-informacion.php:19
+#: includes/cuadro-informacion.php:19 includes/cuadro-informacion.php:19
 #: includes/cuadro-informacion.php:19
 msgid "Follow us on "
 msgstr ""
@@ -38,7 +38,7 @@ msgstr ""
 msgid "More plugins on "
 msgstr ""
 
-#: apg-free-shipping.php:52 apg-free-shipping.php:52 
+#: apg-free-shipping.php:52 apg-free-shipping.php:52
 #: includes/cuadro-informacion.php:33 includes/cuadro-informacion.php:33
 msgid "Contact with us by "
 msgstr ""
@@ -68,25 +68,31 @@ msgid ""
 "and you'll lose it</em>."
 msgstr ""
 
-#: apg-free-shipping.php:103
+#: apg-free-shipping.php:105
 msgid "APG Free Shipping"
 msgstr ""
 
-#: apg-free-shipping.php:104
+#: apg-free-shipping.php:106
 msgid ""
 "Lets you add a free shipping based on Postcode/State/Country of the cart and "
 "minimum order a amount and/or a valid free shipping coupon."
 msgstr ""
 
-#: apg-free-shipping.php:158
+#: apg-free-shipping.php:174
 msgid "Select a class&hellip;"
 msgstr ""
 
-#: apg-free-shipping.php:279
+#: apg-free-shipping.php:320
+#, php-format
+msgid "Estimated delivery time: %s"
+msgstr ""
+
+#: apg-free-shipping.php:331
 msgid "This plugin require WooCommerce active to run!"
 msgstr ""
 
-#: apg-free-shipping.php:331 includes/cuadro-informacion.php:44
+#: apg-free-shipping.php:382 includes/cuadro-informacion.php:44
+#, php-format
 msgid "Please, rate %s:"
 msgstr ""
 
@@ -164,6 +170,7 @@ msgid "No shipping (Shipping class)"
 msgstr ""
 
 #: includes/admin/campos.php:45
+#, php-format
 msgid "Select the shipping class where %s doesn't accept free shippings."
 msgstr ""
 
@@ -172,11 +179,60 @@ msgid "All enabled shipping class"
 msgstr ""
 
 #: includes/admin/campos.php:54
+msgid "No shipping (User role)"
+msgstr ""
+
+#: includes/admin/campos.php:55
+#, php-format
+msgid "Select the user role where %s doesn't accept free shippings."
+msgstr ""
+
+#: includes/admin/campos.php:63
+msgid "Icon image"
+msgstr ""
+
+#: includes/admin/campos.php:65
+msgid "Icon image URL. APG recommends a 60x21px image."
+msgstr ""
+
+#: includes/admin/campos.php:70
+msgid "How show icon image?"
+msgstr ""
+
+#: includes/admin/campos.php:71
+msgid "Select how you want to show the icon image."
+msgstr ""
+
+#: includes/admin/campos.php:75
+msgid "Not show, just title"
+msgstr ""
+
+#: includes/admin/campos.php:76
+msgid "Before title"
+msgstr ""
+
+#: includes/admin/campos.php:77
+msgid "After title"
+msgstr ""
+
+#: includes/admin/campos.php:78
+msgid "No title, just icon"
+msgstr ""
+
+#: includes/admin/campos.php:82
 msgid "Show only APG Free Shipping"
 msgstr ""
 
-#: includes/admin/campos.php:56
+#: includes/admin/campos.php:84
 msgid "Don't show others shipping cost."
+msgstr ""
+
+#: includes/admin/campos.php:88
+msgid "Estimated delivery time"
+msgstr ""
+
+#: includes/admin/campos.php:90
+msgid "Define estimation for delivery time for this shipping method."
 msgstr ""
 
 #. Name of the plugin
