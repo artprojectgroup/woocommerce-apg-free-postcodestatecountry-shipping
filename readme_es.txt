@@ -4,7 +4,7 @@ Donate link: http://artprojectgroup.es/tienda/donacion
 Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, shipping, free shipping, zip, postcode, state, country, coupon, minimum order amount
 Requires at least: 3.8
 Tested up to: 4.7.3
-Stable tag: 2.1
+Stable tag: 2.1.0.1
 WC requires at least: 2.6
 WC tested up to: 2.7
 License: GPLv3
@@ -76,6 +76,8 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG Free Postcode/
 2. Captura de pantalla de WooCommerce - APG Free Postcode/State/Country Shipping. Pestaña de APG envío gratuito.
 
 == Changelog ==
+= 2.1.0.1 =
+* Arreglo de error en la clave de rol de usuario.
 = 2.1 = 
 * Soporte de roles de usuario para no realizar envíos gratuitos. **Actualización patrocinada por [**Marketing Paradise**](https://mkparadise.com)**
 * Soporte para añadir imagen personalizada.
@@ -169,11 +171,8 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG Free Postcode/
 * Versión inicial.
 
 == Upgrade Notice ==
-= 2.1 = 
-* Soporte de roles de usuario para no realizar envíos gratuitos. **Actualización patrocinada por [**Marketing Paradise**](https://mkparadise.com)**
-* Soporte para añadir imagen personalizada.
-* Soporte para tiempo estimado de entrega.
-* Actualización de la captura de pantalla.
+= 2.1.0.1 =
+* Arreglo de error en la clave de rol de usuario.
 
 ==Traducciones ==
 * *English*: by [**Art Project Group**](http://artprojectgroup.es/) (default language).
