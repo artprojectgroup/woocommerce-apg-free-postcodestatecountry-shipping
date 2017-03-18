@@ -89,7 +89,7 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG Free Postcode/
 * Arreglo de error en la clave de rol de usuario.
 
 ### 2.1
-* Soporte de roles de usuario para no realizar envíos gratuitos. **Actualización patrocinada por [**Marketing Paradise**](https://mkparadise.com)**
+* Soporte de roles de usuario para no realizar envíos gratuitos. **Actualización patrocinada por [**Marketing Paradise**](https://mkparadise.com) y [**Dermoder**](http://dermoder.com)**
 * Soporte para añadir imagen personalizada.
 * Soporte para tiempo estimado de entrega.
 * Actualización de la captura de pantalla.
