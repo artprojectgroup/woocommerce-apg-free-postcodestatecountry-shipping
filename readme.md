@@ -9,7 +9,7 @@ Requires at least: 3.8
 
 Tested up to: 4.7.3
 
-Stable tag: 2.1.0.1
+Stable tag: 2.2
 
 WC requires at least: 2.6
 
@@ -30,6 +30,7 @@ Añade a WooCommerce un envío gratuito basado en el código postal, provincia (
 * Puedes requerir un importe mínimo y/o un cupón válido de gastos de envío gratuitos.
 * Puedes excluir clases de envío.
 * Puedes excluir roles de usuario.
+* Puedes ocultar medios de pago.
 * Puedes mostrar una imagen personalizada.
 * Puedes mostrar el tiempo estimado de entrega.
 * Puedes ocultar el resto de gastos de envío al estar disponible el gasto de envío gratuito configurado.
@@ -81,6 +82,9 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG Free Postcode/
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.2
+* Soporte para ocultar medios de pago.
+
 ### 2.1.0.1
 * Arreglo de error en la clave de rol de usuario.
 

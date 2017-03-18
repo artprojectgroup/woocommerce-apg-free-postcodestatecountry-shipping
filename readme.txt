@@ -4,7 +4,7 @@ Donate link: http://artprojectgroup.es/tienda/donacion
 Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, shipping, free shipping, zip, postcode, state, country, coupon, minimum order amount
 Requires at least: 3.8
 Tested up to: 4.7.3
-Stable tag: 2.1.0.1
+Stable tag: 2.2
 WC requires at least: 2.6
 WC tested up to: 2.7
 License: GPLv3
@@ -21,6 +21,7 @@ Add to WooCommerce a free shipping based on postcode, state (province), country 
 * You can require a minimum and/or a valid free shipping coupon.
 * You can exclude shipping classes.
 * You can exclude user roles.
+* You can hide payment gateways.
 * You can show a custom icon image.
 * You can show the estimated delivery time.
 * You can hide the rest of shipping if free shipping is available.
@@ -76,6 +77,8 @@ If you need help to configuring or installing **WooCommerce - APG Free Postcode/
 2. Screenshot of WooCommerce - APG Free Postcode/State/Country Shipping. APG Free Shipping Tab.
 
 == Changelog ==
+= 2.2 = 
+* Support to hide payment gateways.
 = 2.1.0.1 =
 * Fixed user role key.
 = 2.1 =
@@ -171,8 +174,8 @@ If you need help to configuring or installing **WooCommerce - APG Free Postcode/
 * Initial version.
 
 == Upgrade Notice ==
-= 2.1.0.1 =
-* Fixed user role key.
+= 2.2 = 
+* Support to hide payment gateways.
 
 == Translations ==
 * *English*: by [**Art Project Group**](http://artprojectgroup.es/) (default language).
