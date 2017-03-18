@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce - APG Free Postcode/State/Country Shipping\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-15 14:25+0000\n"
-"PO-Revision-Date: 2017-03-15 14:26+0000\n"
+"POT-Creation-Date: 2017-03-18 16:47+0000\n"
+"PO-Revision-Date: 2017-03-18 16:48+0000\n"
 "Last-Translator: artprojectgroup <artprojectgroup@gmail.com>\n"
 "Language-Team: Spanish (Spain)\n"
 "Language: es-ES\n"
@@ -26,18 +26,22 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Loco-Target-Locale: es_ES"
 
-#: apg-free-shipping.php:320
+#: includes/admin/campos.php:61
+msgid "Guest"
+msgstr "Invitado"
+
+#: includes/admin/campos.php:65
+msgid "Payment gateway"
+msgstr "Medio de pago"
+
+#: includes/admin/campos.php:66
 #, php-format
-msgid "Estimated delivery time: %s"
-msgstr "Tiempo de entrega estimado: %s"
+msgid "Payment gateway available for %s"
+msgstr "Medio de pago disponible para %s"
 
-#: includes/admin/campos.php:88
-msgid "Estimated delivery time"
-msgstr "Tiempo de entrega estimado"
-
-#: includes/admin/campos.php:90
-msgid "Define estimation for delivery time for this shipping method."
-msgstr "Indica el tiempo estimado de entrega para este método de envío."
+#: includes/admin/campos.php:74
+msgid "All enabled payments"
+msgstr "Todos los medios de pago"
 
 #: apg-free-shipping.php:48 includes/cuadro-informacion.php:7
 msgid "Make a donation by "
@@ -89,11 +93,11 @@ msgstr ""
 "configurar tras la actualización.<br /><em>Recuerda que la configuración "
 "actual es totalmente incompatible con WooCommerce 2.6 y la perderás</em>."
 
-#: apg-free-shipping.php:105
+#: apg-free-shipping.php:106
 msgid "APG Free Shipping"
 msgstr "APG envío gratuito"
 
-#: apg-free-shipping.php:106
+#: apg-free-shipping.php:107
 msgid ""
 "Lets you add a free shipping based on Postcode/State/Country of the cart and "
 "minimum order a amount and/or a valid free shipping coupon."
@@ -102,15 +106,20 @@ msgstr ""
 "(estado)/país del carro y un importe mínimo de pedido y/o un cupón válido de "
 "gastos de envío gratuitos."
 
-#: apg-free-shipping.php:174
+#: apg-free-shipping.php:177
 msgid "Select a class&hellip;"
 msgstr "Selecciona la clase&hellip;"
 
-#: apg-free-shipping.php:331
+#: apg-free-shipping.php:365
+#, php-format
+msgid "Estimated delivery time: %s"
+msgstr "Tiempo de entrega estimado: %s"
+
+#: apg-free-shipping.php:376
 msgid "This plugin require WooCommerce active to run!"
 msgstr "¡Este plugin necesita WooCommerce activo para funcionar!"
 
-#: apg-free-shipping.php:382 includes/cuadro-informacion.php:44
+#: apg-free-shipping.php:427 includes/cuadro-informacion.php:44
 #, php-format
 msgid "Please, rate %s:"
 msgstr "Por favor, puntúa %s:"
@@ -211,43 +220,51 @@ msgstr "Sin envíos (Rol de usuario)"
 msgid "Select the user role where %s doesn't accept free shippings."
 msgstr "Selecciona el rol de usuario donde %s no aceptará envíos gratuitos."
 
-#: includes/admin/campos.php:63
+#: includes/admin/campos.php:78
 msgid "Icon image"
 msgstr "Imagen personalizada"
 
-#: includes/admin/campos.php:65
+#: includes/admin/campos.php:80
 msgid "Icon image URL. APG recommends a 60x21px image."
 msgstr "URL de la imagen. APG recomienda una imagen de 60x21px."
 
-#: includes/admin/campos.php:70
+#: includes/admin/campos.php:85
 msgid "How show icon image?"
 msgstr "¿Cómo mostrar la imagen?"
 
-#: includes/admin/campos.php:71
+#: includes/admin/campos.php:86
 msgid "Select how you want to show the icon image."
 msgstr "Selecciona cómo quieres que se muestre la imagen personalizada."
 
-#: includes/admin/campos.php:75
+#: includes/admin/campos.php:90
 msgid "Not show, just title"
 msgstr "No mostrar, sólo el título"
 
-#: includes/admin/campos.php:76
+#: includes/admin/campos.php:91
 msgid "Before title"
 msgstr "Antes del título"
 
-#: includes/admin/campos.php:77
+#: includes/admin/campos.php:92
 msgid "After title"
 msgstr "Después del título"
 
-#: includes/admin/campos.php:78
+#: includes/admin/campos.php:93
 msgid "No title, just icon"
 msgstr "Sin título, sólo icono"
 
-#: includes/admin/campos.php:82
+#: includes/admin/campos.php:97
+msgid "Estimated delivery time"
+msgstr "Tiempo de entrega estimado"
+
+#: includes/admin/campos.php:99
+msgid "Define estimation for delivery time for this shipping method."
+msgstr "Indica el tiempo estimado de entrega para este método de envío."
+
+#: includes/admin/campos.php:104
 msgid "Show only APG Free Shipping"
 msgstr "Muestra sólo APG Envío Gratuito"
 
-#: includes/admin/campos.php:84
+#: includes/admin/campos.php:106
 msgid "Don't show others shipping cost."
 msgstr "No muestra el resto de gastos de envío."
 

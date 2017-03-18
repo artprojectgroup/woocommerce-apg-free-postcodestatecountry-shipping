@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG Free Postcode/State/Country Shipping
-Version: 2.1.0.1
+Version: 2.2
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="http://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WooCommerce - APG Weight and Postcode/State/Country Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="http://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: http://artprojectgroup.es/
@@ -35,7 +35,7 @@ $apg_free_shipping = array(
 	'ajustes' 		=> 'admin.php?page=wc-settings&tab=shipping', 
 	'puntuacion' 	=> 'https://wordpress.org/support/view/plugin-reviews/woocommerce-apg-free-postcodestatecountry-shipping'
 );
-$envios_adicionales_free = $limpieza_free = NULL;
+$medios_de_pago = array();
 
 //Carga el idioma
 load_plugin_textdomain( 'apg_free_shipping', null, dirname( DIRECCION_apg_free_shipping ) . '/languages' );
@@ -98,6 +98,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 		class WC_apg_free_shipping extends WC_Shipping_Method {				
 			public $clases_de_envio		= array();
 			public $roles_de_usuario	= array();
+			public $metodos_de_pago		= array();
 
 			public function __construct( $instance_id = 0 ) {
 				$this->id					= 'apg_free_shipping';
@@ -116,6 +117,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 	        public function init() {
 				$this->apg_free_shipping_dame_clases_de_envio(); //Obtiene todas las clases de envío
 				$this->apg_free_shipping_dame_roles_de_usuario(); //Obtiene todos los roles de usuario
+				$this->apg_free_shipping_dame_metodos_de_pago(); //Obtiene todos los métodos de pago
 	
 				$this->init_form_fields();
 				$this->init_settings();
@@ -128,6 +130,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 					'importe_minimo', 
 					'clases_excluidas', 
 					'roles_excluidos', 
+					'pago',
 					'icono',
 					'muestra_icono',
 					'entrega',
@@ -177,12 +180,21 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 			
 			//Función que lee y devuelve los roles de usuario
 			public function apg_free_shipping_dame_roles_de_usuario() {
-				$wp_roles= new WP_Roles();
+				$wp_roles = new WP_Roles();
 
-				foreach( $wp_roles->role_names as $role => $nombre ) {
-					$this->roles_de_usuario[$role] = $nombre;
+				foreach( $wp_roles->role_names as $rol => $nombre ) {
+					$this->roles_de_usuario[$rol] = $nombre;
 				}				
 			}	
+
+			//Función que lee y devuelve los métodos de pago
+			public function apg_free_shipping_dame_metodos_de_pago() {
+				global $medios_de_pago;
+				
+				foreach( $medios_de_pago as $clave => $medio_de_pago ) {
+					$this->metodos_de_pago[$medio_de_pago->id] = $medio_de_pago->title;
+				}
+			}
 	
 			//Calcula el gasto de envío
 			public function calculate_shipping( $paquete = array() ) {
@@ -297,6 +309,37 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 		return $methods;
 	}
 	add_filter( 'woocommerce_shipping_methods', 'apg_free_shipping_anade_gastos_de_envio' );
+	
+	//Filtra los medios de pago
+	function apg_free_shipping_filtra_medios_de_pago( $medios ) {
+		if ( isset( WC()->session->chosen_shipping_methods ) ) {
+			$id = explode( ":", WC()->session->chosen_shipping_methods[0] );
+		} else if ( isset( $_POST['shipping_method'] ) ) {
+			$id = explode( ":", $_POST['shipping_method'][0] );
+		}
+		$configuracion	= maybe_unserialize( get_option( 'woocommerce_apg_free_shipping_' . $id[1] .'_settings' ) );
+		
+		if ( isset( $_POST['payment_method'] ) && !$medios ) {
+			$medios = $_POST['payment_method'];
+		}
+
+		if ( !empty( $configuracion['pago'] ) && $configuracion['pago'][0] != 'todos' ) {
+			foreach ( $medios as $nombre => $medio ) {
+				if ( is_array( $configuracion['pago'] ) ) {
+					if ( !in_array( $nombre, $configuracion['pago'] ) ) {
+						unset( $medios[$nombre] );
+					}
+				} else { 
+					if ( $nombre != $configuracion['pago'] ) {
+						unset( $medios[$nombre] );
+					}
+				}
+			}
+		}
+
+		return $medios;
+	}
+	add_filter( 'woocommerce_available_payment_gateways', 'apg_free_shipping_filtra_medios_de_pago' );
 } else {
 	add_action( 'admin_notices', 'apg_free_shipping_requiere_wc' );
 }
@@ -319,7 +362,7 @@ function apg_free_shipping_icono( $etiqueta, $metodo ) {
 	}
 	//Tiempo de entrega
 	if ( !empty( $configuracion['entrega'] ) ) {
-		$etiqueta .= '<br /><small class="apg_shipping_delivery">' . sprintf( __( "Estimated delivery time: %s", 'apg_free_shipping' ), $configuracion['entrega'] ) . '</small>';
+		$etiqueta .= '<br /><small class="apg_free_shipping_delivery">' . sprintf( __( "Estimated delivery time: %s", 'apg_free_shipping' ), $configuracion['entrega'] ) . '</small>';
 	}
 
 	return $etiqueta;
@@ -386,6 +429,9 @@ function apg_free_shipping_plugin( $nombre ) {
 
 //Hoja de estilo
 function apg_free_shipping_muestra_mensaje() {
+	global $medios_de_pago;
+	
+	$medios_de_pago = WC()->payment_gateways->payment_gateways();
 	wp_register_style( 'apg_free_shipping_hoja_de_estilo', plugins_url( 'assets/css/style.css', __FILE__ ) );
 	wp_enqueue_style( 'apg_free_shipping_hoja_de_estilo' ); //Carga la hoja de estilo		
 }
