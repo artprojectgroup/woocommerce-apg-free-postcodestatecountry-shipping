@@ -1,0 +1,284 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce - APG Free Postcode/State/Country Shipping\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-15 14:24+0000\n"
+"PO-Revision-Date: 2017-03-15 14:24+0000\n"
+"Last-Translator: artprojectgroup <artprojectgroup@gmail.com>\n"
+"Language-Team: Portuguese (Portugal)\n"
+"Language: pt-PT\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Generator: Loco - https://localise.biz/\n"
+"X-Poedit-SearchPath-0: ../..\n"
+"X-Loco-Target-Locale: pt_PT"
+
+#: apg-free-shipping.php:81
+msgid ""
+"<h4>ALERT: 2.0 is a major update</h4>It’s important that you make backups of "
+"your <strong>WooCommerce - APG Free Postcode/State/Country Shipping</strong> "
+"current configuration and configure it again after upgrade.<br /><em>"
+"Remember, the current setting is totally incompatible with WooCommerce 2.6 "
+"and you'll lose it</em>."
+msgstr ""
+
+#: apg-free-shipping.php:320
+#, php-format
+msgid "Estimated delivery time: %s"
+msgstr ""
+
+#: includes/admin/campos.php:11
+msgid "Enable this shipping method"
+msgstr ""
+
+#: includes/admin/campos.php:54
+msgid "No shipping (User role)"
+msgstr ""
+
+#: includes/admin/campos.php:55
+#, php-format
+msgid "Select the user role where %s doesn't accept free shippings."
+msgstr ""
+
+#: includes/admin/campos.php:63
+msgid "Icon image"
+msgstr ""
+
+#: includes/admin/campos.php:65
+msgid "Icon image URL. APG recommends a 60x21px image."
+msgstr ""
+
+#: includes/admin/campos.php:70
+msgid "How show icon image?"
+msgstr ""
+
+#: includes/admin/campos.php:71
+msgid "Select how you want to show the icon image."
+msgstr ""
+
+#: includes/admin/campos.php:75
+msgid "Not show, just title"
+msgstr ""
+
+#: includes/admin/campos.php:76
+msgid "Before title"
+msgstr ""
+
+#: includes/admin/campos.php:77
+msgid "After title"
+msgstr ""
+
+#: includes/admin/campos.php:78
+msgid "No title, just icon"
+msgstr ""
+
+#: includes/admin/campos.php:88
+msgid "Estimated delivery time"
+msgstr ""
+
+#: includes/admin/campos.php:90
+msgid "Define estimation for delivery time for this shipping method."
+msgstr ""
+
+#: apg-free-shipping.php:48 includes/cuadro-informacion.php:7
+msgid "Make a donation by "
+msgstr "Fazer um donativo de "
+
+#: apg-free-shipping.php:50 apg-free-shipping.php:50 apg-free-shipping.php:50
+#: apg-free-shipping.php:50 includes/cuadro-informacion.php:19
+#: includes/cuadro-informacion.php:19 includes/cuadro-informacion.php:19
+#: includes/cuadro-informacion.php:19
+msgid "Follow us on "
+msgstr "Siga-nos no "
+
+#: apg-free-shipping.php:51 includes/cuadro-informacion.php:25
+msgid "More plugins on "
+msgstr "Mais plugins em "
+
+#: apg-free-shipping.php:52 apg-free-shipping.php:52
+#: includes/cuadro-informacion.php:33 includes/cuadro-informacion.php:33
+msgid "Contact with us by "
+msgstr "Contacte-nos por "
+
+#: apg-free-shipping.php:65
+msgid "Settings of "
+msgstr "Configurações de"
+
+#: apg-free-shipping.php:65
+msgid "Settings"
+msgstr "Configurações"
+
+#: apg-free-shipping.php:66
+msgid "Support of "
+msgstr "Suporte de "
+
+#: apg-free-shipping.php:66 includes/cuadro-informacion.php:39
+msgid "Support"
+msgstr "Suporte"
+
+#: apg-free-shipping.php:105
+msgid "APG Free Shipping"
+msgstr "APG Free Shipping"
+
+#: apg-free-shipping.php:106
+msgid ""
+"Lets you add a free shipping based on Postcode/State/Country of the cart and "
+"minimum order a amount and/or a valid free shipping coupon."
+msgstr ""
+"Permite adicionar envios grátis ao WooCommerce, com base no código postal da "
+"encomenda, província (estado) e país da morada do cliente e um valor mínimo "
+"de encomenda e/ou um cupão para envios grátis válido."
+
+#: apg-free-shipping.php:174
+msgid "Select a class&hellip;"
+msgstr "Seleccione uma classe&hellip;"
+
+#: apg-free-shipping.php:331
+msgid "This plugin require WooCommerce active to run!"
+msgstr "Este plugin requer que o WooCommerce esteja activo!"
+
+#: apg-free-shipping.php:382 includes/cuadro-informacion.php:44
+#, php-format
+msgid "Please, rate %s:"
+msgstr "Por favor, classifique o %s:"
+
+#: includes/cuadro-informacion.php:5
+msgid "If you enjoyed and find helpful this plugin, please make a donation:"
+msgstr "Se achou este plugin útil, por favor, faça um donativo:"
+
+#: includes/cuadro-informacion.php:17
+msgid "Follow us:"
+msgstr "Siga-nos:"
+
+#: includes/cuadro-informacion.php:23
+msgid "More plugins:"
+msgstr "Mais plugins:"
+
+#: includes/cuadro-informacion.php:31
+msgid "Contact with us:"
+msgstr "Contacte-nos:"
+
+#: includes/cuadro-informacion.php:37
+msgid "Documentation and Support:"
+msgstr "Documentação e suporte:"
+
+#: includes/admin/campos.php:9
+msgid "Enable/Disable"
+msgstr "Habilitar/Desabilitar"
+
+#: includes/admin/campos.php:15
+msgid "Method Title"
+msgstr "Título do modo de envio"
+
+#: includes/admin/campos.php:17
+msgid "This controls the title which the user sees during checkout."
+msgstr "Controla o título que o utilizador vê durante o checkout."
+
+#: includes/admin/campos.php:22
+msgid "Free Shipping Requires..."
+msgstr "Envio Grátis requer…"
+
+#: includes/admin/campos.php:26
+msgid "N/A"
+msgstr "N/D "
+
+#: includes/admin/campos.php:27
+msgid "A valid free shipping coupon"
+msgstr "Um cupão de envio grátis válido"
+
+#: includes/admin/campos.php:28
+msgid "A minimum order amount (defined below)"
+msgstr "Valor mínimo da encomenda (definido abaixo)"
+
+#: includes/admin/campos.php:29
+msgid "A minimum order amount OR a coupon"
+msgstr "Valor mínimo de encomenda OU um cupão"
+
+#: includes/admin/campos.php:30
+msgid "A minimum order amount AND a coupon"
+msgstr "Valor mínimo de encomenda E um cupão"
+
+#: includes/admin/campos.php:34
+msgid "Minimum Order Amount"
+msgstr "Valor mínimo da encomenda"
+
+#: includes/admin/campos.php:36
+msgid ""
+"Users will need to spend this amount to get free shipping (if enabled above)."
+msgstr ""
+"Os utilizadores terão de gastar este montante para beneficiarem do envio "
+"grátis (se estiver activado)."
+
+#: includes/admin/campos.php:44
+msgid "No shipping (Shipping class)"
+msgstr "Sem envio (classe de envio)"
+
+#: includes/admin/campos.php:45
+#, php-format
+msgid "Select the shipping class where %s doesn't accept free shippings."
+msgstr "Seleccione a classe de envio em que %s não aceita envios grátis."
+
+#: includes/admin/campos.php:50
+msgid "All enabled shipping class"
+msgstr "Todas as classes de envio activas"
+
+#: includes/admin/campos.php:82
+msgid "Show only APG Free Shipping"
+msgstr "Mostrar apenas APG Free Shipping"
+
+#: includes/admin/campos.php:84
+msgid "Don't show others shipping cost."
+msgstr "Não mostrar outros custos de envio."
+
+#. Name of the plugin
+msgid "WooCommerce - APG Free Postcode/State/Country Shipping"
+msgstr "WooCommerce - APG Free Postcode/State/Country Shipping"
+
+#. Description of the plugin
+msgid ""
+"Add to WooCommerce a free shipping based on the order postcode, province "
+"(state) and country of customer's address and minimum order a amount and/or "
+"a valid free shipping coupon. Created from <a href=\"http://profiles."
+"wordpress.org/artprojectgroup/\" target=\"_blank\">Art Project Group</a> <a "
+"href=\"http://wordpress.org/plugins/woocommerce-apg-weight-and-"
+"postcodestatecountry-shipping/\" target=\"_blank\"><strong>WooCommerce - APG "
+"Weight and Postcode/State/Country Shipping</strong></a> plugin and the "
+"original WC_Shipping_Free_Shipping class from <a href=\"http://wordpress."
+"org/plugins/woocommerce/\" target=\"_blank\"><strong>WooCommerce - excelling "
+"eCommerce</strong></a>."
+msgstr ""
+"Adiciona envios grátis ao WooCommerce, com base no código postal da "
+"encomenda, província (estado) e país da morada do cliente e um valor mínimo "
+"de encomenda e/ou um cupão para envios grátis válido. Criado a partir do "
+"plugin <a href=\"http://wordpress.org/plugins/woocommerce-apg-weight-and-"
+"postcodestatecountry-shipping/\" target=\"_blank\"><strong>WooCommerce - APG "
+"Weight and Postcode/State/Country Shipping</strong></a> e da classe original "
+"WC_Shipping_Free_Shipping do <a href=\"http://wordpress."
+"org/plugins/woocommerce/\" target=\"_blank\"><strong>WooCommerce - excelling "
+"eCommerce</strong></a>, pelo <a href=\"http://profiles.wordpress."
+"org/artprojectgroup/\" target=\"_blank\">Art Project Group</a>."
+
+#. URI of the plugin
+msgid ""
+"https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-"
+"shipping/"
+msgstr ""
+"https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-"
+"shipping/"
+
+#. Author of the plugin
+msgid "Art Project Group"
+msgstr "Art Project Group"
+
+#. Author URI of the plugin
+msgid "http://artprojectgroup.es/"
+msgstr "http://artprojectgroup.es/"
