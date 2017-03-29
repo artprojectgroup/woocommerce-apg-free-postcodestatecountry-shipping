@@ -1,12 +1,12 @@
 === WooCommerce - APG Free Postcode/State/Country Shipping ===
 Contributors: artprojectgroup
-Donate link: http://artprojectgroup.es/tienda/donacion
+Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, shipping, free shipping, zip, postcode, state, country, coupon, minimum order amount
 Requires at least: 3.8
 Tested up to: 4.7.3
-Stable tag: 2.2.0.1
+Stable tag: 2.2.0.2
 WC requires at least: 2.6
-WC tested up to: 2.7
+WC tested up to: 3.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -27,8 +27,8 @@ Add to WooCommerce a free shipping based on postcode, state (province), country 
 * You can hide the rest of shipping if free shipping is available.
 
 = Translations =
-* Español ([**Art Project Group**](http://artprojectgroup.es/)).
-* English ([**Art Project Group**](http://artprojectgroup.es/)).
+* Español ([**Art Project Group**](https://artprojectgroup.es/)).
+* English ([**Art Project Group**](https://artprojectgroup.es/)).
 * Português ([**Álvaro Góis dos Santos**](http://efeitoavestruz.pt/)).
 
 = Technical support =
@@ -38,18 +38,18 @@ Add to WooCommerce a free shipping based on postcode, state (province), country 
 **WooCommerce - APG Free Postcode/State/Country Shipping** has been programmed from plugin [*WooCommerce - APG Weight and Postcode/State/Country Shipping*](http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/) from [Art Project Group](http://profiles.wordpress.org/artprojectgroup/) and original class *WC_Shipping_Free_Shipping* from [*WooCommerce - excelling eCommerce*](http://wordpress.org/plugins/woocommerce/), which adds some of the features present in the first to the simplicity of the second.
 
 = More information =
-On our official website you can learn more about [**WooCommerce - APG Free Postcode/State/Country Shipping**](http://artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-free-postcodestatecountry-shipping).
+On our official website you can learn more about [**WooCommerce - APG Free Postcode/State/Country Shipping**](https://artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-free-postcodestatecountry-shipping).
 
 = Comments =
 Don’t forget to leave us your comment on:
 
-* [WooCommerce - APG Free Postcode/State/Country Shipping](http://artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-free-postcodestatecountry-shipping) on Art Project Group.
+* [WooCommerce - APG Free Postcode/State/Country Shipping](https://artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-free-postcodestatecountry-shipping) on Art Project Group.
 * [Art Project Group](https://www.facebook.com/artprojectgroup) on Facebook.
 * [@artprojectgroup](https://twitter.com/artprojectgroup) on Twitter.
 * [+ArtProjectGroupES](https://plus.google.com/+ArtProjectGroupES/) on Google+.
 
 = More plugins =
-Remember that you can find more [plugins for WordPress](http://artprojectgroup.es/plugins-para-wordpress) and more [plugins for WooCommerce](http://artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce) on [Art Project Group](http://artprojectgroup.es) and our profile on [WordPress](http://profiles.wordpress.org/artprojectgroup/).
+Remember that you can find more [plugins for WordPress](https://artprojectgroup.es/plugins-para-wordpress) and more [plugins for WooCommerce](https://artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce) on [Art Project Group](https://artprojectgroup.es) and our profile on [WordPress](http://profiles.wordpress.org/artprojectgroup/).
 
 = GitHub =
 You can follow the development of this plugin on [Github](https://github.com/artprojectgroup/woocommerce-apg-free-postcodestatecountry-shipping).
@@ -61,11 +61,11 @@ You can follow the development of this plugin on [Github](https://github.com/art
  * Search **WooCommerce - APG Free Postcode/State/Country Shipping** in the search engine available on *Plugins -> Add New* and press *Install Now* button.
 2. Activate plugin through *Plugins* menu on WordPress Administration Panel.
 3. Set up plugin on *WooCommerce -> Settings -> Shipping* or through *Settings* button.
-4. Ready, now you can enjoy it, and if you like it and find it useful, make a [*donation*](http://artprojectgroup.es/tienda/donacion).
+4. Ready, now you can enjoy it, and if you like it and find it useful, make a [*donation*](https://artprojectgroup.es/tienda/donacion).
 
 == Frequently asked questions ==
 = How do you set up? =
-Although the plugin configuration is very simple, we have created a tutorial where we explain setup process step by step. You can visit it on [¿Cómo se configura WooCommerce – APG Free Postcode/State/Country Shipping?](http://artprojectgroup.es/como-se-configura-woocommerce-apg-free-postcodestatecountry-shipping).
+Although the plugin configuration is very simple, we have created a tutorial where we explain setup process step by step. You can visit it on [¿Cómo se configura WooCommerce – APG Free Postcode/State/Country Shipping?](https://artprojectgroup.es/como-se-configura-woocommerce-apg-free-postcodestatecountry-shipping).
 
 = Support =
 If you need help to configuring or installing **WooCommerce - APG Free Postcode/State/Country Shipping**, **Art Project Group** offers its service [**Technical Support**](http://wcprojectgroup.es/tienda/ticket-de-soporte). 
@@ -77,6 +77,8 @@ If you need help to configuring or installing **WooCommerce - APG Free Postcode/
 2. Screenshot of WooCommerce - APG Free Postcode/State/Country Shipping. APG Free Shipping Tab.
 
 == Changelog ==
+= 2.2.0.2 = 
+* Error prevention in My account page.
 = 2.2.0.1 = 
 * Error prevention if WooCommerce is disabled.
 = 2.2 = 
@@ -176,19 +178,19 @@ If you need help to configuring or installing **WooCommerce - APG Free Postcode/
 * Initial version.
 
 == Upgrade Notice ==
-= 2.2.0.1 = 
-* Error prevention if WooCommerce is disabled.
+= 2.2.0.2 = 
+* Error prevention in My account page.
 
 == Translations ==
-* *English*: by [**Art Project Group**](http://artprojectgroup.es/) (default language).
-* *Español*: por [**Art Project Group**](http://artprojectgroup.es/).
+* *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).
+* *Español*: por [**Art Project Group**](https://artprojectgroup.es/).
 * *Português*: por [**Álvaro Góis dos Santos**](http://www.efeitoavestruz.pt).
 
 == Support ==
 Since **WooCommerce - APG Free Postcode/State/Country Shipping** is totally free, **Art Project Group** only provides payment [**Technical Support**](http://wcprojectgroup.es/tienda/ticket-de-soporte) service. In any case **Art Project Group** provide any kind of free technical support.
 
 == Donation ==
-Did you liked and you have proved useful **WooCommerce - APG Free Postcode/State/Country Shipping** on your website? We would appreciate a [small donation](http://artprojectgroup.es/tienda/donacion) that will help us to continue improving this plugin and create more plugins totally free for the entire WordPress community.
+Did you liked and you have proved useful **WooCommerce - APG Free Postcode/State/Country Shipping** on your website? We would appreciate a [small donation](https://artprojectgroup.es/tienda/donacion) that will help us to continue improving this plugin and create more plugins totally free for the entire WordPress community.
 
 == Thanks ==
 * Ourselves ([Art Project Group](http://profiles.wordpress.org/artprojectgroup/)) and [Woothemes](http://profiles.wordpress.org/woothemes/) by the great plugins that have inspired **WooCommerce - APG Free Postcode/State/Country Shipping**.

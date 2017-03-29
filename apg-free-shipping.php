@@ -1,10 +1,10 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG Free Postcode/State/Country Shipping
-Version: 2.2.0.1
+Version: 2.2.0.2
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="http://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WooCommerce - APG Weight and Postcode/State/Country Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="http://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
-Author URI: http://artprojectgroup.es/
+Author URI: https://artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
 Tested up to: 4.7.3
@@ -29,9 +29,9 @@ define( 'DIRECCION_apg_free_shipping', plugin_basename( __FILE__ ) );
 $apg_free_shipping = array( 	
 	'plugin' 		=> 'WooCommerce - APG Free Postcode/State/Country Shipping', 
 	'plugin_uri' 	=> 'woocommerce-apg-free-postcodestatecountry-shipping', 
-	'donacion' 		=> 'http://artprojectgroup.es/tienda/donacion',
-	'soporte' 		=> 'http://wcprojectgroup.es/tienda/ticket-de-soporte',
-	'plugin_url' 	=> 'http://artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-free-postcodestatecountry-shipping', 
+	'donacion' 		=> 'https://artprojectgroup.es/tienda/donacion',
+	'soporte' 		=> 'https://wcprojectgroup.es/tienda/ticket-de-soporte',
+	'plugin_url' 	=> 'https://artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-free-postcodestatecountry-shipping', 
 	'ajustes' 		=> 'admin.php?page=wc-settings&tab=shipping', 
 	'puntuacion' 	=> 'https://wordpress.org/support/view/plugin-reviews/woocommerce-apg-free-postcodestatecountry-shipping'
 );
@@ -317,6 +317,9 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 		} else if ( isset( $_POST['shipping_method'] ) ) {
 			$id = explode( ":", $_POST['shipping_method'][0] );
 		}
+		if ( empty( $id ) ) {
+			return $medios;
+		}
 		$configuracion	= maybe_unserialize( get_option( 'woocommerce_apg_free_shipping_' . $id[1] .'_settings' ) );
 		
 		if ( isset( $_POST['payment_method'] ) && !$medios ) {
@@ -346,7 +349,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 
 //Muestra el icono
 function apg_free_shipping_icono( $etiqueta, $metodo ) {
-	$id				= explode( ":", $metodo->id );
+	$id = explode( ":", $metodo->id );
 	$configuracion	= maybe_unserialize( get_option( 'woocommerce_apg_free_shipping_' . $id[1] .'_settings' ) );
 	//¿Mostramos el icono?
 	if ( !empty( $configuracion['icono'] ) && @getimagesize( $configuracion['icono'] ) && $configuracion['muestra_icono'] != 'no' ) {
