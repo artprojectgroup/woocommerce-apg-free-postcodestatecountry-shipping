@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce - APG Free Postcode/State/Country Shipping\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-18 16:47+0000\n"
-"PO-Revision-Date: 2017-03-18 16:48+0000\n"
-"Last-Translator: artprojectgroup <artprojectgroup@gmail.com>\n"
+"POT-Creation-Date: 2017-06-05 10:29+0000\n"
+"PO-Revision-Date: 2017-06-05 10:29+0000\n"
+"Last-Translator: Emilio José Calvo Carrasco <artprojectgroup@gmail.com>\n"
 "Language-Team: Spanish (Spain)\n"
 "Language: es-ES\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
@@ -26,22 +26,9 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Loco-Target-Locale: es_ES"
 
-#: includes/admin/campos.php:61
-msgid "Guest"
-msgstr "Invitado"
-
-#: includes/admin/campos.php:65
-msgid "Payment gateway"
-msgstr "Medio de pago"
-
-#: includes/admin/campos.php:66
-#, php-format
-msgid "Payment gateway available for %s"
-msgstr "Medio de pago disponible para %s"
-
-#: includes/admin/campos.php:74
-msgid "All enabled payments"
-msgstr "Todos los medios de pago"
+#. Author URI of the plugin
+msgid "https://artprojectgroup.es/"
+msgstr "https://artprojectgroup.es/"
 
 #: apg-free-shipping.php:48 includes/cuadro-informacion.php:7
 msgid "Make a donation by "
@@ -106,20 +93,20 @@ msgstr ""
 "(estado)/país del carro y un importe mínimo de pedido y/o un cupón válido de "
 "gastos de envío gratuitos."
 
-#: apg-free-shipping.php:177
+#: apg-free-shipping.php:179
 msgid "Select a class&hellip;"
 msgstr "Selecciona la clase&hellip;"
 
-#: apg-free-shipping.php:365
+#: apg-free-shipping.php:374
 #, php-format
 msgid "Estimated delivery time: %s"
 msgstr "Tiempo de entrega estimado: %s"
 
-#: apg-free-shipping.php:376
+#: apg-free-shipping.php:385
 msgid "This plugin require WooCommerce active to run!"
 msgstr "¡Este plugin necesita WooCommerce activo para funcionar!"
 
-#: apg-free-shipping.php:427 includes/cuadro-informacion.php:44
+#: apg-free-shipping.php:436 includes/cuadro-informacion.php:44
 #, php-format
 msgid "Please, rate %s:"
 msgstr "Por favor, puntúa %s:"
@@ -220,6 +207,23 @@ msgstr "Sin envíos (Rol de usuario)"
 msgid "Select the user role where %s doesn't accept free shippings."
 msgstr "Selecciona el rol de usuario donde %s no aceptará envíos gratuitos."
 
+#: includes/admin/campos.php:61
+msgid "Guest"
+msgstr "Invitado"
+
+#: includes/admin/campos.php:65
+msgid "Payment gateway"
+msgstr "Medio de pago"
+
+#: includes/admin/campos.php:66
+#, php-format
+msgid "Payment gateway available for %s"
+msgstr "Medio de pago disponible para %s"
+
+#: includes/admin/campos.php:74
+msgid "All enabled payments"
+msgstr "Todos los medios de pago"
+
 #: includes/admin/campos.php:78
 msgid "Icon image"
 msgstr "Imagen personalizada"
@@ -307,7 +311,3 @@ msgstr ""
 #. Author of the plugin
 msgid "Art Project Group"
 msgstr "Art Project Group"
-
-#. Author URI of the plugin
-msgid "http://artprojectgroup.es/"
-msgstr "http://artprojectgroup.es/"

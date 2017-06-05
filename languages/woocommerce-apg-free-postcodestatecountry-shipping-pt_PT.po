@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce - APG Free Postcode/State/Country Shipping\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-18 16:47+0000\n"
-"PO-Revision-Date: 2017-03-18 16:47+0000\n"
-"Last-Translator: artprojectgroup <artprojectgroup@gmail.com>\n"
+"POT-Creation-Date: 2017-06-05 10:29+0000\n"
+"PO-Revision-Date: 2017-06-05 10:29+0000\n"
+"Last-Translator: Emilio José Calvo Carrasco <artprojectgroup@gmail.com>\n"
 "Language-Team: Portuguese (Portugal)\n"
 "Language: pt-PT\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
@@ -31,7 +31,7 @@ msgid ""
 "and you'll lose it</em>."
 msgstr ""
 
-#: apg-free-shipping.php:365
+#: apg-free-shipping.php:374
 #, php-format
 msgid "Estimated delivery time: %s"
 msgstr ""
@@ -106,6 +106,10 @@ msgstr ""
 msgid "Define estimation for delivery time for this shipping method."
 msgstr ""
 
+#. Author URI of the plugin
+msgid "https://artprojectgroup.es/"
+msgstr "https://artprojectgroup.es/"
+
 #: apg-free-shipping.php:48 includes/cuadro-informacion.php:7
 msgid "Make a donation by "
 msgstr "Fazer um donativo de "
@@ -155,15 +159,15 @@ msgstr ""
 "encomenda, província (estado) e país da morada do cliente e um valor mínimo "
 "de encomenda e/ou um cupão para envios grátis válido."
 
-#: apg-free-shipping.php:177
+#: apg-free-shipping.php:179
 msgid "Select a class&hellip;"
 msgstr "Seleccione uma classe&hellip;"
 
-#: apg-free-shipping.php:376
+#: apg-free-shipping.php:385
 msgid "This plugin require WooCommerce active to run!"
 msgstr "Este plugin requer que o WooCommerce esteja activo!"
 
-#: apg-free-shipping.php:427 includes/cuadro-informacion.php:44
+#: apg-free-shipping.php:436 includes/cuadro-informacion.php:44
 #, php-format
 msgid "Please, rate %s:"
 msgstr "Por favor, classifique o %s:"
@@ -295,7 +299,3 @@ msgstr ""
 #. Author of the plugin
 msgid "Art Project Group"
 msgstr "Art Project Group"
-
-#. Author URI of the plugin
-msgid "http://artprojectgroup.es/"
-msgstr "http://artprojectgroup.es/"

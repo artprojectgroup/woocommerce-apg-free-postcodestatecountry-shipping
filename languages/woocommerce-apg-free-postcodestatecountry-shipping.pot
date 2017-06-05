@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce - APG Free Postcode/State/Country Shipping\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-18 16:47+0000\n"
+"POT-Creation-Date: 2017-06-05 10:29+0000\n"
 "POT-Revision-Date: Tue Aug 09 2016 11:16:48 GMT+0200 (CEST)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -78,20 +78,20 @@ msgid ""
 "minimum order a amount and/or a valid free shipping coupon."
 msgstr ""
 
-#: apg-free-shipping.php:177
+#: apg-free-shipping.php:179
 msgid "Select a class&hellip;"
 msgstr ""
 
-#: apg-free-shipping.php:365
+#: apg-free-shipping.php:374
 #, php-format
 msgid "Estimated delivery time: %s"
 msgstr ""
 
-#: apg-free-shipping.php:376
+#: apg-free-shipping.php:385
 msgid "This plugin require WooCommerce active to run!"
 msgstr ""
 
-#: apg-free-shipping.php:427 includes/cuadro-informacion.php:44
+#: apg-free-shipping.php:436 includes/cuadro-informacion.php:44
 #, php-format
 msgid "Please, rate %s:"
 msgstr ""
@@ -281,5 +281,5 @@ msgid "Art Project Group"
 msgstr ""
 
 #. Author URI of the plugin
-msgid "http://artprojectgroup.es/"
+msgid "https://artprojectgroup.es/"
 msgstr ""
