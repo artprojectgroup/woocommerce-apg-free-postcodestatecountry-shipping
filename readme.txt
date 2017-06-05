@@ -94,7 +94,7 @@ If you need help to configuring or installing **WooCommerce - APG Free Postcode/
 = 2.1.0.1 =
 * Fixed user role key.
 = 2.1 =
-* Support to limit free shipping by user roles. **Update sponsored by [**Marketing Paradise**](https://mkparadise.com) y [**Dermoder**](http://dermoder.com)**
+* Support to limit free shipping by user roles. **Update sponsored by [**Marketing Paradise**](https://mkparadise.com) and [**Dermoder**](http://dermoder.com)**
 * Support to add a custom image.
 * Support to add the estimated delivery time.
 * Updated screenshot.
