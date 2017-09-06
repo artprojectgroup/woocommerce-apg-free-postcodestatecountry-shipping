@@ -1,12 +1,12 @@
 === WooCommerce - APG Free Postcode/State/Country Shipping ===
 Contributors: artprojectgroup
 Donate link: https://artprojectgroup.es/tienda/donacion
-Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, shipping, free shipping, zip, postcode, state, country, coupon, minimum order amount
+Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, shipping, free shipping, zip, postcode, state, country, coupon, minimum order amount, wpml
 Requires at least: 3.8
 Tested up to: 4.9
-Stable tag: 2.2.0.7
+Stable tag: 2.2.0.8
 WC requires at least: 2.6
-WC tested up to: 3.1.1
+WC tested up to: 3.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -25,6 +25,7 @@ Add to WooCommerce a free shipping based on postcode, state (province), country 
 * You can show a custom icon image.
 * You can show the estimated delivery time.
 * You can hide the rest of shipping if free shipping is available.
+* Fully compatible with [WPML](https://wpml.org/?aid=80296&affiliate_key=m66Ss5ps0xoS) plugin.
 
 = Translations =
 * Español ([**Art Project Group**](https://artprojectgroup.es/)).
@@ -77,6 +78,9 @@ If you need help to configuring or installing **WooCommerce - APG Free Postcode/
 2. Screenshot of WooCommerce - APG Free Postcode/State/Country Shipping. APG Free Shipping Tab.
 
 == Changelog ==
+= 2.2.0.8 = 
+* Support for [WPML](https://wpml.org/?aid=80296&affiliate_key=m66Ss5ps0xoS) plugin.
+* Adjust to optimize WooCommerce 3.2 compatibility.
 = 2.2.0.7 = 
 * Fixed shipping hidding.
 = 2.2.0.6 = 
@@ -188,8 +192,9 @@ If you need help to configuring or installing **WooCommerce - APG Free Postcode/
 * Initial version.
 
 == Upgrade Notice ==
-= 2.2.0.6 = 
-* Fixed shipping hidding.
+= 2.2.0.8 = 
+* Support for [WPML](https://wpml.org/?aid=80296&affiliate_key=m66Ss5ps0xoS) plugin.
+* Adjust to optimize WooCommerce 3.2 compatibility.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).
