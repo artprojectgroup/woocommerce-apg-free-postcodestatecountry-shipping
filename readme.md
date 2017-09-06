@@ -3,13 +3,13 @@ Contributors: artprojectgroup
 
 Donate link: https://artprojectgroup.es/tienda/donacion
 
-Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, shipping, free shipping, zip, postcode, state, country, coupon, minimum order amount, wpml
+Tags: WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, Shipping, Free Shipping, ZIP, Postcode, State, Country, Coupon, Minimum order amount, WPML
 
 Requires at least: 3.8
 
 Tested up to: 4.9
 
-Stable tag: 2.2.0.8
+Stable tag: 2.2.0.9
 
 WC requires at least: 2.6
 
@@ -83,6 +83,9 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG Free Postcode/
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.2.0.9
+* Ajuste para optimizar la compatibilidad con WooCommerce 2.6.
+
 ### 2.2.0.8
 * Soporte para el plugin [WPML](https://wpml.org/?aid=80296&affiliate_key=m66Ss5ps0xoS).
 * Ajuste para optimizar la compatibilidad con WooCommerce 3.2.

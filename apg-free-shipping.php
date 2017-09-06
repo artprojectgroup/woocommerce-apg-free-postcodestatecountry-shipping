@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG Free Postcode/State/Country Shipping
-Version: 2.2.0.8
+Version: 2.2.0.9
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="http://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WooCommerce - APG Weight and Postcode/State/Country Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="http://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: https://artprojectgroup.es/
@@ -88,8 +88,8 @@ function apg_free_shipping_noficacion( $datos_version_actual, $datos_nueva_versi
 }
 add_action( 'in_plugin_update_message-woocommerce-apg-free-postcodestatecountry-shipping/apg-free-shipping.php', 'apg_free_shipping_noficacion', 10, 2 );
 
-include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 //¿Está activo WooCommerce?
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin( 'woocommerce/woocommerce.php' ) ) {
 	//Contine la clase que crea los nuevos gastos de envío
 	function apg_free_shipping_inicio() {
@@ -278,8 +278,12 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 				if ( in_array( $this->requires, array( 'importe_minimo', 'cualquiera', 'ambos' ) ) ) {
 					$total = WC()->cart->get_displayed_subtotal();
 
-					$total = ( 'incl' === WC()->cart->tax_display_cart ) ? round( $total - ( WC()->cart->get_discount_total() + WC()->cart->get_discount_tax() ), wc_get_price_decimals() ) : round( $total - WC()->cart->get_discount_total(), wc_get_price_decimals() );
-
+					if ( version_compare( WC_VERSION, '2.7', '<' ) ) {
+						$total = ( 'incl' === WC()->cart->tax_display_cart ) ? $total - ( WC()->cart->get_cart_discount_total() + WC()->cart->get_cart_discount_tax_total() ) : $total - WC()->cart->get_cart_discount_total();
+					} else {
+						$total = ( 'incl' === WC()->cart->tax_display_cart ) ? round( $total - ( WC()->cart->get_discount_total() + WC()->cart->get_discount_tax() ), wc_get_price_decimals() ) : round( $total - WC()->cart->get_discount_total(), wc_get_price_decimals() );
+					}
+					
 					if ( $total - $total_clases_excluidas >= $this->importe_minimo ) {
 						$tiene_importe_minimo = true;
 					}
@@ -454,6 +458,7 @@ function apg_free_shipping_plugin( $nombre ) {
 function apg_free_shipping_muestra_mensaje() {
 	global $medios_de_pago;
 	
+	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 	if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin( 'woocommerce/woocommerce.php' ) ) {
 		$medios_de_pago = WC()->payment_gateways->payment_gateways(); //Guardamos los medios de cobro
 	}
