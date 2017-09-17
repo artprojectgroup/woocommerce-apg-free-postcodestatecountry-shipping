@@ -4,7 +4,7 @@ Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, Shipping, Free Shipping, ZIP, Postcode, State, Country, Coupon, Minimum order amount, WPML
 Requires at least: 3.8
 Tested up to: 4.9
-Stable tag: 2.2.0.10
+Stable tag: 2.2.0.11
 WC requires at least: 2.6
 WC tested up to: 3.2
 License: GPLv3
@@ -78,6 +78,8 @@ If you need help to configuring or installing **WooCommerce - APG Free Postcode/
 2. Screenshot of WooCommerce - APG Free Postcode/State/Country Shipping. APG Free Shipping Tab.
 
 == Changelog ==
+= 2.2.0.11 = 
+* Fixed Polylang compatibility issue.
 = 2.2.0.10 = 
 * Adjust to optimize WooCommerce 3.2 compatibility.
 = 2.2.0.9 = 
@@ -196,8 +198,8 @@ If you need help to configuring or installing **WooCommerce - APG Free Postcode/
 * Initial version.
 
 == Upgrade Notice ==
-= 2.2.0.10 = 
-* Adjust to optimize WooCommerce 3.2 compatibility.
+= 2.2.0.11 = 
+* Fixed Polylang compatibility issue.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).

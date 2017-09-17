@@ -9,7 +9,7 @@ Requires at least: 3.8
 
 Tested up to: 4.9
 
-Stable tag: 2.2.0.10
+Stable tag: 2.2.0.11
 
 WC requires at least: 2.6
 
@@ -83,6 +83,9 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG Free Postcode/
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.2.0.11
+* Corregido problema de compatibilidad con Polylang.
+
 ### 2.2.0.10
 * Ajuste para optimizar la compatibilidad con WooCommerce 3.2.
 

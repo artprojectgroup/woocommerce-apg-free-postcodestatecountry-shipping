@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG Free Postcode/State/Country Shipping
-Version: 2.2.0.10
+Version: 2.2.0.11
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="http://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="http://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WooCommerce - APG Weight and Postcode/State/Country Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="http://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: https://artprojectgroup.es/
@@ -234,7 +234,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 				//Comprobamos las clases excluidas
 				if ( $this->clases_excluidas ) {
 					//Comprobamos si está activo WPML para coger la traducción correcta de la clase de envío
-					if ( function_exists('icl_object_id') ) {
+					if ( function_exists('icl_object_id') && !function_exists( 'pll_the_languages' ) ) {
 						global $sitepress;
 						do_action( 'wpml_switch_language', $sitepress->get_default_language() );
 					}
@@ -254,7 +254,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 					}
 					
 					//Comprobamos si está activo WPML para devolverlo al idioma que estaba activo
-					if ( function_exists('icl_object_id') ) {
+					if ( function_exists('icl_object_id') && !function_exists( 'pll_the_languages' ) ) {
 						do_action( 'wpml_switch_language', ICL_LANGUAGE_CODE );
 					}
 				}
