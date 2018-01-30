@@ -38,7 +38,7 @@ Add to WooCommerce a free shipping based on postcode, state (province), country 
 **Art Project Group** offers [**Technical support**](https://artprojectgroup.es/tienda/ticket-de-soporte) to configure or install ***WC - APG Free Shipping***.
 
 = Origin =
-**WC - APG Free Shipping** has been programmed from plugin [*WooCommerce - APG Weight and Postcode/State/Country Shipping*](https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/) from [Art Project Group](https://profiles.wordpress.org/artprojectgroup/) and original class *WC_Shipping_Free_Shipping* from [*WooCommerce - excelling eCommerce*](https://wordpress.org/plugins/woocommerce/), which adds some of the features present in the first to the simplicity of the second.
+**WC - APG Free Shipping** has been programmed from plugin [*WC - APG Weight Shipping*](https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/) from [Art Project Group](https://profiles.wordpress.org/artprojectgroup/) and original class *WC_Shipping_Free_Shipping* from [*WooCommerce - excelling eCommerce*](https://wordpress.org/plugins/woocommerce/), which adds some of the features present in the first to the simplicity of the second.
 
 = More information =
 On our official website you can learn more about [**WC - APG Free Shipping**](https://artprojectgroup.es/plugins-para-woocommerce/wc-apg-free-shipping).
