@@ -1,7 +1,4 @@
 <?php
-//Definimos constantes
-define( 'DIRECCION_apg_free_shipping', plugin_basename( __FILE__ ) );
-
 //Definimos las variables
 $apg_free_shipping = array( 	
 	'plugin' 		=> 'WC - APG Free Shipping', 
@@ -109,8 +106,8 @@ function apg_free_shipping_muestra_mensaje() {
 	if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin( 'woocommerce/woocommerce.php' ) ) {
 		$medios_de_pago = WC()->payment_gateways->payment_gateways(); //Guardamos los medios de cobro
 	}
-	wp_enqueue_style( 'apg_free_shipping_hoja_de_estilo', plugins_url( 'assets/css/style.css', __FILE__ ) ); //Carga la hoja de estilo		
-	wp_enqueue_script( 'apg_free_shipping_script', plugins_url( 'assets/js/apg-free-shipping.js', __FILE__ ) );
+	wp_enqueue_style( 'apg_free_shipping_hoja_de_estilo', plugins_url( 'assets/css/style.css', DIRECCION_apg_free_shipping ) ); //Carga la hoja de estilo		
+	wp_enqueue_script( 'apg_free_shipping_script', plugins_url( 'assets/js/apg-free-shipping.js', DIRECCION_apg_free_shipping ) );
 }
 add_action( 'admin_init', 'apg_free_shipping_muestra_mensaje' );
 
