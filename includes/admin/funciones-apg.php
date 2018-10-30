@@ -5,7 +5,7 @@ $apg_free_shipping = array(
 	'plugin_uri' 	=> 'woocommerce-apg-free-postcodestatecountry-shipping', 
 	'donacion' 		=> 'https://artprojectgroup.es/tienda/donacion',
 	'soporte' 		=> 'https://artprojectgroup.es/tienda/ticket-de-soporte',
-	'plugin_url' 	=> 'https://artprojectgroup.es/plugins-para-wordpress/wc-apg-free-shipping', 
+	'plugin_url' 	=> 'https://artprojectgroup.es/plugins-para-woocommerce/wc-apg-free-shipping', 
 	'ajustes' 		=> 'admin.php?page=wc-settings&tab=shipping', 
 	'puntuacion' 	=> 'https://wordpress.org/support/view/plugin-reviews/woocommerce-apg-free-postcodestatecountry-shipping'
 );

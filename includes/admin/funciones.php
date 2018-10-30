@@ -1,6 +1,7 @@
 <?php
 //Muestra el icono
 function apg_free_shipping_icono( $etiqueta, $metodo ) {
+	$gasto_de_envio	= explode( ":", $etiqueta );
 	$id = explode( ":", $metodo->id );
 	$configuracion	= maybe_unserialize( get_option( 'woocommerce_apg_free_shipping_' . $id[1] .'_settings' ) );
 	//¿Mostramos el icono?
@@ -10,9 +11,9 @@ function apg_free_shipping_icono( $etiqueta, $metodo ) {
 		if ( $configuracion['muestra_icono'] == 'delante' ) {
 			$etiqueta = $imagen . ' ' . $etiqueta;
 		} else if ( $configuracion['muestra_icono'] == 'detras' ) {
-			$etiqueta = $etiqueta . ' ' . $imagen;
+			$etiqueta = $gasto_de_envio[0] . ' ' . $imagen . ':' . $gasto_de_envio[1]; //Icono detrás
 		} else {
-			$etiqueta = $imagen;
+			$etiqueta = $imagen . ':' . $gasto_de_envio[1]; //Sólo icono
 		}
 	}
 	//Tiempo de entrega

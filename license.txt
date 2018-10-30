@@ -1,4 +1,4 @@
-WooCommerce - APG Free Postcode/State/Country Shipping
+WC - APG Free Shipping
 
 Copyright 2013 by the contributors
 
@@ -19,10 +19,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 This program incorporates work covered by the following copyright and
 permission notices:
 
-  WooCommerce - APG Free Postcode/State/Country Shipping is Copyright (c) 2013 Art Project Group
-  https://artprojectgroup.es - https://artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-free-postcodestatecountry-shipping
+  WC - APG Free Shipping is Copyright (c) 2013 Art Project Group
+  https://artprojectgroup.es - https://artprojectgroup.es/plugins-para-woocommerce/woocommerce-apg-free-postcodestatecountry-shipping
 
-  WooCommerce - APG Free Postcode/State/Country Shipping is released under the GPL
+  WC - APG Free Shipping is released under the GPL
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
