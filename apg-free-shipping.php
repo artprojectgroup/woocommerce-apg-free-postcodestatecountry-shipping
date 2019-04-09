@@ -1,15 +1,15 @@
 <?php
 /*
 Plugin Name: WC - APG Free Shipping
-Version: 2.2.1.2
+Version: 2.3
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="https://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WC - APG Weight Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="https://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: https://artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
-Tested up to: 5.0
+Tested up to: 5.2
 WC requires at least: 2.6
-WC tested up to: 3.5
+WC tested up to: 3.6
 
 Text Domain: woocommerce-apg-free-postcodestatecountry-shipping
 Domain Path: /languages
@@ -20,9 +20,8 @@ Domain Path: /languages
 */
 
 //Igual no deberías poder abrirme
-if ( !defined( 'ABSPATH' ) ) {
-    exit();
-}
+defined( 'ABSPATH' ) || exit;
+
 //Definimos constantes
 define( 'DIRECCION_apg_free_shipping', plugin_basename( __FILE__ ) );
 
@@ -70,10 +69,10 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 
 				//Inicializamos variables
 				$campos = array( 
-					'activo', 
 					'title', 
 					'requires', 
 					'importe_minimo', 
+					'peso',
 					'clases_excluidas', 
 					'roles_excluidos', 
 					'pago',
@@ -82,6 +81,9 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 					'entrega',
 					'muestra',
 				);
+				if ( version_compare( WC_VERSION, '2.7', '<' ) ) {
+					$campos[ 'activo' ];
+				}
 				foreach ( $campos as $campo ) {
 					$this->$campo = $this->get_option( $campo );
 				}
@@ -119,10 +121,10 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 			public function apg_free_shipping_dame_clases_de_envio() {
 				if ( WC()->shipping->get_shipping_classes() ) {
 					foreach ( WC()->shipping->get_shipping_classes() as $clase_de_envio ) {
-						$this->clases_de_envio[esc_attr( $clase_de_envio->slug )] = $clase_de_envio->name;
+						$this->clases_de_envio[ esc_attr( $clase_de_envio->slug ) ] = $clase_de_envio->name;
 					}
 				} else {
-					$this->clases_de_envio[] = __( 'Select a class&hellip;', 'woocommerce-apg-free-postcodestatecountry-shipping' );
+					$this->clases_de_envio[ ] = __( 'Select a class&hellip;', 'woocommerce-apg-free-postcodestatecountry-shipping' );
 				}
 			}
 			
@@ -131,7 +133,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 				$wp_roles = new WP_Roles();
 
 				foreach( $wp_roles->role_names as $rol => $nombre ) {
-					$this->roles_de_usuario[$rol] = $nombre;
+					$this->roles_de_usuario[ $rol ] = $nombre;
 				}				
 			}	
 
@@ -140,7 +142,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 				global $medios_de_pago;
 				
 				foreach( $medios_de_pago as $clave => $medio_de_pago ) {
-					$this->metodos_de_pago[$medio_de_pago->id] = $medio_de_pago->title;
+					$this->metodos_de_pago[ $medio_de_pago->id ] = $medio_de_pago->title;
 				}
 			}
 	
@@ -156,8 +158,14 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 
 			//Habilita el envío
 			public function is_available( $paquete ) {
-				if ( $this->activo == 'no' ) {
-					return false; //No está activo
+				if ( version_compare( WC_VERSION, '2.7', '<' ) ) {
+					if ( $this->activo == 'no' ) {
+						return false; //No está activo
+					}
+				} else {
+					if ( ! $this->is_enabled() ) {
+						return false; //No está activo
+					}
 				}
 				
 				//Comprobamos los roles excluidos
@@ -185,14 +193,14 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 
 					//Toma distintos datos de los productos
 					foreach ( WC()->cart->get_cart() as $identificador => $valores ) {
-						$producto = $valores['data'];
+						$producto = $valores[ 'data' ];
 						
 						//Clase de envío
 						if ( in_array( $producto->get_shipping_class(), $this->clases_excluidas ) || in_array( 'todas', $this->clases_excluidas ) ) {
 							if ( version_compare( WC_VERSION, '2.7', '<' ) ) {
-								$total_clases_excluidas = ( WC()->cart->tax_display_cart == 'excl' ) ? $total_clases_excluidas + $producto->get_price_excluding_tax() * $valores['quantity'] : $total_clases_excluidas + $producto->get_price_including_tax() * $valores['quantity'];
+								$total_clases_excluidas = ( WC()->cart->tax_display_cart == 'excl' ) ? $total_clases_excluidas + $producto->get_price_excluding_tax() * $valores[ 'quantity' ] : $total_clases_excluidas + $producto->get_price_including_tax() * $valores[ 'quantity' ];
 							} else {
-								$total_clases_excluidas = ( WC()->cart->tax_display_cart == 'excl' ) ? $total_clases_excluidas + wc_get_price_excluding_tax( $producto ) * $valores['quantity'] : $total_clases_excluidas + wc_get_price_including_tax ( $producto ) * $valores['quantity'];
+								$total_clases_excluidas = ( WC()->cart->tax_display_cart == 'excl' ) ? $total_clases_excluidas + wc_get_price_excluding_tax( $producto ) * $valores[ 'quantity' ] : $total_clases_excluidas + wc_get_price_including_tax ( $producto ) * $valores[ 'quantity' ];
 							}
 						}	
 					}
@@ -228,7 +236,15 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 						$total = ( 'incl' === WC()->cart->tax_display_cart ) ? round( $total - ( WC()->cart->get_discount_total() + WC()->cart->get_discount_tax() ), wc_get_price_decimals() ) : round( $total - WC()->cart->get_discount_total(), wc_get_price_decimals() );
 					}
 					
-					if ( $total - $total_clases_excluidas >= $this->importe_minimo ) {
+					//Revisa el peso total
+					$peso = true;
+					if ( $this->peso ) {						
+						if ( WC()->cart->cart_contents_weight > $this->peso ) {
+							$peso = false;
+						}
+					}
+					
+					if ( $total - $total_clases_excluidas >= $this->importe_minimo && $peso ) {
 						$tiene_importe_minimo = true;
 					}
 				}
@@ -280,28 +296,28 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 	//Filtra los medios de pago
 	function apg_free_shipping_filtra_medios_de_pago( $medios ) {
 		if ( isset( WC()->session->chosen_shipping_methods ) ) {
-			$id = explode( ":", WC()->session->chosen_shipping_methods[0] );
-		} else if ( isset( $_POST['shipping_method'] ) ) {
-			$id = explode( ":", $_POST['shipping_method'][0] );
+			$id = explode( ":", WC()->session->chosen_shipping_methods[ 0 ] );
+		} else if ( isset( $_POST[ 'shipping_method' ] ) ) {
+			$id = explode( ":", $_POST[ 'shipping_method' ][ 0 ] );
 		}
-		if ( !isset( $id[1] ) ) {
+		if ( !isset( $id[ 1 ] ) ) {
 			return $medios;
 		}
-		$configuracion	= maybe_unserialize( get_option( 'woocommerce_apg_free_shipping_' . $id[1] .'_settings' ) );
+		$configuracion	= maybe_unserialize( get_option( 'woocommerce_apg_free_shipping_' . $id[ 1 ] .'_settings' ) );
 		
-		if ( isset( $_POST['payment_method'] ) && !$medios ) {
-			$medios = $_POST['payment_method'];
+		if ( isset( $_POST[ 'payment_method' ] ) && !$medios ) {
+			$medios = $_POST[ 'payment_method' ];
 		}
 
-		if ( !empty( $configuracion['pago'] ) && $configuracion['pago'][0] != 'todos' ) {
+		if ( !empty( $configuracion[ 'pago' ] ) && $configuracion[ 'pago' ][ 0 ] != 'todos' ) {
 			foreach ( $medios as $nombre => $medio ) {
-				if ( is_array( $configuracion['pago'] ) ) {
-					if ( !in_array( $nombre, $configuracion['pago'] ) ) {
-						unset( $medios[$nombre] );
+				if ( is_array( $configuracion[ 'pago' ] ) ) {
+					if ( !in_array( $nombre, $configuracion[ 'pago' ] ) ) {
+						unset( $medios[ $nombre ] );
 					}
 				} else { 
-					if ( $nombre != $configuracion['pago'] ) {
-						unset( $medios[$nombre] );
+					if ( $nombre != $configuracion[ 'pago' ] ) {
+						unset( $medios[ $nombre ] );
 					}
 				}
 			}
@@ -318,6 +334,6 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 function apg_free_shipping_requiere_wc() {
 	global $apg_free_shipping;
 		
-	echo '<div class="error fade" id="message"><h3>' . $apg_free_shipping['plugin'] . '</h3><h4>' . __( 'This plugin require WooCommerce active to run!', 'woocommerce-apg-free-postcodestatecountry-shipping' ) . '</h4></div>';
+	echo '<div class="error fade" id="message"><h3>' . $apg_free_shipping[ 'plugin' ] . '</h3><h4>' . __( 'This plugin require WooCommerce active to run!', 'woocommerce-apg-free-postcodestatecountry-shipping' ) . '</h4></div>';
 	deactivate_plugins( DIRECCION_apg_free_shipping );
 }

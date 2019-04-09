@@ -7,13 +7,13 @@ Tags: WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, Shipping, Free Ship
 
 Requires at least: 3.8
 
-Tested up to: 5.0
+Tested up to: 5.2
 
-Stable tag: 2.2.1.2
+Stable tag: 2.3
 
 WC requires at least: 2.6
 
-WC tested up to: 3.5
+WC tested up to: 3.6
 
 License: GPLv3
 
@@ -30,6 +30,7 @@ Añade a WooCommerce un envío gratuito basado en el código postal, provincia (
 
 ### Características
 * Puedes requerir un importe mínimo y/o un cupón válido de gastos de envío gratuitos.
+* Puedes excluir por peso máximo.
 * Puedes excluir clases de envío.
 * Puedes excluir roles de usuario.
 * Puedes ocultar medios de pago.
@@ -85,6 +86,9 @@ Si necesitas ayuda para configurar o instalar **WC - APG Free Shipping**, **Art 
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.3
+* Añadido soporte para peso máximo **Actualización patrocinada por [Aviantecnic](https://aviantecnic.shop/)**.
+
 ### 2.2.1.2
 * Pequeños arreglos.
 
