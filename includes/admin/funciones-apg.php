@@ -98,18 +98,23 @@ function apg_free_shipping_plugin( $nombre ) {
 	return '<a title="' . sprintf( __( 'Please, rate %s:', 'woocommerce-apg-free-postcodestatecountry-shipping' ), $apg_free_shipping[ 'plugin' ] ) . '" href="' . $apg_free_shipping[ 'puntuacion' ] . '?rate=5#postform" class="estrellas">' . $estrellas . '</a>';
 }
 
-//Hoja de estilo
-function apg_free_shipping_muestra_mensaje() {
+//Actualiza los medios de pago 
+function apg_free_shipping_pago() {
 	global $medios_de_pago;
 	
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 	if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin( 'woocommerce/woocommerce.php' ) ) {
-		$medios_de_pago = WC()->payment_gateways->payment_gateways(); //Guardamos los medios de cobro
+		$medios_de_pago = WC()->payment_gateways->payment_gateways(); //Guardamos los medios de pago
 	}
+}
+add_action( 'admin_init', 'apg_free_shipping_pago' );
+
+//Hoja de estilo y JavaScript
+function apg_free_shipping_estilo() {
 	wp_enqueue_style( 'apg_free_shipping_hoja_de_estilo', plugins_url( 'assets/css/style.css', DIRECCION_apg_free_shipping ) ); //Carga la hoja de estilo		
 	wp_enqueue_script( 'apg_free_shipping_script', plugins_url( 'assets/js/apg-free-shipping.js', DIRECCION_apg_free_shipping ) );
 }
-add_action( 'admin_init', 'apg_free_shipping_muestra_mensaje' );
+add_action( 'admin_enqueue_scripts', 'apg_free_shipping_estilo' );
 
 //Eliminamos todo rastro del plugin al desinstalarlo
 function apg_free_shipping_desinstalar() {
