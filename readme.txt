@@ -3,10 +3,10 @@ Contributors: artprojectgroup
 Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, Shipping, Free Shipping, ZIP, Postcode, State, Country, Coupon, Minimum order amount, WPML
 Requires at least: 3.8
-Tested up to: 5.2
-Stable tag: 2.3.1
+Tested up to: 5.2.3
+Stable tag: 2.3.2
 WC requires at least: 2.6
-WC tested up to: 3.6
+WC tested up to: 3.6.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -26,6 +26,7 @@ Add to WooCommerce a free shipping based on postcode, state (province), country 
 * You can exclude user roles.
 * You can hide payment gateways.
 * You can show a custom icon image.
+* You can show price 0.
 * You can show the estimated delivery time.
 * You can hide the rest of shipping if free shipping is available.
 * Fully compatible with [WPML](https://wpml.org/?aid=80296&affiliate_key=m66Ss5ps0xoS) plugin.
@@ -81,6 +82,8 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 2. Screenshot of WC - APG Free Shipping. APG Free Shipping Tab.
 
 == Changelog ==
+= 2.3.2 = 
+* Added option to show the price 0 next to the name of the shipping cost. **Update sponsored by [YonofumoYovapeo](https://yonofumoyovapeo.com)**.
 = 2.3.1 = 
 * Small fixes.
 = 2.3 =
@@ -201,7 +204,7 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 = 0.5 =
 * Update code to be 100% compatible with the latest version of WooCommerce. **Note: Not compatible with WooCommerce versions earlier than 2.1.0.**
 = 0.4 =
-* Added new option that hides other shippings when it´s available.
+* Added new option that hides other shippings when it's available.
 * Fixed bug caused by no group set.
 = 0.3 =
 * New feature to clean database with uninstallation.
@@ -215,8 +218,7 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 * Initial version.
 
 == Upgrade Notice ==
-= 2.3.1 = 
-* Small fixes.
+* Added option to show the price 0 next to the name of the shipping cost. **Update sponsored by [YonofumoYovapeo](https://yonofumoyovapeo.com)**.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).

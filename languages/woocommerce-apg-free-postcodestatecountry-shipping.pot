@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce - APG Free Postcode/State/Country Shipping\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-05 22:31+0000\n"
+"POT-Creation-Date: 2019-07-10 15:06+0000\n"
 "POT-Revision-Date: Tue Aug 09 2016 11:16:48 GMT+0200 (CEST)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -89,7 +89,7 @@ msgstr ""
 msgid "Please, rate %s:"
 msgstr ""
 
-#: includes/admin/funciones.php:21
+#: includes/admin/funciones.php:28
 #, php-format
 msgid "Estimated delivery time: %s"
 msgstr ""
@@ -233,10 +233,20 @@ msgid "Define estimation for delivery time for this shipping method."
 msgstr ""
 
 #: includes/admin/campos.php:117
-msgid "Show only APG Free Shipping"
+#, php-format
+msgid "Show %s price"
 msgstr ""
 
 #: includes/admin/campos.php:119
+#, php-format
+msgid "Show %s price after method title."
+msgstr ""
+
+#: includes/admin/campos.php:123
+msgid "Show only APG Free Shipping"
+msgstr ""
+
+#: includes/admin/campos.php:125
 msgid "Don't show others shipping cost."
 msgstr ""
 

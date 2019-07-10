@@ -113,6 +113,12 @@ $campos[ 'entrega' ] = array(
 		'default'		=> '',
 		'desc_tip'		=> true,
 );
+$campos[ 'precio' ] = array( 
+		'title'			=> sprintf( __( 'Show %s price', 'woocommerce-apg-free-postcodestatecountry-shipping' ), wc_price(0) ),
+		'type'			=> 'checkbox',
+		'label'			=> sprintf( __( "Show %s price after method title.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), wc_price(0) ),
+		'default'		=> 'no',
+);
 $campos[ 'muestra' ] = array( 
 		'title'			=> __( 'Show only APG Free Shipping', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
 		'type'			=> 'checkbox',

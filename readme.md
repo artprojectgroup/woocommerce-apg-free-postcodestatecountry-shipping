@@ -7,13 +7,13 @@ Tags: WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, Shipping, Free Ship
 
 Requires at least: 3.8
 
-Tested up to: 5.2
+Tested up to: 5.2.3
 
-Stable tag: 2.3.1
+Stable tag: 2.3.2
 
 WC requires at least: 2.6
 
-WC tested up to: 3.6
+WC tested up to: 3.6.5
 
 License: GPLv3
 
@@ -35,6 +35,7 @@ Añade a WooCommerce un envío gratuito basado en el código postal, provincia (
 * Puedes excluir roles de usuario.
 * Puedes ocultar medios de pago.
 * Puedes mostrar una imagen personalizada.
+* Puedes mostrar el precio 0.
 * Puedes mostrar el tiempo estimado de entrega.
 * Puedes ocultar el resto de gastos de envío al estar disponible el gasto de envío gratuito configurado.
 * Totalmente compatible con el plugin [WPML](https://wpml.org/?aid=80296&affiliate_key=m66Ss5ps0xoS).
@@ -86,6 +87,9 @@ Si necesitas ayuda para configurar o instalar **WC - APG Free Shipping**, **Art 
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.3.2
+* Añadida opción para mostrar el precio 0 junto al nombre del gasto de envío **Actualización patrocinada por [YonofumoYovapeo](https://yonofumoyovapeo.com)**.
+
 ### 2.3.1
 * Pequeños arreglos.
 

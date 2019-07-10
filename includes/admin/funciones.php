@@ -2,18 +2,25 @@
 //Muestra el icono
 function apg_free_shipping_icono( $etiqueta, $metodo ) {
 	$gasto_de_envio	= explode( ":", $etiqueta );
-	$id = explode( ":", $metodo->id );
+	$id				= explode( ":", $metodo->id );
 	$configuracion	= maybe_unserialize( get_option( 'woocommerce_apg_free_shipping_' . $id[ 1 ] .'_settings' ) );
+	if ( !isset( $gasto_de_envio[ 1 ] ) ) {
+		if ( $configuracion[ 'precio' ] == 'yes' ) {
+			$gasto_de_envio[ 1 ] =  ': ' . wc_price(0);
+		} else {
+			$gasto_de_envio[ 1 ] =  ':';
+		}
+	}
 	//¿Mostramos el icono?
 	if ( !empty( $configuracion[ 'icono' ] ) && @getimagesize( $configuracion[ 'icono' ] ) && $configuracion[ 'muestra_icono' ] != 'no' ) {
 		$tamano = @getimagesize( $configuracion[ 'icono' ] );
 		$imagen	= '<img class="apg_free_shipping_icon" src="' . $configuracion[ 'icono' ] . '" witdh="' . $tamano[ 0 ] . '" height="' . $tamano[ 1 ] . '" />';
 		if ( $configuracion[ 'muestra_icono' ] == 'delante' ) {
-			$etiqueta = $imagen . ' ' . $etiqueta;
+			$etiqueta = $imagen . ' ' . $etiqueta . $gasto_de_envio[ 1 ];
 		} else if ( $configuracion[ 'muestra_icono' ] == 'detras' ) {
-			$etiqueta = $gasto_de_envio[ 0 ] . ' ' . $imagen . ':' . $gasto_de_envio[ 1 ]; //Icono detrás
+			$etiqueta = $gasto_de_envio[ 0 ] . ' ' . $imagen . $gasto_de_envio[ 1 ]; //Icono detrás
 		} else {
-			$etiqueta = $imagen . ':' . $gasto_de_envio[ 1 ]; //Sólo icono
+			$etiqueta = $imagen . $gasto_de_envio[ 1 ]; //Sólo icono
 		}
 	}
 	//Tiempo de entrega
