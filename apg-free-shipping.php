@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WC - APG Free Shipping
-Version: 2.3.2
+Version: 2.4
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="https://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WC - APG Weight Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="https://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: https://artprojectgroup.es/
@@ -9,7 +9,7 @@ Author: Art Project Group
 Requires at least: 3.8
 Tested up to: 5.2.3
 WC requires at least: 2.6
-WC tested up to: 3.6.5
+WC tested up to: 3.7
 
 Text Domain: woocommerce-apg-free-postcodestatecountry-shipping
 Domain Path: /languages
@@ -41,9 +41,11 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 		include_once( 'includes/admin/funciones.php' );
 
 		class WC_apg_free_shipping extends WC_Shipping_Method {				
-			public $clases_de_envio		= array();
-			public $roles_de_usuario	= array();
-			public $metodos_de_pago		= array();
+			public $categorias_de_producto	= array();
+			public $etiquetas_de_producto	= array();
+			public $clases_de_envio			= array();
+			public $roles_de_usuario		= array();
+			public $metodos_de_pago			= array();
 
 			public function __construct( $instance_id = 0 ) {
 				$this->id					= 'apg_free_shipping';
@@ -60,6 +62,8 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 
 			//Inicializa los datos
 	        public function init() {
+				$this->apg_free_shipping_dame_datos_de_producto( 'categorias_de_producto' ); //Obtiene todas las categorías de producto
+				$this->apg_free_shipping_dame_datos_de_producto( 'etiquetas_de_producto' ); //Obtiene todas las etiquetas de producto
 				$this->apg_free_shipping_dame_clases_de_envio(); //Obtiene todas las clases de envío
 				$this->apg_free_shipping_dame_roles_de_usuario(); //Obtiene todos los roles de usuario
 				$this->apg_free_shipping_dame_metodos_de_pago(); //Obtiene todos los métodos de pago
@@ -73,8 +77,14 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 					'requires', 
 					'importe_minimo', 
 					'peso',
-					'clases_excluidas', 
-					'roles_excluidos', 
+					'categorias_excluidas',
+					'tipo_categorias',
+					'etiquetas_excluidas',
+					'tipo_etiquetas',
+					'clases_excluidas',
+					'tipo_clases',
+					'roles_excluidos',
+					'tipo_roles',
 					'pago',
 					'icono',
 					'muestra_icono',
@@ -117,6 +127,26 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 				return parent::get_instance_form_fields();
 			}
 	
+			//Función que lee y devuelve las categorías/etiquetas de producto
+			public function apg_free_shipping_dame_datos_de_producto( $tipo ) {
+				$taxonomy = ( $tipo == 'categorias_de_producto' ) ? 'product_cat' : 'product_tag';
+				
+				$argumentos = array(
+					'taxonomy'		=> $taxonomy,
+					'orderby'		=> 'name',
+					'show_count'	=> 0,
+					'pad_counts'	=> 0,
+					'hierarchical'	=> 1,
+					'title_li'		=> '',
+					'hide_empty'	=> 0
+				);
+				$datos = get_categories( $argumentos );
+				
+				foreach ( $datos as $dato ) {
+					$this->{$tipo}[ $dato->term_id ] = $dato->name;
+				}
+			}
+
 			//Función que lee y devuelve los tipos de clases de envío
 			public function apg_free_shipping_dame_clases_de_envio() {
 				if ( WC()->shipping->get_shipping_classes() ) {
@@ -155,6 +185,15 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 					'taxes'		=> false
 				) );
 			}
+			
+			//Reduce valores en categorías, etiquetas y clases de envío excluídas
+			public function reduce_valores( &$total_excluido, $producto, $valores ) {
+				if ( version_compare( WC_VERSION, '2.7', '<' ) ) {
+					$total_excluido = ( WC()->cart->tax_display_cart == 'excl' ) ? $total_excluido + $producto->get_price_excluding_tax() * $valores[ 'quantity' ] : $total_excluido + $producto->get_price_including_tax() * $valores[ 'quantity' ];
+				} else {
+					$total_excluido = ( WC()->cart->tax_display_cart == 'excl' ) ? $total_excluido + wc_get_price_excluding_tax( $producto ) * $valores[ 'quantity' ] : $total_excluido + wc_get_price_including_tax ( $producto ) * $valores[ 'quantity' ];
+				}
+			}
 
 			//Habilita el envío
 			public function is_available( $paquete ) {
@@ -170,47 +209,69 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 				
 				//Comprobamos los roles excluidos
 				if ( !empty( $this->roles_excluidos ) ) {
-					if ( empty( wp_get_current_user()->roles ) && in_array( 'invitado', $this->roles_excluidos ) ) { //Usuario invitado
+					if ( empty( wp_get_current_user()->roles ) &&
+						( ( in_array( 'invitado', $this->roles_excluidos ) && $this->tipo_roles == 'no' ) ||
+						( !in_array( 'invitado', $this->roles_excluidos ) && $this->tipo_roles == 'yes' ) ) ) { //Usuario invitado
 						return false; //Role excluido
 					}
 					foreach( wp_get_current_user()->roles as $rol ) { //Usuario con rol
-						if ( in_array( $rol, $this->roles_excluidos ) ) {
+						if ( ( in_array( $rol, $this->roles_excluidos ) && $this->tipo_roles == 'no' ) || 
+							( !in_array( $rol, $this->roles_excluidos ) && $this->tipo_roles == 'yes' ) ) {
 							return false; //Role excluido
 						}
 					}
 				}
 
 				//Variable
-				$total_clases_excluidas = 0;
+				$total_excluido = 0;
 				
-				//Comprobamos las clases excluidas
-				if ( $this->clases_excluidas ) {
-					//Comprobamos si está activo WPML para coger la traducción correcta de la clase de envío
-					if ( function_exists('icl_object_id') && !function_exists( 'pll_the_languages' ) ) {
-						global $sitepress;
-						do_action( 'wpml_switch_language', $sitepress->get_default_language() );
+				//Comprobamos si está activo WPML para coger la traducción correcta de la clase de envío
+				if ( function_exists('icl_object_id') && !function_exists( 'pll_the_languages' ) ) {
+					global $sitepress;
+					do_action( 'wpml_switch_language', $sitepress->get_default_language() );
+				}
+
+				//Toma distintos datos de los productos
+				foreach ( WC()->cart->get_cart() as $identificador => $valores ) {
+					$producto = $valores[ 'data' ];
+
+					//Comprobamos las categorías de producto excluidas
+					if ( !empty( $this->categorias_excluidas ) ) {
+						if ( ( !empty( array_intersect( $producto->get_category_ids(), $this->categorias_excluidas ) ) && $this->tipo_categorias == 'no' ) || 
+							( empty( array_intersect( $producto->get_category_ids(), $this->categorias_excluidas ) ) && $this->tipo_categorias == 'yes' ) ) {
+							$this->reduce_valores( $total_excluido, $producto, $valores );
+
+							continue; 
+						}
 					}
 
-					//Toma distintos datos de los productos
-					foreach ( WC()->cart->get_cart() as $identificador => $valores ) {
-						$producto = $valores[ 'data' ];
-						
+					//Comprobamos las etiquetas de producto excluidas
+					if ( !empty( $this->etiquetas_excluidas ) ) {
+						if ( ( !empty( array_intersect( $producto->get_tag_ids(), $this->etiquetas_excluidas ) ) && $this->tipo_etiquetas == 'no' ) || 
+							( empty( array_intersect( $producto->get_tag_ids(), $this->etiquetas_excluidas ) ) && $this->tipo_etiquetas == 'yes' ) ) {
+							$this->reduce_valores( $total_excluido, $producto, $valores );
+
+							continue; 
+						}
+					}
+
+					//Comprobamos las clases excluidas
+					if ( !empty( $this->clases_excluidas ) ) {
 						//Clase de envío
-						if ( in_array( $producto->get_shipping_class(), $this->clases_excluidas ) || in_array( 'todas', $this->clases_excluidas ) ) {
-							if ( version_compare( WC_VERSION, '2.7', '<' ) ) {
-								$total_clases_excluidas = ( WC()->cart->tax_display_cart == 'excl' ) ? $total_clases_excluidas + $producto->get_price_excluding_tax() * $valores[ 'quantity' ] : $total_clases_excluidas + $producto->get_price_including_tax() * $valores[ 'quantity' ];
-							} else {
-								$total_clases_excluidas = ( WC()->cart->tax_display_cart == 'excl' ) ? $total_clases_excluidas + wc_get_price_excluding_tax( $producto ) * $valores[ 'quantity' ] : $total_clases_excluidas + wc_get_price_including_tax ( $producto ) * $valores[ 'quantity' ];
-							}
+						if ( ( ( in_array( $producto->get_shipping_class(), $this->clases_excluidas ) || ( in_array( "todas", $this->clases_excluidas ) && $producto->get_shipping_class() ) ) && $this->tipo_clases == 'no' ) || 
+							( !in_array( $producto->get_shipping_class(), $this->clases_excluidas ) && !in_array( "todas", $this->clases_excluidas ) && $this->tipo_clases == 'yes' ) ) {
+							$this->reduce_valores( $total_excluido, $producto, $valores );
+							
+							continue;
 						}	
 					}
-					
-					//Comprobamos si está activo WPML para devolverlo al idioma que estaba activo
-					if ( function_exists('icl_object_id') && !function_exists( 'pll_the_languages' ) ) {
-						do_action( 'wpml_switch_language', ICL_LANGUAGE_CODE );
-					}
 				}
-	
+				
+				//Comprobamos si está activo WPML para devolverlo al idioma que estaba activo
+				if ( function_exists('icl_object_id') && !function_exists( 'pll_the_languages' ) ) {
+					do_action( 'wpml_switch_language', ICL_LANGUAGE_CODE );
+				}
+
 				//Variables
 				$habilitado				= false;
 				$tiene_cupon			= false;
@@ -244,7 +305,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 						}
 					}
 					
-					if ( $total - $total_clases_excluidas >= $this->importe_minimo && $peso ) {
+					if ( $total - $total_excluido >= $this->importe_minimo && $peso ) {
 						$tiene_importe_minimo = true;
 					}
 				}

@@ -4,9 +4,9 @@ Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, Shipping, Free Shipping, ZIP, Postcode, State, Country, Coupon, Minimum order amount, WPML
 Requires at least: 3.8
 Tested up to: 5.2.3
-Stable tag: 2.3.2
+Stable tag: 2.4
 WC requires at least: 2.6
-WC tested up to: 3.6.5
+WC tested up to: 3.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -22,6 +22,8 @@ Add to WooCommerce a free shipping based on postcode, state (province), country 
 = Features =
 * You can require a minimum and/or a valid free shipping coupon.
 * You can exclude by maximum weight.
+* You can exclude product categories.
+* You can exclude product tags.
 * You can exclude shipping classes.
 * You can exclude user roles.
 * You can hide payment gateways.
@@ -51,7 +53,6 @@ Don’t forget to leave us your comment on:
 * [WC - APG Free Shipping](https://artprojectgroup.es/plugins-para-woocommerce/wc-apg-free-shipping) on Art Project Group.
 * [Art Project Group](https://www.facebook.com/artprojectgroup) on Facebook.
 * [@artprojectgroup](https://twitter.com/artprojectgroup) on Twitter.
-* [+ArtProjectGroupES](https://plus.google.com/+ArtProjectGroupES/) on Google+.
 
 = More plugins =
 Remember that you can find more [plugins for WordPress](https://artprojectgroup.es/plugins-para-wordpress) and more [plugins for WooCommerce](https://artprojectgroup.es/plugins-para-woocommerce) on [Art Project Group](https://artprojectgroup.es) and our profile on [WordPress](https://profiles.wordpress.org/artprojectgroup/).
@@ -82,6 +83,9 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 2. Screenshot of WC - APG Free Shipping. APG Free Shipping Tab.
 
 == Changelog ==
+= 2.4 = 
+* Added options to exclude shippings by product categories and tags. **Update sponsored by [YonofumoYovapeo](https://yonofumoyovapeo.com)**.
+* Screenshot updated.
 = 2.3.2 = 
 * Added option to show the price 0 next to the name of the shipping cost. **Update sponsored by [YonofumoYovapeo](https://yonofumoyovapeo.com)**.
 = 2.3.1 = 
@@ -218,7 +222,8 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 * Initial version.
 
 == Upgrade Notice ==
-* Added option to show the price 0 next to the name of the shipping cost. **Update sponsored by [YonofumoYovapeo](https://yonofumoyovapeo.com)**.
+* Added options to exclude shippings by product categories and tags. **Update sponsored by [YonofumoYovapeo](https://yonofumoyovapeo.com)**.
+* Screenshot updated.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).

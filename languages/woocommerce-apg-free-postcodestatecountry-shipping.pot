@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce - APG Free Postcode/State/Country Shipping\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-10 15:06+0000\n"
+"POT-Creation-Date: 2019-08-21 01:15+0000\n"
 "POT-Revision-Date: Tue Aug 09 2016 11:16:48 GMT+0200 (CEST)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -23,21 +23,21 @@ msgstr ""
 "esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
 "X-Generator: Loco https://localise.biz/"
 
-#: apg-free-shipping.php:51
+#: apg-free-shipping.php:53
 msgid "APG Free Shipping"
 msgstr ""
 
-#: apg-free-shipping.php:52
+#: apg-free-shipping.php:54
 msgid ""
 "Lets you add a free shipping based on Postcode/State/Country of the cart and "
 "minimum order a amount and/or a valid free shipping coupon."
 msgstr ""
 
-#: apg-free-shipping.php:127
+#: apg-free-shipping.php:157
 msgid "Select a class&hellip;"
 msgstr ""
 
-#: apg-free-shipping.php:337
+#: apg-free-shipping.php:398
 msgid "This plugin require WooCommerce active to run!"
 msgstr ""
 
@@ -153,100 +153,118 @@ msgid ""
 "than zero)."
 msgstr ""
 
-#: includes/admin/campos.php:57
-msgid "No shipping (Shipping class)"
-msgstr ""
-
-#: includes/admin/campos.php:58
+#: includes/admin/campos.php:56 includes/admin/campos.php:72
+#: includes/admin/campos.php:90 includes/admin/campos.php:107
 #, php-format
-msgid "Select the shipping class where %s doesn't accept free shippings."
+msgid "No shipping (%s)"
 msgstr ""
 
-#: includes/admin/campos.php:63
+#: includes/admin/campos.php:57 includes/admin/campos.php:73
+#, php-format
+msgid "Select the %s where %s doesn't accept shippings."
+msgstr ""
+
+#: includes/admin/campos.php:65 includes/admin/campos.php:81
+#: includes/admin/campos.php:99 includes/admin/campos.php:118
+#, php-format
+msgid "Shipping (%s)?"
+msgstr ""
+
+#: includes/admin/campos.php:67 includes/admin/campos.php:83
+#: includes/admin/campos.php:101 includes/admin/campos.php:120
+#, php-format
+msgid "Ship only to the %s selected in the previous field."
+msgstr ""
+
+#: includes/admin/campos.php:68 includes/admin/campos.php:84
+#: includes/admin/campos.php:102 includes/admin/campos.php:121
+#, php-format
+msgid ""
+"Check this field to accept shippings in the %s selected in the previous "
+"field."
+msgstr ""
+
+#: includes/admin/campos.php:91 includes/admin/campos.php:108
+#, php-format
+msgid "Select the %s where %s doesn't accept free shippings."
+msgstr ""
+
+#: includes/admin/campos.php:96
 msgid "All enabled shipping class"
 msgstr ""
 
-#: includes/admin/campos.php:67
-msgid "No shipping (User role)"
-msgstr ""
-
-#: includes/admin/campos.php:68
-#, php-format
-msgid "Select the user role where %s doesn't accept free shippings."
-msgstr ""
-
-#: includes/admin/campos.php:74
+#: includes/admin/campos.php:114
 msgid "Guest"
 msgstr ""
 
-#: includes/admin/campos.php:78
+#: includes/admin/campos.php:125
 msgid "Payment gateway"
 msgstr ""
 
-#: includes/admin/campos.php:79
+#: includes/admin/campos.php:126
 #, php-format
 msgid "Payment gateway available for %s"
 msgstr ""
 
-#: includes/admin/campos.php:87
+#: includes/admin/campos.php:134
 msgid "All enabled payments"
 msgstr ""
 
-#: includes/admin/campos.php:91
+#: includes/admin/campos.php:138
 msgid "Icon image"
 msgstr ""
 
-#: includes/admin/campos.php:93
+#: includes/admin/campos.php:140
 msgid "Icon image URL. APG recommends a 60x21px image."
 msgstr ""
 
-#: includes/admin/campos.php:98
+#: includes/admin/campos.php:145
 msgid "How show icon image?"
 msgstr ""
 
-#: includes/admin/campos.php:99
+#: includes/admin/campos.php:146
 msgid "Select how you want to show the icon image."
 msgstr ""
 
-#: includes/admin/campos.php:103
+#: includes/admin/campos.php:150
 msgid "Not show, just title"
 msgstr ""
 
-#: includes/admin/campos.php:104
+#: includes/admin/campos.php:151
 msgid "Before title"
 msgstr ""
 
-#: includes/admin/campos.php:105
+#: includes/admin/campos.php:152
 msgid "After title"
 msgstr ""
 
-#: includes/admin/campos.php:106
+#: includes/admin/campos.php:153
 msgid "No title, just icon"
 msgstr ""
 
-#: includes/admin/campos.php:110
+#: includes/admin/campos.php:157
 msgid "Estimated delivery time"
 msgstr ""
 
-#: includes/admin/campos.php:112
+#: includes/admin/campos.php:159
 msgid "Define estimation for delivery time for this shipping method."
 msgstr ""
 
-#: includes/admin/campos.php:117
+#: includes/admin/campos.php:164
 #, php-format
 msgid "Show %s price"
 msgstr ""
 
-#: includes/admin/campos.php:119
+#: includes/admin/campos.php:166
 #, php-format
 msgid "Show %s price after method title."
 msgstr ""
 
-#: includes/admin/campos.php:123
+#: includes/admin/campos.php:170
 msgid "Show only APG Free Shipping"
 msgstr ""
 
-#: includes/admin/campos.php:125
+#: includes/admin/campos.php:172
 msgid "Don't show others shipping cost."
 msgstr ""
 

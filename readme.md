@@ -9,11 +9,11 @@ Requires at least: 3.8
 
 Tested up to: 5.2.3
 
-Stable tag: 2.3.2
+Stable tag: 2.4
 
 WC requires at least: 2.6
 
-WC tested up to: 3.6.5
+WC tested up to: 3.7
 
 License: GPLv3
 
@@ -31,6 +31,8 @@ Añade a WooCommerce un envío gratuito basado en el código postal, provincia (
 ### Características
 * Puedes requerir un importe mínimo y/o un cupón válido de gastos de envío gratuitos.
 * Puedes excluir por peso máximo.
+* Puedes excluir categorías de producto.
+* Puedes excluir etiquetas de producto.
 * Puedes excluir clases de envío.
 * Puedes excluir roles de usuario.
 * Puedes ocultar medios de pago.
@@ -60,7 +62,6 @@ No olvides dejarnos tu comentario en:
 * [WC - APG Free Shipping](https://artprojectgroup.es/plugins-para-woocommerce/wc-apg-free-shipping) en Art Project Group.
 * [Art Project Group](https://www.facebook.com/artprojectgroup) en Facebook.
 * [@artprojectgroup](https://twitter.com/artprojectgroup) en Twitter.
-* [+ArtProjectGroupES](https://plus.google.com/+ArtProjectGroupES/) en Google+.
 
 ### Más plugins
 Recuerda que puedes encontrar más [plugins para WordPress](https://artprojectgroup.es/plugins-para-wordpress) y más [plugins para WooCommerce](https://artprojectgroup.es/plugins-para-woocommerce) en [Art Project Group](https://artprojectgroup.es) y en nuestro perfil en [WordPress](https://profiles.wordpress.org/artprojectgroup/).
@@ -87,6 +88,10 @@ Si necesitas ayuda para configurar o instalar **WC - APG Free Shipping**, **Art 
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.4
+* Añadidas opciones para excluir el envío por categorías y etiquetas de producto **Actualización patrocinada por [YonofumoYovapeo](https://yonofumoyovapeo.com)**.
+* Actualización de captura de pantalla.
+
 ### 2.3.2
 * Añadida opción para mostrar el precio 0 junto al nombre del gasto de envío **Actualización patrocinada por [YonofumoYovapeo](https://yonofumoyovapeo.com)**.
 
