@@ -9,7 +9,7 @@ Requires at least: 3.8
 
 Tested up to: 5.2.3
 
-Stable tag: 2.4.0.1
+Stable tag: 2.4.0.2
 
 WC requires at least: 2.6
 
@@ -88,6 +88,9 @@ Si necesitas ayuda para configurar o instalar **WC - APG Free Shipping**, **Art 
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.4.0.2
+* Pequeños arreglos en la exclusión del envío por categorías y etiquetas de producto.
+
 ### 2.4.0.1
 * Pequeños arreglos.
 
@@ -187,7 +190,6 @@ Si necesitas ayuda para configurar o instalar **WC - APG Free Shipping**, **Art 
 
 ###2.0
 * Compatibilidad completa con WooCommerce 2.6. **Nota: No es compatible con versiones anteriores a 2.6.0, tampoco su configuración.**
-
 
 ###1.1.1
 * Arreglo de error de compatibilidad con WooCommerce 2.6.1
