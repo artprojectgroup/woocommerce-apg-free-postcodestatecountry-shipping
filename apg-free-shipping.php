@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WC - APG Free Shipping
-Version: 2.4
+Version: 2.4.0.1
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="https://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WC - APG Weight Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="https://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: https://artprojectgroup.es/
@@ -237,33 +237,36 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 
 					//Comprobamos las categorías de producto excluidas
 					if ( !empty( $this->categorias_excluidas ) ) {
-						if ( ( !empty( array_intersect( $producto->get_category_ids(), $this->categorias_excluidas ) ) && $this->tipo_categorias == 'no' ) || 
-							( empty( array_intersect( $producto->get_category_ids(), $this->categorias_excluidas ) ) && $this->tipo_categorias == 'yes' ) ) {
+						if ( !empty( array_intersect( $producto->get_category_ids(), $this->categorias_excluidas ) ) && $this->tipo_categorias == 'no' ) {
 							$this->reduce_valores( $total_excluido, $producto, $valores );
-
-							continue; 
+							
+							continue;
+						} else if ( empty( array_intersect( $producto->get_category_ids(), $this->categorias_excluidas ) ) && $this->tipo_categorias == 'yes' ) {
+							return false;
 						}
 					}
 
 					//Comprobamos las etiquetas de producto excluidas
 					if ( !empty( $this->etiquetas_excluidas ) ) {
-						if ( ( !empty( array_intersect( $producto->get_tag_ids(), $this->etiquetas_excluidas ) ) && $this->tipo_etiquetas == 'no' ) || 
-							( empty( array_intersect( $producto->get_tag_ids(), $this->etiquetas_excluidas ) ) && $this->tipo_etiquetas == 'yes' ) ) {
+						if ( !empty( array_intersect( $producto->get_tag_ids(), $this->etiquetas_excluidas ) ) && $this->tipo_etiquetas == 'no' ) {
 							$this->reduce_valores( $total_excluido, $producto, $valores );
-
-							continue; 
+							
+							continue;
+						} else if ( empty( array_intersect( $producto->get_tag_ids(), $this->etiquetas_excluidas ) ) && $this->tipo_etiquetas == 'yes' ) {
+							return false;
 						}
 					}
 
 					//Comprobamos las clases excluidas
 					if ( !empty( $this->clases_excluidas ) ) {
 						//Clase de envío
-						if ( ( ( in_array( $producto->get_shipping_class(), $this->clases_excluidas ) || ( in_array( "todas", $this->clases_excluidas ) && $producto->get_shipping_class() ) ) && $this->tipo_clases == 'no' ) || 
-							( !in_array( $producto->get_shipping_class(), $this->clases_excluidas ) && !in_array( "todas", $this->clases_excluidas ) && $this->tipo_clases == 'yes' ) ) {
+						if ( ( in_array( $producto->get_shipping_class(), $this->clases_excluidas ) || ( in_array( "todas", $this->clases_excluidas ) && $producto->get_shipping_class() ) ) && $this->tipo_clases == 'no' ) {
 							$this->reduce_valores( $total_excluido, $producto, $valores );
 							
 							continue;
-						}	
+						} else if ( !in_array( $producto->get_shipping_class(), $this->clases_excluidas ) && !in_array( "todas", $this->clases_excluidas ) && $this->tipo_clases == 'yes' ) {
+							return false;
+						}
 					}
 				}
 				

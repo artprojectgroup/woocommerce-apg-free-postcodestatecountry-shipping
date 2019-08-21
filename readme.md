@@ -9,7 +9,7 @@ Requires at least: 3.8
 
 Tested up to: 5.2.3
 
-Stable tag: 2.4
+Stable tag: 2.4.0.1
 
 WC requires at least: 2.6
 
@@ -88,6 +88,9 @@ Si necesitas ayuda para configurar o instalar **WC - APG Free Shipping**, **Art 
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.4.0.1
+* Pequeños arreglos.
+
 ### 2.4
 * Añadidas opciones para excluir el envío por categorías y etiquetas de producto **Actualización patrocinada por [YonofumoYovapeo](https://yonofumoyovapeo.com)**.
 * Actualización de captura de pantalla.
