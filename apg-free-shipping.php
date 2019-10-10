@@ -1,15 +1,15 @@
 <?php
 /*
 Plugin Name: WC - APG Free Shipping
-Version: 2.4.0.2
+Version: 2.4.0.3
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="https://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WC - APG Weight Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="https://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: https://artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
-Tested up to: 5.2.3
+Tested up to: 5.3
 WC requires at least: 2.6
-WC tested up to: 3.7
+WC tested up to: 3.8
 
 Text Domain: woocommerce-apg-free-postcodestatecountry-shipping
 Domain Path: /languages
@@ -194,7 +194,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 					$total_excluido = ( WC()->cart->tax_display_cart == 'excl' ) ? $total_excluido + wc_get_price_excluding_tax( $producto ) * $valores[ 'quantity' ] : $total_excluido + wc_get_price_including_tax ( $producto ) * $valores[ 'quantity' ];
 				}
 			}
-
+			
 			//Habilita el envío
 			public function is_available( $paquete ) {
 				if ( version_compare( WC_VERSION, '2.7', '<' ) ) {
@@ -269,17 +269,6 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 
 					//No atiende a las clases de envío excluidas
 					if ( !empty( $this->clases_excluidas ) ) {
-						if ( ( ( in_array( $producto->get_shipping_class(), $this->clases_excluidas ) || ( in_array( "todas", $this->clases_excluidas ) && $producto->get_shipping_class() ) ) && $this->tipo_clases == 'no' ) ||
-							( !in_array( $producto->get_shipping_class(), $this->clases_excluidas ) && !in_array( "todas", $this->clases_excluidas ) && $this->tipo_clases == 'yes' ) ) {
-							$this->reduce_valores( $peso_total, $peso, $productos_totales, $valores, $precio_total, $producto );
-							
-							continue; 
-						}
-					}
-
-
-					//Comprobamos las clases excluidas
-					if ( !empty( $this->clases_excluidas ) ) {
 						//Clase de envío
 						if ( ( in_array( $producto->get_shipping_class(), $this->clases_excluidas ) || ( in_array( "todas", $this->clases_excluidas ) && $producto->get_shipping_class() ) ) && $this->tipo_clases == 'no' ) {
 							$this->reduce_valores( $total_excluido, $producto, $valores );
@@ -320,7 +309,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 					} else {
 						$total = ( 'incl' === WC()->cart->tax_display_cart ) ? round( $total - ( WC()->cart->get_discount_total() + WC()->cart->get_discount_tax() ), wc_get_price_decimals() ) : round( $total - WC()->cart->get_discount_total(), wc_get_price_decimals() );
 					}
-					
+
 					//Revisa el peso total
 					$peso = true;
 					if ( $this->peso ) {						
@@ -422,3 +411,14 @@ function apg_free_shipping_requiere_wc() {
 	echo '<div class="error fade" id="message"><h3>' . $apg_free_shipping[ 'plugin' ] . '</h3><h4>' . __( 'This plugin require WooCommerce active to run!', 'woocommerce-apg-free-postcodestatecountry-shipping' ) . '</h4></div>';
 	deactivate_plugins( DIRECCION_apg_free_shipping );
 }
+
+//Eliminamos todo rastro del plugin al desinstalarlo
+function apg_free_shipping_desinstalar() {
+	$contador = 0;
+	while( $contador < 100 ) {
+		delete_option( 'woocommerce_apg_free_shipping_' . $contador . 'settings' );
+		$contador++;
+	}
+	delete_transient( 'apg_free_shipping_plugin' );
+}
+register_uninstall_hook( __FILE__, 'apg_free_shipping_desinstalar' );

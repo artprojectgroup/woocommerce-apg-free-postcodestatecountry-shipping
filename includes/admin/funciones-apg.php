@@ -4,7 +4,7 @@ $apg_free_shipping = array(
 	'plugin' 		=> 'WC - APG Free Shipping', 
 	'plugin_uri' 	=> 'woocommerce-apg-free-postcodestatecountry-shipping', 
 	'donacion' 		=> 'https://artprojectgroup.es/tienda/donacion',
-	'soporte' 		=> 'https://artprojectgroup.es/tienda/ticket-de-soporte',
+	'soporte' 		=> 'https://artprojectgroup.es/tienda/soporte-tecnico',
 	'plugin_url' 	=> 'https://artprojectgroup.es/plugins-para-woocommerce/wc-apg-free-shipping', 
 	'ajustes' 		=> 'admin.php?page=wc-settings&tab=shipping', 
 	'puntuacion' 	=> 'https://wordpress.org/support/view/plugin-reviews/woocommerce-apg-free-postcodestatecountry-shipping'
@@ -111,18 +111,10 @@ add_action( 'admin_init', 'apg_free_shipping_pago' );
 
 //Hoja de estilo y JavaScript
 function apg_free_shipping_estilo() {
-	wp_enqueue_style( 'apg_free_shipping_hoja_de_estilo', plugins_url( 'assets/css/style.css', DIRECCION_apg_free_shipping ) ); //Carga la hoja de estilo		
-	wp_enqueue_script( 'apg_free_shipping_script', plugins_url( 'assets/js/apg-free-shipping.js', DIRECCION_apg_free_shipping ) );
+	if ( strpos( $_SERVER[ 'REQUEST_URI' ], 'wc-settings&tab=shipping&instance_id' ) !== false ) {
+		wp_enqueue_style( 'apg_free_shipping_hoja_de_estilo', plugins_url( 'assets/css/style.css', DIRECCION_apg_free_shipping ) ); //Carga la hoja de estilo		
+		wp_enqueue_script( 'apg_free_shipping_script', plugins_url( 'assets/js/apg-free-shipping.js', DIRECCION_apg_free_shipping ) );
+	}
 }
 add_action( 'admin_enqueue_scripts', 'apg_free_shipping_estilo' );
 
-//Eliminamos todo rastro del plugin al desinstalarlo
-function apg_free_shipping_desinstalar() {
-	$contador = 0;
-	while( $contador < 100 ) {
-		delete_option( 'woocommerce_apg_free_shipping_' . $contador . 'settings' );
-		$contador++;
-	}
-	delete_transient( 'apg_free_shipping_plugin' );
-}
-register_uninstall_hook( __FILE__, 'apg_free_shipping_desinstalar' );

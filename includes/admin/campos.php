@@ -13,44 +13,42 @@ if ( version_compare( WC_VERSION, '2.7', '<' ) ) {
 		'default'		=> 'yes'
 	);
 }
-$campos = array(
-	'title'				=> array( 
-		'title' 					=> __( 'Method Title', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
-		'type' 						=> 'text',
-		'description' 				=> __( 'This controls the title which the user sees during checkout.', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
-		'default'					=> $this->method_title,
-		'desc_tip'					=> true,
+$campos[ 'title' ] = array( 
+	'title' 				=> __( 'Method Title', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
+	'type' 					=> 'text',
+	'description' 			=> __( 'This controls the title which the user sees during checkout.', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
+	'default'				=> $this->method_title,
+	'desc_tip'				=> true,
+ );
+$campos[ 'requires' ] = array( 
+	'title' 				=> __( 'Free Shipping Requires...', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
+	'type' 					=> 'select',
+	'class'					=> 'wc-enhanced-select',
+	'options'				=> array( 
+		''					=> __( 'N/A', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
+		'cupon'				=> __( 'A valid free shipping coupon', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
+		'importe_minimo'	=> __( 'A minimum order amount (defined below)', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
+		'cualquiera'		=> __( 'A minimum order amount OR a coupon', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
+		'ambos'				=> __( 'A minimum order amount AND a coupon', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
 	 ),
-	'requires'			=> array( 
-		'title' 					=> __( 'Free Shipping Requires...', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
-		'type' 						=> 'select',
-		'class'						=> 'wc-enhanced-select',
-		'options'					=> array( 
-			''						=> __( 'N/A', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
-			'cupon'					=> __( 'A valid free shipping coupon', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
-			'importe_minimo'		=> __( 'A minimum order amount (defined below)', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
-			'cualquiera'			=> __( 'A minimum order amount OR a coupon', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
-			'ambos'					=> __( 'A minimum order amount AND a coupon', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
-		 ),
-	 ),
-	'importe_minimo'	=> array( 
-				'title'				=> __( 'Minimum Order Amount', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
-				'type'				=> 'price',
-				'description' 		=> __( 'Users will need to spend this amount to get free shipping (if enabled above).', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
-				'default' 			=> '0',
-				'desc_tip'      	=> true,
-				'placeholder'		=> wc_format_localized_price( 0 )
-	 ),
-	'peso'				=> array( 
-				'title'				=> __( 'No shipping (Max. weight)', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
-				'type'				=> 'text',
-				'description' 		=> __( 'Users may not add more than this weight to get free shipping (if greater than zero).', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
-				'default' 			=> '0',
-				'desc_tip'      	=> true,
-				'placeholder'		=> wc_format_localized_decimal( 0 ),
-				'data_type' 		=> 'decimal',
-				'class'				=> 'short wc_input_decimal'
-	 ),
+ );
+$campos[ 'importe_minimo' ] = array( 
+	'title'				=> __( 'Minimum Order Amount', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
+	'type'				=> 'price',
+	'description' 		=> __( 'Users will need to spend this amount to get free shipping (if enabled above).', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
+	'default' 			=> '0',
+	'desc_tip'      	=> true,
+	'placeholder'		=> wc_format_localized_price( 0 )
+);
+$campos[ 'peso' ] = array( 
+	'title'				=> __( 'No shipping (Max. weight)', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
+	'type'				=> 'text',
+	'description' 		=> __( 'Users may not add more than this weight to get free shipping (if greater than zero).', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
+	'default' 			=> '0',
+	'desc_tip'      	=> true,
+	'placeholder'		=> wc_format_localized_decimal( 0 ),
+	'data_type' 		=> 'decimal',
+	'class'				=> 'short wc_input_decimal'
 );
 $campos[ 'categorias_excluidas' ] = array( 
 	'title'			=> sprintf( __( 'No shipping (%s)', 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'Product category', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
