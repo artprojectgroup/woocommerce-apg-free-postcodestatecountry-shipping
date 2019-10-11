@@ -5,12 +5,13 @@ function apg_free_shipping_icono( $etiqueta, $metodo ) {
 	$id				= explode( ":", $metodo->id );
 	$configuracion	= maybe_unserialize( get_option( 'woocommerce_apg_free_shipping_' . $id[ 1 ] .'_settings' ) );
 	
-	//Añade el precio
-	if ( $configuracion[ 'precio' ] == 'yes' ) {
-		$gasto_de_envio[ 1 ] =  ': ' . wc_price(0);
-	} else {
-		$gasto_de_envio[ 1 ] = ( isset( $gasto_de_envio[ 1 ] ) ) ? $gasto_de_envio[ 1 ] : '';
+	//Previene compatibilidad con WC - APG Weight Shipping
+	if ( isset( $gasto_de_envio[ 1 ] ) ) {
+		return $etiqueta;
 	}
+	
+	//Añade el precio
+	$gasto_de_envio[ 1 ] = ( $configuracion[ 'precio' ] == 'yes' ) ? ': ' . wc_price(0) : '';
 	
 	//¿Mostramos el icono?
 	if ( !empty( $configuracion[ 'icono' ] ) && @getimagesize( $configuracion[ 'icono' ] ) && $configuracion[ 'muestra_icono' ] != 'no' ) {
