@@ -1,6 +1,6 @@
 <?php
 //Definimos las variables
-$apg_free_shipping = array( 	
+$apg_free_shipping = [ 	
 	'plugin' 		=> 'WC - APG Free Shipping', 
 	'plugin_uri' 	=> 'woocommerce-apg-free-postcodestatecountry-shipping', 
 	'donacion' 		=> 'https://artprojectgroup.es/tienda/donacion',
@@ -8,8 +8,8 @@ $apg_free_shipping = array(
 	'plugin_url' 	=> 'https://artprojectgroup.es/plugins-para-woocommerce/wc-apg-free-shipping', 
 	'ajustes' 		=> 'admin.php?page=wc-settings&tab=shipping', 
 	'puntuacion' 	=> 'https://wordpress.org/support/view/plugin-reviews/woocommerce-apg-free-postcodestatecountry-shipping'
-);
-$medios_de_pago = array();
+];
+$medios_de_pago = [];
 
 //Carga el idioma
 load_plugin_textdomain( 'woocommerce-apg-free-postcodestatecountry-shipping', null, dirname( DIRECCION_apg_free_shipping ) . '/languages' );
@@ -35,10 +35,10 @@ add_filter( 'plugin_row_meta', 'apg_free_shipping_enlaces', 10, 2 );
 function apg_free_shipping_enlace_de_ajustes( $enlaces ) { 
 	global $apg_free_shipping;
 
-	$enlaces_de_ajustes = array(
+	$enlaces_de_ajustes = [
 		'<a href="' . $apg_free_shipping[ 'ajustes' ] . '" title="' . __( 'Settings of ', 'woocommerce-apg-free-postcodestatecountry-shipping' ) . $apg_free_shipping[ 'plugin' ] .'">' . __( 'Settings', 'woocommerce-apg-free-postcodestatecountry-shipping' ) . '</a>', 
 		'<a href="' . $apg_free_shipping[ 'soporte' ] . '" title="' . __( 'Support of ', 'woocommerce-apg-free-postcodestatecountry-shipping' ) . $apg_free_shipping[ 'plugin' ] .'">' . __( 'Support', 'woocommerce-apg-free-postcodestatecountry-shipping' ) . '</a>'
-	);
+	];
 	foreach( $enlaces_de_ajustes as $enlace_de_ajustes ) {
 		array_unshift( $enlaces, $enlace_de_ajustes );
 	}
@@ -64,19 +64,17 @@ add_action( 'in_plugin_update_message-woocommerce-apg-free-postcodestatecountry-
 function apg_free_shipping_plugin( $nombre ) {
 	global $apg_free_shipping;
 
-	$argumentos = ( object ) array( 
+	$argumentos = ( object ) [ 
 		'slug'		=> $nombre 
-	);
-	$consulta = array( 
+	];
+	$consulta = [ 
 		'action'	=> 'plugin_information', 
 		'timeout'	=> 15, 
 		'request'	=> serialize( $argumentos )
-	);
+	];
 	$respuesta = get_transient( 'apg_free_shipping_plugin' );
 	if ( false === $respuesta ) {
-		$respuesta = wp_remote_post( 'https://api.wordpress.org/plugins/info/1.0/', array( 
-			'body'	=> $consulta
-		) );
+		$respuesta = wp_remote_post( 'https://api.wordpress.org/plugins/info/1.0/', [ 'body' => $consulta ] );
 		set_transient( 'apg_free_shipping_plugin', $respuesta, 24 * HOUR_IN_SECONDS );
 	}
 	if ( !is_wp_error( $respuesta ) ) {
@@ -85,11 +83,11 @@ function apg_free_shipping_plugin( $nombre ) {
 		$plugin[ 'rating' ] = 100;
 	}
 	
-	$rating = array(
+	$rating = [
 	   'rating'		=> $plugin[ 'rating' ],
 	   'type'		=> 'percent',
 	   'number'		=> $plugin[ 'num_ratings' ],
-	);
+	];
 	ob_start();
 	wp_star_rating( $rating );
 	$estrellas = ob_get_contents();

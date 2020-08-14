@@ -1,15 +1,15 @@
 <?php
 /*
 Plugin Name: WC - APG Free Shipping
-Version: 2.4.0.5
+Version: 2.4.0.6
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="https://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WC - APG Weight Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="https://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: https://artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
-Tested up to: 5.3
+Tested up to: 5.6
 WC requires at least: 2.6
-WC tested up to: 3.8
+WC tested up to: 4.4
 
 Text Domain: woocommerce-apg-free-postcodestatecountry-shipping
 Domain Path: /languages
@@ -41,22 +41,22 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 		include_once( 'includes/admin/funciones.php' );
 
 		class WC_apg_free_shipping extends WC_Shipping_Method {				
-			public $categorias_de_producto	= array();
-			public $etiquetas_de_producto	= array();
-			public $clases_de_envio			= array();
-			public $roles_de_usuario		= array();
-			public $metodos_de_pago			= array();
+			public $categorias_de_producto	= [];
+			public $etiquetas_de_producto	= [];
+			public $clases_de_envio			= [];
+			public $roles_de_usuario		= [];
+			public $metodos_de_pago			= [];
 
 			public function __construct( $instance_id = 0 ) {
 				$this->id					= 'apg_free_shipping';
 				$this->instance_id			= absint( $instance_id );
 				$this->method_title			= __( 'APG Free Shipping', 'woocommerce-apg-free-postcodestatecountry-shipping' );
 				$this->method_description	= __( 'Lets you add a free shipping based on Postcode/State/Country of the cart and minimum order a amount and/or a valid free shipping coupon.', 'woocommerce-apg-free-postcodestatecountry-shipping' );
-				$this->supports				= array(
+				$this->supports				= [
 					'shipping-zones',
 					'instance-settings',
 					'instance-settings-modal',
-				);
+				];
 				$this->init();
 			}
 
@@ -72,7 +72,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 				$this->init_settings();
 
 				//Inicializamos variables
-				$campos = array( 
+				$campos = [ 
 					'title', 
 					'requires', 
 					'importe_minimo', 
@@ -90,7 +90,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 					'muestra_icono',
 					'entrega',
 					'muestra',
-				);
+				];
 				if ( version_compare( WC_VERSION, '2.7', '<' ) ) {
 					$campos[ 'activo' ];
 				}
@@ -99,7 +99,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 				}
 				
 				//Acción
-				add_action( 'woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ) );
+				add_action( 'woocommerce_update_options_shipping_' . $this->id, [ $this, 'process_admin_options' ] );
 			}
 			
 			//Formulario de datos
@@ -131,7 +131,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 			public function apg_free_shipping_dame_datos_de_producto( $tipo ) {
 				$taxonomy = ( $tipo == 'categorias_de_producto' ) ? 'product_cat' : 'product_tag';
 				
-				$argumentos = array(
+				$argumentos = [
 					'taxonomy'		=> $taxonomy,
 					'orderby'		=> 'name',
 					'show_count'	=> 0,
@@ -139,7 +139,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 					'hierarchical'	=> 1,
 					'title_li'		=> '',
 					'hide_empty'	=> 0
-				);
+				];
 				$datos = get_categories( $argumentos );
 				
 				foreach ( $datos as $dato ) {
@@ -171,19 +171,21 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 			public function apg_free_shipping_dame_metodos_de_pago() {
 				global $medios_de_pago;
 				
-				foreach( $medios_de_pago as $clave => $medio_de_pago ) {
-					$this->metodos_de_pago[ $medio_de_pago->id ] = $medio_de_pago->title;
-				}
+                if ( is_array( $medios_de_pago ) && !empty( $medios_de_pago ) ) {
+                    foreach( $medios_de_pago as $clave => $medio_de_pago ) {
+                        $this->metodos_de_pago[ $medio_de_pago->id ] = $medio_de_pago->title;
+                    }
+                }
 			}
 	
 			//Calcula el gasto de envío
-			public function calculate_shipping( $paquete = array() ) {
-				$this->add_rate( array(
+			public function calculate_shipping( $paquete = [] ) {
+				$this->add_rate( [
 					'id'		=> $this->get_rate_id(),
 					'label'		=> $this->title,
 					'cost'		=> 0,
 					'taxes'		=> false
-				) );
+				] );
 			}
 			
 			//Reduce valores en categorías, etiquetas y clases de envío excluídas
@@ -290,7 +292,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 				$tiene_cupon			= false;
 				$tiene_importe_minimo	= false;
 	
-				if ( in_array( $this->requires, array( 'cupon', 'cualquiera', 'ambos' ) ) ) {
+				if ( in_array( $this->requires, [ 'cupon', 'cualquiera', 'ambos' ] ) ) {
 					if ( $cupones = WC()->cart->get_coupons() ) {
 						foreach ( $cupones as $codigo => $cupon ) {
 							if ( $cupon->is_valid() && $cupon->enable_free_shipping() ) {
@@ -301,7 +303,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 					}
 				}
 	
-				if ( in_array( $this->requires, array( 'importe_minimo', 'cualquiera', 'ambos' ) ) ) {
+				if ( in_array( $this->requires, [ 'importe_minimo', 'cualquiera', 'ambos' ] ) ) {
 					$total = WC()->cart->get_displayed_subtotal();
 
 					if ( version_compare( WC_VERSION, '3.2', '<' ) && isset( WC()->cart->cart_contents_total ) ) {

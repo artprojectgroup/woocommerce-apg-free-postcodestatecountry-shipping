@@ -6,11 +6,11 @@ function apg_free_shipping_icono( $etiqueta, $metodo ) {
 	$configuracion	= maybe_unserialize( get_option( 'woocommerce_apg_free_shipping_' . $id[ 1 ] .'_settings' ) );
 	
 	//Previene compatibilidad con WC - APG Weight Shipping
-	if ( isset( $gasto_de_envio[ 1 ] ) ) {
+	if ( isset( $gasto_de_envio[ 1 ] ) || !isset( $configuracion[ 'precio' ] ) ) {
 		return $etiqueta;
 	}
-	
-	//Añade el precio
+
+    //Añade el precio
 	$gasto_de_envio[ 1 ] = ( $configuracion[ 'precio' ] == 'yes' ) ? ': ' . wc_price(0) : '';
 	
 	//¿Mostramos el icono?
@@ -39,10 +39,10 @@ add_filter( 'woocommerce_cart_shipping_method_full_label', 'apg_free_shipping_ic
 
 //Oculta el resto de gastos de envío
 function apg_free_shipping_oculta_envios( $envios ) {
-	$envio_gratis = array();
+	$envio_gratis = [];
 
 	foreach ( $envios as $clave => $envio ) {
-		if ( 'apg_free_shipping' === $envio->method_id || 0 == $envio->cost ) {
+		if ( 'apg_free_shipping' == $envio->method_id || 0 == $envio->cost ) {
 			$envio_gratis[ $clave ] = $envio;
 		}
 	}
