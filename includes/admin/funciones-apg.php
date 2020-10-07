@@ -9,6 +9,7 @@ $apg_free_shipping = [
 	'ajustes' 		=> 'admin.php?page=wc-settings&tab=shipping', 
 	'puntuacion' 	=> 'https://wordpress.org/support/view/plugin-reviews/woocommerce-apg-free-postcodestatecountry-shipping'
 ];
+$medios_de_pago = [];
 
 //Carga el idioma
 load_plugin_textdomain( 'woocommerce-apg-free-postcodestatecountry-shipping', null, dirname( DIRECCION_apg_free_shipping ) . '/languages' );
@@ -94,6 +95,17 @@ function apg_free_shipping_plugin( $nombre ) {
 
 	return '<a title="' . sprintf( __( 'Please, rate %s:', 'woocommerce-apg-free-postcodestatecountry-shipping' ), $apg_free_shipping[ 'plugin' ] ) . '" href="' . $apg_free_shipping[ 'puntuacion' ] . '?rate=5#postform" class="estrellas">' . $estrellas . '</a>';
 }
+
+//Actualiza los medios de pago 
+function apg_free_shipping_pago() {
+	global $medios_de_pago;
+	
+	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+	if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin( 'woocommerce/woocommerce.php' ) ) {
+		$medios_de_pago = WC()->payment_gateways->payment_gateways(); //Guardamos los medios de pago
+	}
+}
+add_action( 'admin_init', 'apg_free_shipping_pago' );
 
 //Hoja de estilo y JavaScript
 function apg_free_shipping_estilo() {
