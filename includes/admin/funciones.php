@@ -1,4 +1,7 @@
 <?php
+//Igual no deberías poder abrirme
+defined( 'ABSPATH' ) || exit;
+
 //Muestra el icono
 function apg_free_shipping_icono( $etiqueta, $metodo ) {
 	$gasto_de_envio	= explode( ":", $etiqueta );

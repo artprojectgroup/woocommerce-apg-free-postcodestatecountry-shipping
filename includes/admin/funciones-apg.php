@@ -1,4 +1,7 @@
 <?php
+//Igual no deberías poder abrirme
+defined( 'ABSPATH' ) || exit;
+
 //Definimos las variables
 $apg_free_shipping = [ 	
 	'plugin' 		=> 'WC - APG Free Shipping', 
@@ -99,13 +102,12 @@ function apg_free_shipping_plugin( $nombre ) {
 //Actualiza los medios de pago 
 function apg_free_shipping_pago() {
 	global $medios_de_pago;
-	
-	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-	if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin( 'woocommerce/woocommerce.php' ) ) {
-		$medios_de_pago = WC()->payment_gateways->payment_gateways(); //Guardamos los medios de pago
-	}
+
+    $medios_de_pago = WC()->payment_gateways->payment_gateways(); //Guardamos los medios de pago
 }
-add_action( 'admin_init', 'apg_free_shipping_pago' );
+if ( strpos( $_SERVER[ 'REQUEST_URI' ], 'wc-settings&tab=shipping&instance_id' ) !== false ) {
+    add_action( 'admin_init', 'apg_free_shipping_pago' );
+}
 
 //Hoja de estilo y JavaScript
 function apg_free_shipping_estilo() {

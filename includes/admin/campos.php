@@ -1,7 +1,6 @@
 <?php 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+//Igual no deberías poder abrirme
+defined( 'ABSPATH' ) || exit;
 
 //Campos del formulario
 $campos = [];

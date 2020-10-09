@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WC - APG Free Shipping
-Version: 2.4.0.8
+Version: 2.4.1
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="https://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WC - APG Weight Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="https://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: https://artprojectgroup.es/
@@ -9,7 +9,7 @@ Author: Art Project Group
 Requires at least: 3.8
 Tested up to: 5.6
 WC requires at least: 2.6
-WC tested up to: 4.4
+WC tested up to: 4.6
 
 Text Domain: woocommerce-apg-free-postcodestatecountry-shipping
 Domain Path: /languages
@@ -66,8 +66,8 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 				$this->apg_free_shipping_dame_datos_de_producto( 'etiquetas_de_producto' ); //Obtiene todas las etiquetas de producto
 				$this->apg_free_shipping_dame_clases_de_envio(); //Obtiene todas las clases de envío
 				$this->apg_free_shipping_dame_roles_de_usuario(); //Obtiene todos los roles de usuario
-				$this->apg_free_shipping_dame_metodos_de_pago(); //Obtiene todos los métodos de pago
-	
+                $this->apg_free_shipping_dame_metodos_de_pago(); //Obtiene todos los métodos de pago
+
 				$this->init_form_fields();
 				$this->init_settings();
 
@@ -165,8 +165,8 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 				foreach( $wp_roles->role_names as $rol => $nombre ) {
 					$this->roles_de_usuario[ $rol ] = $nombre;
 				}				
-			}	
-
+			}
+            
 			//Función que lee y devuelve los métodos de pago
 			public function apg_free_shipping_dame_metodos_de_pago() {
 				global $medios_de_pago;
@@ -177,7 +177,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
                     }
                 }
 			}
-	
+
 			//Calcula el gasto de envío
 			public function calculate_shipping( $paquete = [] ) {
 				$this->add_rate( [
@@ -193,7 +193,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 				if ( version_compare( WC_VERSION, '2.7', '<' ) ) {
 					$total_excluido = ( WC()->cart->tax_display_cart == 'excl' ) ? $total_excluido + $producto->get_price_excluding_tax() * $valores[ 'quantity' ] : $total_excluido + $producto->get_price_including_tax() * $valores[ 'quantity' ];
 				} else {
-					$total_excluido = ( WC()->cart->tax_display_cart == 'excl' ) ? $total_excluido + wc_get_price_excluding_tax( $producto ) * $valores[ 'quantity' ] : $total_excluido + wc_get_price_including_tax ( $producto ) * $valores[ 'quantity' ];
+					$total_excluido = ( WC()->cart->get_tax_price_display_mode() == 'excl' ) ? $total_excluido + wc_get_price_excluding_tax( $producto ) * $valores[ 'quantity' ] : $total_excluido + wc_get_price_including_tax( $producto ) * $valores[ 'quantity' ];
 				}
 			}
 			
@@ -309,7 +309,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 					if ( version_compare( WC_VERSION, '3.2', '<' ) && isset( WC()->cart->cart_contents_total ) ) {
 						$total = ( 'incl' === WC()->cart->tax_display_cart ) ? round( $total - ( WC()->cart->get_cart_discount_total() + WC()->cart->get_cart_discount_tax_total() ), wc_get_price_decimals() ) : round( $total - WC()->cart->get_cart_discount_total(), wc_get_price_decimals() );
 					} else {
-						$total = ( 'incl' === WC()->cart->tax_display_cart ) ? round( $total - ( WC()->cart->get_discount_total() + WC()->cart->get_discount_tax() ), wc_get_price_decimals() ) : round( $total - WC()->cart->get_discount_total(), wc_get_price_decimals() );
+						$total = ( 'incl' === WC()->cart->get_tax_price_display_mode() ) ? round( $total - ( WC()->cart->get_discount_total() + WC()->cart->get_discount_tax() ), wc_get_price_decimals() ) : round( $total - WC()->cart->get_discount_total(), wc_get_price_decimals() );
 					}
 
 					//Revisa el peso total
