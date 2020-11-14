@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WC - APG Free Shipping
-Version: 2.4.1.1
+Version: 2.4.1.2
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="https://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WC - APG Weight Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="https://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: https://artprojectgroup.es/
@@ -193,7 +193,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 				if ( version_compare( WC_VERSION, '2.7', '<' ) ) {
 					$total_excluido = ( WC()->cart->tax_display_cart == 'excl' ) ? $total_excluido + $producto->get_price_excluding_tax() * $valores[ 'quantity' ] : $total_excluido + $producto->get_price_including_tax() * $valores[ 'quantity' ];
 				} elseif ( version_compare( WC_VERSION, '4.4', '<' ) ) {
-                    $total_excluido = ( WC()->cart->tax_display_cart() == 'excl' ) ? $total_excluido + wc_get_price_excluding_tax( $producto ) * $valores[ 'quantity' ] : $total_excluido + wc_get_price_including_tax( $producto ) * $valores[ 'quantity' ];
+                    $total_excluido = ( WC()->cart->tax_display_cart == 'excl' ) ? $total_excluido + wc_get_price_excluding_tax( $producto ) * $valores[ 'quantity' ] : $total_excluido + wc_get_price_including_tax( $producto ) * $valores[ 'quantity' ];
                 } else {
                     $total_excluido = ( WC()->cart->get_tax_price_display_mode() == 'excl' ) ? $total_excluido + wc_get_price_excluding_tax( $producto ) * $valores[ 'quantity' ] : $total_excluido + wc_get_price_including_tax( $producto ) * $valores[ 'quantity' ];
 				}
@@ -311,7 +311,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 					if ( version_compare( WC_VERSION, '3.2', '<' ) && isset( WC()->cart->cart_contents_total ) ) {
 						$total = ( 'incl' === WC()->cart->tax_display_cart ) ? round( $total - ( WC()->cart->get_cart_discount_total() + WC()->cart->get_cart_discount_tax_total() ), wc_get_price_decimals() ) : round( $total - WC()->cart->get_cart_discount_total(), wc_get_price_decimals() );
 					} elseif ( version_compare( WC_VERSION, '4.4', '<' ) ) {
-                        $total = ( 'incl' === WC()->cart->tax_display_cart() ) ? round( $total - ( WC()->cart->get_discount_total() + WC()->cart->get_discount_tax() ), wc_get_price_decimals() ) : round( $total - WC()->cart->get_discount_total(), wc_get_price_decimals() );
+                        $total = ( 'incl' === WC()->cart->tax_display_cart ) ? round( $total - ( WC()->cart->get_discount_total() + WC()->cart->get_discount_tax() ), wc_get_price_decimals() ) : round( $total - WC()->cart->get_discount_total(), wc_get_price_decimals() );
                     } else {
                         $total = ( 'incl' === WC()->cart->get_tax_price_display_mode() ) ? round( $total - ( WC()->cart->get_discount_total() + WC()->cart->get_discount_tax() ), wc_get_price_decimals() ) : round( $total - WC()->cart->get_discount_total(), wc_get_price_decimals() );
                     }
