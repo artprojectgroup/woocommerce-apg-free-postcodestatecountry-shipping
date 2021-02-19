@@ -9,11 +9,11 @@ Requires at least: 3.8
 
 Tested up to: 5.7
 
-Stable tag: 2.4.1.3
+Stable tag: 2.5
 
 WC requires at least: 2.6
 
-WC tested up to: 5.0
+WC tested up to: 5.1
 
 License: GPLv3
 
@@ -36,6 +36,7 @@ Añade a WooCommerce un envío gratuito basado en el código postal, provincia (
 * Puedes excluir clases de envío.
 * Puedes excluir roles de usuario.
 * Puedes ocultar medios de pago.
+* Puedes ocultar métodos de envío de la misma zona de envío.
 * Puedes mostrar una imagen personalizada.
 * Puedes mostrar el precio 0.
 * Puedes mostrar el tiempo estimado de entrega.
@@ -88,6 +89,9 @@ Si necesitas ayuda para configurar o instalar **WC - APG Free Shipping**, **Art 
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.5
+* Añadida opción para excluir métodos de envío de la misma zona de envío. **Actualización patrocinada por [YonofumoYovapeo](https://yonofumoyovapeo.com)**.
+
 ### 2.4.1.3
 * Pequeños arreglos.
 

@@ -50,3 +50,83 @@ function apg_free_shipping_oculta_envios( $envios ) {
  
 	return !empty( $envio_gratis ) ? $envio_gratis : $envios;
 }
+
+//Añade APG Shipping a WooCommerce
+function apg_free_shipping_anade_gastos_de_envio( $methods ) {
+    $methods[ 'apg_free_shipping' ] = 'WC_apg_free_shipping';
+
+    return $methods;
+}
+add_filter( 'woocommerce_shipping_methods', 'apg_free_shipping_anade_gastos_de_envio' );
+
+//Filtra los medios de pago
+function apg_free_shipping_filtra_medios_de_pago( $medios ) {
+    if ( isset( WC()->session->chosen_shipping_methods ) ) {
+        $id = explode( ":", WC()->session->chosen_shipping_methods[ 0 ] );
+    } else if ( isset( $_POST[ 'shipping_method' ] ) ) {
+        $id = explode( ":", $_POST[ 'shipping_method' ][ 0 ] );
+    }
+    if ( !isset( $id[ 1 ] ) ) {
+        return $medios;
+    }
+    $configuracion	= maybe_unserialize( get_option( 'woocommerce_apg_free_shipping_' . $id[ 1 ] .'_settings' ) );
+
+    if ( isset( $_POST[ 'payment_method' ] ) && !$medios ) {
+        $medios = $_POST[ 'payment_method' ];
+    }
+
+    if ( !empty( $configuracion[ 'pago' ] ) && $configuracion[ 'pago' ][ 0 ] != 'todos' ) {
+        foreach ( $medios as $nombre => $medio ) {
+            if ( is_array( $configuracion[ 'pago' ] ) ) {
+                if ( !in_array( $nombre, $configuracion[ 'pago' ] ) ) {
+                    unset( $medios[ $nombre ] );
+                }
+            } else { 
+                if ( $nombre != $configuracion[ 'pago' ] ) {
+                    unset( $medios[ $nombre ] );
+                }
+            }
+        }
+    }
+
+    return $medios;
+}
+add_filter( 'woocommerce_available_payment_gateways', 'apg_free_shipping_filtra_medios_de_pago' );
+
+//Actualiza los medios de pago y las zonas de envío
+function apg_free_shipping_toma_de_datos() {
+	global $zonas_de_envio;
+	
+    $zonas_de_envio    = WC_Shipping_Zones::get_zones(); //Guardamos las zonas de envío
+}
+if ( strpos( $_SERVER[ 'REQUEST_URI' ], 'wc-settings&tab=shipping&instance_id' ) !== false || strpos( $_SERVER[ 'REQUEST_URI' ], 'plugins.php' ) !== false ) {
+    add_action( 'admin_init', 'apg_free_shipping_toma_de_datos' );
+}
+
+//Gestiona los gastos de envío
+function apg_free_shipping_gestiona_envios( $envios ) {
+    if ( isset( WC()->session->chosen_shipping_methods ) ) {
+        $id = explode( ":", WC()->session->chosen_shipping_methods[ 0 ] );
+    } else if ( isset( $_POST[ 'shipping_method' ][ 0 ] ) ) {
+        $id = explode( ":", $_POST[ 'shipping_method' ][ 0 ] );
+    }
+    if ( !isset( $id[ 1 ] ) ) {
+        return $envios;
+    }
+    $configuracion  = maybe_unserialize( get_option( 'woocommerce_apg_free_shipping_' . $id[ 1 ] . '_settings' ) );
+
+    if ( isset( $apg_shipping_settings[ 'envio' ] ) && ! empty( $apg_shipping_settings[ 'envio' ] ) ) {
+        foreach ( $envios[ 0 ][ 'rates' ] as $clave => $envio ) {
+            foreach( $configuracion[ 'envio' ] as $metodo ) {
+                if ( $metodo != 'todos' ) {
+                    if ( ( $metodo == 'ninguno' && $id[ 1 ] != $envio->instance_id ) || ( ! in_array( $envio->instance_id, $apg_shipping_settings[ 'envio' ] ) && $id[ 1 ] != $envio->instance_id ) ) {
+                        unset( $envios[ 0 ][ 'rates' ][ $clave ] );
+                    }
+                }
+            }
+        }
+    }
+    
+    return $envios;
+}
+add_filter( 'woocommerce_shipping_packages', 'apg_free_shipping_gestiona_envios', 20, 1 );
