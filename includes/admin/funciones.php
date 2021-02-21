@@ -115,11 +115,11 @@ function apg_free_shipping_gestiona_envios( $envios ) {
     }
     $configuracion  = maybe_unserialize( get_option( 'woocommerce_apg_free_shipping_' . $id[ 1 ] . '_settings' ) );
 
-    if ( isset( $apg_shipping_settings[ 'envio' ] ) && ! empty( $apg_shipping_settings[ 'envio' ] ) ) {
+    if ( isset( $configuracion[ 'envio' ] ) && ! empty( $configuracion[ 'envio' ] ) ) {
         foreach ( $envios[ 0 ][ 'rates' ] as $clave => $envio ) {
             foreach( $configuracion[ 'envio' ] as $metodo ) {
                 if ( $metodo != 'todos' ) {
-                    if ( ( $metodo == 'ninguno' && $id[ 1 ] != $envio->instance_id ) || ( ! in_array( $envio->instance_id, $apg_shipping_settings[ 'envio' ] ) && $id[ 1 ] != $envio->instance_id ) ) {
+                    if ( ( $metodo == 'ninguno' && $id[ 1 ] != $envio->instance_id ) || ( ! in_array( $envio->instance_id, $configuracion[ 'envio' ] ) && $id[ 1 ] != $envio->instance_id ) ) {
                         unset( $envios[ 0 ][ 'rates' ][ $clave ] );
                     }
                 }
