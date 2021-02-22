@@ -9,7 +9,7 @@ Requires at least: 3.8
 
 Tested up to: 5.7
 
-Stable tag: 2.5.0.1
+Stable tag: 2.5.0.2
 
 WC requires at least: 2.6
 
@@ -89,6 +89,9 @@ Si necesitas ayuda para configurar o instalar **WC - APG Free Shipping**, **Art 
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.5.0.2
+* Pequeños arreglos.
+
 ### 2.5.0.1
 * Pequeños arreglos.
 
