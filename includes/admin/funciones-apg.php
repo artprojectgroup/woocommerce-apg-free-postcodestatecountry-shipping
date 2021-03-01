@@ -13,6 +13,7 @@ $apg_free_shipping = [
 	'puntuacion' 	=> 'https://wordpress.org/support/view/plugin-reviews/woocommerce-apg-free-postcodestatecountry-shipping'
 ];
 $medios_de_pago = [];
+$zonas_de_envio = [];
 
 //Carga el idioma
 load_plugin_textdomain( 'woocommerce-apg-free-postcodestatecountry-shipping', null, dirname( DIRECCION_apg_free_shipping ) . '/languages' );
