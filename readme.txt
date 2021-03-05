@@ -4,7 +4,7 @@ Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, Shipping, Free Shipping, ZIP, Postcode, State, Country, Coupon, Minimum order amount, WPML
 Requires at least: 3.8
 Tested up to: 5.7
-Stable tag: 2.5.0.3
+Stable tag: 2.6
 WC requires at least: 2.6
 WC tested up to: 5.1
 License: GPLv3
@@ -84,6 +84,8 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 2. Screenshot of WC - APG Free Shipping. APG Free Shipping Tab.
 
 == Changelog ==
+= 2.6 = 
+* Added option to include taxes in the minimum order amount. **Update sponsored by [Gestazión Comunicación, S.L.](https://www.gestazion.com/)**.
 = 2.5.0.3 = 
 * Small fixes.
 = 2.5.0.2 = 
@@ -256,8 +258,8 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 * Initial version.
 
 == Upgrade Notice ==
-= 2.5.0.3 = 
-* Small fixes.
+= 2.6 = 
+* Added option to include taxes in the minimum order amount. **Update sponsored by [Gestazión Comunicación, S.L.](https://www.gestazion.com/)**.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).

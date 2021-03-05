@@ -39,6 +39,15 @@ $campos[ 'importe_minimo' ] = [
 	'desc_tip'      	=> true,
 	'placeholder'		=> wc_format_localized_price( 0 )
 ];
+if ( version_compare( WC_VERSION, '3.3', '>=' ) ) {
+    $campos[ 'impuestos' ] = [
+        'title'			=> __( 'Including taxes', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
+        'type'			=> 'checkbox',
+        'label'			=> sprintf( __( "Minimum order amount includes taxes.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'product categories', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
+        'desc_tip' 		=> sprintf( __( "Check this field if the minimum order amount must include taxes.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'product categories', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
+        'default'		=> 'no',
+    ];
+}
 $campos[ 'peso' ] = [ 
 	'title'				=> __( 'No shipping (Max. weight)', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
 	'type'				=> 'text',
