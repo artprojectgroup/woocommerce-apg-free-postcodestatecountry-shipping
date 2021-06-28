@@ -1,15 +1,15 @@
 <?php
 /*
 Plugin Name: WC - APG Free Shipping
-Version: 2.6
+Version: 2.6.0.1
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="https://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WC - APG Weight Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="https://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: https://artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
-Tested up to: 5.7
+Tested up to: 5.8
 WC requires at least: 2.6
-WC tested up to: 5.1
+WC tested up to: 5.5
 
 Text Domain: woocommerce-apg-free-postcodestatecountry-shipping
 Domain Path: /languages
@@ -237,19 +237,31 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 				}
 				
 				//Comprobamos los roles excluidos
-				if ( !empty( $this->roles_excluidos ) ) {
-					if ( empty( wp_get_current_user()->roles ) &&
-						( ( in_array( 'invitado', $this->roles_excluidos ) && $this->tipo_roles == 'no' ) ||
-						( !in_array( 'invitado', $this->roles_excluidos ) && $this->tipo_roles == 'yes' ) ) ) { //Usuario invitado
-						return false; //Role excluido
-					}
+                $validacion = true;
+                if ( ! empty( $this->roles_excluidos ) ) {
+					if ( empty( wp_get_current_user()->roles ) ) {
+                        if ( ( in_array( 'invitado', $this->roles_excluidos ) && $this->tipo_roles == 'no' ) ||
+                            ( ! in_array( 'invitado', $this->roles_excluidos ) && $this->tipo_roles == 'yes' ) ) { //Usuario invitado
+                            $validacion = false; //Role excluido
+                        } else {
+                            $validacion = true;
+                        }                   
+                    } 
+                        
 					foreach( wp_get_current_user()->roles as $rol ) { //Usuario con rol
-						if ( ( in_array( $rol, $this->roles_excluidos ) && $this->tipo_roles == 'no' ) || 
-							( !in_array( $rol, $this->roles_excluidos ) && $this->tipo_roles == 'yes' ) ) {
-							return false; //Role excluido
-						}
+						if ( ! $validacion ) {
+                            if ( ( in_array( $rol, $this->roles_excluidos ) && $this->tipo_roles == 'no' ) || 
+							( ! in_array( $rol, $this->roles_excluidos ) && $this->tipo_roles == 'yes' ) ) {
+                                $validacion = false; //Role excluido
+                            } else {
+                                $validacion = true;
+                            } 
+                        }
 					}
 				}
+                if ( ! $validacion ) {
+                    return false; //No está activo
+                }
 
 				//Variable
 				$total_excluido = 0;

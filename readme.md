@@ -7,9 +7,9 @@ Tags: WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, Shipping, Free Ship
 
 Requires at least: 3.8
 
-Tested up to: 5.7
+Tested up to: 5.8
 
-Stable tag: 2.6
+Stable tag: 2.6.0.1
 
 WC requires at least: 2.6
 
@@ -89,6 +89,9 @@ Si necesitas ayuda para configurar o instalar **WC - APG Free Shipping**, **Art 
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.6.0.1
+* Pequeños arreglos.
+
 ### 2.6
 * Añadida opción para incluir los impuestos en el importe mínimo del pedido. **Actualización patrocinada por [Gestazión Comunicación, S.L.](https://www.gestazion.com/)**.
 
