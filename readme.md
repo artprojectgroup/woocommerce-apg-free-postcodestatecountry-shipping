@@ -7,13 +7,13 @@ Tags: WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, Shipping, Free Ship
 
 Requires at least: 3.8
 
-Tested up to: 5.8
+Tested up to: 5.9
 
 Stable tag: 2.6.0.1
 
 WC requires at least: 2.6
 
-WC tested up to: 5.1
+WC tested up to: 5.9
 
 License: GPLv3
 

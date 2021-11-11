@@ -7,9 +7,9 @@ Description: Add to WooCommerce a free shipping based on the order postcode, pro
 Author URI: https://artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
-Tested up to: 5.8
+Tested up to: 5.9
 WC requires at least: 2.6
-WC tested up to: 5.5
+WC tested up to: 5.9
 
 Text Domain: woocommerce-apg-free-postcodestatecountry-shipping
 Domain Path: /languages
@@ -33,7 +33,7 @@ include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin( 'woocommerce/woocommerce.php' ) ) {
 	//Contine la clase que crea los nuevos gastos de envío
 	function apg_free_shipping_inicio() {
-		if ( !class_exists( 'WC_Shipping_Method' ) ) {
+		if ( ! class_exists( 'WC_Shipping_Method' ) ) {
 			return;
 		}
 		
@@ -180,7 +180,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
                 if ( isset( $_REQUEST[ 'instance_id' ] ) ) {
                     $zona_de_envio  = $wpdb->get_var( $wpdb->prepare( "SELECT zone_id FROM {$wpdb->prefix}woocommerce_shipping_zone_methods as methods WHERE methods.instance_id = %d LIMIT 1;", $_REQUEST[ 'instance_id' ] ) );
 
-                    if ( !empty( $zona_de_envio ) ) {
+                    if ( ! empty( $zona_de_envio ) ) {
                         foreach ( $zonas_de_envio as $zona ) {
                             foreach ( $zona[ 'shipping_methods' ] as $gasto_envio ) {
                                 if ( $zona_de_envio == $zona[ 'id' ] && $gasto_envio->instance_id != $_REQUEST[ 'instance_id' ] ) {
@@ -196,7 +196,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 			public function apg_free_shipping_dame_metodos_de_pago() {
 				global $medios_de_pago;
 				
-                if ( is_array( $medios_de_pago ) && !empty( $medios_de_pago ) ) {
+                if ( is_array( $medios_de_pago ) && ! empty( $medios_de_pago ) ) {
                     foreach( $medios_de_pago as $clave => $medio_de_pago ) {
                         $this->metodos_de_pago[ $medio_de_pago->id ] = $medio_de_pago->title;
                     }
@@ -267,7 +267,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 				$total_excluido = 0;
 				
 				//Comprobamos si está activo WPML para coger la traducción correcta de la clase de envío
-				if ( function_exists('icl_object_id') && !function_exists( 'pll_the_languages' ) ) {
+				if ( function_exists('icl_object_id') && ! function_exists( 'pll_the_languages' ) ) {
 					global $sitepress;
 					do_action( 'wpml_switch_language', $sitepress->get_default_language() );
 				}
@@ -277,15 +277,15 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 					$producto = $valores[ 'data' ];
 
 					//Comprobamos las categorías de producto excluidas
-					if ( !empty( $this->categorias_excluidas ) ) {
+					if ( ! empty( $this->categorias_excluidas ) ) {
 						if ( $producto->is_type( 'variation' ) ) {
 							$parent = wc_get_product( $producto->get_parent_id() );
-							if ( ( !empty( array_intersect( $parent->get_category_ids(), $this->categorias_excluidas ) ) && $this->tipo_categorias == 'no' ) || 
+							if ( ( ! empty( array_intersect( $parent->get_category_ids(), $this->categorias_excluidas ) ) && $this->tipo_categorias == 'no' ) || 
 								( empty( array_intersect( $parent->get_category_ids(), $this->categorias_excluidas ) ) && $this->tipo_categorias == 'yes' ) ) {
 								return false;
 							}
 						} else {
-							if ( ( !empty( array_intersect( $producto->get_category_ids(), $this->categorias_excluidas ) ) && $this->tipo_categorias == 'no' ) || 
+							if ( ( ! empty( array_intersect( $producto->get_category_ids(), $this->categorias_excluidas ) ) && $this->tipo_categorias == 'no' ) || 
 								( empty( array_intersect( $producto->get_category_ids(), $this->categorias_excluidas ) ) && $this->tipo_categorias == 'yes' ) ) {
 								return false;
 							}
@@ -293,15 +293,15 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 					}
 
 					//Comprobamos las etiquetas de producto excluidas
-					if ( !empty( $this->etiquetas_excluidas ) ) {
+					if ( ! empty( $this->etiquetas_excluidas ) ) {
 						if ( $producto->is_type( 'variation' ) ) {
 							$parent = wc_get_product( $producto->get_parent_id() );
-							if ( ( !empty( array_intersect( $parent->get_tag_ids(), $this->etiquetas_excluidas ) ) && $this->tipo_etiquetas == 'no' ) || 
+							if ( ( ! empty( array_intersect( $parent->get_tag_ids(), $this->etiquetas_excluidas ) ) && $this->tipo_etiquetas == 'no' ) || 
 								( empty( array_intersect( $parent->get_tag_ids(), $this->etiquetas_excluidas ) ) && $this->tipo_etiquetas == 'yes' ) ) {
 								return false;
 							}
 						} else {
-							if ( ( !empty( array_intersect( $producto->get_tag_ids(), $this->etiquetas_excluidas ) ) && $this->tipo_etiquetas == 'no' ) || 
+							if ( ( ! empty( array_intersect( $producto->get_tag_ids(), $this->etiquetas_excluidas ) ) && $this->tipo_etiquetas == 'no' ) || 
 								( empty( array_intersect( $producto->get_tag_ids(), $this->etiquetas_excluidas ) ) && $this->tipo_etiquetas == 'yes' ) ) {
 								return false;
 							}
@@ -309,20 +309,20 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 					}
 
 					//No atiende a las clases de envío excluidas
-					if ( !empty( $this->clases_excluidas ) ) {
+					if ( ! empty( $this->clases_excluidas ) ) {
 						//Clase de envío
 						if ( ( in_array( $producto->get_shipping_class(), $this->clases_excluidas ) || ( in_array( "todas", $this->clases_excluidas ) && $producto->get_shipping_class() ) ) && $this->tipo_clases == 'no' ) {
 							$this->reduce_valores( $total_excluido, $producto, $valores );
 							
 							continue;
-						} else if ( !in_array( $producto->get_shipping_class(), $this->clases_excluidas ) && !in_array( "todas", $this->clases_excluidas ) && $this->tipo_clases == 'yes' ) {
+						} else if ( ! in_array( $producto->get_shipping_class(), $this->clases_excluidas ) && ! in_array( "todas", $this->clases_excluidas ) && $this->tipo_clases == 'yes' ) {
 							return false;
 						}
 					}
 				}
 				
 				//Comprobamos si está activo WPML para devolverlo al idioma que estaba activo
-				if ( function_exists('icl_object_id') && !function_exists( 'pll_the_languages' ) ) {
+				if ( function_exists('icl_object_id') && ! function_exists( 'pll_the_languages' ) ) {
 					do_action( 'wpml_switch_language', ICL_LANGUAGE_CODE );
 				}
 
@@ -421,11 +421,10 @@ function apg_free_shipping_requiere_wc() {
 
 //Eliminamos todo rastro del plugin al desinstalarlo
 function apg_free_shipping_desinstalar() {
-	$contador = 0;
-	while ( $contador < 100 ) {
-		delete_option( 'woocommerce_apg_free_shipping_' . $contador . 'settings' );
-		$contador++;
-	}
-	delete_transient( 'apg_free_shipping_plugin' );
+    global $wpdb;
+    
+    $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '%woocommerce_apg_free_shipping_%'" );
+
+    delete_transient( 'apg_free_shipping_plugin' );
 }
 register_uninstall_hook( __FILE__, 'apg_free_shipping_desinstalar' );

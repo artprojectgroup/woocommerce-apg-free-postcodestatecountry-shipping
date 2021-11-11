@@ -7,7 +7,7 @@ function apg_free_shipping_icono( $etiqueta, $metodo ) {
 	$configuracion	= maybe_unserialize( get_option( 'woocommerce_apg_free_shipping_' . $metodo->instance_id .'_settings' ) );
     
 	//Previene compatibilidad con WC - APG Weight Shipping
-	if ( $metodo->cost > 0 || !isset( $configuracion[ 'precio' ] ) ) {
+	if ( $metodo->cost > 0 || ! isset( $configuracion[ 'precio' ] ) ) {
 		return $etiqueta;
 	}
 
@@ -15,7 +15,7 @@ function apg_free_shipping_icono( $etiqueta, $metodo ) {
 	$precio    = ( $configuracion[ 'precio' ] == 'yes' ) ? ': ' . wc_price( $metodo->cost ) : '';
 	
 	//¿Mostramos el icono?
-	if ( !empty( $configuracion[ 'icono' ] ) && @getimagesize( $configuracion[ 'icono' ] ) && $configuracion[ 'muestra_icono' ] != 'no' ) {
+	if ( ! empty( $configuracion[ 'icono' ] ) && @getimagesize( $configuracion[ 'icono' ] ) && $configuracion[ 'muestra_icono' ] != 'no' ) {
 		$tamano = @getimagesize( $configuracion[ 'icono' ] );
 		$imagen	= '<img class="apg_free_shipping_icon" src="' . $configuracion[ 'icono' ] . '" witdh="' . $tamano[ 0 ] . '" height="' . $tamano[ 1 ] . '" />';
 		if ( $configuracion[ 'muestra_icono' ] == 'delante' ) { //Icono delante
@@ -30,7 +30,7 @@ function apg_free_shipping_icono( $etiqueta, $metodo ) {
 	}
 	
 	//Tiempo de entrega
-	if ( !empty( $configuracion[ 'entrega' ] ) ) {
+	if ( ! empty( $configuracion[ 'entrega' ] ) ) {
 		$etiqueta .= '<br /><small class="apg_free_shipping_delivery">' . sprintf( __( 'Estimated delivery time: %s', 'woocommerce-apg-free-postcodestatecountry-shipping' ), $configuracion[ 'entrega' ] ) . '</small>';
 	}
 
@@ -48,7 +48,7 @@ function apg_free_shipping_oculta_envios( $envios ) {
 		}
 	}
  
-	return !empty( $envio_gratis ) ? $envio_gratis : $envios;
+	return ! empty( $envio_gratis ) ? $envio_gratis : $envios;
 }
 
 //Añade APG Shipping a WooCommerce
@@ -66,7 +66,7 @@ function apg_free_shipping_filtra_medios_de_pago( $medios ) {
     } else if ( isset( $_POST[ 'shipping_method' ] ) ) {
         $id = explode( ":", $_POST[ 'shipping_method' ][ 0 ] );
     }
-    if ( !isset( $id[ 1 ] ) ) {
+    if ( ! isset( $id[ 1 ] ) ) {
         return $medios;
     }
     $configuracion	= maybe_unserialize( get_option( 'woocommerce_apg_free_shipping_' . $id[ 1 ] .'_settings' ) );
@@ -75,10 +75,10 @@ function apg_free_shipping_filtra_medios_de_pago( $medios ) {
         $medios = $_POST[ 'payment_method' ];
     }
 
-    if ( !empty( $configuracion[ 'pago' ] ) && $configuracion[ 'pago' ][ 0 ] != 'todos' ) {
+    if ( ! empty( $configuracion[ 'pago' ] ) && $configuracion[ 'pago' ][ 0 ] != 'todos' ) {
         foreach ( $medios as $nombre => $medio ) {
             if ( is_array( $configuracion[ 'pago' ] ) ) {
-                if ( !in_array( $nombre, $configuracion[ 'pago' ] ) ) {
+                if ( ! in_array( $nombre, $configuracion[ 'pago' ] ) ) {
                     unset( $medios[ $nombre ] );
                 }
             } else { 
@@ -110,7 +110,7 @@ function apg_free_shipping_gestiona_envios( $envios ) {
     } else if ( isset( $_POST[ 'shipping_method' ][ 0 ] ) ) {
         $id = explode( ":", $_POST[ 'shipping_method' ][ 0 ] );
     }
-    if ( !isset( $id[ 1 ] ) ) {
+    if ( ! isset( $id[ 1 ] ) ) {
         return $envios;
     }
     $configuracion  = maybe_unserialize( get_option( 'woocommerce_apg_free_shipping_' . $id[ 1 ] . '_settings' ) );
