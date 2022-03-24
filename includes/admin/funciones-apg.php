@@ -104,7 +104,7 @@ if ( strpos( $_SERVER[ 'REQUEST_URI' ], 'wc-settings&tab=shipping&instance_id' )
 
 //Hoja de estilo y JavaScript
 function apg_free_shipping_estilo() {
-	if ( strpos( $_SERVER[ 'REQUEST_URI' ], 'wc-settings&tab=shipping&instance_id' ) !== false ) {
+	if ( strpos( $_SERVER[ 'REQUEST_URI' ], 'wc-settings&tab=shipping&instance_id' ) !== false || strpos( $_SERVER[ 'REQUEST_URI' ], 'plugins.php' ) !== false  ) {
 		wp_enqueue_style( 'apg_free_shipping_hoja_de_estilo', plugins_url( 'assets/css/style.css', DIRECCION_apg_free_shipping ) ); //Carga la hoja de estilo		
 	}
 	if ( strpos( $_SERVER[ 'REQUEST_URI' ], 'wc-settings&tab=shipping' ) !== false ) {
