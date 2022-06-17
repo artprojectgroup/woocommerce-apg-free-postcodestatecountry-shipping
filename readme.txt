@@ -3,10 +3,10 @@ Contributors: artprojectgroup
 Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, Shipping, Free Shipping, ZIP, Postcode, State, Country, Coupon, Minimum order amount, WPML
 Requires at least: 3.8
-Tested up to: 6.0
-Stable tag: 2.6.0.2
+Tested up to: 6.1
+Stable tag: 2.6.0.3
 WC requires at least: 2.6
-WC tested up to: 6.4
+WC tested up to: 6.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -33,6 +33,7 @@ Add to WooCommerce a free shipping based on postcode, state (province), country 
 * You can show the estimated delivery time.
 * You can hide the rest of shipping if free shipping is available.
 * Fully compatible with [WPML](https://wpml.org/?aid=80296&affiliate_key=m66Ss5ps0xoS) plugin.
+* You can remove "Estimated delivery time:" with `apg_shipping_delivery` filter.
 
 = Translations =
 * Español ([**Art Project Group**](https://artprojectgroup.es/)).
@@ -84,6 +85,8 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 2. Screenshot of WC - APG Free Shipping. APG Free Shipping Tab.
 
 == Changelog ==
+= 2.6.0.3 =
+* Added `apg_shipping_delivery` filter.
 = 2.6.0.2 = 
 * Small fixes.
 = 2.6.0.1 = 
@@ -262,8 +265,8 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 * Initial version.
 
 == Upgrade Notice ==
-= 2.6.0.2 = 
-* Small fixes.
+= 2.6.0.3 =
+* Added `apg_shipping_delivery` filter.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).
