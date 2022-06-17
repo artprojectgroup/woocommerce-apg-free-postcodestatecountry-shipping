@@ -31,9 +31,9 @@ Add to WooCommerce a free shipping based on postcode, state (province), country 
 * You can show a custom icon image.
 * You can show price 0.
 * You can show the estimated delivery time.
+* You can remove the previous text of the estimated delivery time with the `apg_free_shipping_delivery` filter.
 * You can hide the rest of shipping if free shipping is available.
 * Fully compatible with [WPML](https://wpml.org/?aid=80296&affiliate_key=m66Ss5ps0xoS) plugin.
-* You can remove "Estimated delivery time:" with `apg_shipping_delivery` filter.
 
 = Translations =
 * Español ([**Art Project Group**](https://artprojectgroup.es/)).
@@ -86,7 +86,7 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 
 == Changelog ==
 = 2.6.0.3 =
-* Added `apg_shipping_delivery` filter.
+* Added `apg_free_shipping_delivery` filter.
 = 2.6.0.2 = 
 * Small fixes.
 = 2.6.0.1 = 
@@ -266,7 +266,7 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 
 == Upgrade Notice ==
 = 2.6.0.3 =
-* Added `apg_shipping_delivery` filter.
+* Added `apg_free_shipping_delivery` filter.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).

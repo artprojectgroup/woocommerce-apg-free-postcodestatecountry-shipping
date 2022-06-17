@@ -40,9 +40,9 @@ Añade a WooCommerce un envío gratuito basado en el código postal, provincia (
 * Puedes mostrar una imagen personalizada.
 * Puedes mostrar el precio 0.
 * Puedes mostrar el tiempo estimado de entrega.
+* Puedes eliminar el texto previo del tiempo estimado de entrega con el filtro `apg_free_shipping_delivery`.
 * Puedes ocultar el resto de gastos de envío al estar disponible el gasto de envío gratuito configurado.
 * Totalmente compatible con el plugin [WPML](https://wpml.org/?aid=80296&affiliate_key=m66Ss5ps0xoS).
-* Puedes eliminar el texto "Tiempo de entrega estimado:" con el filtro `apg_shipping_delivery`.
 
 ### Traducciones
 * Español ([**Art Project Group**](https://artprojectgroup.es/)).
@@ -91,7 +91,7 @@ Si necesitas ayuda para configurar o instalar **WC - APG Free Shipping**, **Art 
 
 ## Changelog
 ### 2.6.0.3
-* Añadido filtro `apg_shipping_delivery`.
+* Añadido filtro `apg_free_shipping_delivery`.
 
 ### 2.6.0.2
 * Pequeños arreglos.
