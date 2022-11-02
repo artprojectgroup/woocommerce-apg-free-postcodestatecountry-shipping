@@ -18,15 +18,15 @@ function apg_free_shipping_icono( $etiqueta, $metodo ) {
 	if ( ! empty( $configuracion[ 'icono' ] ) && @getimagesize( $configuracion[ 'icono' ] ) && $configuracion[ 'muestra_icono' ] != 'no' ) {
 		$tamano = @getimagesize( $configuracion[ 'icono' ] );
 		$imagen	= '<img class="apg_free_shipping_icon" src="' . $configuracion[ 'icono' ] . '" witdh="' . $tamano[ 0 ] . '" height="' . $tamano[ 1 ] . '" />';
-		if ( $configuracion[ 'muestra_icono' ] == 'delante' ) { //Icono delante
-			$etiqueta = $imagen . ' ' . $etiqueta . $precio;
+		if ( $configuracion[ 'muestra_icono' ] == 'delante' ) {
+			$etiqueta = $imagen . ' ' . apply_filters( 'apg_free_shipping_label', $etiqueta ) . $precio; //Icono delante
 		} else if ( $configuracion[ 'muestra_icono' ] == 'detras' ) {
-			$etiqueta = $metodo->label . ' ' . $imagen . $precio; //Icono detrás
+			$etiqueta = apply_filters( 'apg_free_shipping_label', $metodo->label ) . ' ' . $imagen . $precio; //Icono detrás
 		} else {
 			$etiqueta = $imagen . $precio; //Sólo icono
 		}
 	} else {
-		$etiqueta = $metodo->label . $precio; //Sin icono
+		$etiqueta = apply_filters( 'apg_free_shipping_label', $metodo->label ) . $precio; //Sin icono y con precio
 	}
 	
 	//Tiempo de entrega
@@ -63,7 +63,7 @@ add_filter( 'woocommerce_shipping_methods', 'apg_free_shipping_anade_gastos_de_e
 function apg_free_shipping_filtra_medios_de_pago( $medios ) {
     if ( isset( WC()->session->chosen_shipping_methods ) ) {
         $id = explode( ":", WC()->session->chosen_shipping_methods[ 0 ] );
-    } else if ( isset( $_POST[ 'shipping_method' ] ) ) {
+    } else if ( isset( $_POST[ 'shipping_method' ][ 0 ] ) ) {
         $id = explode( ":", $_POST[ 'shipping_method' ][ 0 ] );
     }
     if ( ! isset( $id[ 1 ] ) ) {
@@ -113,14 +113,19 @@ function apg_free_shipping_gestiona_envios( $envios ) {
     if ( ! isset( $id[ 1 ] ) ) {
         return $envios;
     }
-    $configuracion  = maybe_unserialize( get_option( 'woocommerce_apg_free_shipping_' . $id[ 1 ] . '_settings' ) );
-
-    if ( isset( $configuracion[ 'envio' ] ) && ! empty( $configuracion[ 'envio' ] ) ) {
-        foreach ( $envios[ 0 ][ 'rates' ] as $clave => $envio ) {
-            foreach( $configuracion[ 'envio' ] as $metodo ) {
-                if ( $metodo != 'todos' ) {
-                    if ( ( $metodo == 'ninguno' && $id[ 1 ] != $envio->instance_id ) || ( ! in_array( $envio->instance_id, $configuracion[ 'envio' ] ) && $id[ 1 ] != $envio->instance_id ) ) {
-                        unset( $envios[ 0 ][ 'rates' ][ $clave ] );
+    $apg_shipping_settings  = maybe_unserialize( get_option( 'woocommerce_apg_free_shipping_' . $id[ 1 ] . '_settings' ) );
+    
+    foreach ( $envios as $clave_paquete => $paquete ) {
+        if ( isset( $paquete[ 'rates' ] ) ) {
+            foreach ( $paquete[ 'rates' ] as $clave => $envio ) {
+                $apg_shipping_settings  = maybe_unserialize( get_option( 'woocommerce_apg_free_shipping_' . $envio->instance_id . '_settings' ) );
+                if ( isset( $apg_shipping_settings[ 'envio' ] ) && ! empty( $apg_shipping_settings[ 'envio' ] ) ) {
+                    foreach( $apg_shipping_settings[ 'envio' ] as $metodo ) {
+                        if ( $metodo != 'todos' ) {
+                            if ( ( $metodo == 'ninguno' && $id[ 1 ] != $envio->instance_id ) || ( ! in_array( $envio->instance_id, $apg_shipping_settings[ 'envio' ] ) && $id[ 1 ] != $envio->instance_id ) ) {
+                                unset( $envios[ $clave_paquete ][ 'rates' ][ $clave ] );
+                            }
+                        }
                     }
                 }
             }
@@ -130,3 +135,4 @@ function apg_free_shipping_gestiona_envios( $envios ) {
     return $envios;
 }
 add_filter( 'woocommerce_shipping_packages', 'apg_free_shipping_gestiona_envios', 20, 1 );
+add_filter( 'woocommerce_cart_shipping_packages', 'apg_free_shipping_gestiona_envios', 20, 1 );

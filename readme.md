@@ -7,13 +7,13 @@ Tags: WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, Shipping, Free Ship
 
 Requires at least: 3.8
 
-Tested up to: 6.1
+Tested up to: 6.2
 
-Stable tag: 2.6.0.4
+Stable tag: 2.7
 
 WC requires at least: 2.6
 
-WC tested up to: 6.7
+WC tested up to: 7.1
 
 License: GPLv3
 
@@ -33,6 +33,7 @@ Añade a WooCommerce un envío gratuito basado en el código postal, provincia (
 * Puedes excluir por peso máximo.
 * Puedes excluir categorías de producto.
 * Puedes excluir etiquetas de producto.
+* Puedes excluir atributos.
 * Puedes excluir clases de envío.
 * Puedes excluir roles de usuario.
 * Puedes ocultar medios de pago.
@@ -41,6 +42,7 @@ Añade a WooCommerce un envío gratuito basado en el código postal, provincia (
 * Puedes mostrar el precio 0.
 * Puedes mostrar el tiempo estimado de entrega.
 * Puedes eliminar el texto previo del tiempo estimado de entrega con el filtro `apg_free_shipping_delivery`.
+* Puedes modificar el título del método de envío con el filtro `apg_free_shipping_label`.
 * Puedes ocultar el resto de gastos de envío al estar disponible el gasto de envío gratuito configurado.
 * Totalmente compatible con el plugin [WPML](https://wpml.org/?aid=80296&affiliate_key=m66Ss5ps0xoS).
 
@@ -90,6 +92,11 @@ Si necesitas ayuda para configurar o instalar **WC - APG Free Shipping**, **Art 
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.7
+* Añadida opción para excluir el envío por atributos. **Actualización patrocinada por [YonofumoYovapeo](https://yonofumoyovapeo.com)**.
+* Añadido filtro `apg_free_shipping_label`.
+* Actualización de captura de pantalla.
+
 ### 2.6.0.4
 * Pequeños arreglos.
 

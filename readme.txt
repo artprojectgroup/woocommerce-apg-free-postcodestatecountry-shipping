@@ -3,10 +3,10 @@ Contributors: artprojectgroup
 Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, Shipping, Free Shipping, ZIP, Postcode, State, Country, Coupon, Minimum order amount, WPML
 Requires at least: 3.8
-Tested up to: 6.1
-Stable tag: 2.6.0.4
+Tested up to: 6.2
+Stable tag: 2.7
 WC requires at least: 2.6
-WC tested up to: 6.7
+WC tested up to: 7.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -24,6 +24,7 @@ Add to WooCommerce a free shipping based on postcode, state (province), country 
 * You can exclude by maximum weight.
 * You can exclude product categories.
 * You can exclude product tags.
+* You can exclude attributes.
 * You can exclude shipping classes.
 * You can exclude user roles.
 * You can hide payment gateways.
@@ -32,6 +33,7 @@ Add to WooCommerce a free shipping based on postcode, state (province), country 
 * You can show price 0.
 * You can show the estimated delivery time.
 * You can remove the previous text of the estimated delivery time with the `apg_free_shipping_delivery` filter.
+* You can modify the shipping method title with the `apg_free_shipping_label` filter.
 * You can hide the rest of shipping if free shipping is available.
 * Fully compatible with [WPML](https://wpml.org/?aid=80296&affiliate_key=m66Ss5ps0xoS) plugin.
 
@@ -85,6 +87,10 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 2. Screenshot of WC - APG Free Shipping. APG Free Shipping Tab.
 
 == Changelog ==
+= 2.7 =
+* Added option to exclude attributes. **Update sponsored by [YonofumoYovapeo](https://yonofumoyovapeo.com)**.
+* Added `apg_free_shipping_label ` filter.
+* Screenshot updated.
 = 2.6.0.4 = 
 * Small fixes.
 = 2.6.0.3 =
@@ -267,8 +273,10 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 * Initial version.
 
 == Upgrade Notice ==
-= 2.6.0.4 = 
-* Small fixes.
+= 2.7 =
+* Added option to exclude attributes. **Update sponsored by [YonofumoYovapeo](https://yonofumoyovapeo.com)**.
+* Added `apg_free_shipping_label ` filter.
+* Screenshot updated.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).
