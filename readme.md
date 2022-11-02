@@ -92,6 +92,9 @@ Si necesitas ayuda para configurar o instalar **WC - APG Free Shipping**, **Art 
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.7.0.1
+* Pequeños arreglos.
+
 ### 2.7
 * Añadida opción para excluir el envío por atributos. **Actualización patrocinada por [YonofumoYovapeo](https://yonofumoyovapeo.com)**.
 * Añadido filtro `apg_free_shipping_label`.

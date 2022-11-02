@@ -115,16 +115,13 @@ function apg_free_shipping_gestiona_envios( $envios ) {
     }
     $apg_shipping_settings  = maybe_unserialize( get_option( 'woocommerce_apg_free_shipping_' . $id[ 1 ] . '_settings' ) );
     
-    foreach ( $envios as $clave_paquete => $paquete ) {
-        if ( isset( $paquete[ 'rates' ] ) ) {
-            foreach ( $paquete[ 'rates' ] as $clave => $envio ) {
-                $apg_shipping_settings  = maybe_unserialize( get_option( 'woocommerce_apg_free_shipping_' . $envio->instance_id . '_settings' ) );
-                if ( isset( $apg_shipping_settings[ 'envio' ] ) && ! empty( $apg_shipping_settings[ 'envio' ] ) ) {
-                    foreach( $apg_shipping_settings[ 'envio' ] as $metodo ) {
-                        if ( $metodo != 'todos' ) {
-                            if ( ( $metodo == 'ninguno' && $id[ 1 ] != $envio->instance_id ) || ( ! in_array( $envio->instance_id, $apg_shipping_settings[ 'envio' ] ) && $id[ 1 ] != $envio->instance_id ) ) {
-                                unset( $envios[ $clave_paquete ][ 'rates' ][ $clave ] );
-                            }
+    if ( isset( $apg_shipping_settings[ 'envio' ] ) && ! empty( $apg_shipping_settings[ 'envio' ] ) ) {
+        if ( isset( $envios[ 0 ][ 'rates' ] ) ) {
+            foreach ( $envios[ 0 ][ 'rates' ] as $clave => $envio ) {
+                foreach( $apg_shipping_settings[ 'envio' ] as $metodo ) {
+                    if ( $metodo != 'todos' ) {
+                        if ( ( $metodo == 'ninguno' && $id[ 1 ] != $envio->instance_id ) || ( ! in_array( $envio->instance_id, $apg_shipping_settings[ 'envio' ] ) && $id[ 1 ] != $envio->instance_id ) ) {
+                            unset( $envios[ 0 ][ 'rates' ][ $clave ] );
                         }
                     }
                 }
