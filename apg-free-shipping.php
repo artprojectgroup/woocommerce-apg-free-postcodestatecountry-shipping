@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WC - APG Free Shipping
-Version: 2.7.0.2
+Version: 2.7.0.3
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="https://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WC - APG Weight Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="https://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: https://artprojectgroup.es/
@@ -9,7 +9,7 @@ Author: Art Project Group
 Requires at least: 3.8
 Tested up to: 6.2
 WC requires at least: 2.6
-WC tested up to: 7.1
+WC tested up to: 7.2
 
 Text Domain: woocommerce-apg-free-postcodestatecountry-shipping
 Domain Path: /languages
@@ -209,10 +209,12 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 
             //Función que lee y devuelve los atributos
 			public function apg_free_shipping_dame_atributos() {
-                foreach ( wc_get_attribute_taxonomies() as $atributo ) {
-                    $terminos   = get_terms( array( 'taxonomy' => 'pa_' . $atributo->attribute_name ) );
-                    foreach( $terminos as $termino ) {
-                        $this->atributos[ esc_attr( $atributo->attribute_label ) ][ 'pa_' . $atributo->attribute_name . "-" . $termino->slug ] = $termino->name;
+                if ( wc_get_attribute_taxonomies() ) {
+                    foreach ( wc_get_attribute_taxonomies() as $atributo ) {
+                        $terminos   = get_terms( array( 'taxonomy' => 'pa_' . $atributo->attribute_name ) );
+                        foreach( $terminos as $termino ) {
+                            $this->atributos[ esc_attr( $atributo->attribute_label ) ][ 'pa_' . $atributo->attribute_name . "-" . $termino->slug ] = $termino->name;
+                        }
                     }
                 }
 			}	

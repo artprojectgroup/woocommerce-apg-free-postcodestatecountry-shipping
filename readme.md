@@ -9,11 +9,11 @@ Requires at least: 3.8
 
 Tested up to: 6.2
 
-Stable tag: 2.7.0.2
+Stable tag: 2.7.0.3
 
 WC requires at least: 2.6
 
-WC tested up to: 7.1
+WC tested up to: 7.2
 
 License: GPLv3
 
@@ -92,6 +92,9 @@ Si necesitas ayuda para configurar o instalar **WC - APG Free Shipping**, **Art 
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.7.0.3
+* Pequeños arreglos.
+
 ### 2.7.0.2
 * Pequeños arreglos.
 
