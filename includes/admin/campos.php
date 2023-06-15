@@ -2,6 +2,8 @@
 //Igual no deberías poder abrirme
 defined( 'ABSPATH' ) || exit;
 
+$this->apg_free_shipping_obtiene_datos(); //Recoge los datos
+
 //Campos del formulario
 $campos = [];
 if ( version_compare( WC_VERSION, '2.7', '<' ) ) {
