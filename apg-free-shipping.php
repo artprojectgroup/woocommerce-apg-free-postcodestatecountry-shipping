@@ -1,15 +1,15 @@
 <?php
 /*
 Plugin Name: WC - APG Free Shipping
-Version: 2.8.0.2
+Version: 2.8.1
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="https://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WC - APG Weight Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="https://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: https://artprojectgroup.es/
 Author: Art Project Group
-Requires at least: 3.8
-Tested up to: 6.3
-WC requires at least: 2.6
-WC tested up to: 7.8
+Requires at least: 5.0
+Tested up to: 6.5
+WC requires at least: 5.6
+WC tested up to: 8.7
 
 Text Domain: woocommerce-apg-free-postcodestatecountry-shipping
 Domain Path: /languages
@@ -47,6 +47,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 		//Cargamos funciones necesarias
 		include_once( 'includes/admin/funciones.php' );
 
+		#[AllowDynamicProperties]
 		class WC_apg_free_shipping extends WC_Shipping_Method {				
 			public $categorias_de_producto   = [];
 			public $etiquetas_de_producto    = [];
