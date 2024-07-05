@@ -3,10 +3,10 @@ Contributors: artprojectgroup
 Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: WooCommerce, Shipping, Free Shipping
 Requires at least: 5.0
-Tested up to: 6.5
-Stable tag: 2.8.2
+Tested up to: 6.6
+Stable tag: 2.8.3
 WC requires at least: 5.6
-WC tested up to: 8.7
+WC tested up to: 9.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -87,6 +87,8 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 2. Screenshot of WC - APG Free Shipping. APG Free Shipping Tab.
 
 == Changelog ==
+= 2.8.3 = 
+* Small fixes.
 = 2.8.2 = 
 * Small fixes.
 = 2.8.1 = 
@@ -298,7 +300,7 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 * Initial version.
 
 == Upgrade Notice ==
-= 2.8.2 = 
+= 2.8.3 = 
 * Small fixes.
 
 == Translations ==

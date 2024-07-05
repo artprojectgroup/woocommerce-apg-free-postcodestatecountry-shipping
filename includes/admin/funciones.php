@@ -99,7 +99,7 @@ function apg_free_shipping_toma_de_datos() {
 	
     $zonas_de_envio    = WC_Shipping_Zones::get_zones(); //Guardamos las zonas de envío
 }
-if ( strpos( $_SERVER[ 'REQUEST_URI' ], 'wc-settings&tab=shipping&instance_id' ) !== false ) {
+if ( strpos( $_SERVER[ 'REQUEST_URI' ], 'wc-settings&tab=shipping' ) !== false ) {
     add_action( 'admin_init', 'apg_free_shipping_toma_de_datos' );
 }
 
