@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce - APG Free Postcode/State/Country Shipping\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-01 16:30+0000\n"
+"POT-Creation-Date: 2025-06-01 17:04+0000\n"
 "POT-Revision-Date: Tue Aug 09 2016 11:16:48 GMT+0200 (CEST)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -153,7 +153,7 @@ msgid "Estimated delivery time"
 msgstr ""
 
 #. %s is the estimated delivery time (e.g., "24-48 hours").
-#: apg-free-shipping.php:605 includes/admin/funciones.php:69
+#: apg-free-shipping.php:601 includes/admin/funciones.php:69
 #, php-format
 msgid "Estimated delivery time: %s"
 msgstr ""
@@ -205,6 +205,10 @@ msgstr ""
 msgid "Including taxes"
 msgstr ""
 
+#: apg-free-shipping.php:588
+msgid "Invalid format"
+msgstr ""
+
 #: apg-free-shipping.php:68
 msgid ""
 "Lets you add a free shipping based on Postcode/State/Country of the cart and "
@@ -239,7 +243,7 @@ msgstr ""
 msgid "N/A"
 msgstr ""
 
-#: apg-free-shipping.php:598
+#: apg-free-shipping.php:594
 msgid "No data available"
 msgstr ""
 
@@ -410,7 +414,7 @@ msgstr ""
 msgid "This controls the title which the user sees during checkout."
 msgstr ""
 
-#: apg-free-shipping.php:623
+#: apg-free-shipping.php:619
 msgid "This plugin requires WooCommerce to be active in order to run!"
 msgstr ""
 
