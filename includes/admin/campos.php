@@ -5,6 +5,8 @@ defined( 'ABSPATH' ) || exit;
 $this->apg_free_shipping_obtiene_datos(); //Recoge los datos
 
 //Campos del formulario
+// translators: %1$s is a context-dependent item name (e.g., product category, tag, attribute, role, or shipping class); %2$s is the shipping method title.
+$texto  = __( "Select the %1\$s where %2\$s doesn't accept shippings.", 'woocommerce-apg-free-postcodestatecountry-shipping' );
 $campos = [];
 if ( version_compare( WC_VERSION, '2.7', '<' ) ) {
 	$campos[ 'activo' ] = [ 
@@ -61,8 +63,10 @@ $campos[ 'peso' ] = [
 	'class'				=> 'short wc_input_decimal'
 ];
 $campos[ 'categorias_excluidas' ] = [ 
-	'title'			=> sprintf( __( 'No shipping (%s)', 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'Product category', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
-	'desc_tip' 		=> sprintf( __( "Select the %s where %s doesn't accept shippings.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'product category', 'woocommerce-apg-free-postcodestatecountry-shipping' ), $this->method_title ),
+    // translators: %s is the name of the product category.
+	'title'			=> sprintf( __( 'No shipping (%s)', 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'Product category', 'woocommerce-apg-free-postcodestatecountry-shipping' )  ),
+    // translators: %1$s is the name of the product category, %2$s is the shipping method title.
+    'desc_tip' 		=> sprintf( $texto, __( 'product category', 'woocommerce-apg-free-postcodestatecountry-shipping' ), $this->method_title ),
 	'css'			=> 'width: 450px;',
 	'default'		=> '',
 	'type'			=> 'multiselect',
@@ -70,15 +74,19 @@ $campos[ 'categorias_excluidas' ] = [
 	'options' 		=> $this->categorias_de_producto,
 ];
 $campos[ 'tipo_categorias' ] = [
-	'title'			=> sprintf( __( 'Shipping (%s)?', 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'Product category', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
+    // translators: %s is the name of the product category.
 	'type'			=> 'checkbox',
+    // translators: %s is the plural "product categories".
 	'label'			=> sprintf( __( "Ship only to the %s selected in the previous field.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'product categories', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
+    // translators: %s is the plural "product categories".
 	'desc_tip' 		=> sprintf( __( "Check this field to accept shippings in the %s selected in the previous field.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'product categories', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
 	'default'		=> 'no',
 ];
 $campos[ 'etiquetas_excluidas' ] = [ 
+    // translators: %s is the name of the product tag.
 	'title'			=> sprintf( __( 'No shipping (%s)', 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'Product tag', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
-	'desc_tip' 		=> sprintf( __( "Select the %s where %s doesn't accept shippings.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'product tag', 'woocommerce-apg-free-postcodestatecountry-shipping' ), $this->method_title ),
+    // translators: %1$s is the product tag name, %2$s is the shipping method title.
+	'desc_tip' 		=> sprintf( $texto, __( 'product tag', 'woocommerce-apg-free-postcodestatecountry-shipping' ), $this->method_title ),
 	'css'			=> 'width: 450px;',
 	'default'		=> '',
 	'type'			=> 'multiselect',
@@ -86,16 +94,21 @@ $campos[ 'etiquetas_excluidas' ] = [
 	'options' 		=> $this->etiquetas_de_producto,
 ];
 $campos[ 'tipo_etiquetas' ] = [
+    // translators: %s is the name of the product tag.
 	'title'			=> sprintf( __( 'Shipping (%s)?', 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'Product tag', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
 	'type'			=> 'checkbox',
+    // translators: %s is the plural "product tags".
 	'label'			=> sprintf( __( "Ship only to the %s selected in the previous field.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'product tags', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
+    // translators: %s is the plural "product tags".
 	'desc_tip' 		=> sprintf( __( "Check this field to accept shippings in the %s selected in the previous field.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'product tags', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
 	'default'		=> 'no',
 ];
 if ( wc_get_attribute_taxonomies() ) {
     $campos[ 'atributos_excluidos' ] = [ 
+        // translators: %s is the name of the attribute.
         'title'			=> sprintf( __( 'No shipping (%s)', 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'Attribute', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
-        'desc_tip' 		=> sprintf( __( "Select the %s where %s doesn't accept shippings.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'attribute', 'woocommerce-apg-free-postcodestatecountry-shipping' ), $this->method_title ),
+        // translators: %1$s is the attribute name, %2$s is the shipping method title.
+        'desc_tip' 		=> sprintf( $texto, __( 'attribute', 'woocommerce-apg-free-postcodestatecountry-shipping' ), $this->method_title ),
         'css'			=> 'width: 450px;',
         'default'		=> '',
         'type'			=> 'multiselect',
@@ -103,17 +116,22 @@ if ( wc_get_attribute_taxonomies() ) {
         'options' 		=> $this->atributos,
     ];
     $campos[ 'tipo_atributos' ] = [
+        // translators: %s is the name of the attribute.
         'title'			=> sprintf( __( 'Shipping (%s)?', 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'Attribute', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
         'type'			=> 'checkbox',
+        // translators: %s is the plural "attributes".
         'label'			=> sprintf( __( "Ship only to the %s selected in the previous field.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'attributes', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
+        // translators: %s is the plural "attributes".
         'desc_tip' 		=> sprintf( __( "Check this field to accept shippings in the %s selected in the previous field.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'attributes', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
         'default'		=> 'no',
     ];
 }
 if ( WC()->shipping->get_shipping_classes() ) {
 	$campos[ 'clases_excluidas' ] = [ 
+        // translators: %s is the name of the shipping class.
 		'title'			=> sprintf( __( 'No shipping (%s)', 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'Shipping class', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
-		'desc_tip' 		=> sprintf( __( "Select the %s where %s doesn't accept free shippings.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'shipping class', 'woocommerce-apg-free-postcodestatecountry-shipping' ), $this->method_title ),
+        // translators: %1$s is the shipping class name, %2$s is the shipping method title.
+		'desc_tip' 		=> sprintf( $texto, __( 'shipping class', 'woocommerce-apg-free-postcodestatecountry-shipping' ), $this->method_title ),
 		'css'			=> 'width: 450px;',
 		'default'		=> '',
 		'type'			=> 'multiselect',
@@ -123,16 +141,21 @@ if ( WC()->shipping->get_shipping_classes() ) {
         ] + $this->clases_de_envio,
 	];
 	$campos[ 'tipo_clases' ] = [
+        // translators: %s is the name of the shipping class.
 		'title'			=> sprintf( __( 'Shipping (%s)?', 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'Shipping class', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
 		'type'			=> 'checkbox',
+        // translators: %s is the plural "shipping classes".
 		'label'			=> sprintf( __( "Ship only to the %s selected in the previous field.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'shipping classes', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
+        // translators: %s is the plural "shipping classes".
 		'desc_tip' 		=> sprintf( __( "Check this field to accept shippings in the %s selected in the previous field.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'shipping classes', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
 		'default'		=> 'no',
 	];
 }
 $campos[ 'roles_excluidos' ] = [ 
+    // translators: %s is the name of the user role.
 	'title'			=> sprintf( __( 'No shipping (%s)', 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'User role', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
-	'desc_tip' 		=> sprintf( __( "Select the %s where %s doesn't accept free shippings.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'user role', 'woocommerce-apg-free-postcodestatecountry-shipping' ), $this->method_title ),
+    // translators: %1$s is the user role name, %2$s is the shipping method title.
+	'desc_tip' 		=> sprintf( $texto, __( 'user role', 'woocommerce-apg-free-postcodestatecountry-shipping' ), $this->method_title ),
 	'css'			=> 'width: 450px;',
 	'default'		=> '',
 	'type'			=> 'multiselect',
@@ -142,14 +165,18 @@ $campos[ 'roles_excluidos' ] = [
 	] + $this->roles_de_usuario,
 ];
 $campos[ 'tipo_roles' ] = [
+    // translators: %s is the name of the user role.
 	'title'			=> sprintf( __( 'Shipping (%s)?', 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'User role', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
 	'type'			=> 'checkbox',
+    // translators: %s is the plural "user roles".
 	'label'			=> sprintf( __( "Ship only to the %s selected in the previous field.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'user roles', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
+    // translators: %s is the plural "user roles".
 	'desc_tip' 		=> sprintf( __( "Check this field to accept shippings in the %s selected in the previous field.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'user roles', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
 	'default'		=> 'no',
 ];
 $campos[ 'pago' ] = [
 	'title'			=> __( 'Payment gateway', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
+    // translators: %s is the shipping method title.
 	'desc_tip'		=> sprintf( __( 'Payment gateway available for %s', 'woocommerce-apg-free-postcodestatecountry-shipping' ), $this->method_title ),
 	'css'			=> 'width: 450px;',
 	'default'		=> [ 
@@ -164,6 +191,7 @@ $campos[ 'pago' ] = [
 if ( ! empty( $this->metodos_de_envio ) ) {
     $campos[ 'envio' ] = [
         'title'			=> __( 'Shipping methods', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
+        // translators: %s is the shipping method title.
         'desc_tip'		=> sprintf( __( "Shipping methods available in the same shipping zone of %s", 'woocommerce-apg-free-postcodestatecountry-shipping' ), $this->method_title ),
         'css'			=> 'width: 450px;',
         'default'		=> [ 
@@ -204,9 +232,11 @@ $campos[ 'entrega' ] = [
 		'desc_tip'		=> true,
 ];
 $campos[ 'precio' ] = [ 
-		'title'			=> sprintf( __( 'Show %s price', 'woocommerce-apg-free-postcodestatecountry-shipping' ), wc_price(0) ),
+        // translators: %s is the shipping price to be shown, typically "0,00 €"
+		'title'			=> sprintf( __( 'Show %s price', 'woocommerce-apg-free-postcodestatecountry-shipping' ), wc_price( 0 ) ),
 		'type'			=> 'checkbox',
-		'label'			=> sprintf( __( "Show %s price after method title.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), wc_price(0) ),
+        // translators: %s is the shipping price to be shown after the label, typically "0,00 €"
+		'label'			=> sprintf( __( "Show %s price after method title.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), wc_price( 0 ) ),
 		'default'		=> 'no',
 ];
 $campos[ 'muestra' ] = [ 

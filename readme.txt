@@ -3,12 +3,12 @@ Contributors: artprojectgroup
 Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: WooCommerce, Shipping, Free Shipping
 Requires at least: 5.0
-Tested up to: 6.8
-Stable tag: 2.8.5
+Tested up to: 6.9
+Stable tag: 3.0
 WC requires at least: 5.6
-WC tested up to: 9.7
-License: GPLv3
-License URI: http://www.gnu.org/licenses/gpl-3.0.html
+WC tested up to: 9.9
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Add to WooCommerce a free shipping based on postcode, state (province), country and a minimum and/or a valid coupon.
 
@@ -87,6 +87,11 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 2. Screenshot of WC - APG Free Shipping. APG Free Shipping Tab.
 
 == Changelog ==
+= 3.0 =
+* Security improvement.
+* General performance enhancement.
+* Full code compliance with WordPress security standards.
+* Small fixes.
 = 2.8.5 = 
 * Small fixes.
 = 2.8.4 = 
@@ -304,7 +309,10 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 * Initial version.
 
 == Upgrade Notice ==
-= 2.8.5 = 
+= 3.0 =
+* Security improvement.
+* General performance enhancement.
+* Full code compliance with WordPress security standards.
 * Small fixes.
 
 == Translations ==
@@ -326,3 +334,10 @@ Did you liked and you have proved useful **WC - APG Free Shipping** on your webs
 * All that you encourage us with your comments.
 
 Thank you very much to all!
+
+== External Services ==
+This plugin connects to the WordPress.org Plugins API to fetch plugin information.
+
+It sends the plugin slug when requesting data.
+
+More info: https://wordpress.org/about/privacy/

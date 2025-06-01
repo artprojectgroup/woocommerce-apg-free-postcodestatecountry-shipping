@@ -7,17 +7,17 @@ Tags: WooCommerce, Shipping, Free Shipping
 
 Requires at least: 5.0
 
-Tested up to: 6.8
+Tested up to: 6.9
 
-Stable tag: 2.8.5
+Stable tag: 3.0
 
 WC requires at least: 5.6
 
-WC tested up to: 9.7
+WC tested up to: 9.9
 
-License: GPLv3
+License: GPLv2 or later
 
-License URI: http://www.gnu.org/licenses/gpl-3.0.html
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Añade a WooCommerce un envío gratuito basado en el código postal, provincia (estado), país y un importe mínimo y/o un cupón válido.
 
@@ -92,6 +92,12 @@ Si necesitas ayuda para configurar o instalar **WC - APG Free Shipping**, **Art 
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 3.0
+* Mejora de la seguridad.
+* Mejora de rendimiento general.
+* Adecuación completa del código a los estándares de seguridad marcadas por WordPress.
+* Pequeños arreglos.
+
 ### 2.8.5
 * Pequeños arreglos.
 
@@ -421,3 +427,10 @@ Dado que **WC - APG Free Shipping** es totalmente gratuito, **Art Project Group*
 * A todos los que nos animáis con vuestros comentarios.
 
 ¡Muchas gracias a todos!
+
+## Servicios Externos
+Este plugin se conecta a la API de plugins de WordPress.org para obtener información sobre plugins.
+
+Envía el enlace permanente del plugin cuando solicita datos.
+
+Más información: https://wordpress.org/about/privacy/
