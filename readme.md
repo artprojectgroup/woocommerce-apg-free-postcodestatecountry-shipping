@@ -9,7 +9,7 @@ Requires at least: 5.0
 
 Tested up to: 6.9
 
-Stable tag: 3.0
+Stable tag: 3.1
 
 WC requires at least: 5.6
 
@@ -29,6 +29,7 @@ Añade a WooCommerce un envío gratuito basado en el código postal, provincia (
 **WC - APG Free Shipping** añade a tu tienda WooCommerce la posibilidad de incluir un envío gratuito basándose en el código postal, provincia (estado) y/o país de la dirección de envío y un importe mínimo del pedido y/o un cupón válido de gastos de envío gratuitos.
 
 ### Características
+* Totalmente compatible con los bloques Carrito y Finalizar compra del editor de bloques de WordPress.
 * Puedes requerir un importe mínimo y/o un cupón válido de gastos de envío gratuitos.
 * Puedes excluir por peso máximo.
 * Puedes excluir categorías de producto.
@@ -92,6 +93,9 @@ Si necesitas ayuda para configurar o instalar **WC - APG Free Shipping**, **Art 
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 3.1
+* Añade soporte a los bloques Carrito y Finalizar compra.
+
 ### 3.0
 * Mejora de la seguridad.
 * Mejora de rendimiento general.

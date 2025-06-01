@@ -2,7 +2,7 @@
 /*
 Plugin Name: WC - APG Free Shipping
 Requires Plugins: woocommerce
-Version: 3.0
+Version: 3.1
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="https://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WC - APG Weight Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="https://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: https://artprojectgroup.es/
@@ -27,6 +27,7 @@ defined( 'ABSPATH' ) || exit;
 
 //Definimos constantes
 define( 'DIRECCION_apg_free_shipping', plugin_basename( __FILE__ ) );
+define( 'VERSION_apg_free_shipping', '3.1' );
 
 //Funciones generales de APG
 include_once( 'includes/admin/funciones-apg.php' );
@@ -556,6 +557,58 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 } else {
 	add_action( 'admin_notices', 'apg_free_shipping_requiere_wc' );
 }
+
+//Añade soporte a Checkout y Cart Block
+function apg_free_shipping_script_bloques() {
+    //Evita ejecución en backend/editor REST
+    if ( is_admin() || wp_doing_ajax() || defined( 'REST_REQUEST' ) ) {
+        return; 
+    }
+    
+	//Detecta bloques de WooCommerce para carrito o checkout
+	$bloques   = function_exists( 'has_block' ) && ( has_block( 'woocommerce/cart', wc_get_page_id( 'cart' ) ) || has_block( 'woocommerce/checkout', wc_get_page_id( 'checkout' ) ) );
+
+	if ( ! $bloques ) {
+        return; //No se están usando bloques de carrito/checkout
+	}
+
+    $script_handle  = 'apg-shipping-bloques';
+    if ( ! wp_script_is( $script_handle, 'enqueued' ) ) {
+        wp_enqueue_script( $script_handle, plugins_url( 'assets/js/apg-free-shipping-bloques.js', DIRECCION_apg_free_shipping ), [ 'jquery' ], VERSION_apg_free_shipping, true );
+        wp_localize_script( $script_handle, 'apg_shipping', [ 'ajax_url' => admin_url( 'admin-ajax.php' ) ] );
+    }
+}
+add_action( 'enqueue_block_assets', 'apg_free_shipping_script_bloques' );
+
+//Añade la etiqueta a los bloques
+function apg_free_shipping_ajax_datos() {
+    // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Missing
+    $metodo = sanitize_text_field( $_POST[ 'metodo' ] ?? '' );
+    if ( ! preg_match( '/^([a-zA-Z0-9_]+):(\d+)$/', $metodo, $method ) ) {
+        wp_send_json_error( __( 'Invalid format', 'woocommerce-apg-weight-and-postcodestatecountry-shipping' ) );
+    }
+
+    list( , $slug, $instance_id )   = $method;
+    $opciones                       = get_option( "woocommerce_{$slug}_{$instance_id}_settings" );
+    if ( ! is_array( $opciones ) ) {
+        wp_send_json_error( __( 'No data available', 'woocommerce-apg-free-postcodestatecountry-shipping' ) );
+    }
+    
+	//Tiempo de entrega
+    $entrega    = $opciones[ 'entrega' ] ?? '';
+	if ( ! empty( $entrega ) ) {
+        // translators: %s is the estimated delivery time (e.g., "24-48 hours").
+        $entrega    = ( apply_filters( 'apg_free_shipping_delivery', true ) ) ? sprintf( __( "Estimated delivery time: %s", 'woocommerce-apg-free-postcodestatecountry-shipping' ), $entrega ) : $entrega;
+    }
+    wp_send_json_success( [
+        'titulo'    => $opciones[ 'title' ] ?? ucfirst( $slug ),
+        'entrega'   => $entrega,
+        'icono'     => $opciones[ 'icono' ] ?? '',
+        'muestra'   => $opciones[ 'muestra_icono' ] ?? '',
+    ] );
+}
+add_action( 'wp_ajax_apg_free_shipping_ajax_datos', 'apg_free_shipping_ajax_datos' );
+add_action( 'wp_ajax_nopriv_apg_free_shipping_ajax_datos', 'apg_free_shipping_ajax_datos' );
 
 //Muestra el mensaje de activación de WooCommerce y desactiva el plugin
 function apg_free_shipping_requiere_wc() {

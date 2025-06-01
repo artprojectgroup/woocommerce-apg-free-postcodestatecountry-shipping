@@ -4,7 +4,7 @@ Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: WooCommerce, Shipping, Free Shipping
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 3.0
+Stable tag: 3.1
 WC requires at least: 5.6
 WC tested up to: 9.9
 License: GPLv2 or later
@@ -20,6 +20,7 @@ Add to WooCommerce a free shipping based on postcode, state (province), country 
 **WC - APG Free Shipping** add to your WooCommerce shop the possibility of including a free shipping based on postcode, state (province) and/or country from the shipping address and a minimum amount of order and/or a valid free shipping coupon.
 
 = Features =
+* Fully compatible with the Cart and Checkout blocks from the WordPress block editor.
 * You can require a minimum and/or a valid free shipping coupon.
 * You can exclude by maximum weight.
 * You can exclude product categories.
@@ -87,6 +88,8 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 2. Screenshot of WC - APG Free Shipping. APG Free Shipping Tab.
 
 == Changelog ==
+= 3.1 =
+* Adds support for the Cart and Checkout blocks.
 = 3.0 =
 * Security improvement.
 * General performance enhancement.
@@ -309,11 +312,8 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 * Initial version.
 
 == Upgrade Notice ==
-= 3.0 =
-* Security improvement.
-* General performance enhancement.
-* Full code compliance with WordPress security standards.
-* Small fixes.
+= 3.1 =
+* Adds support for the Cart and Checkout blocks.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).

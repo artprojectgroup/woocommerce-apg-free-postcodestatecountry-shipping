@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce - APG Free Postcode/State/Country Shipping\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-01 08:43+0000\n"
+"POT-Creation-Date: 2025-06-01 16:30+0000\n"
 "POT-Revision-Date: Tue Aug 09 2016 11:16:48 GMT+0200 (CEST)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -76,7 +76,7 @@ msgstr ""
 msgid "All enabled shipping methods"
 msgstr ""
 
-#: apg-free-shipping.php:66
+#: apg-free-shipping.php:67
 msgid "APG Free Shipping"
 msgstr ""
 
@@ -153,7 +153,7 @@ msgid "Estimated delivery time"
 msgstr ""
 
 #. %s is the estimated delivery time (e.g., "24-48 hours").
-#: includes/admin/funciones.php:68
+#: apg-free-shipping.php:605 includes/admin/funciones.php:69
 #, php-format
 msgid "Estimated delivery time: %s"
 msgstr ""
@@ -205,7 +205,7 @@ msgstr ""
 msgid "Including taxes"
 msgstr ""
 
-#: apg-free-shipping.php:67
+#: apg-free-shipping.php:68
 msgid ""
 "Lets you add a free shipping based on Postcode/State/Country of the cart and "
 "minimum order a amount and/or a valid free shipping coupon."
@@ -237,6 +237,10 @@ msgstr ""
 
 #: includes/admin/campos.php:31
 msgid "N/A"
+msgstr ""
+
+#: apg-free-shipping.php:598
+msgid "No data available"
 msgstr ""
 
 #: includes/admin/campos.php:204
@@ -311,7 +315,7 @@ msgstr ""
 msgid "product tags"
 msgstr ""
 
-#: apg-free-shipping.php:209
+#: apg-free-shipping.php:210
 msgid "Select a class&hellip;"
 msgstr ""
 
@@ -406,7 +410,7 @@ msgstr ""
 msgid "This controls the title which the user sees during checkout."
 msgstr ""
 
-#: apg-free-shipping.php:566
+#: apg-free-shipping.php:623
 msgid "This plugin requires WooCommerce to be active in order to run!"
 msgstr ""
 

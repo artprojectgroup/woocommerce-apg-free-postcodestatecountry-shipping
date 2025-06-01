@@ -63,9 +63,10 @@ function apg_free_shipping_icono( $etiqueta, $metodo ) {
     }
 	
 	//Tiempo de entrega
-	if ( ! empty( $apg_free_shipping_settings[ 'entrega' ] ) ) {
+    $entrega    = $apg_free_shipping_settings[ 'entrega' ];
+	if ( ! empty( $entrega ) ) {
         // translators: %s is the estimated delivery time (e.g., "24-48 hours").
-        $etiqueta .= ( apply_filters( 'apg_free_shipping_delivery', true ) ) ? '<br /><small class="apg_free_shipping_delivery">' . sprintf( __( 'Estimated delivery time: %s', 'woocommerce-apg-free-postcodestatecountry-shipping' ), esc_html( $apg_free_shipping_settings[ 'entrega' ] ) ) . '</small>' : '<br /><small class="apg_free_shipping_delivery">' . esc_html( $apg_free_shipping_settings[ 'entrega' ] ) . '</small>';
+        $etiqueta .= ( apply_filters( 'apg_free_shipping_delivery', true ) ) ? '<br /><small class="apg_free_shipping_delivery">' . sprintf( __( 'Estimated delivery time: %s', 'woocommerce-apg-free-postcodestatecountry-shipping' ), esc_html( $entrega ) ) . '</small>' : '<br /><small class="apg_free_shipping_delivery">' . esc_html( $entrega ) . '</small>';
 	}
 
     //Guarda en caché durante una hora
