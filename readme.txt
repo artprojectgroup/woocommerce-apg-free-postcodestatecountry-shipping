@@ -4,9 +4,9 @@ Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: WooCommerce, Shipping, Free Shipping
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 3.1.0.1
+Stable tag: 3.2
 WC requires at least: 5.6
-WC tested up to: 9.9
+WC tested up to: 9.9.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,12 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 2. Screenshot of WC - APG Free Shipping. APG Free Shipping Tab.
 
 == Changelog ==
+= 3.2 =
+* Adds support for the Cart and Checkout blocks.
+* Security improvement.
+* General performance enhancement.
+* Full code compliance with WordPress security standards.
+* Small fixes.
 = 3.1.0.1 =
 * Version 2.8.5 temporarily restored.
 = 3.1 =
@@ -314,8 +320,12 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 * Initial version.
 
 == Upgrade Notice ==
-= 3.1.0.1 =
-* Version 2.8.5 temporarily restored.
+= 3.2 =
+* Adds support for the Cart and Checkout blocks.
+* Security improvement.
+* General performance enhancement.
+* Full code compliance with WordPress security standards.
+* Small fixes.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).

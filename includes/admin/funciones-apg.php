@@ -12,14 +12,8 @@ $apg_free_shipping = [
 	'ajustes' 		=> 'admin.php?page=wc-settings&tab=shipping', 
 	'puntuacion' 	=> 'https://wordpress.org/support/view/plugin-reviews/woocommerce-apg-free-postcodestatecountry-shipping'
 ];
-$medios_de_pago = [];
-$zonas_de_envio = [];
-
-//Carga el idioma
-function apg_free_shipping_inicia_idioma() {
-    load_plugin_textdomain( 'woocommerce-apg-free-postcodestatecountry-shipping', null, dirname( DIRECCION_apg_free_shipping ) . '/languages' );
-}
-add_action( 'after_setup_theme', 'apg_free_shipping_inicia_idioma' );
+$medios_de_pago = get_transient( 'apg_shipping_metodos_de_pago' );
+$zonas_de_envio = get_transient( 'apg_shipping_zonas_de_envio' );
 
 //Enlaces adicionales personalizados
 function apg_free_shipping_enlaces( $enlaces, $archivo ) {
@@ -62,7 +56,7 @@ function apg_free_shipping_noficacion( $datos_version_actual, $datos_nueva_versi
 		$mensaje .= __( "<h4>ALERT: 2.0 is a major update</h4>It’s important that you make backups of your <strong>WC - APG Free Shipping</strong> current configuration and configure it again after upgrade.<br /><em>Remember, the current setting is totally incompatible with WooCommerce 2.6 and you'll lose it</em>.", 'woocommerce-apg-free-postcodestatecountry-shipping' );
         $mensaje .= '</div><p>';
 		
-		echo $mensaje;
+		echo wp_kses_post( $mensaje );
 	}
 }
 add_action( 'in_plugin_update_message-woocommerce-apg-free-postcodestatecountry-shipping/apg-free-shipping.php', 'apg_free_shipping_noficacion', 10, 2 );
@@ -79,6 +73,7 @@ function apg_free_shipping_plugin( $nombre ) {
 	if ( ! is_wp_error( $respuesta ) ) {
 		$plugin = json_decode( wp_remote_retrieve_body( $respuesta ) );
 	} else {
+        // translators: %s is the plugin name.
 	   return '<a title="' . sprintf( __( 'Please, rate %s:', 'woocommerce-apg-free-postcodestatecountry-shipping' ), $apg_free_shipping[ 'plugin' ] ) . '" href="' . $apg_free_shipping[ 'puntuacion' ] . '?rate=5#postform" class="estrellas">' . __( 'Unknown rating', 'woocommerce-apg-free-postcodestatecountry-shipping' ) . '</a>';
 	}
 
@@ -92,26 +87,18 @@ function apg_free_shipping_plugin( $nombre ) {
 	$estrellas = ob_get_contents();
 	ob_end_clean();
 
+    // translators: %s is the plugin name.
 	return '<a title="' . sprintf( __( 'Please, rate %s:', 'woocommerce-apg-free-postcodestatecountry-shipping' ), $apg_free_shipping[ 'plugin' ] ) . '" href="' . $apg_free_shipping[ 'puntuacion' ] . '?rate=5#postform" class="estrellas">' . $estrellas . '</a>';
-}
-
-//Actualiza los medios de pago 
-function apg_free_shipping_pago() {
-	global $medios_de_pago;
-
-    $medios_de_pago = WC()->payment_gateways->payment_gateways(); //Guardamos los medios de pago
-}
-if ( strpos( $_SERVER[ 'REQUEST_URI' ], 'wc-settings&tab=shipping&instance_id' ) !== false ) {
-    add_action( 'admin_init', 'apg_free_shipping_pago' );
 }
 
 //Hoja de estilo y JavaScript
 function apg_free_shipping_estilo() {
-	if ( strpos( $_SERVER[ 'REQUEST_URI' ], 'wc-settings&tab=shipping&instance_id' ) !== false || strpos( $_SERVER[ 'REQUEST_URI' ], 'plugins.php' ) !== false  ) {
-		wp_enqueue_style( 'apg_free_shipping_hoja_de_estilo', plugins_url( 'assets/css/style.css', DIRECCION_apg_free_shipping ) ); //Carga la hoja de estilo		
+    $request_uri    = isset( $_SERVER[ 'REQUEST_URI' ] ) ? sanitize_text_field( wp_unslash( $_SERVER[ 'REQUEST_URI' ] ) ) : '';
+    if ( strpos( $request_uri, 'wc-settings&tab=shipping&instance_id' ) !== false || strpos( $request_uri, 'plugins.php' ) !== false ) {
+		wp_enqueue_style( 'apg_free_shipping_hoja_de_estilo', plugins_url( 'assets/css/style.css', DIRECCION_apg_free_shipping ), [], VERSION_apg_free_shipping ); //Carga la hoja de estilo global
 	}
-	if ( strpos( $_SERVER[ 'REQUEST_URI' ], 'wc-settings&tab=shipping' ) !== false ) {
-		wp_enqueue_script( 'apg_free_shipping_script', plugins_url( 'assets/js/apg-free-shipping.js', DIRECCION_apg_free_shipping ) );
+    if ( strpos( $request_uri, 'wc-settings&tab=shipping' ) !== false ) {
+		wp_enqueue_script( 'apg_free_shipping_script', plugins_url( 'assets/js/apg-free-shipping.js', DIRECCION_apg_free_shipping ), [ 'jquery' ], VERSION_apg_free_shipping, true );
 	}
 }
 add_action( 'admin_enqueue_scripts', 'apg_free_shipping_estilo' );
