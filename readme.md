@@ -94,7 +94,7 @@ Si necesitas ayuda para configurar o instalar **WC - APG Free Shipping**, **Art 
 
 ## Changelog
 ### 3.2
-* Añade soporte a los bloques Carrito y Finalizar compra.
+* Añade soporte al bloque Finalizar compra.
 * Mejora de la seguridad.
 * Mejora de rendimiento general.
 * Adecuación completa del código a los estándares de seguridad marcadas por WordPress.

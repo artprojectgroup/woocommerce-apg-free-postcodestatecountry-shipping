@@ -50,8 +50,8 @@ $plugin = DIRECCION_apg_free_shipping;
 add_filter( "plugin_action_links_$plugin", 'apg_free_shipping_enlace_de_ajustes' );
 
 //Añade notificación de actualización
-function apg_free_shipping_noficacion( $datos_version_actual, $datos_nueva_version ) {
-	if ( isset( $datos_nueva_version->upgrade_notice ) && strlen( trim( $datos_nueva_version->upgrade_notice ) ) > 0 && (float) $datos_version_actual[ 'Version' ] < 2.0 ){
+function apg_free_shipping_notificacion( $datos_version_actual, $datos_nueva_version ) {
+    if ( isset( $datos_nueva_version->upgrade_notice ) && strlen( trim( $datos_nueva_version->upgrade_notice ) ) > 0 && version_compare( $datos_version_actual['Version'], '2.0', '<' ) ) {
         $mensaje = '</p><div class="wc_plugin_upgrade_notice">';
 		$mensaje .= __( "<h4>ALERT: 2.0 is a major update</h4>It’s important that you make backups of your <strong>WC - APG Free Shipping</strong> current configuration and configure it again after upgrade.<br /><em>Remember, the current setting is totally incompatible with WooCommerce 2.6 and you'll lose it</em>.", 'woocommerce-apg-free-postcodestatecountry-shipping' );
         $mensaje .= '</div><p>';
@@ -59,7 +59,7 @@ function apg_free_shipping_noficacion( $datos_version_actual, $datos_nueva_versi
 		echo wp_kses_post( $mensaje );
 	}
 }
-add_action( 'in_plugin_update_message-woocommerce-apg-free-postcodestatecountry-shipping/apg-free-shipping.php', 'apg_free_shipping_noficacion', 10, 2 );
+add_action( 'in_plugin_update_message-woocommerce-apg-free-postcodestatecountry-shipping/apg-free-shipping.php', 'apg_free_shipping_notificacion', 10, 2 );
 
 //Obtiene toda la información sobre el plugin
 function apg_free_shipping_plugin( $nombre ) {

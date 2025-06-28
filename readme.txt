@@ -89,7 +89,7 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 
 == Changelog ==
 = 3.2 =
-* Adds support for the Cart and Checkout blocks.
+* Adds support for the Checkout block.
 * Security improvement.
 * General performance enhancement.
 * Full code compliance with WordPress security standards.
@@ -321,7 +321,7 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 
 == Upgrade Notice ==
 = 3.2 =
-* Adds support for the Cart and Checkout blocks.
+* Adds support for the Checkout block.
 * Security improvement.
 * General performance enhancement.
 * Full code compliance with WordPress security standards.
