@@ -2,7 +2,7 @@
 /*
 Plugin Name: WC - APG Free Shipping
 Requires Plugins: woocommerce
-Version: 3.2
+Version: 3.2.0.1
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="https://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WC - APG Weight Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="https://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: https://artprojectgroup.es/
@@ -27,7 +27,7 @@ defined( 'ABSPATH' ) || exit;
 
 //Definimos constantes
 define( 'DIRECCION_apg_free_shipping', plugin_basename( __FILE__ ) );
-define( 'VERSION_apg_free_shipping', '3.2' );
+define( 'VERSION_apg_free_shipping', '3.2.0.1' );
 
 //Funciones generales de APG
 include_once( 'includes/admin/funciones-apg.php' );
@@ -275,7 +275,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
                         foreach ( $zonas_de_envio as $zona ) {
                             if ( ( int ) $zona[ 'id' ] === ( int ) $zona_de_envio && !empty( $zona[ 'shipping_methods' ] ) ) {
                                 foreach ( $zona[ 'shipping_methods' ] as $metodo ) {
-                                    if ( $metodo[ 'instance_id' ] != $instancia ) {
+                                    if ( is_array( $metodo ) && isset( $metodo[ 'instance_id' ] ) && $metodo[ 'instance_id' ] != $instancia ) {
                                         $this->metodos_de_envio[ $metodo[ 'instance_id' ] ] = $metodo[ 'title' ];
                                     }
                                 }

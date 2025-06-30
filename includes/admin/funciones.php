@@ -4,75 +4,83 @@ defined( 'ABSPATH' ) || exit;
 
 //Muestra el icono
 function apg_free_shipping_icono( $etiqueta, $metodo ) {
+    //Previene errores y compatibilidad con WC - APG Weight Shipping
+    if ( ! isset( $metodo->instance_id ) || ! isset( $metodo->cost ) || $metodo->cost > 0 ) {
+        return $etiqueta;
+    }
+
     //Variables
     $instance_id = $metodo->instance_id;
     $cache_key   = "apg_shipping_icono_{$instance_id}";
+    
+    //Intenta obtener desde caché
+    $etiqueta_cacheada  = get_transient( $cache_key );
+    if ( false !== $etiqueta_cacheada ) {
+        return $etiqueta_cacheada;
+    }
     
     //Obtiene configuración del método de envío
     $opcion_bruta               = get_option( "woocommerce_apg_free_shipping_{$instance_id}_settings" );
     $apg_free_shipping_settings = is_array( $opcion_bruta ) ? $opcion_bruta : maybe_unserialize( $opcion_bruta );
     
-    //Previene compatibilidad con WC - APG Weight Shipping
-    if ( ! is_array( $apg_free_shipping_settings ) || ! isset( $metodo->cost ) || $metodo->cost > 0 || ! isset( $apg_free_shipping_settings[ 'precio' ] ) ) {
+    //Previene errores
+    if ( ! is_array( $apg_free_shipping_settings ) || ! isset( $apg_free_shipping_settings[ 'precio' ] ) ) {
 		return $etiqueta;
 	}
 
-    //Usa etiqueta en caché
-    $etiqueta   = get_transient( $cache_key );
-    if ( false !== $etiqueta ) {
-        return $etiqueta;
-    }
+    //Precio y título
+    $precio = ( $apg_free_shipping_settings[ 'precio' ] === 'yes' ) ? ': ' . wc_price( $metodo->cost ) : '';    
+    $titulo = apply_filters( 'apg_free_shipping_label', $metodo->label );
 
     //¿Mostramos el icono?
     $icon_url       = $apg_free_shipping_settings[ 'icono' ] ?? '';
     $mostrar_icono  = $apg_free_shipping_settings[ 'muestra_icono' ] ?? '';
+    
+    //Construye el icono si aplica
+    $imagen = '';
     if ( ! empty( $icon_url ) && filter_var( $icon_url, FILTER_VALIDATE_URL ) && $mostrar_icono !== 'no' ) {
-        //Añade el precio
-        $precio = ( $apg_free_shipping_settings['precio'] === 'yes' ) ? ': ' . wc_price( $metodo->cost ) : '';
-        
+        $ancho = $alto = null;
         //Procesa imagen y obtiene su tamaño
-        require_once ABSPATH . 'wp-admin/includes/file.php'; // Asegura que download_url() existe
-        $ancho  = null;
-        $alto   = null;
-        $icon   = download_url( $icon_url );
-        if ( ! is_wp_error( $icon ) ) {
-            $tamano = wp_getimagesize( $icon );
-            if ( is_array( $tamano ) ) {
-                list( $ancho, $alto )   = $tamano;
+        require_once ABSPATH . 'wp-admin/includes/file.php'; //Asegura que download_url() existe
+        $icon_temp  = download_url( $icon_url );
+
+        if ( ! is_wp_error( $icon_temp ) ) {
+            $size   = wp_getimagesize( $icon_temp );
+            if ( is_array( $size ) ) {
+                list( $ancho, $alto )   = $size;
             }
-            wp_delete_file( $icon );
+            wp_delete_file( $icon_temp );
         }
-        
-        //Construcción de la etiqueta <img>
+
+        //Construye la etiqueta <img>
         // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage -- Static plugin image
         $imagen = '<img class="apg_free_shipping_icon apg_icon" src="' . esc_url( $icon_url ) . '"';
         $imagen .= $ancho ? ' width="' . intval( $ancho ) . '"' : '';
         $imagen .= $alto  ? ' height="' . intval( $alto ) . '"' : '';
         $imagen .= ' style="display:inline;" />';
-
-        $titulo  = apply_filters( 'apg_free_shipping_label', $metodo->label );
-        if ( $mostrar_icono === 'delante' ) {
-            $etiqueta   = $imagen . ' ' . $titulo . $precio; //Icono delante
-        } else if ( $mostrar_icono === 'detras' ) {
-            $etiqueta   = $titulo . ' ' . $imagen . $precio; //Icono detrás
-        } else {
-            $etiqueta   = $imagen . $precio; //Sólo icono
-        }
-    } else {
-        $etiqueta   = apply_filters( 'apg_free_shipping_label', $metodo->label ) . $precio; //Sin icono y con precio
     }
-	
-	//Tiempo de entrega
-    $entrega    = $apg_free_shipping_settings[ 'entrega' ];
-	if ( ! empty( $entrega ) ) {
-        // translators: %s is the estimated delivery time (e.g., "24-48 hours").
-        $etiqueta .= ( apply_filters( 'apg_free_shipping_delivery', true ) ) ? '<br /><small class="apg_free_shipping_delivery">' . sprintf( __( 'Estimated delivery time: %s', 'woocommerce-apg-free-postcodestatecountry-shipping' ), esc_html( $entrega ) ) . '</small>' : '<br /><small class="apg_free_shipping_delivery">' . esc_html( $entrega ) . '</small>';
-	}
 
-    //Guarda en caché durante una hora
-    set_transient( $cache_key, $etiqueta, HOUR_IN_SECONDS );
+    //Construye la etiqueta
+    if ( $imagen && $mostrar_icono === 'delante' ) {
+        $nueva_etiqueta = $imagen . ' ' . $titulo . $precio;
+    } elseif ( $imagen && $mostrar_icono === 'detras' ) {
+        $nueva_etiqueta = $titulo . ' ' . $imagen . $precio;
+    } elseif ( $imagen ) {
+        $nueva_etiqueta = $imagen . $precio;
+    } else {
+        $nueva_etiqueta = $titulo . $precio;
+    }
 
-	return $etiqueta;
+    //Tiempo de entrega
+    if ( ! empty( $apg_free_shipping_settings[ 'entrega' ] ) ) {
+        $texto_entrega  = apply_filters( 'apg_free_shipping_delivery', true ) ? sprintf( __( 'Estimated delivery time: %s', 'woocommerce-apg-free-postcodestatecountry-shipping' ), esc_html( $apg_free_shipping_settings[ 'entrega' ] ) ) : esc_html( $apg_free_shipping_settings[ 'entrega' ] );
+        $nueva_etiqueta .= '<br /><small class="apg_free_shipping_delivery">' . $texto_entrega . '</small>';
+    }
+
+    //Guarda en caché la etiqueta final
+    set_transient( $cache_key, $nueva_etiqueta, HOUR_IN_SECONDS );
+
+    return $nueva_etiqueta;
 }
 add_filter( 'woocommerce_cart_shipping_method_full_label', 'apg_free_shipping_icono', PHP_INT_MAX, 2 );
 
