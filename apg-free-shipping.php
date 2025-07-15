@@ -70,6 +70,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 					'shipping-zones',
 					'instance-settings',
 					'instance-settings-modal',
+                    'shipping-calculation',
 				];
 				$this->init();
 			}
