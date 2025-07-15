@@ -2,7 +2,7 @@
 /*
 Plugin Name: WC - APG Free Shipping
 Requires Plugins: woocommerce
-Version: 3.2.0.1
+Version: 3.2.0.2
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="https://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WC - APG Weight Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="https://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: https://artprojectgroup.es/
@@ -12,7 +12,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.0
 Tested up to: 6.9
 WC requires at least: 5.6
-WC tested up to: 10.0
+WC tested up to: 10.0.2
 
 Text Domain: woocommerce-apg-free-postcodestatecountry-shipping
 Domain Path: /languages
@@ -27,7 +27,7 @@ defined( 'ABSPATH' ) || exit;
 
 //Definimos constantes
 define( 'DIRECCION_apg_free_shipping', plugin_basename( __FILE__ ) );
-define( 'VERSION_apg_free_shipping', '3.2.0.1' );
+define( 'VERSION_apg_free_shipping', '3.2.0.2' );
 
 //Funciones generales de APG
 include_once( 'includes/admin/funciones-apg.php' );
@@ -547,6 +547,9 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 					'cost'		=> 0,
 					'taxes'		=> false
 				] );
+                
+                //Limpieza del transient del icono para evitar datos obsoletos
+                delete_transient( 'apg_shipping_icono_' . $this->instance_id );
 			}
 			
 			//Reduce valores en categorías, etiquetas y clases de envío excluídas
@@ -562,7 +565,6 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 		}
 	}
 	add_action( 'plugins_loaded', 'apg_free_shipping_inicio', 0 );
-
 } else {
 	add_action( 'admin_notices', 'apg_free_shipping_requiere_wc' );
 }
