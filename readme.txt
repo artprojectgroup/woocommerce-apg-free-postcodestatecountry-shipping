@@ -4,9 +4,9 @@ Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: WooCommerce, Shipping, Free Shipping
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 3.2.0.3
+Stable tag: 3.3
 WC requires at least: 5.6
-WC tested up to: 10.0.2
+WC tested up to: 10.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,6 +34,7 @@ Add to WooCommerce a free shipping based on postcode, state (province), country 
 * You can show price 0.
 * You can show the estimated delivery time.
 * You can modify the shipping method title with the `apg_free_shipping_label` filter.
+* You can modify the shipping method label using the `apg_free_shipping_final_label` filter.
 * You can remove the previous text of the estimated delivery time with the `apg_free_shipping_delivery` filter.
 * You can hide the rest of shipping if free shipping is available.
 * Fully compatible with [WPML](https://wpml.org/?aid=80296&affiliate_key=m66Ss5ps0xoS) plugin.
@@ -88,6 +89,10 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 2. Screenshot of WC - APG Free Shipping. APG Free Shipping Tab.
 
 == Changelog ==
+= 3.3 =
+* Added the `apg_free_shipping_final_label` filter.
+* Added phpDocs in the code.
+* Small fixes.
 = 3.2.0.3 =
 * Small fixes.
 = 3.2.0.2 =
@@ -326,7 +331,9 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 * Initial version.
 
 == Upgrade Notice ==
-= 3.2.0.3 =
+= 3.3 =
+* Added the `apg_free_shipping_final_label` filter.
+* Added phpDocs in the code.
 * Small fixes.
 
 == Translations ==

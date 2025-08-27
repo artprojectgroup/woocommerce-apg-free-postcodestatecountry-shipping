@@ -9,11 +9,11 @@ Requires at least: 5.0
 
 Tested up to: 6.9
 
-Stable tag: 3.2.0.3
+Stable tag: 3.3
 
 WC requires at least: 5.6
 
-WC tested up to: 10.0.2
+WC tested up to: 10.1.2
 
 License: GPLv2 or later
 
@@ -43,6 +43,7 @@ Añade a WooCommerce un envío gratuito basado en el código postal, provincia (
 * Puedes mostrar el precio 0.
 * Puedes mostrar el tiempo estimado de entrega.
 * Puedes modificar el título del método de envío con el filtro `apg_free_shipping_label`.
+* Puedes modificar la etiqueta del método de envío con el filtro `apg_free_shipping_final_label`.
 * Puedes eliminar el texto previo del tiempo estimado de entrega con el filtro `apg_free_shipping_delivery`.
 * Puedes ocultar el resto de gastos de envío al estar disponible el gasto de envío gratuito configurado.
 * Totalmente compatible con el plugin [WPML](https://wpml.org/?aid=80296&affiliate_key=m66Ss5ps0xoS).
@@ -93,6 +94,10 @@ Si necesitas ayuda para configurar o instalar **WC - APG Free Shipping**, **Art 
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 3.3
+* Añadido filtro `apg_shipping_final_label`.
+* Añadidos los phpDocs en el código.
+* Pequeños arreglos.
 ### 3.2.0.3
 * Pequeños arreglos.
 

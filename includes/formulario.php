@@ -1,5 +1,18 @@
 <?php 
-//Igual no deberías poder abrirme
+/**
+ * Muestra el formulario de configuración del método de envío APG Free Shipping en el panel de administración de WooCommerce.
+ *
+ * Este archivo es cargado desde el método `admin_options()` de la clase de método de envío,
+ * mostrando la descripción, cabecera con imagen y los campos de configuración generados automáticamente.
+ *
+ * Variables globales utilizadas:
+ * @global array $apg_free_shipping  Información del plugin (nombre, url, etc.).
+ * @var WC_apg_free_shipping $this   Instancia del método de envío.
+ *
+ * @package WC-APG-Free-Shipping
+ */
+
+// Igual no deberías poder abrirme.
 defined( 'ABSPATH' ) || exit;
 
 global $apg_free_shipping;

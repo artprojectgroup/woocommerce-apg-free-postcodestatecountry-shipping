@@ -1,13 +1,28 @@
 <?php 
-//Igual no deberías poder abrirme
+/**
+ * Definición de los campos del formulario de ajustes de WC - APG Free Shipping.
+ *
+ * Contiene el array de campos configurables para la instancia del método de envío,
+ * incluyendo opciones de título, requisitos, importe mínimo, exclusiones por categorías,
+ * etiquetas, atributos, clases de envío, roles de usuario, métodos de pago, métodos de envío,
+ * icono, estimación de entrega y otras opciones avanzadas.
+ *
+ * @package WC-APG-Free-Shipping
+ * @subpackage Includes/Admin
+ * @author Art Project Group
+ */
+
+// Igual no deberías poder abrirme.
 defined( 'ABSPATH' ) || exit;
 
-$this->apg_free_shipping_obtiene_datos(); //Recoge los datos
+$this->apg_free_shipping_obtiene_datos(); // Recoge los datos.
 
-//Campos del formulario
+// Campos del formulario.
 // translators: %1$s is a context-dependent item name (e.g., product category, tag, attribute, role, or shipping class); %2$s is the shipping method title.
 $texto  = __( "Select the %1\$s where %2\$s doesn't accept shippings.", 'woocommerce-apg-free-postcodestatecountry-shipping' );
 $campos = [];
+
+// Campo: Activar/desactivar (solo WC < 2.7)
 if ( version_compare( WC_VERSION, '2.7', '<' ) ) {
 	$campos[ 'activo' ] = [ 
 		'title'			=> __( 'Enable/Disable', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
@@ -232,10 +247,10 @@ $campos[ 'entrega' ] = [
 		'desc_tip'		=> true,
 ];
 $campos[ 'precio' ] = [ 
-        // translators: %s is the shipping price to be shown, typically "0,00 €"
+        //  translators: %s is the shipping price to be shown, typically "0,00 €".
 		'title'			=> sprintf( __( 'Show %s price', 'woocommerce-apg-free-postcodestatecountry-shipping' ), wc_price( 0 ) ),
 		'type'			=> 'checkbox',
-        // translators: %s is the shipping price to be shown after the label, typically "0,00 €"
+        //  translators: %s is the shipping price to be shown after the label, typically "0,00 €".
 		'label'			=> sprintf( __( "Show %s price after method title.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), wc_price( 0 ) ),
 		'default'		=> 'no',
 ];
