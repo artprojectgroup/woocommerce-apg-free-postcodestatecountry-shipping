@@ -181,7 +181,7 @@ add_filter( 'woocommerce_available_payment_gateways', 'apg_free_shipping_filtra_
 function apg_free_shipping_toma_de_datos() {	
     // Obtiene los métodos de pago.
     $medios_de_pago = get_transient( 'apg_shipping_metodos_de_pago' );
-    if ( false === $medios_de_pago ) {
+    if ( false === $medios_de_pago || ! is_array( $medios_de_pago ) || empty( $medios_de_pago ) ) {
         $medios_de_pago = [];
         $gateways       = WC()->payment_gateways()->get_available_payment_gateways();
 
@@ -231,7 +231,7 @@ function apg_free_shipping_toma_de_datos() {
 
     //  Ejecutar también en el backend SOLO cuando estás en configuración de envío.
     // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-    if ( is_admin() && isset( $_GET[ 'page' ], $_GET[ 'tab' ], $_GET[ 'instance_id' ] ) && $_GET[ 'page' ] === 'wc-settings' && $_GET[ 'tab' ] === 'shipping' && is_numeric( $_GET[ 'instance_id' ] ) ) {
+    if ( is_admin() && isset( $_GET[ 'page' ], $_GET[ 'tab' ], $_GET[ 'instance_id' ] ) && 'wc-settings' === sanitize_text_field( wp_unslash( $_GET[ 'page' ] ) ) && 'shipping' === sanitize_text_field( wp_unslash( $_GET[ 'tab' ] ) ) && absint( $_GET[ 'instance_id' ] ) ) {
         apg_free_shipping_toma_de_datos();
     }
 }
