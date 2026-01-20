@@ -30,6 +30,7 @@ Add to WooCommerce a free shipping based on postcode, state (province), country 
 * You can exclude user roles.
 * You can hide payment gateways.
 * You can hide shipping methods from the same shipping zone.
+* AJAX search with SelectWoo for large admin lists.
 * You can show a custom icon image.
 * You can show price 0.
 * You can show the estimated delivery time.

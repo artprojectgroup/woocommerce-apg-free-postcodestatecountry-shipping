@@ -39,6 +39,7 @@ Añade a WooCommerce un envío gratuito basado en el código postal, provincia (
 * Puedes excluir roles de usuario.
 * Puedes ocultar medios de pago.
 * Puedes ocultar métodos de envío de la misma zona de envío.
+* Búsqueda AJAX con SelectWoo para listas largas en el admin.
 * Puedes mostrar una imagen personalizada.
 * Puedes mostrar el precio 0.
 * Puedes mostrar el tiempo estimado de entrega.
