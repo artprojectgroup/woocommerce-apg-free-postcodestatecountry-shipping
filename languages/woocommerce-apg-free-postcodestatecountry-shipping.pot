@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce - APG Free Postcode/State/Country "
 "Shipping\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-11 11:29+0000\n"
+"POT-Creation-Date: 2026-01-20 15:52+0000\n"
 "POT-Revision-Date: Tue Aug 09 2016 11:16:48 GMT+0200 (CEST)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -217,7 +217,7 @@ msgstr ""
 
 #: includes/admin/campos.php:109 includes/admin/campos.php:148
 #: includes/admin/campos.php:189 includes/admin/campos.php:231
-msgid "Large list. Type to search… (AJAX)"
+msgid "Large list. Type to search…"
 msgstr ""
 
 #: apg-free-shipping.php:99

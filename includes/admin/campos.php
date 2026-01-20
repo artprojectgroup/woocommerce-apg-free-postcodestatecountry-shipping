@@ -106,7 +106,7 @@ $campos[ 'categorias_excluidas' ] = [
 		'data-nonce'    => $apg_ajax_nonce,
 	] : [],
 	'options' => $categorias_ajax ? $categorias_seed : $categorias_opts,
-	'description' => ( $categorias_cnt > 500 ? __( 'Large list. Type to search… (AJAX)', 'woocommerce-apg-free-postcodestatecountry-shipping' ) : '' ),
+	'description' => ( $categorias_cnt > 500 ? __( 'Large list. Type to search…', 'woocommerce-apg-free-postcodestatecountry-shipping' ) : '' ),
 ];
 $campos[ 'tipo_categorias' ] = [
     // translators: %s is the name of the product category.
@@ -145,7 +145,7 @@ $campos[ 'etiquetas_excluidas' ] = [
 		'data-nonce'    => $apg_ajax_nonce,
 	] : [],
 	'options' => $etiquetas_ajax ? $etiquetas_seed : $etiquetas_opts,
-	'description' => ( $etiquetas_cnt > 500 ? __( 'Large list. Type to search… (AJAX)', 'woocommerce-apg-free-postcodestatecountry-shipping' ) : '' ),
+	'description' => ( $etiquetas_cnt > 500 ? __( 'Large list. Type to search…', 'woocommerce-apg-free-postcodestatecountry-shipping' ) : '' ),
 ];
 $campos[ 'tipo_etiquetas' ] = [
     // translators: %s is the name of the product tag.
@@ -186,7 +186,7 @@ if ( wc_get_attribute_taxonomies() ) {
 			'data-nonce'    => $apg_ajax_nonce,
 		] : [],
 		'options' => $atributos_ajax ? $atributos_seed : $atributos_opts,
-		'description' => ( $atributos_cnt > 500 ? __( 'Large list. Type to search… (AJAX)', 'woocommerce-apg-free-postcodestatecountry-shipping' ) : '' ),
+		'description' => ( $atributos_cnt > 500 ? __( 'Large list. Type to search…', 'woocommerce-apg-free-postcodestatecountry-shipping' ) : '' ),
     ];
     $campos[ 'tipo_atributos' ] = [
         // translators: %s is the name of the attribute.
@@ -228,7 +228,7 @@ if ( WC()->shipping->get_shipping_classes() ) {
 			'data-nonce'    => $apg_ajax_nonce,
 		] : [],
 		'options' => [ 'todas' => __( 'All enabled shipping class', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ] + ( $clases_ajax ? $clases_seed : $clases_opts ),
-		'description' => ( $clases_cnt > 500 ? __( 'Large list. Type to search… (AJAX)', 'woocommerce-apg-free-postcodestatecountry-shipping' ) : '' ),
+		'description' => ( $clases_cnt > 500 ? __( 'Large list. Type to search…', 'woocommerce-apg-free-postcodestatecountry-shipping' ) : '' ),
 	];
 	$campos[ 'tipo_clases' ] = [
         // translators: %s is the name of the shipping class.

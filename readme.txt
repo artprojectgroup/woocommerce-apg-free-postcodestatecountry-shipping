@@ -4,7 +4,7 @@ Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: WooCommerce, Shipping, Free Shipping
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 3.4.1
+Stable tag: 3.4.0
 WC requires at least: 5.6
 WC tested up to: 10.5.0
 License: GPLv2 or later
