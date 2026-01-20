@@ -2,7 +2,7 @@
 /*
 Plugin Name: WC - APG Free Shipping
 Requires Plugins: woocommerce
-Version: 3.3.0.1
+Version: 3.4.0
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="https://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WC - APG Weight Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="https://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: https://artprojectgroup.es/
@@ -12,7 +12,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.0
 Tested up to: 6.9
 WC requires at least: 5.6
-WC tested up to: 10.2.1
+WC tested up to: 10.5.0
 
 Text Domain: woocommerce-apg-free-postcodestatecountry-shipping
 Domain Path: /languages
@@ -38,7 +38,7 @@ define( 'DIRECCION_apg_free_shipping', plugin_basename( __FILE__ ) );
  * Constante con la versión actual del plugin.
  * @var string
  */
-define( 'VERSION_apg_free_shipping', '3.3.0.1' );
+define( 'VERSION_apg_free_shipping', '3.4.0' );
 
 // Funciones generales de APG.
 include_once( 'includes/admin/funciones-apg.php' );
@@ -208,20 +208,24 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 
                 if ( empty( $this->{$tipo} ) ) {
                     $argumentos = [
-                        'taxonomy'      => $taxonomy,
-                        'orderby'       => 'name',
-                        'show_count'    => 0,
-                        'pad_counts'    => 0,
-                        'hierarchical'  => 1,
-                        'title_li'      => '',
-                        'hide_empty'    => false,
+                        'taxonomy'               => $taxonomy,
+                        'orderby'                => 'name',
+                        'show_count'             => 0,
+                        'pad_counts'             => 0,
+                        'hierarchical'           => 1,
+                        'title_li'               => '',
+                        'hide_empty'             => false,
+                        'fields'                 => 'id=>name',
+                        'update_term_meta_cache' => false,
                     ];
 
                     $datos          = get_categories( $argumentos );
                     $this->{$tipo}  = [];
 
-                    foreach ( $datos as $dato ) {
-                        $this->{$tipo}[ $dato->term_id ] = $dato->name;
+                    if ( is_array( $datos ) ) {
+                        foreach ( $datos as $term_id => $term_name ) {
+                            $this->{$tipo}[ (int) $term_id ] = $term_name;
+                        }
                     }
 
                     set_transient( $transient, $this->{$tipo}, 30 * DAY_IN_SECONDS ); // Guarda la caché durante un mes.
@@ -352,8 +356,8 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
                    // Fuerza una nueva recopilación de datos en caso de caché vacía o corrupta.
                    delete_transient( $cache_key );
 
-                   if ( function_exists( 'apg_shipping_toma_de_datos' ) ) {
-                       apg_shipping_toma_de_datos();
+                   if ( function_exists( 'apg_free_shipping_toma_de_datos' ) ) {
+                       apg_free_shipping_toma_de_datos();
                        $this->metodos_de_pago = get_transient( $cache_key );
                    }
                }
@@ -398,19 +402,34 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
                 // Obtiene los atributos.
                 $atributos  = [];
                 $taxonomias = wc_get_attribute_taxonomies();
-                if ( !empty( $taxonomias ) && is_array( $taxonomias ) ) {
+                if ( ! empty( $taxonomias ) && is_array( $taxonomias ) ) {
                     foreach ( $taxonomias as $atributo ) {
                         if ( empty( $atributo->attribute_name ) || empty( $atributo->attribute_label ) ) {
                             continue;
                         }
-                        
-                        $nombre_taxonomia = 'pa_' . $atributo->attribute_name;
-                        $terminos         = get_terms( [ 'taxonomy' => $nombre_taxonomia, 'hide_empty' => false ] );
 
-                        if ( ! is_wp_error( $terminos ) && ! empty( $terminos ) ) {
-                            foreach ( $terminos as $termino ) {
-                                $atributos[ esc_attr( $atributo->attribute_label ) ][ $nombre_taxonomia . '-' . $termino->slug ] = $termino->name;
+                        $nombre_taxonomia = 'pa_' . $atributo->attribute_name;
+                        $terminos_ids     = get_terms(
+                            [
+                                'taxonomy'               => $nombre_taxonomia,
+                                'hide_empty'             => false,
+                                'fields'                 => 'ids',
+                                'update_term_meta_cache' => false,
+                            ]
+                        );
+
+                        if ( is_wp_error( $terminos_ids ) || empty( $terminos_ids ) ) {
+                            continue;
+                        }
+
+                        foreach ( $terminos_ids as $termino_id ) {
+                            $slug = get_term_field( 'slug', $termino_id, $nombre_taxonomia );
+                            $name = get_term_field( 'name', $termino_id, $nombre_taxonomia );
+                            if ( is_wp_error( $slug ) || is_wp_error( $name ) || '' === $slug ) {
+                                continue;
                             }
+
+                            $atributos[ esc_attr( $atributo->attribute_label ) ][ $nombre_taxonomia . '-' . sanitize_title( $slug ) ] = sanitize_text_field( $name );
                         }
                     }
                 }
