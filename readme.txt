@@ -4,7 +4,7 @@ Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: WooCommerce, Shipping, Free Shipping
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 3.4.0
+Stable tag: 3.5.0
 WC requires at least: 5.6
 WC tested up to: 10.5.0
 License: GPLv2 or later
@@ -90,6 +90,10 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 2. Screenshot of WC - APG Free Shipping. APG Free Shipping Tab.
 
 == Changelog ==
+= 3.5.0 =
+* Fixed memory overflow.
+* General performance enhancement.
+* Small fixes.
 = 3.4.0 =
 * New AJAX search system with SelectWoo for long admin term lists, preventing thousands of options from being rendered at once.
 * Small fixes.
@@ -337,8 +341,9 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 * Initial version.
 
 == Upgrade Notice ==
-= 3.4.0 =
-* New AJAX search system with SelectWoo for long admin term lists, preventing thousands of options from being rendered at once.
+= 3.5.0 =
+* Fixed memory overflow.
+* General performance enhancement.
 * Small fixes.
 
 == Translations ==

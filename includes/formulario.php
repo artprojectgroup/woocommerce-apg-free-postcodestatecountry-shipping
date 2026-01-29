@@ -55,7 +55,20 @@ jQuery(function($){
             },
             minimumInputLength: 1,
             allowClear: true,
-            placeholder: "<?php echo esc_js( __( 'Search…', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ); ?>"
+            placeholder: "<?php echo esc_js( __( 'Search…', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ); ?>",
+            language: {
+                inputTooShort: function(args){
+                    var tmpl = "<?php
+                        // translators: %d is the number of characters required.
+                        echo esc_js( __( 'Please enter %d or more characters.', 'woocommerce-apg-free-postcodestatecountry-shipping' ) );
+                    ?>";
+                    return tmpl.replace('%d', (args.minimum - args.input.length));
+                },
+                noResults: function(){ return "<?php echo esc_js( __( 'No results found.', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ); ?>"; },
+                searching: function(){ return "<?php echo esc_js( __( 'Searching…', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ); ?>"; },
+                loadingMore: function(){ return "<?php echo esc_js( __( 'Loading more results…', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ); ?>"; },
+                errorLoading: function(){ return "<?php echo esc_js( __( 'The results could not be loaded.', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ); ?>"; }
+            }
         });
     }
     $("select.apg-ajax-select").each(function(){ initAjaxSelect($(this)); });

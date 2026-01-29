@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce - APG Free Postcode/State/Country "
 "Shipping\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-20 15:52+0000\n"
+"POT-Creation-Date: 2026-01-29 02:30+0000\n"
 "POT-Revision-Date: Tue Aug 09 2016 11:16:48 GMT+0200 (CEST)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -64,23 +64,23 @@ msgid ""
 "excelling eCommerce</strong></a>."
 msgstr ""
 
-#: includes/admin/campos.php:315
+#: includes/admin/campos.php:354
 msgid "After title"
 msgstr ""
 
-#: includes/admin/campos.php:278
+#: includes/admin/campos.php:306
 msgid "All enabled payments"
 msgstr ""
 
-#: includes/admin/campos.php:230
+#: includes/admin/campos.php:249
 msgid "All enabled shipping class"
 msgstr ""
 
-#: includes/admin/campos.php:295
+#: includes/admin/campos.php:334
 msgid "All enabled shipping methods"
 msgstr ""
 
-#: apg-free-shipping.php:98
+#: apg-free-shipping.php:100 apg-free-shipping.php:215
 msgid "APG Free Shipping"
 msgstr ""
 
@@ -88,20 +88,20 @@ msgstr ""
 msgid "Art Project Group"
 msgstr ""
 
-#: includes/admin/campos.php:176 includes/admin/campos.php:193
+#: includes/admin/campos.php:195 includes/admin/campos.php:212
 msgid "Attribute"
 msgstr ""
 
 #. %1$s is the attribute name, %2$s is the shipping method title.
-#: includes/admin/campos.php:178
+#: includes/admin/campos.php:197
 msgid "attribute"
 msgstr ""
 
-#: includes/admin/campos.php:196 includes/admin/campos.php:198
+#: includes/admin/campos.php:215 includes/admin/campos.php:217
 msgid "attributes"
 msgstr ""
 
-#: includes/admin/campos.php:314
+#: includes/admin/campos.php:353
 msgid "Before title"
 msgstr ""
 
@@ -114,9 +114,9 @@ msgstr ""
 #. %s is the plural "attributes".
 #. %s is the plural "shipping classes".
 #. %s is the plural "user roles".
-#: includes/admin/campos.php:117 includes/admin/campos.php:157
-#: includes/admin/campos.php:198 includes/admin/campos.php:240
-#: includes/admin/campos.php:264
+#: includes/admin/campos.php:120 includes/admin/campos.php:163
+#: includes/admin/campos.php:217 includes/admin/campos.php:259
+#: includes/admin/campos.php:283
 #, php-format
 msgid ""
 "Check this field to accept shippings in the %s selected in the previous "
@@ -132,7 +132,7 @@ msgstr ""
 msgid "Contact with us:"
 msgstr ""
 
-#: includes/admin/campos.php:322
+#: includes/admin/campos.php:361
 msgid "Define estimation for delivery time for this shipping method."
 msgstr ""
 
@@ -140,7 +140,7 @@ msgstr ""
 msgid "Documentation and Support:"
 msgstr ""
 
-#: includes/admin/campos.php:337
+#: includes/admin/campos.php:376
 msgid "Don't show others shipping cost."
 msgstr ""
 
@@ -152,13 +152,13 @@ msgstr ""
 msgid "Enable/Disable"
 msgstr ""
 
-#: includes/admin/campos.php:320
+#: includes/admin/campos.php:359
 msgid "Estimated delivery time"
 msgstr ""
 
 #. %s is the estimated delivery time (e.g., "24-48 hours").
 #. %s: estimated delivery time defined in shipping settings.
-#: apg-free-shipping.php:738 includes/admin/funciones.php:98
+#: apg-free-shipping.php:976 includes/admin/funciones.php:98
 #, php-format
 msgid "Estimated delivery time: %s"
 msgstr ""
@@ -176,11 +176,11 @@ msgstr ""
 msgid "Free Shipping Requires..."
 msgstr ""
 
-#: includes/admin/campos.php:254
+#: includes/admin/campos.php:273
 msgid "Guest"
 msgstr ""
 
-#: includes/admin/campos.php:308
+#: includes/admin/campos.php:347
 msgid "How show icon image?"
 msgstr ""
 
@@ -194,11 +194,11 @@ msgid ""
 "shipping/"
 msgstr ""
 
-#: includes/admin/campos.php:301
+#: includes/admin/campos.php:340
 msgid "Icon image"
 msgstr ""
 
-#: includes/admin/campos.php:303
+#: includes/admin/campos.php:342
 msgid "Icon image URL. APG recommends a 60x21px image."
 msgstr ""
 
@@ -211,26 +211,30 @@ msgstr ""
 msgid "Including taxes"
 msgstr ""
 
-#: apg-free-shipping.php:725
+#: apg-free-shipping.php:963
 msgid "Invalid format"
 msgstr ""
 
-#: includes/admin/campos.php:109 includes/admin/campos.php:148
-#: includes/admin/campos.php:189 includes/admin/campos.php:231
+#: includes/admin/campos.php:112 includes/admin/campos.php:154
+#: includes/admin/campos.php:208 includes/admin/campos.php:250
 msgid "Large list. Type to search…"
 msgstr ""
 
-#: apg-free-shipping.php:99
+#: apg-free-shipping.php:101
 msgid ""
 "Lets you add a free shipping based on Postcode/State/Country of the cart "
 "and minimum order a amount and/or a valid free shipping coupon."
+msgstr ""
+
+#: includes/formulario.php:69
+msgid "Loading more results…"
 msgstr ""
 
 #: includes/cuadro-informacion.php:23 includes/admin/funciones-apg.php:42
 msgid "Make a donation by "
 msgstr ""
 
-#: includes/admin/campos.php:36
+#: apg-free-shipping.php:213 includes/admin/campos.php:36
 msgid "Method Title"
 msgstr ""
 
@@ -254,12 +258,16 @@ msgstr ""
 msgid "N/A"
 msgstr ""
 
-#: apg-free-shipping.php:731
+#: apg-free-shipping.php:969
 msgid "No data available"
 msgstr ""
 
-#: includes/admin/campos.php:296
+#: includes/admin/campos.php:335
 msgid "No other shipping methods"
+msgstr ""
+
+#: includes/formulario.php:67
+msgid "No results found."
 msgstr ""
 
 #. %s is the name of the product category.
@@ -267,9 +275,9 @@ msgstr ""
 #. %s is the name of the attribute.
 #. %s is the name of the shipping class.
 #. %s is the name of the user role.
-#: includes/admin/campos.php:96 includes/admin/campos.php:135
-#: includes/admin/campos.php:176 includes/admin/campos.php:218
-#: includes/admin/campos.php:246
+#: includes/admin/campos.php:99 includes/admin/campos.php:141
+#: includes/admin/campos.php:195 includes/admin/campos.php:237
+#: includes/admin/campos.php:265
 #, php-format
 msgid "No shipping (%s)"
 msgstr ""
@@ -278,22 +286,33 @@ msgstr ""
 msgid "No shipping (Max. weight)"
 msgstr ""
 
-#: includes/admin/campos.php:316
+#: includes/admin/campos.php:355
 msgid "No title, just icon"
 msgstr ""
 
-#: includes/admin/campos.php:313
+#: includes/admin/campos.php:352
 msgid "Not show, just title"
 msgstr ""
 
-#: includes/admin/campos.php:268
+#: includes/admin/campos.php:296
 msgid "Payment gateway"
 msgstr ""
 
 #. %s is the shipping method title.
-#: includes/admin/campos.php:270
+#: includes/admin/campos.php:298
 #, php-format
 msgid "Payment gateway available for %s"
+msgstr ""
+
+#. %s is the payment method ID.
+#: includes/admin/campos.php:292
+#, php-format
+msgid "Payment method %s"
+msgstr ""
+
+#. %d is the number of characters required.
+#: includes/formulario.php:63
+msgid "Please enter %d or more characters."
 msgstr ""
 
 #. %s is the plugin name.
@@ -305,41 +324,45 @@ msgid "Please, rate %s:"
 msgstr ""
 
 #: includes/admin/campos.php:66 includes/admin/campos.php:67
-#: includes/admin/campos.php:115 includes/admin/campos.php:117
+#: includes/admin/campos.php:118 includes/admin/campos.php:120
 msgid "product categories"
 msgstr ""
 
-#: includes/admin/campos.php:96
+#: includes/admin/campos.php:99
 msgid "Product category"
 msgstr ""
 
 #. %1$s is the name of the product category, %2$s is the shipping method title.
-#: includes/admin/campos.php:98
+#: includes/admin/campos.php:101
 msgid "product category"
 msgstr ""
 
-#: includes/admin/campos.php:135 includes/admin/campos.php:152
+#: includes/admin/campos.php:141 includes/admin/campos.php:158
 msgid "Product tag"
 msgstr ""
 
 #. %1$s is the product tag name, %2$s is the shipping method title.
-#: includes/admin/campos.php:137
+#: includes/admin/campos.php:143
 msgid "product tag"
 msgstr ""
 
-#: includes/admin/campos.php:155 includes/admin/campos.php:157
+#: includes/admin/campos.php:161 includes/admin/campos.php:163
 msgid "product tags"
+msgstr ""
+
+#: includes/formulario.php:68
+msgid "Searching…"
 msgstr ""
 
 #: includes/formulario.php:58
 msgid "Search…"
 msgstr ""
 
-#: apg-free-shipping.php:260
+#: apg-free-shipping.php:468
 msgid "Select a class&hellip;"
 msgstr ""
 
-#: includes/admin/campos.php:309
+#: includes/admin/campos.php:348
 msgid "Select how you want to show the icon image."
 msgstr ""
 
@@ -362,9 +385,9 @@ msgstr ""
 #. %s is the plural "attributes".
 #. %s is the plural "shipping classes".
 #. %s is the plural "user roles".
-#: includes/admin/campos.php:115 includes/admin/campos.php:155
-#: includes/admin/campos.php:196 includes/admin/campos.php:238
-#: includes/admin/campos.php:262
+#: includes/admin/campos.php:118 includes/admin/campos.php:161
+#: includes/admin/campos.php:215 includes/admin/campos.php:257
+#: includes/admin/campos.php:281
 #, php-format
 msgid "Ship only to the %s selected in the previous field."
 msgstr ""
@@ -373,48 +396,54 @@ msgstr ""
 #. %s is the name of the attribute.
 #. %s is the name of the shipping class.
 #. %s is the name of the user role.
-#: includes/admin/campos.php:152 includes/admin/campos.php:193
-#: includes/admin/campos.php:235 includes/admin/campos.php:259
+#: includes/admin/campos.php:158 includes/admin/campos.php:212
+#: includes/admin/campos.php:254 includes/admin/campos.php:278
 #, php-format
 msgid "Shipping (%s)?"
 msgstr ""
 
-#: includes/admin/campos.php:218 includes/admin/campos.php:235
+#: includes/admin/campos.php:237 includes/admin/campos.php:254
 msgid "Shipping class"
 msgstr ""
 
 #. %1$s is the shipping class name, %2$s is the shipping method title.
-#: includes/admin/campos.php:220
+#: includes/admin/campos.php:239
 msgid "shipping class"
 msgstr ""
 
-#: includes/admin/campos.php:238 includes/admin/campos.php:240
+#: includes/admin/campos.php:257 includes/admin/campos.php:259
 msgid "shipping classes"
 msgstr ""
 
-#: includes/admin/campos.php:285
+#. %s is the shipping method ID.
+#: includes/admin/campos.php:319
+#, php-format
+msgid "Shipping method %s"
+msgstr ""
+
+#: includes/admin/campos.php:324
 msgid "Shipping methods"
 msgstr ""
 
 #. %s is the shipping method title.
-#: includes/admin/campos.php:287
+#: includes/admin/campos.php:326
 #, php-format
 msgid "Shipping methods available in the same shipping zone of %s"
 msgstr ""
 
 #. %s is the shipping price to be shown, typically "0,00 €".
-#: includes/admin/campos.php:328
+#: includes/admin/campos.php:367
 #, php-format
 msgid "Show %s price"
 msgstr ""
 
 #. %s is the shipping price to be shown after the label, typically "0,00 €".
-#: includes/admin/campos.php:331
+#: includes/admin/campos.php:370
 #, php-format
 msgid "Show %s price after method title."
 msgstr ""
 
-#: includes/admin/campos.php:335
+#: includes/admin/campos.php:374
 msgid "Show only APG Free Shipping"
 msgstr ""
 
@@ -426,11 +455,15 @@ msgstr ""
 msgid "Support of "
 msgstr ""
 
+#: includes/formulario.php:70
+msgid "The results could not be loaded."
+msgstr ""
+
 #: includes/admin/campos.php:38
 msgid "This controls the title which the user sees during checkout."
 msgstr ""
 
-#: apg-free-shipping.php:760
+#: apg-free-shipping.php:998
 msgid "This plugin requires WooCommerce to be active in order to run!"
 msgstr ""
 
@@ -439,16 +472,16 @@ msgstr ""
 msgid "Unknown rating"
 msgstr ""
 
-#: includes/admin/campos.php:246 includes/admin/campos.php:259
+#: includes/admin/campos.php:265 includes/admin/campos.php:278
 msgid "User role"
 msgstr ""
 
 #. %1$s is the user role name, %2$s is the shipping method title.
-#: includes/admin/campos.php:248
+#: includes/admin/campos.php:267
 msgid "user role"
 msgstr ""
 
-#: includes/admin/campos.php:262 includes/admin/campos.php:264
+#: includes/admin/campos.php:281 includes/admin/campos.php:283
 msgid "user roles"
 msgstr ""
 

@@ -15,7 +15,7 @@
 // Igual no deberías poder abrirme.
 defined( 'ABSPATH' ) || exit;
 
-$this->apg_free_shipping_obtiene_datos(); // Recoge los datos.
+$this->apg_free_shipping_obtiene_datos( true ); // Recoge los datos (modo campos).
 $apg_ajax_nonce = wp_create_nonce( 'apg_ajax_terms' );
 
 // Campos del formulario.
@@ -80,7 +80,10 @@ $campos[ 'peso' ] = [
 ];
 // Product categories: preparatory code for AJAX/multiselect/seeded options
 $categorias_opts  = is_array( $this->categorias_de_producto ) ? $this->categorias_de_producto : [];
-$categorias_cnt   = count( $categorias_opts );
+$categorias_cnt   = wp_count_terms( 'product_cat' );
+if ( is_wp_error( $categorias_cnt ) ) {
+	$categorias_cnt = 1000;
+}
 $categorias_ajax  = $categorias_cnt > 500;
 $categorias_saved = (array) $this->get_option( 'categorias_excluidas', [] );
 $categorias_seed  = [];
@@ -119,7 +122,10 @@ $campos[ 'tipo_categorias' ] = [
 ];
 // Product tags: preparatory code for AJAX/multiselect/seeded options
 $etiquetas_opts  = is_array( $this->etiquetas_de_producto ) ? $this->etiquetas_de_producto : [];
-$etiquetas_cnt   = count( $etiquetas_opts );
+$etiquetas_cnt   = wp_count_terms( 'product_tag' );
+if ( is_wp_error( $etiquetas_cnt ) ) {
+	$etiquetas_cnt = 1000;
+}
 $etiquetas_ajax  = $etiquetas_cnt > 500;
 $etiquetas_saved = (array) $this->get_option( 'etiquetas_excluidas', [] );
 $etiquetas_seed  = [];
@@ -160,8 +166,21 @@ $campos[ 'tipo_etiquetas' ] = [
 if ( wc_get_attribute_taxonomies() ) {
 	// Attributes: preparatory code for AJAX/multiselect/seeded options
 	$atributos_opts  = is_array( $this->atributos ) ? $this->atributos : [];
-	$atributos_cnt   = count( $atributos_opts );
-	$atributos_ajax  = $atributos_cnt > 500;
+	$atributos_cnt   = 0;
+	$atributos_tax   = function_exists( 'wc_get_attribute_taxonomy_names' ) ? wc_get_attribute_taxonomy_names() : [];
+	$atributos_force = ! empty( $this->apg_atributos_forced_ajax );
+	if ( ! $atributos_force && is_array( $atributos_tax ) ) {
+		foreach ( $atributos_tax as $taxonomia ) {
+		$cnt = wp_count_terms( $taxonomia );
+			if ( ! is_wp_error( $cnt ) ) {
+				$atributos_cnt += (int) $cnt;
+			}
+		}
+	}
+	if ( $atributos_force || ! $atributos_cnt ) {
+		$atributos_cnt = 1000;
+	}
+	$atributos_ajax  = $atributos_cnt > 500 || $atributos_force;
 	$atributos_saved = (array) $this->get_option( 'atributos_excluidos', [] );
 	$atributos_seed  = [];
 	if ( $atributos_ajax && ! empty( $atributos_saved ) ) {
@@ -264,6 +283,15 @@ $campos[ 'tipo_roles' ] = [
 	'desc_tip' 			=> sprintf( __( "Check this field to accept shippings in the %s selected in the previous field.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'user roles', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
 	'default'			=> 'no',
 ];
+$pago_opts   = is_array( $this->metodos_de_pago ) ? $this->metodos_de_pago : [];
+$pago_saved  = (array) $this->get_option( 'pago', [] );
+$pago_seed   = [];
+if ( empty( $pago_opts ) && ! empty( $pago_saved ) ) {
+	foreach ( $pago_saved as $pid ) {
+		// translators: %s is the payment method ID.
+		$pago_seed[ $pid ] = sprintf( __( 'Payment method %s', 'woocommerce-apg-free-postcodestatecountry-shipping' ), $pid );
+	}
+}
 $campos[ 'pago' ] = [
 	'title'				=> __( 'Payment gateway', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
     // translators: %s is the shipping method title.
@@ -276,11 +304,22 @@ $campos[ 'pago' ] = [
 	'class'				=> 'chosen_select',
 	'options' 			=> [ 
 		'todos'				=> __( 'All enabled payments', 'woocommerce-apg-free-postcodestatecountry-shipping' )
-	] + $this->metodos_de_pago,
+	] + ( ! empty( $pago_opts ) ? $pago_opts : $pago_seed ),
 ];
 // Shipping methods: always static options, no AJAX, multiselect
 $metodos_opts = is_array( $this->metodos_de_envio ) ? $this->metodos_de_envio : [];
-if ( ! empty( $this->metodos_de_envio ) ) {
+$envio_saved  = (array) $this->get_option( 'envio', [] );
+$envio_seed   = [];
+if ( empty( $metodos_opts ) && ! empty( $envio_saved ) ) {
+	foreach ( $envio_saved as $eid ) {
+		if ( 'todos' === $eid || 'ninguno' === $eid ) {
+			continue;
+		}
+		// translators: %s is the shipping method ID.
+		$envio_seed[ $eid ] = sprintf( __( 'Shipping method %s', 'woocommerce-apg-free-postcodestatecountry-shipping' ), $eid );
+	}
+}
+if ( ! empty( $metodos_opts ) || ! empty( $envio_seed ) ) {
     $campos[ 'envio' ] = [
         'title'			=> __( 'Shipping methods', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
         // translators: %s is the shipping method title.
@@ -294,7 +333,7 @@ if ( ! empty( $this->metodos_de_envio ) ) {
 		'options' => [
 			'todos'			=> __( 'All enabled shipping methods', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
 			'ninguno'		=> __( 'No other shipping methods', 'woocommerce-apg-free-postcodestatecountry-shipping' )
-		] + $metodos_opts,
+		] + ( ! empty( $metodos_opts ) ? $metodos_opts : $envio_seed ),
     ];
 }
 $campos[ 'icono' ] = [ 
