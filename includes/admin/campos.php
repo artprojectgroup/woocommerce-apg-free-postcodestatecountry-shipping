@@ -319,23 +319,21 @@ if ( empty( $metodos_opts ) && ! empty( $envio_saved ) ) {
 		$envio_seed[ $eid ] = sprintf( __( 'Shipping method %s', 'woocommerce-apg-free-postcodestatecountry-shipping' ), $eid );
 	}
 }
-if ( ! empty( $metodos_opts ) || ! empty( $envio_seed ) ) {
-    $campos[ 'envio' ] = [
-        'title'			=> __( 'Shipping methods', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
-        // translators: %s is the shipping method title.
-        'desc_tip'		=> sprintf( __( "Shipping methods available in the same shipping zone of %s", 'woocommerce-apg-free-postcodestatecountry-shipping' ), $this->method_title ),
-        'css'			=> 'width: 450px;',
-        'default'		=> [
-            'todos'
-        ],
-		'type'			=> 'multiselect',
-		'class'			=> 'wc-enhanced-select',
-		'options' => [
-			'todos'			=> __( 'All enabled shipping methods', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
-			'ninguno'		=> __( 'No other shipping methods', 'woocommerce-apg-free-postcodestatecountry-shipping' )
-		] + ( ! empty( $metodos_opts ) ? $metodos_opts : $envio_seed ),
-    ];
-}
+$campos[ 'envio' ] = [
+    'title'			=> __( 'Shipping methods', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
+    // translators: %s is the shipping method title.
+    'desc_tip'		=> sprintf( __( "Shipping methods available in the same shipping zone of %s", 'woocommerce-apg-free-postcodestatecountry-shipping' ), $this->method_title ),
+    'css'			=> 'width: 450px;',
+    'default'		=> [
+        'todos'
+    ],
+	'type'			=> 'multiselect',
+	'class'			=> 'wc-enhanced-select',
+	'options' => [
+		'todos'			=> __( 'All enabled shipping methods', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
+		'ninguno'		=> __( 'No other shipping methods', 'woocommerce-apg-free-postcodestatecountry-shipping' )
+	] + ( ! empty( $metodos_opts ) ? $metodos_opts : $envio_seed ),
+];
 $campos[ 'icono' ] = [ 
 		'title'			=> __( 'Icon image', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
 		'type'			=> 'text',
