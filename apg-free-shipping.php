@@ -2,7 +2,7 @@
 /*
 Plugin Name: WC - APG Free Shipping
 Requires Plugins: woocommerce
-Version: 3.5.1
+Version: 3.5.2
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="https://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WC - APG Weight Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="https://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: https://artprojectgroup.es/
@@ -38,7 +38,7 @@ define( 'DIRECCION_apg_free_shipping', plugin_basename( __FILE__ ) );
  * Constante con la versión actual del plugin.
  * @var string
  */
-define( 'VERSION_apg_free_shipping', '3.5.1' );
+define( 'VERSION_apg_free_shipping', '3.5.2' );
 
 // Funciones generales de APG.
 include_once( 'includes/admin/funciones-apg.php' );
@@ -121,7 +121,8 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 				if ( $this->apg_free_shipping_debe_cargar_campos() ) {
 					$this->init_form_fields();
 				} else {
-					$this->instance_form_fields = $this->apg_free_shipping_campos_minimos();
+                    // Campos ligeros con todas las claves para cargar ajustes de instancia sin listas pesadas.
+					$this->instance_form_fields = $this->apg_free_shipping_campos_configuracion();
 				}
 				$this->init_settings();
 
@@ -216,6 +217,45 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 					],
 				];
 			}
+
+            /**
+             * Devuelve una definición ligera de campos para cargar ajustes de instancia.
+             *
+             * @return array
+             */
+            private function apg_free_shipping_campos_configuracion() {
+                $campos = [
+                    'title'               => [ 'type' => 'text', 'default' => '' ],
+                    'requires'            => [ 'type' => 'select', 'default' => '' ],
+                    'importe_minimo'      => [ 'type' => 'text', 'default' => '' ],
+                    'peso'                => [ 'type' => 'text', 'default' => '' ],
+                    'categorias_excluidas'=> [ 'type' => 'multiselect', 'default' => [] ],
+                    'tipo_categorias'     => [ 'type' => 'checkbox', 'default' => 'no' ],
+                    'etiquetas_excluidas' => [ 'type' => 'multiselect', 'default' => [] ],
+                    'tipo_etiquetas'      => [ 'type' => 'checkbox', 'default' => 'no' ],
+                    'atributos_excluidos' => [ 'type' => 'multiselect', 'default' => [] ],
+                    'tipo_atributos'      => [ 'type' => 'checkbox', 'default' => 'no' ],
+                    'clases_excluidas'    => [ 'type' => 'multiselect', 'default' => [] ],
+                    'tipo_clases'         => [ 'type' => 'checkbox', 'default' => 'no' ],
+                    'roles_excluidos'     => [ 'type' => 'multiselect', 'default' => [] ],
+                    'tipo_roles'          => [ 'type' => 'checkbox', 'default' => 'no' ],
+                    'pago'                => [ 'type' => 'multiselect', 'default' => [] ],
+                    'envio'               => [ 'type' => 'multiselect', 'default' => [] ],
+                    'icono'               => [ 'type' => 'text', 'default' => '' ],
+                    'muestra_icono'       => [ 'type' => 'select', 'default' => '' ],
+                    'entrega'             => [ 'type' => 'text', 'default' => '' ],
+                    'precio'              => [ 'type' => 'checkbox', 'default' => 'no' ],
+                    'muestra'             => [ 'type' => 'checkbox', 'default' => 'no' ],
+                    'impuestos'           => [ 'type' => 'checkbox', 'default' => 'no' ],
+                    'debug'               => [ 'type' => 'checkbox', 'default' => 'no' ],
+                ];
+
+                if ( version_compare( WC_VERSION, '2.7', '<' ) ) {
+                    $campos['activo'] = [ 'type' => 'checkbox', 'default' => 'yes' ];
+                }
+
+                return $campos;
+            }
 			
 			/**
 			 * Muestra las opciones de administración del método de envío en el panel de WooCommerce.

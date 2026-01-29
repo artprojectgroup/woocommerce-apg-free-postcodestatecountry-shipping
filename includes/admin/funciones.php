@@ -23,6 +23,7 @@ defined( 'ABSPATH' ) || exit;
  * @param WC_Shipping_Rate   $metodo   Objeto del método de envío.
  * @return string Etiqueta personalizada con icono, título y/o detalles de entrega.
  */
+if ( ! function_exists( 'apg_free_shipping_icono' ) ) {
 function apg_free_shipping_icono( $etiqueta, $metodo ) {
     // Previene errores y compatibilidad con WC - APG Weight Shipping.
     if ( ! isset( $metodo->instance_id ) || ! isset( $metodo->cost ) || $metodo->cost > 0 ) {
@@ -49,7 +50,7 @@ function apg_free_shipping_icono( $etiqueta, $metodo ) {
 	}
 
     // Precio y título.
-    $precio = ( $apg_free_shipping_settings[ 'precio' ] === 'yes' ) ? ': ' . wc_price( $metodo->cost ) : '';    
+    $precio = ( $apg_free_shipping_settings[ 'precio' ] === 'yes' ) ? ': ' . wc_price( $metodo->cost ) : '';
     $titulo = apply_filters( 'apg_free_shipping_label', $metodo->label, $metodo);
 
     // ¿Mostramos el icono?.
@@ -106,7 +107,10 @@ function apg_free_shipping_icono( $etiqueta, $metodo ) {
 
     return $nueva_etiqueta;
 }
-add_filter( 'woocommerce_cart_shipping_method_full_label', 'apg_free_shipping_icono', PHP_INT_MAX, 2 );
+}
+if ( function_exists( 'apg_free_shipping_icono' ) ) {
+    add_filter( 'woocommerce_cart_shipping_method_full_label', 'apg_free_shipping_icono', PHP_INT_MAX, 2 );
+}
 
 /**
  * Oculta todos los métodos de envío excepto el gratuito cuando está disponible.
@@ -256,16 +260,33 @@ add_action( 'init', 'apg_free_shipping_condicional_toma_de_datos', 5 );
  * @return array Paquetes de envío filtrados.
  */
 function apg_free_shipping_gestiona_envios( $envios ) {
-    $apg_free_shipping_settings  = apg_free_shipping_dame_configuracion();
+    $id = [];
+
+    if ( function_exists( 'WC' ) && WC()->session ) {
+        $chosen = WC()->session->get( 'chosen_shipping_methods' );
+        if ( ! empty( $chosen ) && isset( $chosen[ 0 ] ) ) {
+            $id = explode( ':', $chosen[ 0 ] );
+        }
+    }
+    // phpcs:ignore WordPress.Security.NonceVerification.Missing
+    if ( empty( $id ) && isset( $_POST[ 'shipping_method' ][ 0 ] ) ) {
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing
+        $id = explode( ':', sanitize_text_field( wp_unslash( $_POST[ 'shipping_method' ][ 0 ] ) ) );
+    }
+
+    if ( ! isset( $id[ 1 ] ) ) {
+        return $envios;
+    }
+
+    $opcion = get_option( 'woocommerce_apg_free_shipping_' . absint( $id[ 1 ] ) . '_settings' );
+    $apg_free_shipping_settings = is_array( $opcion ) ? $opcion : maybe_unserialize( $opcion );
     
-    if ( isset( $apg_free_shipping_settings[ 'envio' ] ) && is_array( $apg_free_shipping_settings['envio'] ) && ! empty( $apg_free_shipping_settings[ 'envio' ] ) ) {
+    if ( isset( $apg_free_shipping_settings[ 'envio' ] ) && is_array( $apg_free_shipping_settings[ 'envio' ] ) && ! empty( $apg_free_shipping_settings[ 'envio' ] ) ) {
         if ( isset( $envios[ 0 ] ) && is_array( $envios[ 0 ] ) && isset( $envios[ 0 ][ 'rates' ] ) ) {
             foreach ( $envios[ 0 ][ 'rates' ] as $clave => $envio ) {
-                $instance_id    = $envio->instance_id;
-                
                 foreach( $apg_free_shipping_settings[ 'envio' ] as $metodo ) {
                     if ( $metodo !== 'todos' ) {
-                        if ( $metodo === 'ninguno' || ! in_array( $instance_id, $apg_free_shipping_settings['envio'], true ) ) {
+                        if ( ( $metodo === 'ninguno' && $id[ 1 ] != $envio->instance_id ) || ( ! in_array( $envio->instance_id, $apg_free_shipping_settings[ 'envio' ] ) && $id[ 1 ] != $envio->instance_id ) ) {
                             unset( $envios[ 0 ][ 'rates' ][ $clave ] );
                         }
                     }
