@@ -306,7 +306,7 @@ add_filter( 'woocommerce_cart_shipping_packages', 'apg_free_shipping_gestiona_en
  * @return array Configuración del método de envío o array vacío si no está disponible.
  */
 function apg_free_shipping_dame_configuracion() {
-    //Corrección propuesta por @rabbitshavefangs en https://wordpress.org/support/topic/problem-in-line-50-of-functiones-php/
+    // Corrección propuesta por @rabbitshavefangs en https://wordpress.org/support/topic/problem-in-line-50-of-functiones-php/
     if ( isset( WC()->session ) && is_object( WC()->session ) ) {
         $chosen_shipping_methods = WC()->session->get( 'chosen_shipping_methods' );
         if ( ! empty( $chosen_shipping_methods ) ) {

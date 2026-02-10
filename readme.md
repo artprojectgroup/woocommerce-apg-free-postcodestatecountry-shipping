@@ -9,7 +9,7 @@ Requires at least: 5.0
 
 Tested up to: 6.9
 
-Stable tag: 3.5.2
+Stable tag: 3.5.3
 
 WC requires at least: 5.6
 
@@ -68,7 +68,7 @@ No olvides dejarnos tu comentario en:
 
 * [WC - APG Free Shipping](https://artprojectgroup.es/plugins-para-woocommerce/wc-apg-free-shipping) en Art Project Group.
 * [Art Project Group](https://www.facebook.com/artprojectgroup) en Facebook.
-* [@artprojectgroup](https://twitter.com/artprojectgroup) en Twitter.
+* [@artprojectgroup](https://x.com/artprojectgroup) en X.
 
 ### Más plugins
 Recuerda que puedes encontrar más [plugins para WordPress](https://artprojectgroup.es/plugins-para-wordpress) y más [plugins para WooCommerce](https://artprojectgroup.es/plugins-para-woocommerce) en [Art Project Group](https://artprojectgroup.es) y en nuestro perfil en [WordPress](https://profiles.wordpress.org/artprojectgroup/).
@@ -95,6 +95,9 @@ Si necesitas ayuda para configurar o instalar **WC - APG Free Shipping**, **Art 
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 3.5.3
+* Pequeños arreglos.
+
 ### 3.5.2
 * Pequeños arreglos.
 
