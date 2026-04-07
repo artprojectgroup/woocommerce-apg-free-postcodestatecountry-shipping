@@ -14,6 +14,44 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * Obtiene las pasarelas de pago activas sin depender de su disponibilidad en checkout.
+ *
+ * @return array<string, string>
+ */
+if ( ! function_exists( 'apg_free_shipping_dame_pasarelas_activas' ) ) {
+function apg_free_shipping_dame_pasarelas_activas() {
+    if ( ! function_exists( 'WC' ) ) {
+        return [];
+    }
+
+    $payment_gateways = WC()->payment_gateways();
+    if ( empty( $payment_gateways ) || ! is_object( $payment_gateways ) || ! method_exists( $payment_gateways, 'payment_gateways' ) ) {
+        return [];
+    }
+
+    $gateways = $payment_gateways->payment_gateways();
+    if ( empty( $gateways ) || ! is_array( $gateways ) ) {
+        return [];
+    }
+
+    $medios_de_pago = [];
+    foreach ( $gateways as $gateway ) {
+        if ( ! is_object( $gateway ) || empty( $gateway->id ) ) {
+            continue;
+        }
+
+        if ( isset( $gateway->enabled ) && 'yes' !== $gateway->enabled ) {
+            continue;
+        }
+
+        $medios_de_pago[ $gateway->id ] = method_exists( $gateway, 'get_title' ) ? $gateway->get_title() : $gateway->id;
+    }
+
+    return $medios_de_pago;
+}
+}
+
+/**
  * Muestra el icono y la etiqueta personalizada para el método de envío gratuito en WooCommerce.
  *
  * Construye una etiqueta con icono, título, precio (si aplica) y el tiempo estimado de entrega,
@@ -195,12 +233,7 @@ function apg_free_shipping_toma_de_datos() {
     try {
         $medios_de_pago = get_transient( 'apg_shipping_metodos_de_pago' );
         if ( empty( $apg_free_shipping_loading_shipping_methods ) && ( false === $medios_de_pago || ! is_array( $medios_de_pago ) || empty( $medios_de_pago ) ) ) {
-            $medios_de_pago = [];
-            $gateways       = WC()->payment_gateways()->get_available_payment_gateways();
-
-            foreach ( $gateways as $gateway ) {
-                $medios_de_pago[ $gateway->id ] = $gateway->get_title();
-            }
+            $medios_de_pago = apg_free_shipping_dame_pasarelas_activas();
 
             set_transient( 'apg_shipping_metodos_de_pago', $medios_de_pago, 30 * DAY_IN_SECONDS ); // Guarda la caché durante un mes.
         }

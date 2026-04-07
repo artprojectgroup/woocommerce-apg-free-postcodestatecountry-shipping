@@ -7,13 +7,13 @@ Tags: WooCommerce, Shipping, Free Shipping
 
 Requires at least: 5.0
 
-Tested up to: 6.9
+Tested up to: 7.0
 
-Stable tag: 3.5.3
+Stable tag: 3.6.0
 
 WC requires at least: 5.6
 
-WC tested up to: 10.5.0
+WC tested up to: 10.7.0
 
 License: GPLv2 or later
 
@@ -95,6 +95,10 @@ Si necesitas ayuda para configurar o instalar **WC - APG Free Shipping**, **Art 
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 3.6.0
+* Mejorada la obtención de pasarelas de pago para que puedan seleccionarse todas las pasarelas activas en los ajustes del método de envío.
+* Pequeños arreglos.
+
 ### 3.5.3
 * Pequeños arreglos.
 

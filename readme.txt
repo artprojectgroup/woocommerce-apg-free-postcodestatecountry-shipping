@@ -3,10 +3,10 @@ Contributors: artprojectgroup
 Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: WooCommerce, Shipping, Free Shipping
 Requires at least: 5.0
-Tested up to: 6.9
-Stable tag: 3.5.3
+Tested up to: 7.0
+Stable tag: 3.6.0
 WC requires at least: 5.6
-WC tested up to: 10.5.0
+WC tested up to: 10.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -90,6 +90,9 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 2. Screenshot of WC - APG Free Shipping. APG Free Shipping Tab.
 
 == Changelog ==
+= 3.6.0 =
+* Improved payment gateway collection so all active gateways can be selected in shipping settings.
+* Small fixes.
 = 3.5.3 =
 * Small fixes.
 = 3.5.2 =
@@ -347,7 +350,8 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 * Initial version.
 
 == Upgrade Notice ==
-= 3.5.3 =
+= 3.6.0 =
+* Improved payment gateway collection so all active gateways can be selected in shipping settings.
 * Small fixes.
 
 == Translations ==

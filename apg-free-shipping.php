@@ -2,7 +2,7 @@
 /*
 Plugin Name: WC - APG Free Shipping
 Requires Plugins: woocommerce
-Version: 3.5.3
+Version: 3.6.0
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="https://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WC - APG Weight Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="https://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: https://artprojectgroup.es/
@@ -10,9 +10,9 @@ Author: Art Project Group
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.0
-Tested up to: 6.9
+Tested up to: 7.0
 WC requires at least: 5.6
-WC tested up to: 10.5.0
+WC tested up to: 10.7.0
 
 Text Domain: woocommerce-apg-free-postcodestatecountry-shipping
 Domain Path: /languages
@@ -38,7 +38,7 @@ define( 'DIRECCION_apg_free_shipping', plugin_basename( __FILE__ ) );
  * Constante con la versión actual del plugin.
  * @var string
  */
-define( 'VERSION_apg_free_shipping', '3.5.3' );
+define( 'VERSION_apg_free_shipping', '3.6.0' );
 
 // Funciones generales de APG.
 include_once( 'includes/admin/funciones-apg.php' );
@@ -686,16 +686,8 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 					$this->metodos_de_pago  = [];
 
 					// Obtiene los métodos de pago directamente desde WooCommerce como último recurso.
-					if ( function_exists( 'WC' ) ) {
-						$payment_gateways = WC()->payment_gateways();
-						if ( $payment_gateways && is_object( $payment_gateways ) && method_exists( $payment_gateways, 'get_available_payment_gateways' ) && empty( $apg_free_shipping_loading_shipping_methods ) ) {
-							$gateways = $payment_gateways->get_available_payment_gateways();
-							if ( ! empty( $gateways ) && is_array( $gateways ) ) {
-								foreach ( $gateways as $gateway ) {
-									$this->metodos_de_pago[ $gateway->id ] = $gateway->get_title();
-								}
-							}
-						}
+					if ( empty( $apg_free_shipping_loading_shipping_methods ) && function_exists( 'apg_free_shipping_dame_pasarelas_activas' ) ) {
+						$this->metodos_de_pago = apg_free_shipping_dame_pasarelas_activas();
 					}
 
 					if ( ! empty( $this->metodos_de_pago ) ) {
