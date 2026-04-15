@@ -9,7 +9,7 @@ Requires at least: 5.0
 
 Tested up to: 7.0
 
-Stable tag: 3.6.0
+Stable tag: 3.7.0
 
 WC requires at least: 5.6
 
@@ -95,6 +95,9 @@ Si necesitas ayuda para configurar o instalar **WC - APG Free Shipping**, **Art 
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 3.7.0
+* Corregida la carga de los campos de configuración del método de envío al crear una nueva instancia desde las zonas de envío de WooCommerce.
+
 ### 3.6.0
 * Mejorada la obtención de pasarelas de pago para que puedan seleccionarse todas las pasarelas activas en los ajustes del método de envío.
 * Pequeños arreglos.

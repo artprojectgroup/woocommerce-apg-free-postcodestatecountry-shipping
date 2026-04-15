@@ -2,7 +2,7 @@
 /*
 Plugin Name: WC - APG Free Shipping
 Requires Plugins: woocommerce
-Version: 3.6.0
+Version: 3.7.0
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="https://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WC - APG Weight Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="https://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: https://artprojectgroup.es/
@@ -38,7 +38,7 @@ define( 'DIRECCION_apg_free_shipping', plugin_basename( __FILE__ ) );
  * Constante con la versión actual del plugin.
  * @var string
  */
-define( 'VERSION_apg_free_shipping', '3.6.0' );
+define( 'VERSION_apg_free_shipping', '3.7.0' );
 
 // Funciones generales de APG.
 include_once( 'includes/admin/funciones-apg.php' );
@@ -183,6 +183,14 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 					return false;
 				}
 
+				// Permite cargar campos completos cuando WooCommerce crea el método
+				// desde el modal de zonas de envío vía admin-ajax.php.
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Solo lectura.
+				$ajax_action = isset( $_REQUEST['action'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) : '';
+				if ( wp_doing_ajax() && 'woocommerce_shipping_zone_add_method' === $ajax_action ) {
+					return (bool) $this->instance_id;
+				}
+
 				if ( function_exists( 'is_wc_admin_settings_page' ) && ! is_wc_admin_settings_page() ) {
 					return false;
 				}
@@ -194,8 +202,10 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 				}
 
 				// Solo cargar campos completos cuando se edita una instancia concreta.
+				// En el modal nuevo WooCommerce ya ha creado la instancia, aunque no siempre
+				// reenvía instance_id por request en todos los puntos del flujo.
 				// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Solo lectura.
-				$instance_id = isset( $_REQUEST['instance_id'] ) ? absint( wp_unslash( $_REQUEST['instance_id'] ) ) : 0;
+				$instance_id = isset( $_REQUEST['instance_id'] ) ? absint( wp_unslash( $_REQUEST['instance_id'] ) ) : absint( $this->instance_id );
 				if ( ! $instance_id ) {
 					return false;
 				}
