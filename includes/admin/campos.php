@@ -246,7 +246,7 @@ if ( WC()->shipping->get_shipping_classes() ) {
 			'data-source'   => 'classes',
 			'data-nonce'    => $apg_ajax_nonce,
 		] : [],
-		'options' => [ 'todas' => __( 'All enabled shipping class', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ] + ( $clases_ajax ? $clases_seed : $clases_opts ),
+		'options' => [ 'todas' => __( 'All enabled shipping classes', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ] + ( $clases_ajax ? $clases_seed : $clases_opts ),
 		'description' => ( $clases_cnt > 500 ? __( 'Large list. Type to search…', 'woocommerce-apg-free-postcodestatecountry-shipping' ) : '' ),
 	];
 	$campos[ 'tipo_clases' ] = [
@@ -342,12 +342,12 @@ $campos[ 'icono' ] = [
 		'desc_tip'		=> true,
 ];
 $campos[ 'muestra_icono' ] = [ 
-		'title'			=> __( 'How show icon image?', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
+		'title'			=> __( 'How to show the icon image?', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
 		'desc_tip' 		=> __( 'Select how you want to show the icon image.', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
 		'type'			=> 'select',
 		'class'			=> 'wc-enhanced-select',
 		'options'		=> [ 
-			'no'			=> __( 'Not show, just title', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
+			'no'			=> __( "Don't show, just title", 'woocommerce-apg-free-postcodestatecountry-shipping' ),
 			'delante'		=> __( 'Before title', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
 			'detras'		=> __( 'After title', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
 			'solo'			=> __( 'No title, just icon', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
@@ -371,7 +371,7 @@ $campos[ 'precio' ] = [
 $campos[ 'muestra' ] = [ 
 		'title'			=> __( 'Show only APG Free Shipping', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
 		'type'			=> 'checkbox',
-		'label'			=> __( "Don't show others shipping cost.", 'woocommerce-apg-free-postcodestatecountry-shipping' ),
+		'label'			=> __( "Don't show other shipping costs.", 'woocommerce-apg-free-postcodestatecountry-shipping' ),
 		'default'		=> 'no',
 ];
 

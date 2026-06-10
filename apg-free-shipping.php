@@ -2,17 +2,17 @@
 /*
 Plugin Name: WC - APG Free Shipping
 Requires Plugins: woocommerce
-Version: 3.7.0
+Version: 3.8.0
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
-Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and minimum order a amount and/or a valid free shipping coupon. Created from <a href="https://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WC - APG Weight Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="https://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
+Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and a minimum order amount and/or a valid free shipping coupon. Created from <a href="https://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WC - APG Weight Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="https://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: https://artprojectgroup.es/
 Author: Art Project Group
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+License: GPLv3 or later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 5.0
-Tested up to: 7.0
+Tested up to: 7.1
 WC requires at least: 5.6
-WC tested up to: 10.7.0
+WC tested up to: 10.9.0
 
 Text Domain: woocommerce-apg-free-postcodestatecountry-shipping
 Domain Path: /languages
@@ -38,7 +38,7 @@ define( 'DIRECCION_apg_free_shipping', plugin_basename( __FILE__ ) );
  * Constante con la versión actual del plugin.
  * @var string
  */
-define( 'VERSION_apg_free_shipping', '3.7.0' );
+define( 'VERSION_apg_free_shipping', '3.8.0' );
 
 // Funciones generales de APG.
 include_once( 'includes/admin/funciones-apg.php' );
@@ -98,7 +98,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 				$this->id					= 'apg_free_shipping';
 				$this->instance_id			= absint( $instance_id );
 				$this->method_title			= __( 'APG Free Shipping', 'woocommerce-apg-free-postcodestatecountry-shipping' );
-				$this->method_description	= __( 'Lets you add a free shipping based on Postcode/State/Country of the cart and minimum order a amount and/or a valid free shipping coupon.', 'woocommerce-apg-free-postcodestatecountry-shipping' ) . '<span class="apg-weight-marker"></span>';
+				$this->method_description	= __( 'Lets you add a free shipping based on Postcode/State/Country of the cart and a minimum order amount and/or a valid free shipping coupon.', 'woocommerce-apg-free-postcodestatecountry-shipping' ) . '<span class="apg-weight-marker"></span>';
 				$this->supports				= [
 					'shipping-zones',
 					'instance-settings',
@@ -577,11 +577,14 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
                 if ( empty( $this->metodos_de_envio ) ) {
                     $this->metodos_de_envio = [];
                     // Obtiene la zona de envío de esta instancia.
-                    $zona_de_envio          = wp_cache_get( "apg_zone_{$instancia}" );
-                    if ( false === $zona_de_envio ) {
+                    $zona_de_envio          = wp_cache_get( "apg_zone_{$instancia}", 'apg_shipping' );
+                    if ( empty( $zona_de_envio ) ) {
                         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- No existe una función alternativa en WooCommerce
                         $zona_de_envio  = $wpdb->get_var( $wpdb->prepare( "SELECT zone_id FROM {$wpdb->prefix}woocommerce_shipping_zone_methods WHERE instance_id = %d LIMIT 1;", $instancia ) );
-                        wp_cache_set( "apg_zone_{$instancia}", $zona_de_envio );
+                        // Solo se cachea un valor válido para evitar «envenenar» la caché con una zona vacía en almacenes con object cache persistente.
+                        if ( ! empty( $zona_de_envio ) ) {
+                            wp_cache_set( "apg_zone_{$instancia}", $zona_de_envio, 'apg_shipping', DAY_IN_SECONDS );
+                        }
                     }
 
                     if ( empty( $zonas_de_envio ) ) {

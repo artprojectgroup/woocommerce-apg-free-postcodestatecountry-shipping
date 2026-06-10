@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit; ?>
 	<div class="fila">
 		<div class="columna">
 			<p>
-				<?php esc_html_e( 'If you enjoyed and find helpful this plugin, please make a donation:', 'woocommerce-apg-free-postcodestatecountry-shipping' ); ?>
+				<?php esc_html_e( 'If you enjoy this plugin and find it helpful, please make a donation:', 'woocommerce-apg-free-postcodestatecountry-shipping' ); ?>
 			</p>
 			<p> <a href="<?php echo esc_url( $apg_free_shipping['donacion'] ); ?>" target="_blank" title="<?php echo esc_attr__( 'Make a donation by ', 'woocommerce-apg-free-postcodestatecountry-shipping' ); ?>APG"> <span class="genericon genericon-cart"></span> </a> </p>
 		</div>
@@ -48,9 +48,9 @@ defined( 'ABSPATH' ) || exit; ?>
 	<div class="fila">
 		<div class="columna">
 			<p>
-				<?php esc_html_e( 'Contact with us:', 'woocommerce-apg-free-postcodestatecountry-shipping' ); ?>
+				<?php esc_html_e( 'Contact us:', 'woocommerce-apg-free-postcodestatecountry-shipping' ); ?>
 			</p>
-			<p> <a href="mailto:info@artprojectgroup.es" title="<?php echo esc_attr__( 'Contact with us by ', 'woocommerce-apg-free-postcodestatecountry-shipping' ); ?>e-mail"><span class="genericon genericon-mail"></span></a> </p>
+			<p> <a href="mailto:info@artprojectgroup.es" title="<?php echo esc_attr__( 'Contact us by ', 'woocommerce-apg-free-postcodestatecountry-shipping' ); ?>e-mail"><span class="genericon genericon-mail"></span></a> </p>
 		</div>
 		<div class="columna">
 			<p>

@@ -53,7 +53,7 @@ msgstr ""
 #. Description of the plugin
 msgid ""
 "Add to WooCommerce a free shipping based on the order postcode, province "
-"(state) and country of customer's address and minimum order a amount "
+"(state) and country of customer's address and a minimum order amount "
 "and/or a valid free shipping coupon. Created from <a href=\"https:"
 "//profiles.wordpress.org/artprojectgroup/\" target=\"_blank\">Art "
 "Project Group</a> <a href=\"https://wordpress.org/plugins/woocommerce-"
@@ -73,7 +73,7 @@ msgid "All enabled payments"
 msgstr ""
 
 #: includes/admin/campos.php:249
-msgid "All enabled shipping class"
+msgid "All enabled shipping classes"
 msgstr ""
 
 #: includes/admin/campos.php:334
@@ -125,11 +125,11 @@ msgstr ""
 
 #: includes/cuadro-informacion.php:53 includes/admin/funciones-apg.php:46
 #: includes/admin/funciones-apg.php:46
-msgid "Contact with us by "
+msgid "Contact us by "
 msgstr ""
 
 #: includes/cuadro-informacion.php:51
-msgid "Contact with us:"
+msgid "Contact us:"
 msgstr ""
 
 #: includes/admin/campos.php:361
@@ -141,7 +141,7 @@ msgid "Documentation and Support:"
 msgstr ""
 
 #: includes/admin/campos.php:376
-msgid "Don't show others shipping cost."
+msgid "Don't show other shipping costs."
 msgstr ""
 
 #: includes/admin/campos.php:31
@@ -181,7 +181,7 @@ msgid "Guest"
 msgstr ""
 
 #: includes/admin/campos.php:347
-msgid "How show icon image?"
+msgid "How to show the icon image?"
 msgstr ""
 
 #. Author URI of the plugin
@@ -204,7 +204,7 @@ msgstr ""
 
 #: includes/cuadro-informacion.php:21
 msgid ""
-"If you enjoyed and find helpful this plugin, please make a donation:"
+"If you enjoy this plugin and find it helpful, please make a donation:"
 msgstr ""
 
 #: includes/admin/campos.php:64
@@ -223,7 +223,7 @@ msgstr ""
 #: apg-free-shipping.php:101
 msgid ""
 "Lets you add a free shipping based on Postcode/State/Country of the cart "
-"and minimum order a amount and/or a valid free shipping coupon."
+"and a minimum order amount and/or a valid free shipping coupon."
 msgstr ""
 
 #: includes/formulario.php:69
@@ -291,7 +291,7 @@ msgid "No title, just icon"
 msgstr ""
 
 #: includes/admin/campos.php:352
-msgid "Not show, just title"
+msgid "Don't show, just title"
 msgstr ""
 
 #: includes/admin/campos.php:296

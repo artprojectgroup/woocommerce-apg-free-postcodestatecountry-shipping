@@ -3,17 +3,17 @@ Contributors: artprojectgroup
 Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: WooCommerce, Shipping, Free Shipping
 Requires at least: 5.0
-Tested up to: 7.0
-Stable tag: 3.7.0
+Tested up to: 7.1
+Stable tag: 3.8.0
 WC requires at least: 5.6
-WC tested up to: 10.7.0
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+WC tested up to: 10.9.0
+License: GPLv3 or later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Add to WooCommerce a free shipping based on postcode, state (province), country and a minimum and/or a valid coupon.
 
 == Description ==
-**IMPORTANT: *WC - APG Free Shipping* required WooCommerce 2.6.0 or higher.**
+**IMPORTANT: *WC - APG Free Shipping* requires WooCommerce 2.6.0 or higher.**
 
 **NOTE: WooCommerce – APG Free Postcode/State/Country Shipping is now called *WC - APG Free Shipping*.**
 
@@ -83,13 +83,17 @@ Although the plugin configuration is very simple, we have created a tutorial whe
 = Support =
 If you need help to configuring or installing **WC - APG Free Shipping**, **Art Project Group** offers its service [**Technical Support**](https://artprojectgroup.es/tienda/ticket-de-soporte). 
 
-*In any case **Art Project Group** provides any kind of free technical support.*
+*In no case does **Art Project Group** provide any kind of free technical support.*
 
 == Screenshots ==
 1. Screenshot of WC - APG Free Shipping. Shipping Options Tab.
 2. Screenshot of WC - APG Free Shipping. APG Free Shipping Tab.
 
 == Changelog ==
+= 3.8.0 =
+* Fixed the shipping methods list not refreshing when methods were added, deleted or enabled/disabled in a shipping zone (the list could show empty or outdated on stores with a persistent object cache).
+* Improved cache invalidation for product categories, tags and attribute values, so new ones show up immediately.
+* Compatible with WooCommerce 10.9 and WordPress 7.1.
 = 3.7.0 =
 * Fixed shipping method settings fields when creating a new instance from WooCommerce shipping zones.
 = 3.6.0 =
@@ -242,13 +246,13 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 * Support for [WPML](https://wpml.org/?aid=80296&affiliate_key=m66Ss5ps0xoS) plugin.
 * Adjust to optimize WooCommerce 3.2 compatibility.
 = 2.2.0.7 = 
-* Fixed shipping hidding.
+* Fixed shipping hiding.
 = 2.2.0.6 = 
 * Fixed localization.
 = 2.2.0.5 = 
 * Adjust to optimize WooCommerce 3.0 compatibility.
 = 2.2.0.4 = 
-* Fixed shipping hidding.
+* Fixed shipping hiding.
 = 2.2.0.3 = 
 * Adjust to optimize WooCommerce 3.0 compatibility.
 = 2.2.0.2 = 
@@ -273,7 +277,7 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 = 2.0.1.3 = 
 * Added option to enabled/disabled a shipping method.
 = 2.0.1.2 =
-* Fixed shipping hidding.
+* Fixed shipping hiding.
 = 2.0.1.1 =
 * Added support for multiple shipping methods per shipping zone.
 = 2.0.1 =
@@ -312,7 +316,7 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 = 0.9.1.1 =
 * Fix internal error that appeared after the last update.
 = 0.9.1 =
-* Fixed bug that caused the free shipping will not work when no restriction isn’t select.
+* Fixed bug that caused the free shipping to not work when no restriction is selected.
 * Fixed links error.
 = 0.9 =
 * Fixed internal errors that appeared when you install the plugin and have no initial configuration.
@@ -361,16 +365,16 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 * *Português*: por [**Álvaro Góis dos Santos**](http://www.efeitoavestruz.pt).
 
 == Support ==
-Since **WC - APG Free Shipping** is totally free, **Art Project Group** only provides payment [**Technical Support**](https://artprojectgroup.es/tienda/ticket-de-soporte) service. In any case **Art Project Group** provide any kind of free technical support.
+Since **WC - APG Free Shipping** is totally free, **Art Project Group** only provides payment [**Technical Support**](https://artprojectgroup.es/tienda/ticket-de-soporte) service. In no case does **Art Project Group** provide any kind of free technical support.
 
 == Donation ==
-Did you liked and you have proved useful **WC - APG Free Shipping** on your website? We would appreciate a [small donation](https://artprojectgroup.es/tienda/donacion) that will help us to continue improving this plugin and create more plugins totally free for the entire WordPress community.
+Did you like it and find **WC - APG Free Shipping** useful on your website? We would appreciate a [small donation](https://artprojectgroup.es/tienda/donacion) that will help us to continue improving this plugin and create more plugins totally free for the entire WordPress community.
 
 == Thanks ==
 * Ourselves ([Art Project Group](https://profiles.wordpress.org/artprojectgroup/)) and [Woothemes](https://profiles.wordpress.org/woothemes/) by the great plugins that have inspired **WC - APG Free Shipping**.
 * To all that use it.
 * All that you help to improve it.
-* All you made donations.
+* All who made donations.
 * All that you encourage us with your comments.
 
 Thank you very much to all!
