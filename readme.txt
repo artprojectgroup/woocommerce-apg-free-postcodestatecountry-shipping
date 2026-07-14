@@ -4,9 +4,9 @@ Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: WooCommerce, Shipping, Free Shipping
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 3.8.0
+Stable tag: 3.9.0
 WC requires at least: 5.6
-WC tested up to: 10.9.0
+WC tested up to: 11.0.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -90,6 +90,9 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 2. Screenshot of WC - APG Free Shipping. APG Free Shipping Tab.
 
 == Changelog ==
+= 3.9.0 =
+* Added compatibility with YITH WooCommerce Product Bundles. On bundles set to "Items will be bundled in a unique shipment", the bundled items now inherit the bundle shipping class, so the excluded shipping classes setting applies to the whole bundle.
+* Compatible with WooCommerce 11.0.
 = 3.8.0 =
 * Fixed the shipping methods list not refreshing when methods were added, deleted or enabled/disabled in a shipping zone (the list could show empty or outdated on stores with a persistent object cache).
 * Improved cache invalidation for product categories, tags and attribute values, so new ones show up immediately.
@@ -356,8 +359,9 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 * Initial version.
 
 == Upgrade Notice ==
-= 3.7.0 =
-* Fixed shipping method settings fields when creating a new instance from WooCommerce shipping zones.
+= 3.9.0 =
+* Added compatibility with YITH WooCommerce Product Bundles. On bundles set to "Items will be bundled in a unique shipment", the bundled items now inherit the bundle shipping class, so the excluded shipping classes setting applies to the whole bundle.
+* Compatible with WooCommerce 11.0.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).

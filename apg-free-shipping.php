@@ -2,7 +2,7 @@
 /*
 Plugin Name: WC - APG Free Shipping
 Requires Plugins: woocommerce
-Version: 3.8.0
+Version: 3.9.0
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and a minimum order amount and/or a valid free shipping coupon. Created from <a href="https://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WC - APG Weight Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="https://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: https://artprojectgroup.es/
@@ -12,7 +12,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 5.0
 Tested up to: 7.1
 WC requires at least: 5.6
-WC tested up to: 10.9.0
+WC tested up to: 11.0.0
 
 Text Domain: woocommerce-apg-free-postcodestatecountry-shipping
 Domain Path: /languages
@@ -38,7 +38,7 @@ define( 'DIRECCION_apg_free_shipping', plugin_basename( __FILE__ ) );
  * Constante con la versión actual del plugin.
  * @var string
  */
-define( 'VERSION_apg_free_shipping', '3.8.0' );
+define( 'VERSION_apg_free_shipping', '3.9.0' );
 
 // Funciones generales de APG.
 include_once( 'includes/admin/funciones-apg.php' );
@@ -790,6 +790,37 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 			}
 			
 			/**
+             * Devuelve el producto contenedor si el artículo del carrito forma parte de un pack
+             * de YITH WooCommerce Product Bundles configurado como «envío único».
+             *
+             * YITH resuelve el envío de estos packs a nivel de paquete de envío, dejando solo el
+             * producto contenedor. Pero este método recorre el carrito directamente, donde los
+             * productos internos siguen presentes con su propia clase de envío (o sin ninguna).
+             *
+             * @param array $valores Datos de la línea del carrito.
+             * @return WC_Product|false Producto contenedor del pack, o false si no aplica.
+             */
+            public function apg_free_shipping_dame_pack_de_envio_unico( $valores ) {
+                if ( empty( $valores[ 'bundled_by' ] ) || is_null( WC()->cart ) ) {
+                    return false;
+                }
+
+                $carrito = WC()->cart->get_cart();
+                $pack    = isset( $carrito[ $valores[ 'bundled_by' ] ][ 'data' ] ) ? $carrito[ $valores[ 'bundled_by' ] ][ 'data' ] : false;
+
+                if ( ! $pack instanceof WC_Product || ! $pack->is_type( 'yith_bundle' ) ) {
+                    return false;
+                }
+
+                // «yes» = los artículos se envían individualmente: cada uno conserva su clase.
+                if ( 'yes' === $pack->get_meta( '_yith_wcpb_non_bundled_shipping' ) ) {
+                    return false;
+                }
+
+                return $pack;
+            }
+
+			/**
              * Comprueba si el método de envío está disponible para el paquete actual.
              *
              * @param array $paquete Datos del paquete de WooCommerce.
@@ -889,12 +920,15 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 
                     // No atiende a las clases de envío excluidas.
 					if ( ! empty( $this->clases_excluidas ) ) {
-						// Clase de envío.
-						if ( ( in_array( $producto->get_shipping_class(), $this->clases_excluidas ) || ( in_array( "todas", $this->clases_excluidas ) && $producto->get_shipping_class() ) ) && $this->tipo_clases == 'no' ) {
+						// Clase de envío efectiva: los productos internos de un pack heredan la clase del pack.
+						$pack           = $this->apg_free_shipping_dame_pack_de_envio_unico( $valores );
+						$clase_de_envio = ( $pack && $pack->get_shipping_class() ) ? $pack->get_shipping_class() : $producto->get_shipping_class();
+
+						if ( ( in_array( $clase_de_envio, $this->clases_excluidas ) || ( in_array( "todas", $this->clases_excluidas ) && $clase_de_envio ) ) && $this->tipo_clases == 'no' ) {
 							$this->reduce_valores( $total_excluido, $producto, $valores );
-							
+
 							continue;
-						} else if ( ! in_array( $producto->get_shipping_class(), $this->clases_excluidas ) && ! in_array( "todas", $this->clases_excluidas ) && $this->tipo_clases == 'yes' ) {
+						} else if ( ! in_array( $clase_de_envio, $this->clases_excluidas ) && ! in_array( "todas", $this->clases_excluidas ) && $this->tipo_clases == 'yes' ) {
 							return apply_filters( 'woocommerce_shipping_' . $this->id . '_is_available', false, $paquete, $this );
 						}
 					}
