@@ -3,10 +3,11 @@ Contributors: artprojectgroup
 Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: WooCommerce, Shipping, Free Shipping
 Requires at least: 5.7
-Tested up to: 7.1
-Stable tag: 3.9.0
+Tested up to: 7.2
+Requires PHP: 7.4
+Stable tag: 3.10.0
 WC requires at least: 5.6
-WC tested up to: 11.0.0
+WC tested up to: 11.1.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -90,6 +91,15 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 2. Screenshot of WC - APG Free Shipping. APG Free Shipping Tab.
 
 == Changelog ==
+= 3.10.0 =
+* Security: the public endpoint that feeds the block cart now only returns data from real shipping methods, instead of being able to expose the settings of any other option in the site.
+* Security: the shipping method title and icon are now sanitised and escaped before being printed in the block cart.
+* Security: the automatic deactivation when WooCommerce is missing can now only be triggered by users allowed to manage plugins.
+* Fixed the cart downloading the icon image on every shipping calculation: local icons are read from disk and the image size is cached, so a slow icon host no longer delays the cart.
+* Fixed the excluded user roles setting for customers with more than one role.
+* Fixed several PHP notices in the cart when the chosen shipping method had no saved settings, and an empty rating when wordpress.org returned an unexpected response.
+* Uninstall now also removes the plugin transients and no longer matches options belonging to other plugins.
+* Compatible with WooCommerce 11.1 and WordPress 7.2.
 = 3.9.0 =
 * Added compatibility with YITH WooCommerce Product Bundles. On bundles set to "Items will be bundled in a unique shipment", the bundled items now inherit the bundle shipping class, so the excluded shipping classes setting applies to the whole bundle.
 * Compatible with WooCommerce 11.0.
@@ -359,6 +369,10 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 * Initial version.
 
 == Upgrade Notice ==
+= 3.10.0 =
+* Security fixes in the public endpoint used by the block cart and in the data it prints.
+* The cart no longer downloads the icon image on every shipping calculation.
+* Compatible with WooCommerce 11.1 and WordPress 7.2.
 = 3.9.0 =
 * Added compatibility with YITH WooCommerce Product Bundles: bundled items now inherit the bundle shipping class.
 * Compatible with WooCommerce 11.0.

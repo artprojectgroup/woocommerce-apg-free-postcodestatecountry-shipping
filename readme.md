@@ -8,13 +8,15 @@ Tags: WooCommerce, Shipping, Free Shipping
 
 Requires at least: 5.7
 
-Tested up to: 7.1
+Tested up to: 7.2
 
-Stable tag: 3.9.0
+Requires PHP: 7.4
+
+Stable tag: 3.10.0
 
 WC requires at least: 5.6
 
-WC tested up to: 11.0.0
+WC tested up to: 11.1.0
 
 License: GPLv3 or later
 
@@ -111,6 +113,17 @@ Si necesitas ayuda para configurar o instalar **WC - APG Free Shipping**, **Art 
 _En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito._
 
 ## Changelog
+
+### 3.10.0
+
+- Seguridad: el endpoint público que alimenta el carrito de bloques solo devuelve ya datos de métodos de envío reales, en vez de poder exponer los ajustes de cualquier otra opción del sitio.
+- Seguridad: el título y el icono del método de envío se sanean y escapan antes de imprimirse en el carrito de bloques.
+- Seguridad: la desactivación automática cuando falta WooCommerce solo puede provocarla ya quien tiene permiso para gestionar plugins.
+- Corregida la descarga de la imagen del icono en cada cálculo de envío: los iconos locales se leen del disco y su tamaño se cachea, de modo que un servidor de iconos lento ya no retrasa el carrito.
+- Corregida la exclusión por rol de usuario en clientes con más de un rol.
+- Corregidos varios avisos de PHP en el carrito cuando el método de envío elegido no tenía ajustes guardados, y la valoración vacía cuando wordpress.org devolvía una respuesta inesperada.
+- La desinstalación borra ahora también los datos temporales del plugin y ya no alcanza opciones de otros plugins.
+- Compatible con WooCommerce 11.1 y WordPress 7.2.
 
 ### 3.9.0
 

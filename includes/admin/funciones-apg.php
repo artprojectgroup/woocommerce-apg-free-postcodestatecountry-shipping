@@ -121,6 +121,12 @@ function apg_free_shipping_plugin( $nombre ) {
 
 	$plugin = json_decode( wp_remote_retrieve_body( $respuesta ) );
 
+	// Una respuesta con un cuerpo inesperado deja $plugin en null: leer ->rating avisa y pinta una valoración vacía.
+	if ( ! is_object( $plugin ) || ! isset( $plugin->rating, $plugin->num_ratings ) ) {
+		// translators: %s is the plugin name.
+		return '<a title="' . sprintf( __( 'Please, rate %s:', 'woocommerce-apg-free-postcodestatecountry-shipping' ), $apg_free_shipping[ 'plugin' ] ) . '" href="' . $apg_free_shipping[ 'puntuacion' ] . '?rate=5#postform" class="estrellas">' . __( 'Unknown rating', 'woocommerce-apg-free-postcodestatecountry-shipping' ) . '</a>';
+	}
+
     $rating = [
 	   'rating'		=> $plugin->rating,
 	   'type'		=> 'percent',

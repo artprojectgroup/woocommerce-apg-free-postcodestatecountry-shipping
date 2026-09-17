@@ -16,6 +16,21 @@ jQuery(function($) {
         document.head.appendChild(styleTag);
     }
     
+    // Escapa un valor que va dentro de un atributo HTML. Un escapador basado en el DOM
+    // (textContent / .text()) no codifica las comillas y no sirve en esta posición.
+    function escAttr( valor ) {
+        if ( valor === null || typeof valor === 'undefined' ) {
+            return '';
+        }
+
+        return String( valor )
+            .replace( /&/g, '&amp;' )
+            .replace( /</g, '&lt;' )
+            .replace( />/g, '&gt;' )
+            .replace( /"/g, '&quot;' )
+            .replace( /'/g, '&#039;' );
+    }
+
     function actualizarIconosAPG() {
 		$('.wc-block-components-shipping-rates-control input[type="radio"][name^="radio-control-"]').each(function() {
 			const $input = $(this);
@@ -36,7 +51,7 @@ jQuery(function($) {
 				let icono = '', entrega = '', html = '';
 
 				if ( d.icono && d.muestra !== 'no' ) {
-					icono = `<img src="${d.icono}" style="display:inline;" class="apg_icon">`;
+					icono = `<img src="${escAttr( d.icono )}" style="display:inline;" class="apg_icon">`;
 				}
 
 				if ( d.muestra === 'delante' ) {

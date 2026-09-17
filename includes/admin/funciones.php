@@ -52,6 +52,98 @@ function apg_free_shipping_dame_pasarelas_activas() {
 }
 
 /**
+ * Devuelve la ruta local de un archivo a partir de su URL, si pertenece a esta instalación.
+ *
+ * @param string $url URL del archivo.
+ * @return string Ruta absoluta legible, o cadena vacía si el archivo no es local.
+ */
+if ( ! function_exists( 'apg_free_shipping_dame_ruta_local' ) ) {
+function apg_free_shipping_dame_ruta_local( $url ) {
+    if ( ! is_string( $url ) || '' === $url ) {
+        return '';
+    }
+
+    $url    = strtok( $url, '?' ); // Descarta la cadena de consulta.
+    $bases  = [];
+
+    // De la más concreta a la más general, para que gane la primera coincidencia.
+    $subidas    = wp_upload_dir();
+    if ( ! empty( $subidas[ 'baseurl' ] ) && ! empty( $subidas[ 'basedir' ] ) ) {
+        $bases[ $subidas[ 'baseurl' ] ] = $subidas[ 'basedir' ];
+    }
+    $bases[ content_url() ]     = WP_CONTENT_DIR;
+    $bases[ includes_url() ]    = ABSPATH . WPINC;
+    $bases[ site_url( '/' ) ]   = ABSPATH;
+
+    foreach ( $bases as $base_url => $base_directorio ) {
+        // Compara sin esquema para que http/https no impidan la coincidencia.
+        $base_sin_esquema   = preg_replace( '#^https?:#', '', $base_url );
+        $url_sin_esquema    = preg_replace( '#^https?:#', '', $url );
+
+        if ( '' !== $base_sin_esquema && 0 === strpos( $url_sin_esquema, $base_sin_esquema ) ) {
+            $ruta   = rtrim( $base_directorio, '/\\' ) . '/' . ltrim( substr( $url_sin_esquema, strlen( $base_sin_esquema ) ), '/' );
+            if ( is_readable( $ruta ) && ! is_dir( $ruta ) ) {
+                return $ruta;
+            }
+        }
+    }
+
+    return '';
+}
+}
+
+/**
+ * Obtiene el ancho y el alto de la imagen del icono del método de envío.
+ *
+ * Resuelve primero la ruta local del archivo cuando la URL pertenece a esta instalación
+ * —el caso habitual, incluida la imagen por defecto del plugin— para no hacer ninguna
+ * petición HTTP. Solo descarga la imagen cuando es remota, con un tiempo de espera corto
+ * en lugar de los 300 segundos por defecto de download_url(), y cachea el tamaño por URL:
+ * esto se ejecuta al pintar el carrito y no puede quedarse esperando a un servidor ajeno.
+ *
+ * @param string $icon_url URL de la imagen.
+ * @return array Ancho y alto, o [ null, null ] si no se han podido determinar.
+ */
+if ( ! function_exists( 'apg_free_shipping_dame_tamano_icono' ) ) {
+function apg_free_shipping_dame_tamano_icono( $icon_url ) {
+    $cache_key  = 'apg_shipping_tamano_' . md5( $icon_url );
+    $tamano     = get_transient( $cache_key );
+
+    if ( is_array( $tamano ) && isset( $tamano[ 0 ], $tamano[ 1 ] ) ) {
+        return [ $tamano[ 0 ] ? (int) $tamano[ 0 ] : null, $tamano[ 1 ] ? (int) $tamano[ 1 ] : null ];
+    }
+
+    $ancho  = null;
+    $alto   = null;
+    $ruta   = apg_free_shipping_dame_ruta_local( $icon_url );
+
+    if ( $ruta ) {
+        $size   = wp_getimagesize( $ruta );
+        if ( is_array( $size ) ) {
+            list( $ancho, $alto )   = $size;
+        }
+    } else {
+        // Procesa imagen remota y obtiene su tamaño.
+        require_once ABSPATH . 'wp-admin/includes/file.php'; // Asegura que download_url() existe.
+        $icon_temp  = download_url( $icon_url, 5 );
+
+        if ( ! is_wp_error( $icon_temp ) ) {
+            $size   = wp_getimagesize( $icon_temp );
+            if ( is_array( $size ) ) {
+                list( $ancho, $alto )   = $size;
+            }
+            wp_delete_file( $icon_temp );
+        }
+    }
+
+    // Un tamaño válido se cachea una semana; uno fallido solo una hora, para reintentarlo pronto.
+    set_transient( $cache_key, [ (int) $ancho, (int) $alto ], ( $ancho && $alto ) ? WEEK_IN_SECONDS : HOUR_IN_SECONDS );
+
+    return [ $ancho, $alto ];
+}
+}
+
+/**
  * Muestra el icono y la etiqueta personalizada para el método de envío gratuito en WooCommerce.
  *
  * Construye una etiqueta con icono, título, precio (si aplica) y el tiempo estimado de entrega,
@@ -98,18 +190,8 @@ function apg_free_shipping_icono( $etiqueta, $metodo ) {
     // Construye el icono si aplica.
     $imagen = '';
     if ( ! empty( $icon_url ) && filter_var( $icon_url, FILTER_VALIDATE_URL ) && $mostrar_icono !== 'no' ) {
-        $ancho = $alto = null;
-        // Procesa imagen y obtiene su tamaño.
-        require_once ABSPATH . 'wp-admin/includes/file.php'; // Asegura que download_url() existe.
-        $icon_temp  = download_url( $icon_url );
-
-        if ( ! is_wp_error( $icon_temp ) ) {
-            $size   = wp_getimagesize( $icon_temp );
-            if ( is_array( $size ) ) {
-                list( $ancho, $alto )   = $size;
-            }
-            wp_delete_file( $icon_temp );
-        }
+        // Obtiene el tamaño de la imagen sin descargarla en cada cálculo de envío.
+        list( $ancho, $alto )   = apg_free_shipping_dame_tamano_icono( $icon_url );
 
         // Construye la etiqueta <img>.
         // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage -- Static plugin image
@@ -190,10 +272,15 @@ add_filter( 'woocommerce_shipping_methods', 'apg_free_shipping_anade_gastos_de_e
 function apg_free_shipping_filtra_medios_de_pago( $medios ) {
     $apg_free_shipping_settings	= apg_free_shipping_dame_configuracion();
 
+    // Sin ajustes no hay nada que filtrar: evita leer un índice sobre un valor que no es array.
+    if ( ! is_array( $apg_free_shipping_settings ) ) {
+        return $medios;
+    }
+
     if ( ! empty( $apg_free_shipping_settings[ 'pago' ] ) && $apg_free_shipping_settings[ 'pago' ][ 0 ] !== 'todos' ) {
-        // phpcs:ignore WordPress.Security.NonceVerification.Missing
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Lectura del método de pago elegido en el formulario del pago para filtrar la lista mostrada; no se modifica ningún dato.
         if ( isset( $_POST[ 'payment_method' ] ) && ! $medios ) {
-            // phpcs:ignore WordPress.Security.NonceVerification.Missing
+            // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Lectura del método de pago elegido en el formulario del pago para filtrar la lista mostrada; no se modifica ningún dato.
             $medios = array_map( 'sanitize_text_field', (array) wp_unslash( $_POST[ 'payment_method' ] ) );
         }
         foreach ( $medios as $nombre => $medio ) {
@@ -279,7 +366,7 @@ function apg_free_shipping_toma_de_datos() {
     }
 
     //  Ejecutar también en el backend SOLO cuando estás en configuración de envío.
-    // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+    // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Solo se comprueba en qué pantalla del escritorio estamos para decidir si refrescar la caché; no se modifica ningún dato.
     if ( is_admin() && isset( $_GET[ 'page' ], $_GET[ 'tab' ], $_GET[ 'instance_id' ] ) && 'wc-settings' === sanitize_text_field( wp_unslash( $_GET[ 'page' ] ) ) && 'shipping' === sanitize_text_field( wp_unslash( $_GET[ 'tab' ] ) ) && absint( $_GET[ 'instance_id' ] ) ) {
         apg_free_shipping_toma_de_datos();
     }
@@ -301,9 +388,9 @@ function apg_free_shipping_gestiona_envios( $envios ) {
             $id = explode( ':', $chosen[ 0 ] );
         }
     }
-    // phpcs:ignore WordPress.Security.NonceVerification.Missing
+    // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Lectura del método de envío elegido en el formulario del pago para filtrar la lista mostrada; no se modifica ningún dato.
     if ( empty( $id ) && isset( $_POST[ 'shipping_method' ][ 0 ] ) ) {
-        // phpcs:ignore WordPress.Security.NonceVerification.Missing
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Lectura del método de envío elegido en el formulario del pago para filtrar la lista mostrada; no se modifica ningún dato.
         $id = explode( ':', sanitize_text_field( wp_unslash( $_POST[ 'shipping_method' ][ 0 ] ) ) );
     }
 
@@ -339,21 +426,32 @@ add_filter( 'woocommerce_cart_shipping_packages', 'apg_free_shipping_gestiona_en
  * @return array Configuración del método de envío o array vacío si no está disponible.
  */
 function apg_free_shipping_dame_configuracion() {
+    $id = [];
+
     // Corrección propuesta por @rabbitshavefangs en https://wordpress.org/support/topic/problem-in-line-50-of-functiones-php/
     if ( isset( WC()->session ) && is_object( WC()->session ) ) {
         $chosen_shipping_methods = WC()->session->get( 'chosen_shipping_methods' );
-        if ( ! empty( $chosen_shipping_methods ) ) {
+        if ( ! empty( $chosen_shipping_methods[ 0 ] ) ) {
             $id = explode( ":", $chosen_shipping_methods[ 0 ] );
         }
-    // phpcs:ignore WordPress.Security.NonceVerification.Missing
+    // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Lectura del método de envío elegido en el formulario del pago para filtrar la lista mostrada; no se modifica ningún dato.
     } elseif ( isset( $_POST[ 'shipping_method' ][ 0 ] ) ) {
-        // phpcs:ignore WordPress.Security.NonceVerification.Missing
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Lectura del método de envío elegido en el formulario del pago para filtrar la lista mostrada; no se modifica ningún dato.
         $id = explode( ":", sanitize_text_field( wp_unslash( $_POST[ 'shipping_method' ][ 0 ] ) ) );
     } else {
         return [];
     }
-    
-    return ( !empty( $id[ 1 ] ) ) ? get_option( 'woocommerce_apg_free_shipping_' . $id[ 1 ] . '_settings' ) : [];
+
+    if ( empty( $id[ 1 ] ) ) {
+        return [];
+    }
+
+    // El identificador llega desde la sesión o desde el formulario del pago, así que se fuerza
+    // a entero: sin esto compone el nombre de cualquier otra opción de la base de datos.
+    $opcion                     = get_option( 'woocommerce_apg_free_shipping_' . absint( $id[ 1 ] ) . '_settings' );
+    $apg_free_shipping_settings = is_array( $opcion ) ? $opcion : maybe_unserialize( $opcion );
+
+    return is_array( $apg_free_shipping_settings ) ? $apg_free_shipping_settings : [];
 }
 
 /**
@@ -455,6 +553,7 @@ function apg_free_shipping_borra_cache_envios() {
 			$instancia = absint( $instancia );
 			delete_transient( 'apg_shipping_metodos_envio_' . $instancia );
 			wp_cache_delete( 'apg_zone_' . $instancia, 'apg_shipping' );
+			wp_cache_delete( 'apg_metodo_' . $instancia, 'apg_shipping' );
 		}
 	}
 }

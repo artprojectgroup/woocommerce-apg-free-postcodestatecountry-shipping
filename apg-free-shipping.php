@@ -2,7 +2,7 @@
 /*
 Plugin Name: WC - APG Free Shipping
 Requires Plugins: woocommerce
-Version: 3.9.0
+Version: 3.10.0
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and a minimum order amount and/or a valid free shipping coupon. Created from <a href="https://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WC - APG Weight Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="https://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: https://artprojectgroup.es/
@@ -10,9 +10,10 @@ Author: Art Project Group
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 5.7
-Tested up to: 7.1
+Requires PHP: 7.4
+Tested up to: 7.2
 WC requires at least: 5.6
-WC tested up to: 11.0.0
+WC tested up to: 11.1.0
 
 Text Domain: woocommerce-apg-free-postcodestatecountry-shipping
 Domain Path: /languages
@@ -38,7 +39,7 @@ define( 'DIRECCION_apg_free_shipping', plugin_basename( __FILE__ ) );
  * Constante con la versión actual del plugin.
  * @var string
  */
-define( 'VERSION_apg_free_shipping', '3.9.0' );
+define( 'VERSION_apg_free_shipping', '3.10.0' );
 
 // Funciones generales de APG.
 include_once( 'includes/admin/funciones-apg.php' );
@@ -851,13 +852,29 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
                             $validacion = true;
                         }                   
                     } else {
-                        foreach( wp_get_current_user()->roles as $rol ) { // Usuario con rol.
-                            if ( ( in_array( $rol, $this->roles_excluidos ) && $this->tipo_roles == 'no' ) || 
-                            ( ! in_array( $rol, $this->roles_excluidos ) && $this->tipo_roles == 'yes' ) ) {
-                                $validacion = false; // Role excluido.
-                            } else {
-                                $validacion = true;
-                            } 
+                        // Un usuario puede tener varios roles y la decisión no puede depender
+                        // de cuál sea el último del bucle: en modo exclusión basta con que uno
+                        // de sus roles esté excluido, y en modo «solo estos roles» basta con
+                        // que uno de sus roles esté seleccionado.
+                        $roles_del_usuario  = wp_get_current_user()->roles; // Usuario con rol.
+                        if ( $this->tipo_roles == 'yes' ) { // Envía solo a los roles seleccionados.
+                            $validacion = false;
+                            foreach( $roles_del_usuario as $rol ) {
+                                if ( in_array( $rol, $this->roles_excluidos ) ) {
+                                    $validacion = true; // Role permitido.
+
+                                    break;
+                                }
+                            }
+                        } else { // No envía a los roles seleccionados.
+                            $validacion = true;
+                            foreach( $roles_del_usuario as $rol ) {
+                                if ( in_array( $rol, $this->roles_excluidos ) ) {
+                                    $validacion = false; // Role excluido.
+
+                                    break;
+                                }
+                            }
                         }
                     }             
 				}
@@ -1103,13 +1120,35 @@ add_action( 'enqueue_block_assets', 'apg_free_shipping_script_bloques' );
  * @return void
  */
 function apg_free_shipping_ajax_datos() {
-    // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Missing
+    global $wpdb;
+
+    // Endpoint de solo lectura que debe responder también a visitantes no identificados desde
+    // el carrito y el pago de bloques, por lo que no puede exigir un nonce. No modifica ningún
+    // dato y solo sirve ajustes de métodos de envío reales (se valida más abajo).
+    // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Endpoint público de solo lectura; el identificador recibido se valida contra los métodos de envío existentes.
     $metodo = isset( $_POST[ 'metodo' ] ) ? sanitize_text_field( wp_unslash( $_POST[ 'metodo' ] ) ) : '';
     if ( ! preg_match( '/^([a-zA-Z0-9_]+):(\d+)$/', $metodo, $method ) ) {
         wp_send_json_error( __( 'Invalid format', 'woocommerce-apg-free-postcodestatecountry-shipping' ) );
     }
 
     list( , $slug, $instance_id )   = $method;
+    $instance_id                    = absint( $instance_id );
+
+    // Comprueba que la instancia existe y que pertenece al método indicado. Sin esto, el dato
+    // recibido compone el nombre de cualquier opción «woocommerce_*_<número>_settings» de la
+    // base de datos y la respuesta la devuelve a cualquier visitante.
+    $metodo_registrado  = wp_cache_get( "apg_metodo_{$instance_id}", 'apg_shipping' );
+    if ( false === $metodo_registrado ) {
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- No existe una función alternativa en WooCommerce; el resultado se cachea justo debajo
+        $metodo_registrado  = $wpdb->get_var( $wpdb->prepare( "SELECT method_id FROM {$wpdb->prefix}woocommerce_shipping_zone_methods WHERE instance_id = %d LIMIT 1;", $instance_id ) );
+        $metodo_registrado  = is_string( $metodo_registrado ) ? $metodo_registrado : '';
+        wp_cache_set( "apg_metodo_{$instance_id}", $metodo_registrado, 'apg_shipping', DAY_IN_SECONDS );
+    }
+
+    if ( '' === $metodo_registrado || $metodo_registrado !== $slug ) {
+        wp_send_json_error( __( 'No data available', 'woocommerce-apg-free-postcodestatecountry-shipping' ) );
+    }
+
     $opciones                       = get_option( "woocommerce_{$slug}_{$instance_id}_settings" );
     if ( ! is_array( $opciones ) ) {
         wp_send_json_error( __( 'No data available', 'woocommerce-apg-free-postcodestatecountry-shipping' ) );
@@ -1122,7 +1161,7 @@ function apg_free_shipping_ajax_datos() {
         $entrega    = ( apply_filters( 'apg_free_shipping_delivery', true ) ) ? sprintf( __( "Estimated delivery time: %s", 'woocommerce-apg-free-postcodestatecountry-shipping' ), $entrega ) : $entrega;
     }
     wp_send_json_success( [
-        'titulo'    => $opciones[ 'title' ] ?? ucfirst( $slug ),
+        'titulo'    => wp_kses_post( $opciones[ 'title' ] ?? ucfirst( $slug ) ),
         'entrega'   => wp_kses_post( $entrega ),
         'icono'     => esc_url_raw( $opciones[ 'icono' ] ?? '' ),
         'muestra'   => $opciones[ 'muestra_icono' ] ?? '',
@@ -1143,7 +1182,11 @@ function apg_free_shipping_requiere_wc() {
     echo '<h3>' . esc_html( $apg_free_shipping[ 'plugin' ] ) . '</h3>';
     echo '<h4>' . esc_html__( 'This plugin requires WooCommerce to be active in order to run!', 'woocommerce-apg-free-postcodestatecountry-shipping' ) . '</h4>';
     echo '</div>';
-	deactivate_plugins( DIRECCION_apg_free_shipping );
+
+	// La desactivación es una acción de estado: solo la provoca quien puede gestionar plugins.
+	if ( current_user_can( 'activate_plugins' ) ) {
+		deactivate_plugins( DIRECCION_apg_free_shipping );
+	}
 }
 
 /**
@@ -1153,8 +1196,44 @@ function apg_free_shipping_requiere_wc() {
  */
 function apg_free_shipping_desinstalar() {
     global $wpdb;
-    
-    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Limpieza forzada de opciones temporales propias del plugin
-    $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '%woocommerce_apg_free_shipping_%'" );
+
+    // El comodín inicial hacía coincidir también opciones ajenas que contuvieran el nombre.
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Limpieza forzada de opciones propias del plugin
+    $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'woocommerce_apg_free_shipping_%'" );
+
+    // Datos temporales de nombre fijo.
+    $temporales = [
+        'apg_shipping_product_cat',
+        'apg_shipping_product_tag',
+        'apg_shipping_clases_envio',
+        'apg_shipping_roles_usuario',
+        'apg_shipping_metodos_de_pago',
+        'apg_shipping_zonas_de_envio',
+        'apg_shipping_atributos',
+        'apg_free_shipping_plugin',
+    ];
+    foreach ( $temporales as $temporal ) {
+        delete_transient( $temporal );
+    }
+
+    // Datos temporales por instancia. Se recorren las instancias reales mientras la tabla de
+    // WooCommerce siga disponible, para que también se limpien con caché de objetos persistente.
+    $tabla  = $wpdb->prefix . 'woocommerce_shipping_zone_methods';
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Comprobación de existencia de tabla durante la desinstalación
+    if ( $tabla === $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $tabla ) ) ) {
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- No existe una función alternativa en WooCommerce
+        $instancias = $wpdb->get_col( "SELECT instance_id FROM {$wpdb->prefix}woocommerce_shipping_zone_methods;" );
+        foreach ( (array) $instancias as $instancia ) {
+            $instancia  = absint( $instancia );
+            delete_transient( 'apg_shipping_icono_' . $instancia );
+            delete_transient( 'apg_shipping_metodos_envio_' . $instancia );
+            wp_cache_delete( 'apg_zone_' . $instancia, 'apg_shipping' );
+            wp_cache_delete( 'apg_metodo_' . $instancia, 'apg_shipping' );
+        }
+    }
+
+    // Barrido final por si quedan datos temporales de instancias ya eliminadas.
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Limpieza forzada de datos temporales propios del plugin
+    $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '\_transient\_apg\_shipping\_%' OR option_name LIKE '\_transient\_timeout\_apg\_shipping\_%'" );
 }
 register_uninstall_hook( __FILE__, 'apg_free_shipping_desinstalar' );
