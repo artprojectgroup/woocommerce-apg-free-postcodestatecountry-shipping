@@ -153,6 +153,7 @@ msgid "Enable/Disable"
 msgstr ""
 
 #: includes/admin/campos.php:359
+#: includes/clases/class-apg-free-shipping-help.php:175
 msgid "Estimated delivery time"
 msgstr ""
 
@@ -173,6 +174,7 @@ msgid "Follow us:"
 msgstr ""
 
 #: includes/admin/campos.php:43
+#: includes/clases/class-apg-free-shipping-help.php:143
 msgid "Free Shipping Requires..."
 msgstr ""
 
@@ -181,6 +183,7 @@ msgid "Guest"
 msgstr ""
 
 #: includes/admin/campos.php:347
+#: includes/clases/class-apg-free-shipping-help.php:174
 msgid "How to show the icon image?"
 msgstr ""
 
@@ -195,6 +198,7 @@ msgid ""
 msgstr ""
 
 #: includes/admin/campos.php:340
+#: includes/clases/class-apg-free-shipping-help.php:173
 msgid "Icon image"
 msgstr ""
 
@@ -208,6 +212,7 @@ msgid ""
 msgstr ""
 
 #: includes/admin/campos.php:64
+#: includes/clases/class-apg-free-shipping-help.php:145
 msgid "Including taxes"
 msgstr ""
 
@@ -235,10 +240,12 @@ msgid "Make a donation by "
 msgstr ""
 
 #: apg-free-shipping.php:213 includes/admin/campos.php:36
+#: includes/clases/class-apg-free-shipping-help.php:135
 msgid "Method Title"
 msgstr ""
 
 #: includes/admin/campos.php:55
+#: includes/clases/class-apg-free-shipping-help.php:144
 msgid "Minimum Order Amount"
 msgstr ""
 
@@ -283,6 +290,7 @@ msgid "No shipping (%s)"
 msgstr ""
 
 #: includes/admin/campos.php:72
+#: includes/clases/class-apg-free-shipping-help.php:146
 msgid "No shipping (Max. weight)"
 msgstr ""
 
@@ -295,6 +303,7 @@ msgid "Don't show, just title"
 msgstr ""
 
 #: includes/admin/campos.php:296
+#: includes/clases/class-apg-free-shipping-help.php:163
 msgid "Payment gateway"
 msgstr ""
 
@@ -422,6 +431,7 @@ msgid "Shipping method %s"
 msgstr ""
 
 #: includes/admin/campos.php:324
+#: includes/clases/class-apg-free-shipping-help.php:164
 msgid "Shipping methods"
 msgstr ""
 
@@ -444,6 +454,7 @@ msgid "Show %s price after method title."
 msgstr ""
 
 #: includes/admin/campos.php:374
+#: includes/clases/class-apg-free-shipping-help.php:165
 msgid "Show only APG Free Shipping"
 msgstr ""
 
@@ -499,4 +510,158 @@ msgstr ""
 
 #. Name of the plugin
 msgid "WC - APG Free Shipping"
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:66
+msgid "More help"
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:67
+msgid "Full documentation"
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:132
+msgid "The method"
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:134
+msgid ""
+"This method belongs to the shipping zone you are editing, so free shipping "
+"is only ever offered to the countries, states and postcodes of that zone. "
+"You can add it as many times as you need, each copy with its own conditions."
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:135
+msgid "the name the customer reads at checkout. APG Free Shipping by default."
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:140
+msgid "When shipping is free"
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:142
+msgid ""
+"What the cart has to meet before this method shows up. With nothing set, "
+"shipping is free for everyone in the zone."
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:143
+msgid ""
+"the condition: nothing, a valid free shipping coupon, a minimum order "
+"amount, either of the two, or both at once."
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:144
+msgid ""
+"how much the customer has to spend. It only counts when the condition above "
+"asks for an amount."
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:145
+msgid ""
+"whether that amount is compared against the total with taxes or without "
+"them. Unticked, which is how it comes, taxes are left out."
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:146
+msgid ""
+"a weight above which shipping stops being free, however much the order "
+"costs. Leave it at zero to switch it off."
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:151
+msgid "Exclusions"
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:153
+msgid ""
+"What never travels free. There are five pairs of settings, one for product "
+"categories, tags, attributes, shipping classes and user roles, and the two "
+"in each pair work together."
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:154
+msgid "No shipping (...)"
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:154
+msgid ""
+"the list of categories, tags, attributes, shipping classes or roles that do "
+"not get free shipping. Leave a list empty and nothing is excluded by it. "
+"With more than five hundred entries the list turns into a search box, so you "
+"type instead of scrolling."
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:155
+msgid "Shipping (...)?"
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:155
+msgid ""
+"turns the list around: ticked, free shipping is offered only for what is on "
+"the list and for nothing else."
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:160
+msgid "At checkout"
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:162
+msgid ""
+"Which payment methods and which other shipping methods can be used together "
+"with this one."
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:163
+msgid ""
+"the payment methods the customer is offered when choosing free shipping. "
+"Useful for leaving cash on delivery out of an order that travels free."
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:164
+msgid ""
+"the other shipping methods of the same zone that are shown alongside this "
+"one."
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:165
+msgid ""
+"hides every other shipping cost whenever free shipping is available, so the "
+"customer cannot pay for something that is already free."
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:170
+msgid "How it looks"
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:172
+msgid "What the customer sees next to the method at checkout."
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:173
+msgid ""
+"the address of an image to show with the method, typically the carrier logo. "
+"60x21 pixels works well."
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:174
+msgid ""
+"where the icon goes: before the title, after it, or on its own with no title "
+"at all."
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:175
+msgid ""
+"a free text shown under the method, such as 24 to 48 hours. Leave it empty "
+"and nothing is shown."
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:176
+msgid "Show price"
+msgstr ""
+
+#: includes/clases/class-apg-free-shipping-help.php:176
+msgid ""
+"writes the zero price after the title instead of leaving the method with no "
+"figure, which some customers read as an error."
 msgstr ""

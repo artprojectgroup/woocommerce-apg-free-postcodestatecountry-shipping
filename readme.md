@@ -12,7 +12,7 @@ Tested up to: 7.2
 
 Requires PHP: 7.4
 
-Stable tag: 3.10.0
+Stable tag: 3.11.0
 
 WC requires at least: 5.6
 
@@ -53,6 +53,7 @@ Añade a WooCommerce un envío gratuito basado en el código postal, provincia (
 - Puedes eliminar el texto previo del tiempo estimado de entrega con el filtro `apg_free_shipping_delivery`.
 - Puedes ocultar el resto de gastos de envío al estar disponible el gasto de envío gratuito configurado.
 - Totalmente compatible con el plugin [WPML](https://wpml.org/?aid=80296&affiliate_key=m66Ss5ps0xoS).
+- Ayuda contextual en los ajustes del método de envío, que explica cada opción sin salir de la pantalla.
 
 ### Traducciones
 
@@ -62,7 +63,7 @@ Añade a WooCommerce un envío gratuito basado en el código postal, provincia (
 
 ### Soporte técnico
 
-**Art Project Group** te ofrece [**Soporte técnico**](https://artprojectgroup.es/tienda/ticket-de-soporte) para configurar o instalar ***WC - APG Free Shipping***.
+**Art Project Group** te ofrece [**Soporte técnico**](https://artprojectgroup.es/tienda/soporte-tecnico) para configurar o instalar ***WC - APG Free Shipping***.
 
 ### Origen
 
@@ -70,13 +71,15 @@ Añade a WooCommerce un envío gratuito basado en el código postal, provincia (
 
 ### Más información
 
-En nuestro sitio web oficial puedes obtener más información sobre [**WC - APG Free Shipping**](https://artprojectgroup.es/plugins-para-woocommerce/wc-apg-free-shipping).
+En nuestro sitio web oficial puedes obtener más información sobre [**WC - APG Free Shipping**](https://artprojectgroup.es/plugins-para-woocommerce/wc-apg-envio-gratuito).
+
+Tienes la [documentación completa](https://artprojectgroup.es/documentacion/wc-apg-envio-gratuito), con cada ajuste explicado uno a uno.
 
 ### Comentarios
 
 No olvides dejarnos tu comentario en:
 
-- [WC - APG Free Shipping](https://artprojectgroup.es/plugins-para-woocommerce/wc-apg-free-shipping) en Art Project Group.
+- [WC - APG Free Shipping](https://artprojectgroup.es/plugins-para-woocommerce/wc-apg-envio-gratuito) en Art Project Group.
 - [Art Project Group](https://www.facebook.com/artprojectgroup) en Facebook.
 - [@artprojectgroup](https://x.com/artprojectgroup) en X.
 
@@ -104,15 +107,20 @@ Puedes seguir el desarrollo de este plugin en [Github](https://github.com/artpro
 
 ### ¿Cómo se configura?
 
-Aunque la configuración del plugin es muy simple, hemos creado un tutorial donde explicamos paso a paso el proceso de configuración. Puedes visitarlo en [¿Cómo se configura WooCommerce – APG Free Postcode/State/Country Shipping?](https://artprojectgroup.es/como-se-configura-woocommerce-apg-free-postcodestatecountry-shipping).
+Aunque la configuración del plugin es muy simple, hemos creado un tutorial donde explicamos paso a paso el proceso de configuración. Puedes visitarlo en [¿Cómo se configura WC - APG Envío Gratuito 2.0?](https://artprojectgroup.es/como-se-configura-wc-apg-envio-gratuito-2-0).
 
 ### Soporte técnico
 
-Si necesitas ayuda para configurar o instalar **WC - APG Free Shipping**, **Art Project Group** te ofrece su servicio de [**Soporte técnico**](https://artprojectgroup.es/tienda/ticket-de-soporte).
+Si necesitas ayuda para configurar o instalar **WC - APG Free Shipping**, **Art Project Group** te ofrece su servicio de [**Soporte técnico**](https://artprojectgroup.es/tienda/soporte-tecnico).
 
 _En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito._
 
 ## Changelog
+
+### 3.11.0
+
+- Ayuda contextual en los ajustes del método de envío, que explica cada opción sin salir de la pantalla.
+- El plugin carga sus propios archivos por ruta absoluta, así que ya no puede coger otro con el mismo nombre.
 
 ### 3.10.0
 
@@ -626,7 +634,7 @@ _En ningún caso **Art Project Group** proporciona ningún tipo de soporte técn
 
 ## Soporte técnico
 
-Dado que **WC - APG Free Shipping** es totalmente gratuito, **Art Project Group** sólo proporciona el servicio de [**Soporte técnico**](https://artprojectgroup.es/tienda/ticket-de-soporte) previo pago. En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.
+Dado que **WC - APG Free Shipping** es totalmente gratuito, **Art Project Group** sólo proporciona el servicio de [**Soporte técnico**](https://artprojectgroup.es/tienda/soporte-tecnico) previo pago. En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.
 
 ## Donación
 

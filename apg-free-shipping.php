@@ -2,7 +2,7 @@
 /*
 Plugin Name: WC - APG Free Shipping
 Requires Plugins: woocommerce
-Version: 3.10.0
+Version: 3.11.0
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and a minimum order amount and/or a valid free shipping coupon. Created from <a href="https://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WC - APG Weight Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="https://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: https://artprojectgroup.es/
@@ -39,10 +39,10 @@ define( 'DIRECCION_apg_free_shipping', plugin_basename( __FILE__ ) );
  * Constante con la versión actual del plugin.
  * @var string
  */
-define( 'VERSION_apg_free_shipping', '3.10.0' );
+define( 'VERSION_apg_free_shipping', '3.11.0' );
 
 // Funciones generales de APG.
-include_once( 'includes/admin/funciones-apg.php' );
+include_once __DIR__ . '/includes/admin/funciones-apg.php';
 
 // ¿Está activo WooCommerce?.
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
@@ -73,7 +73,20 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 		}
 		
 		// Cargamos funciones necesarias.
-		include_once( 'includes/admin/funciones.php' );
+		include_once __DIR__ . '/includes/admin/funciones.php';
+
+        // Ayuda contextual. Los ajustes de este método viven dentro de la pantalla de ajustes de
+        // WooCommerce, y es la propia clase la que comprueba que se está editando una instancia
+        // suya antes de añadir nada.
+        //
+        // Va en `admin_head` con prioridad 11 y no en `load-woocommerce_page_wc-settings` porque
+        // WooCommerce vacía la ayuda de toda esa pantalla en `admin_head` con prioridad 10
+        // (`WC_Admin_Settings::get_settings_pages()`), mediante una función anónima que no se puede
+        // desenganchar. Añadiéndolos después, los paneles llegan intactos al HTML.
+        if ( is_admin() ) {
+            include_once __DIR__ . '/includes/clases/class-apg-free-shipping-help.php';
+            add_action( 'admin_head', array( 'APG_Free_Shipping_Help', 'add_tabs' ), 11 );
+        }
 
 		/**
 		 * WC_apg_free_shipping class.
@@ -275,7 +288,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 			 * @return void
 			 */
 			public function admin_options() {
-				include_once( 'includes/formulario.php' );
+				include_once __DIR__ . '/includes/formulario.php';
 			}
 			
 			/**

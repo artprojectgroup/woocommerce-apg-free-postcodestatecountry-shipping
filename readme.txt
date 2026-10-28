@@ -5,7 +5,7 @@ Tags: WooCommerce, Shipping, Free Shipping
 Requires at least: 5.7
 Tested up to: 7.2
 Requires PHP: 7.4
-Stable tag: 3.10.0
+Stable tag: 3.11.0
 WC requires at least: 5.6
 WC tested up to: 11.1.0
 License: GPLv3 or later
@@ -40,6 +40,7 @@ Add to WooCommerce a free shipping based on postcode, state (province), country 
 * You can remove the previous text of the estimated delivery time with the `apg_free_shipping_delivery` filter.
 * You can hide the rest of shipping if free shipping is available.
 * Fully compatible with [WPML](https://wpml.org/?aid=80296&affiliate_key=m66Ss5ps0xoS) plugin.
+* Contextual help on the shipping method settings, explaining every setting without leaving the screen.
 
 = Translations =
 * Español ([**Art Project Group**](https://artprojectgroup.es/)).
@@ -47,18 +48,20 @@ Add to WooCommerce a free shipping based on postcode, state (province), country 
 * Português ([**Álvaro Góis dos Santos**](http://efeitoavestruz.pt/)).
 
 = Technical support =
-**Art Project Group** offers [**Technical support**](https://artprojectgroup.es/tienda/ticket-de-soporte) to configure or install ***WC - APG Free Shipping***.
+**Art Project Group** offers [**Technical support**](https://artprojectgroup.es/tienda/soporte-tecnico) to configure or install ***WC - APG Free Shipping***.
 
 = Origin =
 **WC - APG Free Shipping** has been programmed from plugin [*WC - APG Weight Shipping*](https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/) from [Art Project Group](https://profiles.wordpress.org/artprojectgroup/) and original class *WC_Shipping_Free_Shipping* from [*WooCommerce - excelling eCommerce*](https://wordpress.org/plugins/woocommerce/), which adds some of the features present in the first to the simplicity of the second.
 
 = More information =
-On our official website you can learn more about [**WC - APG Free Shipping**](https://artprojectgroup.es/plugins-para-woocommerce/wc-apg-free-shipping).
+On our official website you can learn more about [**WC - APG Free Shipping**](https://artprojectgroup.es/plugins-para-woocommerce/wc-apg-envio-gratuito).
+
+You can also read the [full documentation](https://artprojectgroup.es/documentacion/wc-apg-envio-gratuito), with every setting explained one by one.
 
 = Comments =
 Don’t forget to leave us your comment on:
 
-* [WC - APG Free Shipping](https://artprojectgroup.es/plugins-para-woocommerce/wc-apg-free-shipping) on Art Project Group.
+* [WC - APG Free Shipping](https://artprojectgroup.es/plugins-para-woocommerce/wc-apg-envio-gratuito) on Art Project Group.
 * [Art Project Group](https://www.facebook.com/artprojectgroup) on Facebook.
 * [@artprojectgroup](https://x.com/artprojectgroup) on X.
 
@@ -79,10 +82,10 @@ You can follow the development of this plugin on [Github](https://github.com/art
 
 == Frequently asked questions ==
 = How do you set up? =
-Although the plugin configuration is very simple, we have created a tutorial where we explain setup process step by step. You can visit it on [¿Cómo se configura WooCommerce – APG Free Postcode/State/Country Shipping?](https://artprojectgroup.es/como-se-configura-woocommerce-apg-free-postcodestatecountry-shipping).
+Although the plugin configuration is very simple, we have created a tutorial where we explain setup process step by step. You can visit it on [¿Cómo se configura WC - APG Envío Gratuito 2.0?](https://artprojectgroup.es/como-se-configura-wc-apg-envio-gratuito-2-0).
 
 = Support =
-If you need help to configuring or installing **WC - APG Free Shipping**, **Art Project Group** offers its service [**Technical Support**](https://artprojectgroup.es/tienda/ticket-de-soporte). 
+If you need help to configuring or installing **WC - APG Free Shipping**, **Art Project Group** offers its service [**Technical Support**](https://artprojectgroup.es/tienda/soporte-tecnico). 
 
 *In no case does **Art Project Group** provide any kind of free technical support.*
 
@@ -91,6 +94,10 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 2. Screenshot of WC - APG Free Shipping. APG Free Shipping Tab.
 
 == Changelog ==
+= 3.11.0 =
+* Contextual help on the settings of the shipping method, explaining every setting without leaving the screen.
+* The plugin loads its own files by absolute path, so it can no longer pick up a file of the same name from somewhere else.
+
 = 3.10.0 =
 * Security: the public endpoint that feeds the block cart now only returns data from real shipping methods, instead of being able to expose the settings of any other option in the site.
 * Security: the shipping method title and icon are now sanitised and escaped before being printed in the block cart.
@@ -383,7 +390,7 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 * *Português*: por [**Álvaro Góis dos Santos**](http://www.efeitoavestruz.pt).
 
 == Support ==
-Since **WC - APG Free Shipping** is totally free, **Art Project Group** only provides payment [**Technical Support**](https://artprojectgroup.es/tienda/ticket-de-soporte) service. In no case does **Art Project Group** provide any kind of free technical support.
+Since **WC - APG Free Shipping** is totally free, **Art Project Group** only provides payment [**Technical Support**](https://artprojectgroup.es/tienda/soporte-tecnico) service. In no case does **Art Project Group** provide any kind of free technical support.
 
 == Donation ==
 Did you like it and find **WC - APG Free Shipping** useful on your website? We would appreciate a [small donation](https://artprojectgroup.es/tienda/donacion) that will help us to continue improving this plugin and create more plugins totally free for the entire WordPress community.
