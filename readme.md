@@ -117,6 +117,12 @@ _En ningún caso **Art Project Group** proporciona ningún tipo de soporte técn
 
 ## Changelog
 
+### 3.12.0
+
+- Corregida la comprobación del cupón de envío gratuito, que dejaba un aviso en el registro en cada cálculo de envío.
+- Quitado el código de compatibilidad con WooCommerce anterior a 4.4, que ya no se ejecutaba.
+- Compatible con WordPress 7.2 y WooCommerce 11.2.1.
+
 ### 3.11.0
 
 - Ayuda contextual en los ajustes del método de envío, que explica cada opción sin salir de la pantalla.

@@ -23,15 +23,6 @@ $apg_ajax_nonce = wp_create_nonce( 'apg_ajax_terms' );
 $texto  = __( "Select the %1\$s where %2\$s doesn't accept shippings.", 'woocommerce-apg-free-postcodestatecountry-shipping' );
 $campos = [];
 
-// Campo: Activar/desactivar (solo WC < 2.7)
-if ( version_compare( WC_VERSION, '2.7', '<' ) ) {
-	$campos[ 'activo' ] = [ 
-		'title'				=> __( 'Enable/Disable', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
-		'type'				=> 'checkbox',
-		'label'				=> __( 'Enable this shipping method', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
-		'default'			=> 'yes'
-	];
-}
 $campos[ 'title' ] = [ 
 	'title' 				=> __( 'Method Title', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
 	'type' 					=> 'text',
@@ -59,15 +50,13 @@ $campos[ 'importe_minimo' ] = [
 	'desc_tip'      		=> true,
 	'placeholder'			=> wc_format_localized_price( 0 )
 ];
-if ( version_compare( WC_VERSION, '3.3', '>=' ) ) {
-    $campos[ 'impuestos' ] = [
-        'title'				=> __( 'Including taxes', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
-        'type'				=> 'checkbox',
-        'label'				=> sprintf( __( "Minimum order amount includes taxes.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'product categories', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
-        'desc_tip' 			=> sprintf( __( "Check this field if the minimum order amount must include taxes.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'product categories', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
-        'default'			=> 'no',
-    ];
-}
+$campos[ 'impuestos' ] = [
+	'title'				=> __( 'Including taxes', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
+	'type'				=> 'checkbox',
+	'label'				=> sprintf( __( "Minimum order amount includes taxes.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'product categories', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
+	'desc_tip' 			=> sprintf( __( "Check this field if the minimum order amount must include taxes.", 'woocommerce-apg-free-postcodestatecountry-shipping' ), __( 'product categories', 'woocommerce-apg-free-postcodestatecountry-shipping' ) ),
+	'default'			=> 'no',
+];
 $campos[ 'peso' ] = [ 
 	'title'					=> __( 'No shipping (Max. weight)', 'woocommerce-apg-free-postcodestatecountry-shipping' ),
 	'type'					=> 'text',

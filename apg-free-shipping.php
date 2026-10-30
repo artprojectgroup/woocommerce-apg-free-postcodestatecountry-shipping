@@ -2,7 +2,7 @@
 /*
 Plugin Name: WC - APG Free Shipping
 Requires Plugins: woocommerce
-Version: 3.11.0
+Version: 3.12.0
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-free-postcodestatecountry-shipping/
 Description: Add to WooCommerce a free shipping based on the order postcode, province (state) and country of customer's address and a minimum order amount and/or a valid free shipping coupon. Created from <a href="https://profiles.wordpress.org/artprojectgroup/" target="_blank">Art Project Group</a> <a href="https://wordpress.org/plugins/woocommerce-apg-weight-and-postcodestatecountry-shipping/" target="_blank"><strong>WC - APG Weight Shipping</strong></a> plugin and the original WC_Shipping_Free_Shipping class from <a href="https://wordpress.org/plugins/woocommerce/" target="_blank"><strong>WooCommerce - excelling eCommerce</strong></a>.
 Author URI: https://artprojectgroup.es/
@@ -13,8 +13,7 @@ Requires at least: 5.7
 Requires PHP: 7.4
 Tested up to: 7.2
 WC requires at least: 5.6
-WC tested up to: 11.1.0
-
+WC tested up to: 11.2.1
 Text Domain: woocommerce-apg-free-postcodestatecountry-shipping
 Domain Path: /languages
  */
@@ -39,7 +38,7 @@ define( 'DIRECCION_apg_free_shipping', plugin_basename( __FILE__ ) );
  * Constante con la versión actual del plugin.
  * @var string
  */
-define( 'VERSION_apg_free_shipping', '3.11.0' );
+define( 'VERSION_apg_free_shipping', '3.12.0' );
 
 // Funciones generales de APG.
 include_once __DIR__ . '/includes/admin/funciones-apg.php';
@@ -163,12 +162,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 					'entrega',
 					'muestra',
 				];
-				if ( version_compare( WC_VERSION, '2.7', '<' ) ) {
-					$campos[] = 'activo';
-				}
-				if ( version_compare( WC_VERSION, '3.3', '>=' ) ) {
-					$campos[] = 'impuestos';
-				}
+				$campos[] = 'impuestos';
 				foreach ( $campos as $campo ) {
 					$this->$campo = $this->get_option( $campo );
 				}
@@ -273,10 +267,6 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
                     'impuestos'           => [ 'type' => 'checkbox', 'default' => 'no' ],
                     'debug'               => [ 'type' => 'checkbox', 'default' => 'no' ],
                 ];
-
-                if ( version_compare( WC_VERSION, '2.7', '<' ) ) {
-                    $campos['activo'] = [ 'type' => 'checkbox', 'default' => 'yes' ];
-                }
 
                 return $campos;
             }
@@ -841,14 +831,8 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
              * @return bool
 			 */
 			public function is_available( $paquete ) {
-				if ( version_compare( WC_VERSION, '2.7', '<' ) ) {
-					if ( $this->activo == 'no' ) {
-						return apply_filters( 'woocommerce_shipping_' . $this->id . '_is_available', false, $paquete, $this ); // No está activo.
-					}
-				} else {
-					if ( ! $this->is_enabled() ) {
-						return apply_filters( 'woocommerce_shipping_' . $this->id . '_is_available', false, $paquete, $this ); // No está activo.
-					}
+				if ( ! $this->is_enabled() ) {
+					return apply_filters( 'woocommerce_shipping_' . $this->id . '_is_available', false, $paquete, $this ); // No está activo.
 				}
 				
 				// Recoge los datos.
@@ -973,7 +957,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 				if ( in_array( $this->requires, [ 'cupon', 'cualquiera', 'ambos' ] ) ) {
 					if ( $cupones = WC()->cart->get_coupons() ) {
 						foreach ( $cupones as $codigo => $cupon ) {
-							if ( $cupon->is_valid() && $cupon->enable_free_shipping() ) {
+							if ( $cupon->is_valid() && $cupon->get_free_shipping() ) {
 								$tiene_cupon = true;
 								break;
 							}
@@ -985,16 +969,10 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 				if ( in_array( $this->requires, [ 'importe_minimo', 'cualquiera', 'ambos' ] ) ) {
 					$total = WC()->cart->get_displayed_subtotal();
                                         
-					if ( version_compare( WC_VERSION, '3.2', '<' ) && isset( WC()->cart->cart_contents_total ) ) {
-						$total = ( 'incl' === WC()->cart->tax_display_cart ) ? round( $total - ( WC()->cart->get_cart_discount_total() + WC()->cart->get_cart_discount_tax_total() ), wc_get_price_decimals() ) : round( $total - WC()->cart->get_cart_discount_total(), wc_get_price_decimals() );
-					} elseif ( version_compare( WC_VERSION, '4.4', '<' ) ) {
-                        $total = ( 'incl' === WC()->cart->tax_display_cart ) ? round( $total - ( WC()->cart->get_discount_total() + WC()->cart->get_discount_tax() ), wc_get_price_decimals() ) : round( $total - WC()->cart->get_discount_total(), wc_get_price_decimals() );
-                    } else {
-                        $total = ( 'incl' === WC()->cart->get_tax_price_display_mode() ) ? round( $total - ( WC()->cart->get_discount_total() + WC()->cart->get_discount_tax() ), wc_get_price_decimals() ) : round( $total - WC()->cart->get_discount_total(), wc_get_price_decimals() );
-                    }
+					$total = ( 'incl' === WC()->cart->get_tax_price_display_mode() ) ? round( $total - ( WC()->cart->get_discount_total() + WC()->cart->get_discount_tax() ), wc_get_price_decimals() ) : round( $total - WC()->cart->get_discount_total(), wc_get_price_decimals() );
 
                     // ¿Impuestos?.
-                    if ( version_compare( WC_VERSION, '3.3', '>=' ) && $this->impuestos == "yes" && ! WC()->cart->display_prices_including_tax() ) {
+                    if ( $this->impuestos == "yes" && ! WC()->cart->display_prices_including_tax() ) {
                         $total  = $total + WC()->cart->get_subtotal_tax() - WC()->cart->get_cart_discount_tax_total();
                     }
 
@@ -1086,13 +1064,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 			 * @return void
 			 */
 			public function reduce_valores( &$total_excluido, $producto, $valores ) {
-				if ( version_compare( WC_VERSION, '2.7', '<' ) ) {
-					$total_excluido = ( WC()->cart->tax_display_cart == 'excl' ) ? $total_excluido + $producto->get_price_excluding_tax() * $valores[ 'quantity' ] : $total_excluido + $producto->get_price_including_tax() * $valores[ 'quantity' ];
-				} elseif ( version_compare( WC_VERSION, '4.4', '<' ) ) {
-                    $total_excluido = ( WC()->cart->tax_display_cart == 'excl' ) ? $total_excluido + wc_get_price_excluding_tax( $producto ) * $valores[ 'quantity' ] : $total_excluido + wc_get_price_including_tax( $producto ) * $valores[ 'quantity' ];
-                } else {
-                    $total_excluido = ( WC()->cart->get_tax_price_display_mode() == 'excl' ) ? $total_excluido + wc_get_price_excluding_tax( $producto ) * $valores[ 'quantity' ] : $total_excluido + wc_get_price_including_tax( $producto ) * $valores[ 'quantity' ];
-				}
+				$total_excluido = ( WC()->cart->get_tax_price_display_mode() == 'excl' ) ? $total_excluido + wc_get_price_excluding_tax( $producto ) * $valores[ 'quantity' ] : $total_excluido + wc_get_price_including_tax( $producto ) * $valores[ 'quantity' ];
 			}
 		}
 	}

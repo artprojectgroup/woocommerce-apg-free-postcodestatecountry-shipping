@@ -5,9 +5,9 @@ Tags: WooCommerce, Shipping, Free Shipping
 Requires at least: 5.7
 Tested up to: 7.2
 Requires PHP: 7.4
-Stable tag: 3.11.0
+Stable tag: 3.12.0
 WC requires at least: 5.6
-WC tested up to: 11.1.0
+WC tested up to: 11.2.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -94,6 +94,11 @@ If you need help to configuring or installing **WC - APG Free Shipping**, **Art 
 2. Screenshot of WC - APG Free Shipping. APG Free Shipping Tab.
 
 == Changelog ==
+= 3.12.0 =
+* Fixed the free shipping coupon check, which left a deprecation warning in the log on every shipping calculation.
+* Removed the compatibility code for WooCommerce below 4.4, which no longer ran.
+* Compatible with WordPress 7.2 and WooCommerce 11.2.1.
+
 = 3.11.0 =
 * Contextual help on the settings of the shipping method, explaining every setting without leaving the screen.
 * The plugin loads its own files by absolute path, so it can no longer pick up a file of the same name from somewhere else.
