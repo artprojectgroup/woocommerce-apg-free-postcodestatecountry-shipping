@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit; ?>
 			<p>
 				<?php esc_html_e( 'If you enjoy this plugin and find it helpful, please make a donation:', 'woocommerce-apg-free-postcodestatecountry-shipping' ); ?>
 			</p>
-			<p> <a href="<?php echo esc_url( $apg_free_shipping['donacion'] ); ?>" target="_blank" title="<?php echo esc_attr__( 'Make a donation by ', 'woocommerce-apg-free-postcodestatecountry-shipping' ); ?>APG"> <span class="genericon genericon-cart"></span> </a> </p>
+			<p> <a href="<?php echo esc_url( apg_free_shipping_enlace( 'donacion' ) ); ?>" target="_blank" title="<?php echo esc_attr__( 'Make a donation by ', 'woocommerce-apg-free-postcodestatecountry-shipping' ); ?>APG"> <span class="genericon genericon-cart"></span> </a> </p>
 		</div>
 		<div class="columna">
 			<p>Art Project Group:</p>
@@ -56,7 +56,7 @@ defined( 'ABSPATH' ) || exit; ?>
 			<p>
 				<?php esc_html_e( 'Documentation and Support:', 'woocommerce-apg-free-postcodestatecountry-shipping' ); ?>
 			</p>
-			<p> <a href="<?php echo esc_url( $apg_free_shipping['plugin_url'] ); ?>" title="<?php echo esc_attr( $apg_free_shipping['plugin'] ); ?>"><span class="genericon genericon-book"></span></a> <a href="<?php echo esc_url( $apg_free_shipping['soporte'] ); ?>" title="<?php echo esc_attr__( 'Support', 'woocommerce-apg-free-postcodestatecountry-shipping' ); ?>"><span class="genericon genericon-cog"></span></a> </p>
+			<p> <a href="<?php echo esc_url( apg_free_shipping_enlace( 'plugin_url' ) ); ?>" title="<?php echo esc_attr( $apg_free_shipping['plugin'] ); ?>"><span class="genericon genericon-book"></span></a> <a href="<?php echo esc_url( apg_free_shipping_enlace( 'soporte' ) ); ?>" title="<?php echo esc_attr__( 'Support', 'woocommerce-apg-free-postcodestatecountry-shipping' ); ?>"><span class="genericon genericon-cog"></span></a> </p>
 		</div>
 	</div>
 

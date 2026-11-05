@@ -14,12 +14,31 @@
 defined( 'ABSPATH' ) || exit;
 
 // Definimos las variables.
+/* Devuelve la direccion de la web en el idioma de quien mira la pantalla. Se resuelve al usarla y
+nunca al cargar el plugin, porque hasta que WordPress no identifica al usuario no se sabe su idioma. */
+function apg_free_shipping_enlace( $clave ) {
+	global $apg_free_shipping;
+
+	if ( ! isset( $apg_free_shipping['enlaces'][ $clave ] ) ) {
+		return '';
+	}
+
+	$par = $apg_free_shipping['enlaces'][ $clave ];
+
+	return ( 0 === strpos( get_user_locale(), 'es' ) ) ? $par[0] : $par[1];
+}
+
 $apg_free_shipping = [ 	
 	'plugin' 		=> 'WC - APG Free Shipping', 
 	'plugin_uri' 	=> 'woocommerce-apg-free-postcodestatecountry-shipping', 
-	'donacion' 		=> 'https://artprojectgroup.es/tienda/donacion',
-	'soporte' 		=> 'https://artprojectgroup.es/tienda/soporte-tecnico',
-	'plugin_url' 	=> 'https://artprojectgroup.es/plugins-para-woocommerce/wc-apg-free-shipping', 
+	//Cada direccion de la web, en espanol y en ingles.
+	'enlaces' => array(
+		'web' => array( 'https://artprojectgroup.es/', 'https://artprojectgroup.com/' ),
+		'plugin_url' => array( 'https://artprojectgroup.es/plugins-para-woocommerce/wc-apg-envio-gratuito', 'https://artprojectgroup.com/woocommerce-plugins/wc-apg-free-shipping' ),
+		'donacion' => array( 'https://artprojectgroup.es/tienda/donacion', 'https://artprojectgroup.com/shop/donation' ),
+		'soporte' => array( 'https://artprojectgroup.es/tienda/soporte-tecnico', 'https://artprojectgroup.com/shop/technical-support' ),
+		'documentacion' => array( 'https://artprojectgroup.es/documentacion/wc-apg-envio-gratuito', 'https://artprojectgroup.com/documentation/wc-apg-free-shipping' ),
+		),
 	'ajustes' 		=> 'admin.php?page=wc-settings&tab=shipping', 
 	'puntuacion' 	=> 'https://wordpress.org/support/view/plugin-reviews/woocommerce-apg-free-postcodestatecountry-shipping'
 ];
@@ -39,8 +58,8 @@ function apg_free_shipping_enlaces( $enlaces, $archivo ) {
 	global $apg_free_shipping;
 
 	if ( $archivo == DIRECCION_apg_free_shipping ) {
-		$enlaces[] = '<a href="' . $apg_free_shipping[ 'donacion' ] . '" target="_blank" title="' . __( 'Make a donation by ', 'woocommerce-apg-free-postcodestatecountry-shipping' ) . 'APG"><span class="genericon genericon-cart"></span></a>';
-		$enlaces[] = '<a href="'. $apg_free_shipping[ 'plugin_url' ] . '" target="_blank" title="' . $apg_free_shipping[ 'plugin' ] . '"><strong class="artprojectgroup">APG</strong></a>';
+		$enlaces[] = '<a href="' . apg_free_shipping_enlace( 'donacion' ) . '" target="_blank" title="' . __( 'Make a donation by ', 'woocommerce-apg-free-postcodestatecountry-shipping' ) . 'APG"><span class="genericon genericon-cart"></span></a>';
+		$enlaces[] = '<a href="'. apg_free_shipping_enlace( 'plugin_url' ) . '" target="_blank" title="' . $apg_free_shipping[ 'plugin' ] . '"><strong class="artprojectgroup">APG</strong></a>';
 		$enlaces[] = '<a href="https://www.facebook.com/artprojectgroup" title="' . __( 'Follow us on ', 'woocommerce-apg-free-postcodestatecountry-shipping' ) . 'Facebook" target="_blank"><span class="genericon genericon-facebook-alt"></span></a> <a href="https://x.com/artprojectgroup" title="' . __( 'Follow us on ', 'woocommerce-apg-free-postcodestatecountry-shipping' ) . 'X" target="_blank"><span class="genericon genericon-x-alt"></span></a> <a href="https://es.linkedin.com/in/artprojectgroup" title="' . __( 'Follow us on ', 'woocommerce-apg-free-postcodestatecountry-shipping' ) . 'LinkedIn" target="_blank"><span class="genericon genericon-linkedin"></span></a>';
 		$enlaces[] = '<a href="https://profiles.wordpress.org/artprojectgroup/" title="' . __( 'More plugins on ', 'woocommerce-apg-free-postcodestatecountry-shipping' ) . 'WordPress" target="_blank"><span class="genericon genericon-wordpress"></span></a>';
 		$enlaces[] = '<a href="mailto:info@artprojectgroup.es" title="' . __( 'Contact us by ', 'woocommerce-apg-free-postcodestatecountry-shipping' ) . 'e-mail"><span class="genericon genericon-mail"></span></a>';
@@ -62,7 +81,7 @@ function apg_free_shipping_enlace_de_ajustes( $enlaces ) {
 
 	$enlaces_de_ajustes = [
 		'<a href="' . $apg_free_shipping[ 'ajustes' ] . '" title="' . __( 'Settings of ', 'woocommerce-apg-free-postcodestatecountry-shipping' ) . $apg_free_shipping[ 'plugin' ] .'">' . __( 'Settings', 'woocommerce-apg-free-postcodestatecountry-shipping' ) . '</a>', 
-		'<a href="' . $apg_free_shipping[ 'soporte' ] . '" title="' . __( 'Support of ', 'woocommerce-apg-free-postcodestatecountry-shipping' ) . $apg_free_shipping[ 'plugin' ] .'">' . __( 'Support', 'woocommerce-apg-free-postcodestatecountry-shipping' ) . '</a>'
+		'<a href="' . apg_free_shipping_enlace( 'soporte' ) . '" title="' . __( 'Support of ', 'woocommerce-apg-free-postcodestatecountry-shipping' ) . $apg_free_shipping[ 'plugin' ] .'">' . __( 'Support', 'woocommerce-apg-free-postcodestatecountry-shipping' ) . '</a>'
 	];
 	foreach( $enlaces_de_ajustes as $enlace_de_ajustes ) {
 		array_unshift( $enlaces, $enlace_de_ajustes );

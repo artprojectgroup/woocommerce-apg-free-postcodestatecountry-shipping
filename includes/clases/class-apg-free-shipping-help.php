@@ -24,16 +24,6 @@ class APG_Free_Shipping_Help {
 	const METODO = 'apg_free_shipping';
 
 	/**
-	 * Dirección de la documentación completa, en español.
-	 */
-	const DOCS_URL = 'https://artprojectgroup.es/documentacion/wc-apg-envio-gratuito';
-
-	/**
-	 * Dirección de la documentación completa, en inglés.
-	 */
-	const DOCS_URL_EN = 'https://artprojectgroup.com/documentation/wc-apg-envio-gratuito';
-
-	/**
 	 * Añade los paneles del plugin a la pantalla de ajustes de envío.
 	 *
 	 * @return void
@@ -97,7 +87,8 @@ class APG_Free_Shipping_Help {
 	 * @return string
 	 */
 	private static function documentacion() {
-		return ( 0 === strpos( get_user_locale(), 'es' ) ) ? self::DOCS_URL : self::DOCS_URL_EN;
+		//El idioma lo decide apg_free_shipping_enlace(), que es quien guarda las dos direcciones.
+		return apg_free_shipping_enlace( 'documentacion' );
 	}
 
 	/**
